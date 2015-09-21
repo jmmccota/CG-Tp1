@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <cstdarg>
 #include "SplitString.h"
 #include "Circulo.h"
 
