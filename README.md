@@ -11,4 +11,4 @@
 		4.17 - Deve ser tratado colis~ao entre o personagem principal com as extremidades do cenário.
 		4.20 - Não é permitido o pressionamento contínuo de teclas.
 		4.21 - Ao pressionar a tecla 'f' deve se alternar entre a tecla cheia (full screen) e não cheia.
-	5 - 
+	5 - ALÉM DISTO, DEVE-SE APRESENTAR A MODELAGEM DE, PELO MENOS, 2 INIMIGOS SIMPLES.
