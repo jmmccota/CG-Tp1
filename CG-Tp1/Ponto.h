@@ -10,7 +10,7 @@ public:
 	{
 	}
 
-	Ponto(int _x, int _y) {
+	Ponto(float _x, float _y) {
 		x = _x;
 		y = _y;
 	}
