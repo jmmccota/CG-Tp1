@@ -111,18 +111,18 @@ void AlteraTamanhoJanela(GLsizei w, GLsizei h)
 }
 
 // Programa Principal 
-int main(int argc, char **argv) {
-	char* titulo = "Animação";
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-	glutInitWindowSize(800, 600);
-	glutInitWindowPosition(10, 10);
-	glutCreateWindow(titulo);
-	glutDisplayFunc(Desenha);
-	glutReshapeFunc(AlteraTamanhoJanela);
-	glutTimerFunc(1000, Timer, 1);
-	Inicializa();
-	glutMainLoop();
-
-	return 0;
-}
+//int main(int argc, char **argv) {
+//	char* titulo = "Animação";
+//	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+//	glutInitWindowSize(800, 600);
+//	glutInitWindowPosition(10, 10);
+//	glutCreateWindow(titulo);
+//	glutDisplayFunc(Desenha);
+//	glutReshapeFunc(AlteraTamanhoJanela);
+//	glutTimerFunc(1000, Timer, 1);
+//	Inicializa();
+//	glutMainLoop();
+//
+//	return 0;
+//}
