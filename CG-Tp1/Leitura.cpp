@@ -1,13 +1,10 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <cstring>
 #include <fstream>
 #include <iostream>
 #include <string>
 #include "SplitString.h"
-#include "Ponto.h"
+#include "Circulo.h"
 
 using namespace std;
 
@@ -35,6 +32,8 @@ void carregar(string filename, ...) {
 					centroX = atof(flds[0].c_str());
 					centroY = atof(flds[1].c_str());
 					raio = atof(flds[2].c_str());
+					Circulo c(centroX, centroY, raio);
+					cout << c << endl;
 					//cout << "Circulo" << centroX << centroY << raio << endl;
 				}
 				else if (flds[0] != " ")
@@ -50,7 +49,7 @@ void carregar(string filename, ...) {
 						SplitString ss(line);
 						vector<string> flds = ss.split(' ', 1);
 						pontos[i] = new Ponto(atoi(flds[0].c_str()), atoi(flds[1].c_str()));
-//						cout << *pontos[i] << endl;
+						cout << *pontos[i] << endl;
 					}
 				}
 			}

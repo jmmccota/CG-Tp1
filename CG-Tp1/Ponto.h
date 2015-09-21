@@ -1,7 +1,7 @@
 #pragma once
 class Ponto
 {
-private:
+protected:
 	friend std::ostream& operator<<(std::ostream&, const Ponto&);
 	float x, y;
 public:
@@ -32,8 +32,8 @@ public:
 	}
 	~Ponto()
 	{
-		delete &x;
-		delete &y;
+		/*delete &x;
+		delete &y;*/
 	}
 
 };
