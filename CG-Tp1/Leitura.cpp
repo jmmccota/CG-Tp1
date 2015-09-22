@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include <cstdarg>
-#include "SplitString.h"
+#include "FuncoesAuxiliares.h"
 #include "Circulo.h"
 #include <GL/glut.h>
 
@@ -19,8 +19,7 @@ Ponto** carregar(string filename) {
 
 			getline(poligon, line);
 			//cout << line << endl;
-			SplitString ss(line);
-			vector<string> flds = ss.split(' ', 1);
+			vector<string> flds = FuncoesAuxiliares::split(line, ' ');
 			if (flds.size() > 0) {
 				if (flds[0] == "C" || flds[0] == "c") {
 					float corR, corG, corB;
@@ -28,9 +27,8 @@ Ponto** carregar(string filename) {
 					corG = atof(flds[2].c_str());
 					corB = atof(flds[3].c_str());
 
-					getline(poligon, line);
-					SplitString ss(line);
-					vector<string> flds = ss.split(' ', 0);
+                    getline(poligon, line);
+                    vector<string> flds = FuncoesAuxiliares::split(line, ' ');
 					float centroX, centroY, raio;
 					centroX = atof(flds[0].c_str());
 					centroY = atof(flds[1].c_str());
@@ -48,9 +46,8 @@ Ponto** carregar(string filename) {
 					corB = atof(flds[3].c_str());
 					pontos = new Ponto*[repeticao];
 					for (int i = 0; i < repeticao; i++) {
-						getline(poligon, line);
-						SplitString ss(line);
-						vector<string> flds = ss.split(' ', 1);
+                        getline(poligon, line);
+                        vector<string> flds = FuncoesAuxiliares::split(line, ' ');
 						pontos[i] = new Ponto(atoi(flds[0].c_str()), atoi(flds[1].c_str()));
 						cout << *pontos[i] << endl;
 					}
