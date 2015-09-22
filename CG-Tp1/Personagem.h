@@ -3,6 +3,9 @@
 
 
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include "Solido.h"
@@ -17,6 +20,8 @@
 class Personagem : public Solido
 {
 	protected:
+
+
 		//Valores de vida e municoes do personagem
 		int hp, municao1, municao2;
 
@@ -25,7 +30,10 @@ class Personagem : public Solido
 		virtual ~Personagem() = 0;
 
 		//Carrega o personagem do arquivo de modelo
-		virtual void carrega() = 0;
+        virtual void carrega()
+        {
+
+        }
 };
 
 

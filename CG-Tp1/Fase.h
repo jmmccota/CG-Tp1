@@ -3,6 +3,9 @@
 
 
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include <queue>
@@ -19,7 +22,7 @@ class Fase
 {
 	protected:
 		//Personagem jogavel
-		Personagem principal;
+		Personagem *principal;
 
 		//Fila de inimigos que apareceram na tela
 		std::queue<Personagem> inimigos;

@@ -3,8 +3,12 @@
 
 
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
 #include <GL/gl.h>
 #include <GL/glut.h>
+#include "Solido.h"
 
 
 /*
@@ -13,7 +17,7 @@
 */
 
 
-class Projetil : protected Solido
+class Projetil : public Solido
 {
 	protected:
 		//Dano causado pelo projetil
