@@ -78,20 +78,14 @@ void Desenha(void) {
 	glLoadIdentity();
 	glColor3f(1.0f, 0.0f, 0.0f);
 	gluOrtho2D(-10000, 10000, -10000, 10000);
-	glBegin(GL_POLYGON);
+	glBegin(GL_TRIANGLE_FAN);
 	{
-		for (int i = 0; i < 9;i++){
+		for (int i = 0; i < 53;i++){
 			glVertex2i(pts[i]->getX(), pts[i]->getY());
 		}
 	}
 	glEnd();
-	glBegin(GL_POLYGON);
-	{
-		for (int i = 9; i < 26; i++) {
-			glVertex2i(pts[i]->getX(), pts[i]->getY());
-		}
-	}
-	glEnd();
+	
 	glFlush();
 }
 void AlteraTamanhoJanela(GLsizei w, GLsizei h) {
