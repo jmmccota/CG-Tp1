@@ -2,9 +2,16 @@
 #define PROJETIL_ABS
 
 
-
+#ifdef _WIN32
+#include <windows.h>
+#endif
+#include "FuncoesAuxiliares.h"
+#include "Poligono.h"
 #include <GL/gl.h>
 #include <GL/glut.h>
+#include <string>
+#include <fstream>
+#include <vector>
 
 
 /*
@@ -16,6 +23,9 @@
 class Solido
 {
 	protected:
+		//Vetor de poligonos
+		std::vector<Poligono> poligonos;
+
 		//Posicao central do solido
 		GLfloat posX, posY;
 
@@ -28,6 +38,9 @@ class Solido
 
 		//Retorna true caso solido tenha sido destruido, false caso contrario
 		virtual bool destruido() = 0;
+
+		//Desenha o solido na tela
+		void carrega(std::string arquivo);
 
 		//Desenha o solido na tela
 		virtual void desenha() = 0;

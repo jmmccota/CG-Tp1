@@ -21,7 +21,7 @@ class Poligono
         GLfloat *pontosY;
 
     public:
-        Poligono(int escala);
+        Poligono(float escala);
         ~Poligono();
 
         void Carrega(std::string *linhas, int nLinhas);
