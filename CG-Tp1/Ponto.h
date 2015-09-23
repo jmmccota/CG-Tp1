@@ -8,6 +8,7 @@ public:
 
 	Ponto()
 	{
+
 	}
 
 	Ponto(float _x, float _y) {

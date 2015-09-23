@@ -1,8 +1,10 @@
+freeglut/
 *.sln
 *.sdf
-*.git*
+.gitattributes
 /Debug
 /CG-Tp1/Debug
+/CG-Tp1/x64
 *.vcx*
 
 

@@ -1,5 +1,16 @@
 #include "Solido.h"
 
+Solido::Solido()
+{
+    poligonos = nullptr;
+    nPoligonos = 0;
+}
+
+Solido::~Solido()
+{
+    delete[] poligonos;
+}
+
 void Solido::carrega(std::string arquivo)
 {
 	std::ifstream fs;
@@ -31,4 +42,12 @@ void Solido::carrega(std::string arquivo)
 		}
 		poligonos.push_back(*(new Poligono(300 / 10000)));
 	}
+}
+
+void Solido::desenha()
+{
+    for (int i = 0; i < nPoligonos; i++)
+    {
+        poligonos[i].desenha(posX, posY);
+    }
 }

@@ -24,8 +24,12 @@ class Poligono
         Poligono(float escala);
         ~Poligono();
 
-        void Carrega(std::string *linhas, int nLinhas);
-        void Desenha(GLfloat x, GLfloat y);
+        //Carrega o poligono
+        void carrega(std::string *linhas, int nLinhas);
+
+        //Desenha o poligono relativo ao ponto (x,y)
+        //    (x,y) usado como posicao do solido que contem o poligono
+        void desenha(GLfloat x, GLfloat y);
 
 };
 

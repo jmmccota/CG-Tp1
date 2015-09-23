@@ -33,8 +33,11 @@ class Solido
 		GLfloat tamX, tamY;
 
 	public:
+        //Evita erros de segmentacao
+        Solido();
+
 		//Limpa memoria alocada dinamicamente
-		virtual ~Solido() = 0;
+		~Solido();
 
 		//Retorna true caso solido tenha sido destruido, false caso contrario
 		virtual bool destruido() = 0;
@@ -43,7 +46,7 @@ class Solido
 		void carrega(std::string arquivo);
 
 		//Desenha o solido na tela
-		virtual void desenha() = 0;
+		void desenha();
 
 		//Define as acoes do solido
 		//	(movimento, destruicao, ...)

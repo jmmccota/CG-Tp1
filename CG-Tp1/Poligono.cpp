@@ -12,7 +12,7 @@ Poligono::~Poligono()
     delete[] this->pontosY;
 }
 
-void Poligono::Carrega(std::string *linhas, int nLinhas)
+void Poligono::carrega(std::string *linhas, int nLinhas)
 {
     //Lendo primeira linha
     std::vector<std::string> linha = FuncoesAuxiliares::split(linhas[0], ' ');
@@ -54,7 +54,7 @@ void Poligono::Carrega(std::string *linhas, int nLinhas)
     }
 }
 
-void Poligono::Desenha(GLfloat x, GLfloat y)
+void Poligono::desenha(GLfloat x, GLfloat y)
 {
     glColor3f(cor[0], cor[1], cor[2]);
 	if (nPontos > 2)
