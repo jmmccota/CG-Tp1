@@ -80,7 +80,7 @@ void Desenha(void) {
 	glLoadIdentity();
 	glColor3f(1.0f, 0.0f, 0.0f);
 	gluOrtho2D(-10000, 10000, -10000, 10000);
-	glBegin(GL_TRIANGLE_FAN);
+	glBegin(GL_POLYGON);
 	{
 		for (int i = 0; i < 4;i++) {
 			glVertex2i(pts[i]->getX(), pts[i]->getY());
@@ -111,7 +111,7 @@ void AlteraTamanhoJanela(GLsizei w, GLsizei h) {
 void Teclas(unsigned char tecla, GLint x, GLint y) {
 
 	switch (tecla) {
-	//A tecla 'f' alterna entre a tecla cheia (full screen) e não cheia.
+		//A tecla 'f' alterna entre a tecla cheia (full screen) e não cheia.
 	case 'f':
 		if (!isFullScreen) {
 			glutFullScreen();
@@ -122,8 +122,6 @@ void Teclas(unsigned char tecla, GLint x, GLint y) {
 		isFullScreen = !isFullScreen;
 		break;
 	}
-
-
 }
 
 
