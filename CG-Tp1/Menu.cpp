@@ -252,20 +252,20 @@ void mouseClick(int button, int state, int x, int y) {
 	
 }
 // Programa Principal 
-int main(int argc, char **argv)
-{
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-	glutInitWindowSize(1280, 720);
-	glutInitWindowPosition((GetSystemMetrics(SM_CXSCREEN) - 1280) / 2, (GetSystemMetrics(SM_CYSCREEN) - 720) / 2);
-	glutCreateWindow("Animação");
-	glutMouseFunc(mouseClick);
-	glutKeyboardFunc(keyboardDown);
-	glutDisplayFunc(Desenha);
-	glutReshapeFunc(AlteraTamanhoJanela);
-	//glutTimerFunc(33, Timer, 1);
-	Inicializa();
-	glutMainLoop();
-
-	return 0;
-}
+//int main(int argc, char **argv)
+//{
+//	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+//	glutInitWindowSize(1280, 720);
+//	glutInitWindowPosition((GetSystemMetrics(SM_CXSCREEN) - 1280) / 2, (GetSystemMetrics(SM_CYSCREEN) - 720) / 2);
+//	glutCreateWindow("Animação");
+//	glutMouseFunc(mouseClick);
+//	glutKeyboardFunc(keyboardDown);
+//	glutDisplayFunc(Desenha);
+//	glutReshapeFunc(AlteraTamanhoJanela);
+//	//glutTimerFunc(33, Timer, 1);
+//	Inicializa();
+//	glutMainLoop();
+//
+//	return 0;
+//}

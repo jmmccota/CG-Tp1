@@ -108,23 +108,6 @@ void AlteraTamanhoJanela(GLsizei w, GLsizei h) {
 
 }
 
-void Teclas(unsigned char tecla, GLint x, GLint y) {
-
-	switch (tecla) {
-		//A tecla 'f' alterna entre a tecla cheia (full screen) e não cheia.
-	case 'f':
-		if (!isFullScreen) {
-			glutFullScreen();
-		}
-		else {
-			glutReshapeWindow(800, 600);
-		}
-		isFullScreen = !isFullScreen;
-		break;
-	}
-}
-
-
 
 //
 void Inicializa(void) {
@@ -140,7 +123,6 @@ int main(int argc, char **argv) {
 	glutCreateWindow(titulo);
 	glutDisplayFunc(Desenha);
 	glutReshapeFunc(AlteraTamanhoJanela);
-	glutKeyboardFunc(Teclas);
 	Inicializa();
 	glutMainLoop();
 
