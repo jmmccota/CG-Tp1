@@ -10,11 +10,8 @@ void Solido::desenha()
 
 Solido::Solido()
 {
-    poligonos = nullptr;
-    nPoligonos = 0;
 }
 
 Solido::~Solido()
 {
-    delete[] poligonos;
 }
