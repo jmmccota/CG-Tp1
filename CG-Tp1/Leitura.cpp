@@ -78,9 +78,9 @@ void Desenha(void) {
 	glLoadIdentity();
 	glColor3f(1.0f, 0.0f, 0.0f);
 	gluOrtho2D(-10000, 10000, -10000, 10000);
-	glBegin(GL_TRIANGLE_FAN);
+	glBegin(GL_POLYGON);
 	{
-		for (int i = 0; i < 53;i++){
+		for (int i = 0; i < 2;i++){
 			glVertex2i(pts[i]->getX(), pts[i]->getY());
 		}
 	}
@@ -111,7 +111,7 @@ void Inicializa(void) {
 }
 int main(int argc, char **argv) {
 	char* titulo = "Splitfire";
-	pts = carregar("splitfire.txt");
+	pts = carregar("testes.txt");
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(800, 600);
