@@ -7,6 +7,11 @@
 #endif
 #include <GL/gl.h>
 #include <GL/glut.h>
+#include <conio.h>
+#include <stdio.h>
+#include "OpenAL/al.h"
+#include "OpenAL/alc.h"
+
 
 /*
 	Classe usada para efeitos sonoros
@@ -16,9 +21,14 @@
 
 class EfeitoSonoro
 {
-	public:
-		EfeitoSonoro();
-		~EfeitoSonoro();
+protected:
+	ALCdevice* device = alcOpenDevice(NULL);
+	ALCcontext* context = alcCreateContext(device, NULL);
+	
+public:
+	EfeitoSonoro();
+	~EfeitoSonoro();
+	void MainTheme();
 };
 
 
