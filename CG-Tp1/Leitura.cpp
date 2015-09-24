@@ -54,6 +54,7 @@ Ponto** carregar(string filename) {
 					}
 				}
 			}
+			break;
 		}
 	}
 	//cout << "terminou?" << endl;
@@ -81,7 +82,7 @@ void Desenha(void) {
 	gluOrtho2D(-10000, 10000, -10000, 10000);
 	glBegin(GL_TRIANGLE_FAN);
 	{
-		for (int i = 0; i < 53;i++) {
+		for (int i = 0; i < 4;i++) {
 			glVertex2i(pts[i]->getX(), pts[i]->getY());
 		}
 	}
@@ -133,7 +134,7 @@ void Inicializa(void) {
 }
 int main(int argc, char **argv) {
 	char* titulo = "Splitfire";
-	pts = carregar("splitfire.txt");
+	pts = carregar("spitfire.txt");
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(800, 600);
