@@ -13,19 +13,18 @@
 
 class Poligono
 {
-    private:
+    public:
         float escala;
         GLfloat cor[3];
-        int nPontos;
-        GLfloat *pontosX;
-        GLfloat *pontosY;
+        vector<GLfloat> pontosX;
+        vector<GLfloat> pontosY;
 
     public:
-        Poligono(int escala);
+        Poligono(float escala);
         ~Poligono();
 
         //Carrega o poligono
-        void carrega(std::string *linhas, int nLinhas);
+        void carrega(std::vector<std::string> linhas);
 
         //Desenha o poligono relativo ao ponto (x,y)
         //    (x,y) usado como posicao do solido que contem o poligono

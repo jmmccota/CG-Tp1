@@ -1,8 +1,6 @@
 #ifndef EFEITOVISUAL_ABS
 #define EFEITOVISUAL_ABS
 
-
-
 #ifdef _WIN32
 #include <windows.h>
 #endif
@@ -19,18 +17,22 @@
 
 class EfeitoVisual
 {
-	public:
-		EfeitoVisual();
-		~EfeitoVisual();
+protected:
+	bool fullScreen = false;
+public:
+	EfeitoVisual();
+	~EfeitoVisual();
 
-		//COMO FAZER ANIMACAO EXPLOSAO?
-		//void static Explosao(GLfloat x, GLfloat y, GLfloat raio, int estagio);
-		
-		//Retorna true caso objetos tenham colidido, false caso contrario
-		bool static Colisao(Solido *a, Solido *b);
+	//COMO FAZER ANIMACAO EXPLOSAO?
+	//void static Explosao(GLfloat x, GLfloat y, GLfloat raio, int estagio);
+
+	//Retorna true caso objetos tenham colidido, false caso contrario
+	bool static Colisao(Solido *a, Solido *b);
+
+	//Retorna se a tela está em fullScreen ou não
+	bool IsFullScreen();
+
+	//Metodo de pressionamento de teclas
+	void Teclas(unsigned char tecla, GLint x, GLint y);
 };
-
-
-
-
 #endif

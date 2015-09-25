@@ -9,6 +9,7 @@
 #include <GL/glut.h>
 
 using namespace std;
+bool isFullScreen = false;
 Ponto** pts;
 Ponto** carregar(string filename) {
 	string line;
@@ -27,8 +28,8 @@ Ponto** carregar(string filename) {
 					corG = atof(flds[2].c_str());
 					corB = atof(flds[3].c_str());
 
-                    getline(poligon, line);
-                    vector<string> flds = FuncoesAuxiliares::split(line, ' ');
+					getline(poligon, line);
+					vector<string> flds = FuncoesAuxiliares::split(line, ' ');
 					float centroX, centroY, raio;
 					centroX = atof(flds[0].c_str());
 					centroY = atof(flds[1].c_str());
@@ -46,17 +47,18 @@ Ponto** carregar(string filename) {
 					corB = atof(flds[3].c_str());
 					pontos = new Ponto*[repeticao];
 					for (int i = 0; i < repeticao; i++) {
-                        getline(poligon, line);
-                        vector<string> flds = FuncoesAuxiliares::split(line, ' ');
+						getline(poligon, line);
+						vector<string> flds = FuncoesAuxiliares::split(line, ' ');
 						pontos[i] = new Ponto(atoi(flds[0].c_str()), atoi(flds[1].c_str()));
 						cout << *pontos[i] << endl;
 					}
 				}
 			}
+			break;
 		}
 	}
 	//cout << "terminou?" << endl;
-	
+
 	poligon.close();
 	return pontos;
 	//delete &line;
@@ -78,14 +80,14 @@ void Desenha(void) {
 	glLoadIdentity();
 	glColor3f(1.0f, 0.0f, 0.0f);
 	gluOrtho2D(-10000, 10000, -10000, 10000);
-	glBegin(GL_TRIANGLE_FAN);
+	glBegin(GL_POLYGON);
 	{
-		for (int i = 0; i < 53;i++){
+		for (int i = 0; i < 4;i++) {
 			glVertex2i(pts[i]->getX(), pts[i]->getY());
 		}
 	}
 	glEnd();
-	
+
 	glFlush();
 }
 void AlteraTamanhoJanela(GLsizei w, GLsizei h) {
@@ -106,12 +108,14 @@ void AlteraTamanhoJanela(GLsizei w, GLsizei h) {
 
 }
 
-void Inicializa(void) {  
+
+//
+void Inicializa(void) {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
 int main(int argc, char **argv) {
 	char* titulo = "Splitfire";
-	pts = carregar("splitfire.txt");
+	pts = carregar("spitfire.txt");
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(800, 600);
