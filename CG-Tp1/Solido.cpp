@@ -2,13 +2,10 @@
 
 Solido::Solido()
 {
-    poligonos = nullptr;
-    nPoligonos = 0;
 }
 
 Solido::~Solido()
 {
-    delete[] poligonos;
 }
 
 void Solido::carrega(std::string arquivo)
@@ -17,36 +14,37 @@ void Solido::carrega(std::string arquivo)
 	fs.open(arquivo, std::fstream::in);
 	while (!fs.eof())
 	{
-		int nLinhas;
-		std::vector<std::string> vLinha;
-		std::string linha, linhas;
-		std::getline(fs, linha);
+		std::string linha;
+        std::getline(fs, linha);
+        if (linha == "")
+            continue;
+        int nLinhas;
+        std::vector<std::string> vLinha, linhas;
 		vLinha = FuncoesAuxiliares::split(linha, ' ');
-		linhas = linha;
+		linhas.push_back(linha);
 		//Caso seja circulo
 		if (vLinha[0] == "C")
 		{
 			std::getline(fs, linha);
-			linhas += "\n" + linha;
-			nLinhas = 2;
+			linhas.push_back(linha);
 		}
 		//Caso seja poligono
 		else
 		{
 			for (int i = 0; i < stoi(vLinha[0]); i++)
 			{
-				std::getline(fs, linha);
-				linhas += "\n" + linha;
+                std::getline(fs, linha);
+                linhas.push_back(linha);
 			}
-			nLinhas = stoi(vLinha[0]) + 1;
 		}
-		poligonos.push_back(*(new Poligono(300 / 10000)));
+		poligonos.push_back(*(new Poligono((float) 500 / 10000)));
+        poligonos.back().carrega(linhas);
 	}
 }
 
 void Solido::desenha()
 {
-    for (int i = 0; i < nPoligonos; i++)
+    for (int i = 0; i < poligonos.size(); i++)
     {
         poligonos[i].desenha(posX, posY);
     }

@@ -22,7 +22,8 @@
 
 class Solido
 {
-	protected:
+	//protected:
+    public:
 		//Vetor de poligonos
 		std::vector<Poligono> poligonos;
 
@@ -37,10 +38,10 @@ class Solido
         Solido();
 
 		//Limpa memoria alocada dinamicamente
-		~Solido();
+		virtual ~Solido();
 
 		//Retorna true caso solido tenha sido destruido, false caso contrario
-		virtual bool destruido() = 0;
+        // virtual bool destruido() = 0;
 
 		//Desenha o solido na tela
 		void carrega(std::string arquivo);
@@ -50,7 +51,7 @@ class Solido
 
 		//Define as acoes do solido
 		//	(movimento, destruicao, ...)
-		virtual void acao() = 0;
+        // virtual void acao() = 0;
 
 		//Getters
 		GLfloat getX() { return posX; }
