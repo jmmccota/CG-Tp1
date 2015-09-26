@@ -46,7 +46,6 @@ void Poligono::carrega(std::vector<std::string> linhas)
     }
 }
 
-#include<iostream>
 void Poligono::desenha(GLfloat x, GLfloat y)
 {
     glColor3f(cor[0], cor[1], cor[2]);
@@ -56,9 +55,7 @@ void Poligono::desenha(GLfloat x, GLfloat y)
 		glBegin(GL_LINES);
     for (int i = 0; i < pontosX.size(); i++)
     {
-        cout << pontosX[i] + x << " , " << pontosY[i] + y<<endl;
         glVertex2f(pontosX[i] + x, pontosY[i] + y);
     }
-    cout << endl << endl;
     glEnd();
 }

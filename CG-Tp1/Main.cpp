@@ -20,8 +20,11 @@
 
 void Desenha(){
 
-    glMatrixMode(GL_MODELVIEW);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
+    glColor3f(1.0f, 0.0f, 0.0f);
+    gluOrtho2D(-1000, 1000, -1000, 1000);
 
     Solido *s = new Solido();
     s->carrega("spitfire.txt");
@@ -33,14 +36,14 @@ void Desenha(){
 }
 
 int main(int argc, char **argv) {
-    char* titulo = "Animação";
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
     glutInitWindowSize(800, 600);
     glutInitWindowPosition(10, 10);
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    glutCreateWindow(titulo);
+    glutCreateWindow("desenha");
     glutDisplayFunc(Desenha);
-    gluOrtho2D(-500, 500, -500, 500);
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     glutMainLoop();
+
+    return 0;
 }
