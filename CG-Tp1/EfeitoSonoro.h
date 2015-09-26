@@ -9,9 +9,6 @@
 #include <GL/glut.h>
 #include <conio.h>
 #include <stdio.h>
-#include "al.h" 
-#include "alc.h" 
-#include "alut.h"
 
 
 /*

@@ -17,7 +17,7 @@ GLfloat ystep = 1.0f;
 // Largura e altura da janela
 GLfloat windowWidth;
 GLfloat windowHeight;
-bool fullscreen=false;
+bool fullscreen = false;
 
 // Função callback chamada para fazer o desenho
 void Desenha(void)
@@ -28,15 +28,45 @@ void Desenha(void)
 	// Limpa a janela de visualização com a cor de fundo especificada
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	// Especifica que a cor corrente é vermelha
-	//         R     G     B
-	//Jiraiya
-	string titulo = "JIRAIYA's FLY";
-	glColor3f(1.0,0,0);
-	glRasterPos2f(100, 180);
+
+
+	string titulo = "Best Score: ";
+	glColor3f(0.2, 0.5, 0.9);
+	glRasterPos2f(325, 237.5);
 	for (int i = 0; i < 13;i++) {
-		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24,titulo[i]);
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, titulo[i]);
 	}
+	glLineWidth(3.0);
+	glBegin(GL_LINE_LOOP);
+	glVertex2f(0, 239);
+	glVertex2f(319, 239);
+	glEnd();
+
+	glBegin(GL_LINE_LOOP);
+	glVertex2f(0, 241);
+	glVertex2f(319, 241);
+	glEnd();
+
+	glBegin(GL_LINE_LOOP);
+	glVertex2f(320, 240);
+	glVertex2f(310, 247);
+	glVertex2f(440, 247);
+	glVertex2f(430, 240);
+	glVertex2f(440, 233);
+	glVertex2f(310, 233);
+	glEnd();
+
+	glBegin(GL_LINE_LOOP);
+	glVertex2f(432, 239);
+	glVertex2f(500, 239);
+	glEnd();
+
+	glBegin(GL_LINE_LOOP);
+	glVertex2f(432, 241);
+	glVertex2f(500, 241);
+	glEnd();
+
+
 	string start = "Iniciar";
 	glColor3f(1.0, 0, 0);
 	glRasterPos2f(153, 135);
@@ -64,10 +94,10 @@ void Desenha(void)
 	glColor3f(1.0f, 0.0f, 0.0f);
 	// Desenha o quadrado de fora(vermelho)
 	glBegin(GL_LINE_LOOP);
-	glVertex2i(50,10);
-	glVertex2i(390,10);
-	glVertex2i(390,170);
-	glVertex2i(50,170);
+	glVertex2i(50, 10);
+	glVertex2i(390, 10);
+	glVertex2i(390, 170);
+	glVertex2i(50, 170);
 	glEnd();
 	glBegin(GL_LINE_LOOP); //outro quadrado vermelho com nome do trabalho e grupo???
 	glVertex2i(270, 155);
@@ -81,10 +111,10 @@ void Desenha(void)
 	//glVertex2i(GLint(x1 + rsize), GLint(y1 + rsize));
 	//desenha o quadrado dos botoes
 	glBegin(GL_LINE_LOOP); //iniciar
-	glVertex2i(70,155);
-	glVertex2i(260,155);
-	glVertex2i(260,125);
-	glVertex2i(70,125);
+	glVertex2i(70, 155);
+	glVertex2i(260, 155);
+	glVertex2i(260, 125);
+	glVertex2i(70, 125);
 	glEnd();
 	glBegin(GL_LINE_LOOP); //opcoes
 	glVertex2i(70, 120);
@@ -173,43 +203,43 @@ void AlteraTamanhoJanela(GLsizei w, GLsizei h)
 void keyboardDown(unsigned char key, int x, int y) {
 
 	switch (key) {
-		case 'O': 
-			cout << "Opcoes";//ir pro menu de função		
-			break;
-		case 'o': 
-			cout << "Opcoes";//ir pro menu de função
-			break;
-		case 13: 
-			cout << "Iniciar";//ENTER -> ir pro jogo	
-			break;
-		case  27:   
-			cout << "Sair";// ESC-> sair do jogo
-			break;
-		case 'm': 
-			cout << "melhores";//ir para melhores pontuaçoes
-			break;
-		case 'M': 
-			cout << "melhores";//ir para melhores pontuaçoes
-			break;
-		case 'f':
-			if (!fullscreen) {
-				fullscreen = true;
-				glutFullScreen();
-			}
-			else {
-				fullscreen = false;
-				glutReshapeWindow(1280, 720);
-				glutInitWindowPosition((GetSystemMetrics(SM_CXSCREEN) - 1280) / 2, (GetSystemMetrics(SM_CYSCREEN) - 720) / 2);
-			}
-			//fullscreen
-			break;
+	case 'O':
+		cout << "Opcoes";//ir pro menu de função		
+		break;
+	case 'o':
+		cout << "Opcoes";//ir pro menu de função
+		break;
+	case 13:
+		cout << "Iniciar";//ENTER -> ir pro jogo	
+		break;
+	case  27:
+		cout << "Sair";// ESC-> sair do jogo
+		break;
+	case 'm':
+		cout << "melhores";//ir para melhores pontuaçoes
+		break;
+	case 'M':
+		cout << "melhores";//ir para melhores pontuaçoes
+		break;
+	case 'f':
+		if (!fullscreen) {
+			fullscreen = true;
+			glutFullScreen();
+		}
+		else {
+			fullscreen = false;
+			glutReshapeWindow(1280, 720);
+			glutInitWindowPosition((GetSystemMetrics(SM_CXSCREEN) - 1280) / 2, (GetSystemMetrics(SM_CYSCREEN) - 720) / 2);
+		}
+		//fullscreen
+		break;
 		//exit(0);
 	}
 }
 void mouseClick(int button, int state, int x, int y) {
 	//cout << "Iniciar";
 	//if (button==GLUT_LEFT_BUTTON) {
-	cout <<"pos: "<< x << "," << y<<endl;
+	cout << "pos: " << x << "," << y << endl;
 	//cout <<"wx: "<< windowWidth-x << "," << windowHeight-y << endl;	
 	if (fullscreen) {
 		if (x >= 216 && x <= 797) {
@@ -248,24 +278,24 @@ void mouseClick(int button, int state, int x, int y) {
 			}
 		}
 	}
-		
-	
+
+
 }
 // Programa Principal 
-//int main(int argc, char **argv)
-//{
-//	glutInit(&argc, argv);
-//	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-//	glutInitWindowSize(1280, 720);
-//	glutInitWindowPosition((GetSystemMetrics(SM_CXSCREEN) - 1280) / 2, (GetSystemMetrics(SM_CYSCREEN) - 720) / 2);
-//	glutCreateWindow("Animação");
-//	glutMouseFunc(mouseClick);
-//	glutKeyboardFunc(keyboardDown);
-//	glutDisplayFunc(Desenha);
-//	glutReshapeFunc(AlteraTamanhoJanela);
-//	//glutTimerFunc(33, Timer, 1);
-//	Inicializa();
-//	glutMainLoop();
-//
-//	return 0;
-//}
+int main(int argc, char **argv)
+{
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+	glutInitWindowSize(1280, 720);
+	glutInitWindowPosition((GetSystemMetrics(SM_CXSCREEN) - 1280) / 2, (GetSystemMetrics(SM_CYSCREEN) - 720) / 2);
+	glutCreateWindow("Animação");
+	glutMouseFunc(mouseClick);
+	glutKeyboardFunc(keyboardDown);
+	glutDisplayFunc(Desenha);
+	glutReshapeFunc(AlteraTamanhoJanela);
+	//glutTimerFunc(33, Timer, 1);
+	Inicializa();
+	glutMainLoop();
+
+	return 0;
+}

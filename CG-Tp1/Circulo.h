@@ -1,7 +1,7 @@
 #pragma once
 #include "Ponto.h"
 class Circulo :
-	public Ponto
+public Ponto
 {
 private:
 	friend std::ostream& operator<<(std::ostream&, const Circulo&);
