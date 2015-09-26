@@ -39,7 +39,7 @@ void Desenha(void)
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, best[i]);
 	}
 
-	Score bestScore = bestScore.getBestScore();
+	Score bestScore = Score::getBestScore();
 	string score = std::to_string(bestScore.getScore());
 
 	glRasterPos2f(365, 237.5);
@@ -540,22 +540,22 @@ void idle() {
 	Desenha();
 }
 // Programa Principal 
-//int main(int argc, char **argv)
-//{
-//	glutInit(&argc, argv);
-//	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-//	glutInitWindowSize(1280, 720);
-//	glutInitWindowPosition((GetSystemMetrics(SM_CXSCREEN) - 1280) / 2, (GetSystemMetrics(SM_CYSCREEN) - 720) / 2);
-//	glutCreateWindow("Animação");
-//	glutMouseFunc(mouseClick);
-//	glutKeyboardFunc(keyboardDown);
-//	glutKeyboardUpFunc(keyboardUp);
-//	glutDisplayFunc(Desenha);
-//	glutIdleFunc(idle);
-//	glutReshapeFunc(AlteraTamanhoJanela);
-//	//glutTimerFunc(33, Timer, 1);
-//	Inicializa();
-//	glutMainLoop();
-//
-//	return 0;
-//}
+int main(int argc, char **argv)
+{
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+	glutInitWindowSize(1280, 720);
+	glutInitWindowPosition((GetSystemMetrics(SM_CXSCREEN) - 1280) / 2, (GetSystemMetrics(SM_CYSCREEN) - 720) / 2);
+	glutCreateWindow("Animação");
+	glutMouseFunc(mouseClick);
+	glutKeyboardFunc(keyboardDown);
+	glutKeyboardUpFunc(keyboardUp);
+	glutDisplayFunc(Desenha);
+	glutIdleFunc(idle);
+	glutReshapeFunc(AlteraTamanhoJanela);
+	//glutTimerFunc(33, Timer, 1);
+	Inicializa();
+	glutMainLoop();
+
+	return 0;
+}

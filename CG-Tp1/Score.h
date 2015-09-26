@@ -9,24 +9,27 @@ using namespace std;
 
 class Score {
 protected:
+	friend std::ostream& operator<<(std::ostream&, const Score&);
 	string jogador;
-	int32_t score;
+	int score;
 public:
-	Score(string jogador, int32_t score);
+	Score(string jogador, int score);
 	Score();
 	~Score();
 
 	//Cria o arquivo score.txt
-	void CriaArquivo();
+	void static CriaArquivo();
 
 	//Salva a pontuação do jogador, retornando se foi salvo ou não
-	bool SaveScore(string jogador, int32_t score);
+	bool SaveScore(string jogador, int score);
 
 	//Pega o melhor Score e o nome do jogador 
-	Score getBestScore();
+	Score static getBestScore();
 
 	//Getters
-	int32_t getScore();
+	int getScore();
 	string getJogador();
 };
+
+
 
