@@ -10,14 +10,13 @@ void Desenha(){
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glColor3f(1.0f, 0.0f, 0.0f);
-    gluOrtho2D(-2000, 2000, -2000, 2000);
+    gluOrtho2D(-1000, 1000, -1000, 1000);
 
-    
     s->posX = 0;
-    s->posY = -1000;
+    s->posY = -500;
     s->desenha();
     s2->posX = 0;
-    s2->posY = 1000;
+    s2->posY = 500;
     s2->desenha();
 
     glFlush();

@@ -102,7 +102,7 @@ void FuncoesAuxiliares::bresenham(int x1, int y1, int x2, int y2)
 	}
 }
 
-void FuncoesAuxiliares::bresenham_circle(int x, int y, int a, int b)
+void FuncoesAuxiliares::bresenhamCircle(int x, int y, int a, int b)
 {
 	int wx, wy;
 	int thresh;
