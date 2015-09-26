@@ -25,10 +25,8 @@ public:
 	//Pega o melhor Score e o nome do jogador 
 	Score getBestScore();
 
-	//Retorna o Score
+	//Getters
 	int32_t getScore();
-
-	//Retorna o nome do jogador
 	string getJogador();
 };
 
