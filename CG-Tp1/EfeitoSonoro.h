@@ -7,6 +7,9 @@
 #endif
 #include <GL/gl.h>
 #include <GL/glut.h>
+#include <conio.h>
+#include <stdio.h>
+
 
 /*
 	Classe usada para efeitos sonoros
@@ -16,9 +19,13 @@
 
 class EfeitoSonoro
 {
-	public:
-		EfeitoSonoro();
-		~EfeitoSonoro();
+protected:
+	
+	
+public:
+	EfeitoSonoro();
+	~EfeitoSonoro();
+	void MainTheme();
 };
 
 
