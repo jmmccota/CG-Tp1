@@ -7,6 +7,7 @@
 #include "SplitString.h"
 #include "Circulo.h"
 #include <GL/glut.h>
+#include "EfeitoSonoro.h"
 
 using namespace std;
 Ponto** pts;
@@ -155,6 +156,9 @@ void Inicializa(void) {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
 int main(int argc, char **argv) {
+	EfeitoSonoro som;
+	som.MainTheme();
+
 	char* titulo = "Splitfire";
 	pts = carregar("splitfire.txt");
 	glutInit(&argc, argv);
@@ -162,7 +166,7 @@ int main(int argc, char **argv) {
 	glutInitWindowSize(800, 600);
 	glutInitWindowPosition(10, 10);
 	glutCreateWindow(titulo);
-	glutDisplayFunc(Desenha);
+	//glutDisplayFunc(Desenha);
 	glutReshapeFunc(AlteraTamanhoJanela);
 	Inicializa();
 	glutMainLoop();

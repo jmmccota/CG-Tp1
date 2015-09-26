@@ -9,8 +9,9 @@
 #include <GL/glut.h>
 #include <conio.h>
 #include <stdio.h>
-#include "OpenAL/al.h"
-#include "OpenAL/alc.h"
+#include "al.h" 
+#include "alc.h" 
+#include "alut.h"
 
 
 /*
@@ -22,8 +23,7 @@
 class EfeitoSonoro
 {
 protected:
-	ALCdevice* device = alcOpenDevice(NULL);
-	ALCcontext* context = alcCreateContext(device, NULL);
+	
 	
 public:
 	EfeitoSonoro();
