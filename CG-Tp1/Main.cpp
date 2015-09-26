@@ -22,7 +22,7 @@ void Desenha(){
 int main(int argc, char **argv) {
     char* titulo = "Animação";
 
-	s->carrega("spitfire.txt");
+	s->carrega("bf109.txt");
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
     glutInitWindowSize(800, 600);
