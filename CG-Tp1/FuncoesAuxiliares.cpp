@@ -60,7 +60,7 @@ void FuncoesAuxiliares::bresenham(int x1, int y1, int x2, int y2)
 
 	if (dx > dy)
 	{
-		desenha(x, y);
+		FuncoesAuxiliares::desenha(x, y);
 		e = 2 * dy - dx;
 		inc1 = 2 * (dy - dx);
 		inc2 = 2 * dy;
@@ -76,12 +76,12 @@ void FuncoesAuxiliares::bresenham(int x1, int y1, int x2, int y2)
 				e += inc2;
 			}
 			x += incx;
-			desenha(x, y);
+			FuncoesAuxiliares::desenha(x, y);
 		}
 	}
 	else
 	{
-		desenha(x, y);
+		FuncoesAuxiliares::desenha(x, y);
 		e = 2 * dx - dy;
 		inc1 = 2 * (dx - dy);
 		inc2 = 2 * dx;
@@ -97,7 +97,7 @@ void FuncoesAuxiliares::bresenham(int x1, int y1, int x2, int y2)
 				e += inc2;
 			}
 			y += incy;
-			desenha(x, y);
+			FuncoesAuxiliares::desenha(x, y);
 		}
 	}
 }
@@ -109,7 +109,7 @@ void FuncoesAuxiliares::bresenham_circle(int x, int y, int a, int b)
 	int asq = a * a;
 	int bsq = b * b;
 	int xa, ya;
-	bresenham(x, y + b, x, y - b);
+	FuncoesAuxiliares::bresenham(x, y + b, x, y - b);
 	wx = 0;
 	wy = b;
 	xa = 0;
@@ -126,10 +126,10 @@ void FuncoesAuxiliares::bresenham_circle(int x, int y, int a, int b)
 		wx++;
 		if (xa >= ya)
 			break;
-		bresenham(x + wx, y - wy, x - wx, y - wy);
-		bresenham(x + wx, y + wy, x - wx, y + wy);
+		FuncoesAuxiliares::bresenham(x + wx, y - wy, x - wx, y - wy);
+		FuncoesAuxiliares::bresenham(x + wx, y + wy, x - wx, y + wy);
 	}
-	bresenham(x + a, y, x - a, y);
+	FuncoesAuxiliares::bresenham(x + a, y, x - a, y);
 	wx = a;
 	wy = 0;
 	xa = bsq * 2 * a;
@@ -146,7 +146,7 @@ void FuncoesAuxiliares::bresenham_circle(int x, int y, int a, int b)
 		wy++;
 		if (ya > xa)
 			break;
-		bresenham(x + wx, y - wy, x - wx, y - wy);
-		bresenham(x + wx, y + wy, x - wx, y + wy);
+		FuncoesAuxiliares::bresenham(x + wx, y - wy, x - wx, y - wy);
+		FuncoesAuxiliares::bresenham(x + wx, y + wy, x - wx, y + wy);
 	}
 }
