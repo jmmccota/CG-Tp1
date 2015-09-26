@@ -2,6 +2,7 @@
 #include <cstring>
 #include <string>
 #include <iostream>
+#include "Score.h"
 // Tamanho e posição inicial do quadrado
 using namespace std;
 GLfloat posX1 = 100.0f;
@@ -31,11 +32,22 @@ void Desenha(void)
 
 
 	string titulo = "Best Score: ";
-	glColor3f(0.2, 0.5, 0.9);
+	glColor3f(0.4, 0.9, 1);
 	glRasterPos2f(325, 237.5);
 	for (int i = 0; i < 13;i++) {
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, titulo[i]);
 	}
+
+	Score bestScore = bestScore.getBestScore();
+	string score = std::to_string(bestScore.getScore());
+	
+	glRasterPos2f(365, 237.5);
+	for (int i = 0; i < score.length();i++) {
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, score[i]);
+	}
+	
+	glColor3f(0.2, 0.6, 0.9);
+
 	glLineWidth(3.0);
 	glBegin(GL_LINE_LOOP);
 	glVertex2f(0, 239);

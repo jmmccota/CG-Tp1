@@ -11,7 +11,13 @@ protected:
 	int32_t score;
 public:
 	Score(string jogador, int32_t score);
+	Score();
 	~Score();
 
 	bool SaveScore();
+	Score getBestScore();
+	int32_t getScore();
+	string getJogador();
+
 };
+
