@@ -1,7 +1,9 @@
 #pragma once
 #include "Score.h"
 #include <string>
-#include <stdio.h>
+#include <fstream>
+#include <iostream>
+#include "SplitString.h"
 
 using namespace std;
 

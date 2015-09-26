@@ -4,7 +4,7 @@ Score::Score() {
 
 }
 
-Score::~Score(){}
+Score::~Score() {}
 
 Score::Score(string jogador, int32_t score) {
 	Score::jogador = jogador;
@@ -13,18 +13,15 @@ Score::Score(string jogador, int32_t score) {
 
 bool Score::SaveScore() {
 
-	FILE *fp = NULL;
 
 	try
 	{
-		//fp = fopen("Scores/Scores.txt", "rb");
 
 
 		return true;
 	}
 	catch (const std::exception&)
 	{
-		fclose(fp);
 		return false;
 	}
 
@@ -33,17 +30,34 @@ bool Score::SaveScore() {
 
 Score Score::getBestScore() {
 
-	FILE *fp = NULL;
+	string line;
+	int32_t maxScore = -1;
+	string bestPlayer;
+
 	try
 	{
-		//fp = fopen("Scores/Scores.txt", "rb");
+		ifstream file("Scores/Scores.txt");
+		while (file.good()) {
+			getline(file, line);
 
+			SplitString splitLine(line);
+			vector<string> vecSplit = splitLine.split('/t', 2);
 
-		return Score("André Malta", 200000);
+			int32_t tempMaxScore = (int)vecSplit[1].c_str();
+
+			if (tempMaxScore >= maxScore) {
+				maxScore = tempMaxScore;
+				bestPlayer = vecSplit[0];
+			}
+
+		}
+		file.close();
+
+		return Score(bestPlayer, maxScore);
 	}
 	catch (const std::exception&)
 	{
-		fclose(fp);
+
 		return Score("Unknow", 0);
 	}
 }
