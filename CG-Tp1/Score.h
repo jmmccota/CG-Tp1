@@ -20,7 +20,7 @@ public:
 	void CriaArquivo();
 
 	//Salva a pontuação do jogador, retornando se foi salvo ou não
-	bool SaveScore();
+	bool SaveScore(string jogador, int32_t score);
 
 	//Pega o melhor Score e o nome do jogador 
 	Score getBestScore();

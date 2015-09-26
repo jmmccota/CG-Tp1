@@ -32,7 +32,6 @@ void Desenha(void)
 	glClear(GL_COLOR_BUFFER_BIT);
 
 #pragma region "Desenha o melhor Score"
-	
 	string best = "Best Score: ";
 	glColor3f(0.4, 0.9, 1);
 	glRasterPos2f(325, 237.5);
@@ -541,22 +540,22 @@ void idle() {
 	Desenha();
 }
 // Programa Principal 
-int main(int argc, char **argv)
-{
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-	glutInitWindowSize(1280, 720);
-	glutInitWindowPosition((GetSystemMetrics(SM_CXSCREEN) - 1280) / 2, (GetSystemMetrics(SM_CYSCREEN) - 720) / 2);
-	glutCreateWindow("Animação");
-	glutMouseFunc(mouseClick);
-	glutKeyboardFunc(keyboardDown);
-	glutKeyboardUpFunc(keyboardUp);
-	glutDisplayFunc(Desenha);
-	glutIdleFunc(idle);
-	glutReshapeFunc(AlteraTamanhoJanela);
-	//glutTimerFunc(33, Timer, 1);
-	Inicializa();
-	glutMainLoop();
-
-	return 0;
-}
+//int main(int argc, char **argv)
+//{
+//	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+//	glutInitWindowSize(1280, 720);
+//	glutInitWindowPosition((GetSystemMetrics(SM_CXSCREEN) - 1280) / 2, (GetSystemMetrics(SM_CYSCREEN) - 720) / 2);
+//	glutCreateWindow("Animação");
+//	glutMouseFunc(mouseClick);
+//	glutKeyboardFunc(keyboardDown);
+//	glutKeyboardUpFunc(keyboardUp);
+//	glutDisplayFunc(Desenha);
+//	glutIdleFunc(idle);
+//	glutReshapeFunc(AlteraTamanhoJanela);
+//	//glutTimerFunc(33, Timer, 1);
+//	Inicializa();
+//	glutMainLoop();
+//
+//	return 0;
+//}
