@@ -25,6 +25,6 @@ public:
 	void static bresenham(int x1, int y1, int x2, int y2);
 	void static bresenham_circle(int x, int y, int a, int b);
 
-	};
+};
 
 #endif

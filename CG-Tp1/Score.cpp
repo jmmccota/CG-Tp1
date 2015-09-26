@@ -1,47 +1,43 @@
 #include "Score.h"
 
 Score::Score() {
-
 }
 
-Score::~Score() {}
+Score::~Score() {
+}
 
 Score::Score(string jogador, int32_t score) {
 	Score::jogador = jogador;
 	Score::score = score;
 }
 
+
+void Score::CriaArquivo() {
+	ofstream makefile;
+	makefile.open("Score.txt");
+	makefile.close();
+}
+
 bool Score::SaveScore() {
-
-
 	try
 	{
-
-
 		return true;
 	}
 	catch (const std::exception&)
 	{
 		return false;
 	}
-
-
 }
 
 Score Score::getBestScore() {
-
 	string line;
 	int32_t maxScore = -1;
 	string bestPlayer;
-
-	try
-	{
-		ifstream file("Scores/Scores.txt");
+	ifstream file("Scores.txt");
+	if (file.is_open()) {
 		while (file.good()) {
 			getline(file, line);
-
-			SplitString splitLine(line);
-			vector<string> vecSplit = splitLine.split('/t', 2);
+			vector<string> vecSplit = FuncoesAuxiliares::split(line, '/t');
 
 			int32_t tempMaxScore = (int)vecSplit[1].c_str();
 
@@ -49,16 +45,18 @@ Score Score::getBestScore() {
 				maxScore = tempMaxScore;
 				bestPlayer = vecSplit[0];
 			}
-
 		}
 		file.close();
-
-		return Score(bestPlayer, maxScore);
+		if (maxScore == -1) {
+			return Score("Unknown", 0);
+		}
+		else {
+			return Score(bestPlayer, maxScore);
+		}
 	}
-	catch (const std::exception&)
-	{
-
-		return Score("Unknow", 0);
+	else {
+		CriaArquivo();
+		return Score("Unknown", 0);
 	}
 }
 

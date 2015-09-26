@@ -3,7 +3,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
-#include "SplitString.h"
+#include "FuncoesAuxiliares.h"
 
 using namespace std;
 
@@ -16,10 +16,19 @@ public:
 	Score();
 	~Score();
 
-	bool SaveScore();
-	Score getBestScore();
-	int32_t getScore();
-	string getJogador();
+	//Cria o arquivo score.txt
+	void CriaArquivo();
 
+	//Salva a pontuação do jogador, retornando se foi salvo ou não
+	bool SaveScore();
+
+	//Pega o melhor Score e o nome do jogador 
+	Score getBestScore();
+
+	//Retorna o Score
+	int32_t getScore();
+
+	//Retorna o nome do jogador
+	string getJogador();
 };
 
