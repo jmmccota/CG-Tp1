@@ -5,6 +5,10 @@ Personagem::Personagem(GLfloat pX, GLfloat pY, GLfloat vel, float esc, Fase* f) 
     fase = f;
 }
 
+Personagem::~Personagem()
+{
+}
+
 void Personagem::alvejado(int dano)
 {
     hp -= dano;

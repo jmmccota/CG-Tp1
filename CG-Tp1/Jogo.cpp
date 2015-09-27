@@ -24,3 +24,8 @@ void Jogo::setProxFase(int p)
 {
     proxFase = p;
 }
+
+void Jogo::fimJogo()
+{
+
+}

@@ -11,7 +11,6 @@ class Personagem;
 #include "Solido.h"
 #include "Projetil.h"
 #include "Fase.h"
-#include <string>
 
 
 /*
@@ -37,9 +36,6 @@ class Personagem : public Solido
 
 		//Limpa memoria alocada dinamicamente
 		virtual ~Personagem() = 0;
-
-		//Carrega o personagem do arquivo de modelo
-        virtual void carrega(std::string file);
 
         //Atira projetil tipo 1 ou 2
         virtual void atira(int tipo) = 0;
