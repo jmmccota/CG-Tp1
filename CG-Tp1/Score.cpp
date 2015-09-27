@@ -6,7 +6,7 @@ Score::Score() {
 Score::~Score() {
 }
 
-Score::Score(string jogador, int32_t score) {
+Score::Score(string jogador, int score) {
 	Score::jogador = jogador;
 	Score::score = score;
 }
@@ -18,7 +18,7 @@ void Score::CriaArquivo() {
 	makefile.close();
 }
 
-bool Score::SaveScore(string jogador, int32_t score) {
+bool Score::SaveScore(string jogador, int score) {
 	try
 	{
 		ofstream file("PlayersScores.txt", ios::app);
@@ -34,7 +34,7 @@ bool Score::SaveScore(string jogador, int32_t score) {
 
 Score Score::getBestScore() {
 	string line;
-	int32_t maxScore = -1;
+	int maxScore = -1;
 	string bestPlayer;
 	ifstream file("PlayersScores.txt");
 	if (file.is_open()) {
@@ -43,7 +43,7 @@ Score Score::getBestScore() {
 			if (line != "") {
 				vector<string> vecSplit = FuncoesAuxiliares::split(line, '\t');
 
-				int32_t tempMaxScore = std::stoi(vecSplit[1]);
+				int tempMaxScore = std::stoi(vecSplit[1]);
 
 				if (tempMaxScore >= maxScore) {
 					maxScore = tempMaxScore;
@@ -65,10 +65,14 @@ Score Score::getBestScore() {
 	}
 }
 
-int32_t Score::getScore() {
+int Score::getScore() {
 	return score;
 }
 
 string Score::getJogador() {
 	return jogador;
+}
+
+std::ostream& operator<<(std::ostream &strm, const Score &a) {
+	return strm << a.jogador << " -> " << a.score << endl;
 }

@@ -26,10 +26,10 @@ int main(int argc, char **argv) {
     char* titulo = "Animação";
 
     s->carrega("spitfire.txt");
-    s2->carrega("bf109.txt");
+    s2->carrega("me163.txt");
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-    glutInitWindowSize(800, 600);
+    glutInitWindowSize(800, 800);
     glutInitWindowPosition(10, 10);
     glutCreateWindow("desenha");
     glutDisplayFunc(DesenhaAviao);

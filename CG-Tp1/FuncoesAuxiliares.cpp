@@ -38,23 +38,19 @@ void FuncoesAuxiliares::bresenham(int x1, int y1, int x2, int y2)
 	dy = y2 - y1;
 
 	if (dx < 0)
-	{
 		dx = -dx;
-	}
+
 	if (dy < 0)
-	{
 		dy = -dy;
-	}
+
 	incx = 1;
 	if (x2 < x1)
-	{
 		incx = -1;
-	}
+
 	incy = 1;
 	if (y2 < y1)
-	{
 		incy = -1;
-	}
+
 	x = x1;
 	y = y1;
 
@@ -115,7 +111,7 @@ void FuncoesAuxiliares::bresenhamCircle(int x, int y, int a, int b)
 	xa = 0;
 	ya = asq * 2 * b;
 	thresh = asq / 4 - asq * b;
-	while (true) {
+    while (xa < ya) {
 		thresh += xa + bsq;
 		if (thresh >= 0) {
 			ya -= asq * 2;
@@ -135,7 +131,7 @@ void FuncoesAuxiliares::bresenhamCircle(int x, int y, int a, int b)
 	xa = bsq * 2 * a;
 	ya = 0;
 	thresh = bsq / 4 - bsq * a;
-	while (true) {
+    while (ya <= xa) {
 		thresh += ya + asq;
 		if (thresh >= 0) {
 			xa -= bsq * 2;
