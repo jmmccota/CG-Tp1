@@ -21,9 +21,12 @@ bool explosao = true;
 
 #include "Spitfire.h"
 #include "Bf109.h"
+#include "TiroSimples.h"
 
 Spitfire *s = new Spitfire(-50, 0, (float)20 / 10000, nullptr);
 Bf109 *b = new Bf109(50, 0, (float)20 / 10000, nullptr, nullptr);
+TiroSimples *t1 = new TiroSimples(-39.5, 8, (float)2 / 10000);
+TiroSimples *t2 = new TiroSimples(-39.5, -8, (float)2 / 10000);
 
 
 void desenha(void){
@@ -35,7 +38,7 @@ void desenha(void){
 	gluOrtho2D(-100, 100, -100, 100);
 	glTranslatef(translacaoX, translacaoY, translacaoZ);
 	glRotatef(rotacaoX1, 1, 0, 0);
-	glRotatef(rotacaoY1, 0, 1, 0);
+    glRotatef(rotacaoY1, 0, 1, 0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
     s->desenha();
@@ -51,20 +54,8 @@ void desenha(void){
 		glTranslatef(translacaoX2, 0, 0);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		glBegin(GL_POLYGON);
-		glColor3f(0, 1, 0);
-		glVertex2f(-41, 7);
-		glVertex2f(-41, 10);
-		glVertex2f(-38, 10);
-		glVertex2f(-38, 7);
-		glEnd();
-		glBegin(GL_POLYGON);
-		glColor3f(0, 1, 0);
-		glVertex2f(-41, -7);
-		glVertex2f(-41, -10);
-		glVertex2f(-38, -10);
-		glVertex2f(-38, -7);
-		glEnd();
+        t1->desenha();
+        t2->desenha();
 		glPopMatrix();
 
 		// desenha o bloco q recebe o tiro
@@ -124,7 +115,7 @@ void desenha(void){
 		glEnd();
 		glPopMatrix();
 	}
-	glFlush();
+	glutSwapBuffers();
 }
 
 // de tempo em tempo ele desenha
@@ -153,9 +144,8 @@ void Timer(int value){
 int main(int argc, char **argv)
 {
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(1280, 720);
-    glClearColor(1, 1, 1, 0.8);
 	glutInitWindowPosition((GetSystemMetrics(SM_CXSCREEN) - 1280) / 2, (GetSystemMetrics(SM_CYSCREEN) - 720) / 2);
 	glutCreateWindow("Jogo");
 	glutTimerFunc(33, Timer, 1);
