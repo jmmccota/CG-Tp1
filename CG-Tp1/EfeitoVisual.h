@@ -34,5 +34,7 @@ public:
 
 	//Metodo de pressionamento de teclas
 	void Teclas(unsigned char tecla, GLint x, GLint y);
+
+	
 };
 #endif

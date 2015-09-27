@@ -4,7 +4,7 @@
 Solido *s = new Solido();
 Solido *s2 = new Solido();
 
-void Desenha(){
+void DesenhaAviao(){
 
     glClear(GL_COLOR_BUFFER_BIT);
     glMatrixMode(GL_PROJECTION);
@@ -32,7 +32,7 @@ int main(int argc, char **argv) {
     glutInitWindowSize(800, 600);
     glutInitWindowPosition(10, 10);
     glutCreateWindow("desenha");
-    glutDisplayFunc(Desenha);
+    glutDisplayFunc(DesenhaAviao);
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     glutMainLoop();
 
