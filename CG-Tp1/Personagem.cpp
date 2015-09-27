@@ -1,6 +1,6 @@
 #include "Personagem.h"
 
-Personagem::Personagem(GLfloat posX, GLfloat posY, GLfloat velocidade, float escala, Fase* f) : Solido(posX, posY, velocidade, escala)
+Personagem::Personagem(GLfloat pX, GLfloat pY, GLfloat vel, float esc, Fase* f) : Solido(pX, pY, vel, esc)
 {
     fase = f;
 }

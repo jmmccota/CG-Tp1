@@ -1,5 +1,10 @@
-#pragma once
+#ifndef BOMBA_H
+#define BOMBA_H
+
+class Bomba;
+
 #include "Projetil.h"
+
 class Bomba : public Projetil
 {
     public:
@@ -7,3 +12,4 @@ class Bomba : public Projetil
         ~Bomba();
 };
 
+#endif

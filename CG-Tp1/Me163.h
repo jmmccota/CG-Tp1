@@ -1,6 +1,8 @@
 #ifndef ME163_H
 #define ME163_H
 
+class Me163;
+
 #include "Personagem.h"
 
 class Me163 : public Personagem
@@ -9,7 +11,7 @@ class Me163 : public Personagem
         Personagem *alvo;
 
     public:
-        Me163(GLfloat posX, GLfloat posY, float escala, Personagem *alvo, Fase *f);
+        Me163(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f);
         ~Me163();
 
         void acao();

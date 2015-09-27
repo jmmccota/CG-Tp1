@@ -1,11 +1,11 @@
 #include "Bf109.h"
 
 
-Bf109::Bf109(GLfloat posX, GLfloat posY, float escala, Personagem *alvo, Fase *f) 
-    : Personagem(posX, posY, 0.01*escala, escala, f)
+Bf109::Bf109(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f)
+    : Personagem(pX, pY, 0.01*esc, esc, f)
 {
-    this->alvo = alvo;
-    this->carrega("modelos/bf109.txt");
+    alvo = a;
+    carrega("modelos/bf109.txt");
     hp = 30;
     municao[0] = 999;
     municao[1] = 0;

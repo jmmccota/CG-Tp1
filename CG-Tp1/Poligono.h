@@ -1,6 +1,8 @@
 #ifndef POLIGONO_H
 #define POLIGONO_H
 
+class Poligono;
+
 #ifdef _WIN32
 #include <windows.h>
 #endif

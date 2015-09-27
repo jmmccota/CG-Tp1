@@ -1,7 +1,7 @@
 #include "Projetil.h"
 
-Projetil::Projetil(GLfloat posX, GLfloat posY, GLfloat velocidade, float escala)
-    : Solido(posX, posY, velocidade, escala)
+Projetil::Projetil(GLfloat pX, GLfloat pY, GLfloat vel, float esc)
+    : Solido(pX, pY, vel, esc)
 {
 }
 

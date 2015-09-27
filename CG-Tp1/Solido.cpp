@@ -1,11 +1,11 @@
 #include "Solido.h"
 
-Solido::Solido(GLfloat posX, GLfloat posY, GLfloat velocidade, float escala)
+Solido::Solido(GLfloat pX, GLfloat pY, GLfloat vel, float esc)
 {
-    this->posX = posX;
-    this->posY = posY;
-    this->velocidade = velocidade;
-    this->escala = escala;
+    posX = pX;
+    posY = pY;
+    velocidade = vel;
+    escala = esc;
 }
 
 Solido::~Solido()

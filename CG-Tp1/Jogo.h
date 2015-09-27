@@ -1,6 +1,8 @@
 #ifndef JOGO_H
 #define JOGO_H
 
+class Jogo;
+
 #include "Fase.h"
 #include <vector>
 

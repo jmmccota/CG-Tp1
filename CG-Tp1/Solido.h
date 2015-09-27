@@ -1,6 +1,7 @@
-#ifndef PROJETIL_ABS
-#define PROJETIL_ABS
+#ifndef SOLIDO_H
+#define SOLIDO_H
 
+class Solido;
 
 #ifdef _WIN32
 #include <windows.h>
@@ -39,7 +40,7 @@ class Solido
         float escala;
 
 	public:
-        Solido(GLfloat posX, GLfloat posY, GLfloat velocidade, float escala);
+        Solido(GLfloat pX, GLfloat pY, GLfloat vel, float esc);
 
 		//Limpa memoria alocada dinamicamente
 		virtual ~Solido();

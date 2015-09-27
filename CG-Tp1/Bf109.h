@@ -1,6 +1,8 @@
 #ifndef BF109_H
 #define BF109_H
 
+class Bf109;
+
 #include "Personagem.h"
 #include "TiroSimplesInimigo.h"
 #include <cmath>
@@ -15,7 +17,7 @@ class Bf109 : public Personagem
         int estadoTiro;
 
     public:
-        Bf109(GLfloat posX, GLfloat posY, float escala, Personagem *alvo, Fase *f);
+        Bf109(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f);
         ~Bf109();
 
         void atira(int tipo);

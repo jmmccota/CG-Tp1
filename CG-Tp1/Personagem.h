@@ -1,7 +1,7 @@
-#ifndef PERSONAGEM_ABS
-#define PERSONAGEM_ABS
+#ifndef PERSONAGEM_H
+#define PERSONAGEM_H
 
-
+class Personagem;
 
 #ifdef _WIN32
 #include <windows.h>
@@ -33,7 +33,7 @@ class Personagem : public Solido
 
 	public:
         //Inicia o personagem
-        Personagem(GLfloat posX, GLfloat posY, GLfloat velocidade, float escala, Fase* f);
+        Personagem(GLfloat pX, GLfloat pY, GLfloat vel, float esc, Fase* f);
 
 		//Limpa memoria alocada dinamicamente
 		virtual ~Personagem() = 0;

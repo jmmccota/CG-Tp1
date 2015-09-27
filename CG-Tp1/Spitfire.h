@@ -1,6 +1,11 @@
 #ifndef SPITFIRE_H
 #define SPITFIRE_H
+
+class Spitfire;
+
 #include "Personagem.h"
+#include "TiroSimples.h"
+#include "Bomba.h"
 
 class Spitfire : public Personagem
 {
@@ -8,7 +13,7 @@ class Spitfire : public Personagem
         bool movCima = false, movBaixo = false, movEsq = false, movDir = false;
 
     public:
-        Spitfire(GLfloat posX, GLfloat posY, float escala, Fase *f);
+        Spitfire(GLfloat pX, GLfloat pY, float esc, Fase *f);
         ~Spitfire();
 
         void acao();

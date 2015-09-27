@@ -1,5 +1,10 @@
-#pragma once
+#ifndef TIROSIMPLESINIMIGO_H
+#define TIROSIMPLESINIMIGO_H
+
+class TiroSimplesInimigo;
+
 #include "Projetil.h"
+
 class TiroSimplesInimigo : public Projetil
 {
     public:
@@ -7,3 +12,4 @@ class TiroSimplesInimigo : public Projetil
         ~TiroSimplesInimigo();
 };
 
+#endif

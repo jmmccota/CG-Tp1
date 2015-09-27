@@ -1,8 +1,8 @@
 #include "Spitfire.h"
 
 
-Spitfire::Spitfire(GLfloat posX, GLfloat posY, float escala, Fase *f)
-    : Personagem(posX, posY, 0.016 * escala, escala, f)
+Spitfire::Spitfire(GLfloat pX, GLfloat pY, float esc, Fase *f)
+    : Personagem(pX, pY, 0.016 * esc, esc, f)
 {
     this->carrega("modelos/spitfire.txt");
     hp = 40;

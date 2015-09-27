@@ -1,11 +1,11 @@
 #include "Me163.h"
 
 
-Me163::Me163(GLfloat posX, GLfloat posY, float escala, Personagem *alvo, Fase *f)
-    : Personagem(posX, posY, 0.025*escala, escala, f)
+Me163::Me163(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f)
+    : Personagem(pX, pY, 0.025*esc, esc, f)
 {
-    this->alvo = alvo;
-    this->carrega("modelo/me163.txt");
+    alvo = a;
+    carrega("modelo/me163.txt");
     hp = 20;
     municao[0] = 0;
     municao[1] = 0;

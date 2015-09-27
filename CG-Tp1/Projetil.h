@@ -1,7 +1,7 @@
 #ifndef PROJETIL_H
 #define PROJETIL_H
 
-
+class Projetil;
 
 #ifdef _WIN32
 #include <windows.h>
@@ -25,7 +25,7 @@ class Projetil : public Solido
 		int dano;
 
     public:
-        Projetil(GLfloat posX, GLfloat posY, GLfloat velocidade, float escala);
+        Projetil(GLfloat pX, GLfloat pY, GLfloat vel, float esc);
 
         void acao();
 };

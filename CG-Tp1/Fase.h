@@ -1,7 +1,7 @@
-#ifndef FASE_ABS
-#define FASE_ABS
+#ifndef FASE_H
+#define FASE_H
 
-
+class Fase;
 
 #ifdef _WIN32
 #include <windows.h>
@@ -9,6 +9,7 @@
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include "Personagem.h"
+#include "Projetil.h"
 #include "Jogo.h"
 #include <queue>
 #include <vector>
@@ -24,7 +25,7 @@ class Fase
 {
 	protected:
 		//Personagem jogavel
-		Personagem *principal;
+        Personagem *principal;
 
 		//Fila de inimigos que apareceram na tela
 		std::queue<Personagem*> inimigosInativos;
