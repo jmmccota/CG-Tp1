@@ -18,6 +18,14 @@ bool booldesenha = true;
 bool explosao = true;
 
 
+
+#include "Spitfire.h"
+#include "Bf109.h"
+
+Spitfire *s = new Spitfire(-50, 0, (float)20 / 10000, nullptr);
+Bf109 *b = new Bf109(50, 0, (float)20 / 10000, nullptr, nullptr);
+
+
 void desenha(void){
 	glClear(GL_COLOR_BUFFER_BIT);
 	// desenha o primeiro bloco atiraador
@@ -30,12 +38,7 @@ void desenha(void){
 	glRotatef(rotacaoY1, 0, 1, 0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glBegin(GL_POLYGON);
-	glColor3f(1, 0, 0);
-	glVertex2f(-60, 10);
-	glVertex2f(-40, 10);
-	glVertex2f(-40, -10);
-	glVertex2f(-60, -10);
+    s->desenha();
 	glEnd();
 	glPopMatrix();
 
@@ -72,13 +75,7 @@ void desenha(void){
 		glTranslatef(translacaoX, 0, 0);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		glBegin(GL_POLYGON);
-		glColor3f(1, 0, 0);
-		glVertex2f(40, 10);
-		glVertex2f(60, 10);
-		glVertex2f(60, -10);
-		glVertex2f(40, -10);
-		glEnd();
+        b->desenha();
 		glPopMatrix();
 	}
 	else if(explosao){
@@ -158,6 +155,7 @@ int main(int argc, char **argv)
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(1280, 720);
+    glClearColor(1, 1, 1, 0.8);
 	glutInitWindowPosition((GetSystemMetrics(SM_CXSCREEN) - 1280) / 2, (GetSystemMetrics(SM_CYSCREEN) - 720) / 2);
 	glutCreateWindow("Jogo");
 	glutTimerFunc(33, Timer, 1);
