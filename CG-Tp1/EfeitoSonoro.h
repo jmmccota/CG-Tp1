@@ -3,15 +3,12 @@
 
 class EfeitoSonoro;
 
-#ifdef _WIN32
-#include <windows.h>
-#endif
-#include <GL/gl.h>
-#include <GL/glut.h>
-#include <conio.h>
-#include <stdio.h>
 
+#include <fmod.hpp>
+#include <fmod_errors.h>
+#include <iostream>
 
+using namespace std;
 /*
 	Classe usada para efeitos sonoros
 		(efeito sonoro, musica, ...)
@@ -20,13 +17,22 @@ class EfeitoSonoro;
 
 class EfeitoSonoro
 {
-    protected:
-	
-	
-    public:
-	    EfeitoSonoro();
-	    ~EfeitoSonoro();
-	    void MainTheme();
+
+protected:
+	FMOD::System *system;
+	FMOD::Sound *sound;
+	FMOD::Channel *channel = 0;
+	FMOD_RESULT result;
+	unsigned int version;
+
+private:
+	//
+	void ERRCHECK(FMOD_RESULT result);
+
+public:
+	EfeitoSonoro();
+	~EfeitoSonoro();
+	void playMainTheme();
 };
 
 

@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 #include "Score.h"
-#include "Me163.h"
+#include "EfeitoSonoro.h"
 
 // Tamanho e posição inicial do quadrado
 using namespace std;
@@ -545,6 +545,10 @@ void idle() {
 // Programa Principal 
 int main(int argc, char **argv)
 {
+	EfeitoSonoro m;
+	m.playMainTheme();
+
+
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(1280, 720);
