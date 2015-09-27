@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <vector>
 #include "FuncoesAuxiliares.h"
 
 using namespace std;
@@ -25,6 +26,9 @@ public:
 
 	//Pega o melhor Score e o nome do jogador 
 	Score static getBestScore();
+
+	//Pega as melhores pontuações de acordo com a quantidade desejada
+	vector<Score> getBestScore(int quant);
 
 	//Getters
 	int getScore();

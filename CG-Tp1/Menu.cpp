@@ -3,6 +3,8 @@
 #include <string>
 #include <iostream>
 #include "Score.h"
+#include "Me163.h"
+
 // Tamanho e posição inicial do quadrado
 using namespace std;
 GLfloat posX1 = 100.0f;

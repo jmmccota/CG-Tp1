@@ -1,5 +1,7 @@
-#ifndef EFEITOVISUAL_ABS
-#define EFEITOVISUAL_ABS
+#ifndef EFEITOVISUAL_H
+#define EFEITOVISUAL_H
+
+class EfeitoVisual;
 
 #ifdef _WIN32
 #include <windows.h>
@@ -17,11 +19,11 @@
 
 class EfeitoVisual
 {
-protected:
-	bool fullScreen = false;
-public:
-	EfeitoVisual();
-	~EfeitoVisual();
+    protected:
+	    bool fullScreen = false;
+    public:
+	    EfeitoVisual();
+	    ~EfeitoVisual();
 
 	//COMO FAZER ANIMACAO EXPLOSAO?
 	//void static Explosao(GLfloat x, GLfloat y, GLfloat raio, int estagio);

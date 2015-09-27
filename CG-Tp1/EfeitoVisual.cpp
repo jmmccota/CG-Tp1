@@ -33,9 +33,9 @@ void EfeitoVisual::Teclas(unsigned char tecla, GLint x, GLint y) {
 			glutFullScreen();
 		}
 		else {
-			glutReshapeWindow(800, 600);
+			glutReshapeWindow(1280, 720);
 		}
-		fullScreen = fullScreen;
+		fullScreen = !fullScreen;
 		break;
 	}
 }

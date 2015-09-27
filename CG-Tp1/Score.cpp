@@ -65,6 +65,12 @@ Score Score::getBestScore() {
 	}
 }
 
+vector<Score> Score::getBestScore(int quantScores)
+{
+	vector<Score> bestScores(quantScores);
+	return bestScores;
+}
+
 int Score::getScore() {
 	return score;
 }

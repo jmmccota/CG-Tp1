@@ -1,7 +1,7 @@
-#ifndef PROJETIL_ABS
-#define PROJETIL_ABS
+#ifndef PROJETIL_H
+#define PROJETIL_H
 
-
+class Projetil;
 
 #ifdef _WIN32
 #include <windows.h>
@@ -17,11 +17,17 @@
 */
 
 
+
 class Projetil : public Solido
 {
 	protected:
 		//Dano causado pelo projetil
 		int dano;
+
+    public:
+        Projetil(GLfloat pX, GLfloat pY, GLfloat vel, float esc);
+
+        void acao();
 };
 
 

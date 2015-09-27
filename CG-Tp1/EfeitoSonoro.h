@@ -1,6 +1,7 @@
-#ifndef EFEITOSONORO_ABS
-#define EFEITOSONORO_ABS
+#ifndef EFEITOSONORO_H
+#define EFEITOSONORO_H
 
+class EfeitoSonoro;
 
 #ifdef _WIN32
 #include <windows.h>
@@ -19,13 +20,13 @@
 
 class EfeitoSonoro
 {
-protected:
+    protected:
 	
 	
-public:
-	EfeitoSonoro();
-	~EfeitoSonoro();
-	void MainTheme();
+    public:
+	    EfeitoSonoro();
+	    ~EfeitoSonoro();
+	    void MainTheme();
 };
 
 

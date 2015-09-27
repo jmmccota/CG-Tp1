@@ -1,6 +1,8 @@
 #ifndef FUNCOES_AUXILIARES_H
 #define FUNCOES_AUXILIARES_H
 
+class FuncoesAuxiliares;
+
 #include <string>
 #include <sstream>
 #include <vector>

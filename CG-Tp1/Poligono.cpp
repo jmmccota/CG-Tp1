@@ -59,3 +59,17 @@ void Poligono::desenha(GLfloat x, GLfloat y)
     }
     glEnd();
 }
+
+
+GLfloat Poligono::getPontoX(int indice)
+{
+    return pontosX[indice];
+}
+GLfloat Poligono::getPontoY(int indice)
+{
+    return pontosY[indice];
+}
+int Poligono::getNPontos()
+{
+    return pontosX.size();
+}

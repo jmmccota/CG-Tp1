@@ -1,6 +1,7 @@
-#ifndef PROJETIL_ABS
-#define PROJETIL_ABS
+#ifndef SOLIDO_H
+#define SOLIDO_H
 
+class Solido;
 
 #ifdef _WIN32
 #include <windows.h>
@@ -22,8 +23,7 @@
 
 class Solido
 {
-	//protected:
-    public:
+	protected:
 		//Vetor de poligonos
 		std::vector<Poligono> poligonos;
 
@@ -33,9 +33,14 @@ class Solido
 		//Dimensoes X e Y do solido
 		GLfloat tamX, tamY;
 
+        //Velocidade de movimentação do solido
+        GLfloat velocidade;
+
+        //Escala do solido
+        float escala;
+
 	public:
-        //Evita erros de segmentacao
-        Solido();
+        Solido(GLfloat pX, GLfloat pY, GLfloat vel, float esc);
 
 		//Limpa memoria alocada dinamicamente
 		virtual ~Solido();
@@ -51,7 +56,7 @@ class Solido
 
 		//Define as acoes do solido
 		//	(movimento, destruicao, ...)
-        // virtual void acao() = 0;
+        virtual void acao() = 0;
 
 		//Getters
 		GLfloat getX() { return posX; }
