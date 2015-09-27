@@ -1,3 +1,4 @@
+#include <windows.h>
 #include <math.h>
 #include <gl/glut.h>
 #include<iostream>
@@ -14,10 +15,10 @@ GLint translacaoX2 = -180;
 GLfloat translacaoZ = 0;
 bool fullscreen = false;
 bool booldesenha = true;
+bool explosao = true;
 
 
-void desenha(void)
-{
+void desenha(void){
 	glClear(GL_COLOR_BUFFER_BIT);
 	// desenha o primeiro bloco atiraador
 	glPushMatrix();
@@ -38,8 +39,7 @@ void desenha(void)
 	glEnd();
 	glPopMatrix();
 
-	if (booldesenha == true)
-	{
+	if (booldesenha == true){
 		// desenha a muniçãoo
 		glPushMatrix();
 		glMatrixMode(GL_PROJECTION);
@@ -81,15 +81,20 @@ void desenha(void)
 		glEnd();
 		glPopMatrix();
 	}
-	else
-	{
+	else if(explosao){
 		// desenha a explosao
 		glPushMatrix();
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		gluOrtho2D(-100, 100, -100, 100);
-		glScalef(escala, escala, escala);
 		glTranslatef(translacaoX2, 0, 0);
+		if (escala < 3){
+			escala = escala + 0.3;
+		}
+		else{
+			explosao = false;
+		}
+		glScalef(escala, escala, escala);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		glBegin(GL_POLYGON);
@@ -126,32 +131,26 @@ void desenha(void)
 }
 
 // de tempo em tempo ele desenha
-void Timer(int value)
-{
-	if (booldesenha)
-	{
-		translacaoX++;
+void Timer(int value){
+	translacaoX += 2;
+	if (booldesenha){
 
-		if (translacaoX >= -20)
-		{
-			translacaoX2 = translacaoX2 + 5;
+		if (translacaoX >= -20){
+			translacaoX2 = translacaoX2 + 8;
 		}
-		else
-		{
-			translacaoX2++;
+		else{
+			translacaoX2 += 2;
 		}
 		//momento em q as balas colidem com o bloco
-		if ((translacaoX2 - translacaoX) > 78)
-		{
+		if ((translacaoX2 - translacaoX)>78){
 			translacaoX2 = translacaoX2 - 30;
 			booldesenha = false;
 		}
 	}
-	if (value > 0)
-	{
-		glutPostRedisplay();
-		glutTimerFunc(33, Timer, 1);
-	}
+		if (value > 0){
+			glutPostRedisplay();
+			glutTimerFunc(33, Timer, 1);
+		}
 }
 
 int main(int argc, char **argv)
