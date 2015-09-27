@@ -1,5 +1,5 @@
-#ifndef PROJETIL_ABS
-#define PROJETIL_ABS
+#ifndef PROJETIL_H
+#define PROJETIL_H
 
 
 
@@ -17,11 +17,17 @@
 */
 
 
+
 class Projetil : public Solido
 {
 	protected:
 		//Dano causado pelo projetil
 		int dano;
+
+    public:
+        Projetil(GLfloat posX, GLfloat posY, GLfloat velocidade, float escala);
+
+        void acao();
 };
 
 

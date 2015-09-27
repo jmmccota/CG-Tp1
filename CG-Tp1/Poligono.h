@@ -13,7 +13,7 @@
 
 class Poligono
 {
-    public:
+    protected:
         float escala;
         GLfloat cor[3];
         vector<GLfloat> pontosX;
@@ -30,6 +30,11 @@ class Poligono
         //    (x,y) usado como posicao do solido que contem o poligono
         void desenha(GLfloat x, GLfloat y);
 
+
+        //Getters
+        GLfloat getPontoX(int indice);
+        GLfloat getPontoY(int indice);
+        int getNPontos();
 };
 
 #endif

@@ -22,8 +22,7 @@
 
 class Solido
 {
-	//protected:
-    public:
+	protected:
 		//Vetor de poligonos
 		std::vector<Poligono> poligonos;
 
@@ -33,9 +32,14 @@ class Solido
 		//Dimensoes X e Y do solido
 		GLfloat tamX, tamY;
 
+        //Velocidade de movimentação do solido
+        GLfloat velocidade;
+
+        //Escala do solido
+        float escala;
+
 	public:
-        //Evita erros de segmentacao
-        Solido();
+        Solido(GLfloat posX, GLfloat posY, GLfloat velocidade, float escala);
 
 		//Limpa memoria alocada dinamicamente
 		virtual ~Solido();
@@ -51,7 +55,7 @@ class Solido
 
 		//Define as acoes do solido
 		//	(movimento, destruicao, ...)
-        // virtual void acao() = 0;
+        virtual void acao() = 0;
 
 		//Getters
 		GLfloat getX() { return posX; }
