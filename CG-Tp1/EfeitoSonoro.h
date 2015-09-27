@@ -26,13 +26,19 @@ protected:
 	unsigned int version;
 
 private:
-	//
+	//Verificação de erros
 	void ERRCHECK(FMOD_RESULT result);
 
 public:
 	EfeitoSonoro();
 	~EfeitoSonoro();
-	void playMainTheme();
+	
+	void playMainTheme(bool loop);
+	void stopSound();
+	
+	FMOD::Sound getSound();
+
+
 };
 
 

@@ -546,8 +546,7 @@ void idle() {
 int main(int argc, char **argv)
 {
 	EfeitoSonoro m;
-	m.playMainTheme();
-
+	m.playMainTheme(true);
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);

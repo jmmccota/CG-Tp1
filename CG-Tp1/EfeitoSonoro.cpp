@@ -11,7 +11,6 @@ void EfeitoSonoro::ERRCHECK(FMOD_RESULT result)
 
 EfeitoSonoro::EfeitoSonoro()
 {
-
 	try
 	{
 		/*
@@ -42,10 +41,22 @@ EfeitoSonoro::~EfeitoSonoro()
 
 }
 
-void EfeitoSonoro::playMainTheme() {
+void EfeitoSonoro::playMainTheme(bool loop) {
 	result = system->createSound("MainTheme.mp3", FMOD_HARDWARE, 0, &sound);
 	ERRCHECK(result);
 	result = system->playSound(FMOD_CHANNEL_FREE, sound, false, &channel);
 	ERRCHECK(result);
 
+	if (loop) {
+		channel->setMode(FMOD_LOOP_NORMAL);
+	}
+}
+
+void EfeitoSonoro::stopSound() {
+	result = sound->release();
+	ERRCHECK(result);
+}
+
+FMOD::Sound EfeitoSonoro::getSound() {
+	return *sound;
 }
