@@ -33,53 +33,6 @@ void Desenha(void)
 	// Limpa a janela de visualização com a cor de fundo especificada
 	glClear(GL_COLOR_BUFFER_BIT);
 
-#pragma region "Desenha o melhor Score"
-	string best = "Best Score: ";
-	glColor3f(0.4, 0.9, 1);
-	glRasterPos2f(325, 237.5);
-	for (int i = 0; i < 13;i++) {
-		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, best[i]);
-	}
-
-	Score bestScore = Score::getBestScore();
-	string score = std::to_string(bestScore.getScore());
-
-	glRasterPos2f(365, 237.5);
-	for (int i = 0; i < score.length();i++) {
-		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, score[i]);
-	}
-
-	glColor3f(0.2, 0.6, 0.9);
-	glLineWidth(3.0);
-	glBegin(GL_LINE_LOOP);
-	glVertex2f(0, 239);
-	glVertex2f(319, 239);
-	glEnd();
-
-	glBegin(GL_LINE_LOOP);
-	glVertex2f(0, 241);
-	glVertex2f(319, 241);
-	glEnd();
-
-	glBegin(GL_LINE_LOOP);
-	glVertex2f(320, 240);
-	glVertex2f(310, 247);
-	glVertex2f(440, 247);
-	glVertex2f(430, 240);
-	glVertex2f(440, 233);
-	glVertex2f(310, 233);
-	glEnd();
-
-	glBegin(GL_LINE_LOOP);
-	glVertex2f(432, 239);
-	glVertex2f(500, 239);
-	glEnd();
-
-	glBegin(GL_LINE_LOOP);
-	glVertex2f(432, 241);
-	glVertex2f(500, 241);
-	glEnd();
-#pragma endregion
 
 	//Jiraiya
 	string titulo = "JIRAIYA's FLY";
@@ -230,6 +183,54 @@ void Desenha(void)
 		//de inicio por .... nos nomes, mas fazer o arquivo pra ler(futuramente)
 		//colocar botão de limpar
 		//colocar botão de atirar
+		#pragma region "Desenha o melhor Score"
+	string best = "Best Score: ";
+	glColor3f(0.4, 0.9, 1);
+	glRasterPos2f(325, 237.5);
+	for (int i = 0; i < 13;i++) {
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, best[i]);
+	}
+
+	Score bestScore = Score::getBestScore();
+	string score = std::to_string(bestScore.getScore());
+
+	glRasterPos2f(365, 237.5);
+	for (int i = 0; i < score.length();i++) {
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, score[i]);
+	}
+
+	glColor3f(0.2, 0.6, 0.9);
+	glLineWidth(3.0);
+	glBegin(GL_LINE_LOOP);
+	glVertex2f(0, 239);
+	glVertex2f(319, 239);
+	glEnd();
+
+	glBegin(GL_LINE_LOOP);
+	glVertex2f(0, 241);
+	glVertex2f(319, 241);
+	glEnd();
+
+	glBegin(GL_LINE_LOOP);
+	glVertex2f(320, 240);
+	glVertex2f(310, 247);
+	glVertex2f(440, 247);
+	glVertex2f(430, 240);
+	glVertex2f(440, 233);
+	glVertex2f(310, 233);
+	glEnd();
+
+	glBegin(GL_LINE_LOOP);
+	glVertex2f(432, 239);
+	glVertex2f(500, 239);
+	glEnd();
+
+	glBegin(GL_LINE_LOOP);
+	glVertex2f(432, 241);
+	glVertex2f(500, 241);
+	glEnd();
+#pragma endregion
+
 	}
 	else {
 		string start = "Iniciar";
