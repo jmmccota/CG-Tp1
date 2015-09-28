@@ -2,6 +2,7 @@
 #include <math.h>
 #include <gl/glut.h>
 #include<iostream>
+#include "EfeitoSonoro.h"
 using namespace std;
 
 GLfloat escala = 1;
@@ -143,6 +144,9 @@ void Timer(int value){
 
 int main(int argc, char **argv)
 {
+	EfeitoSonoro ef;
+	ef.playOpenSound();
+
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(1280, 720);

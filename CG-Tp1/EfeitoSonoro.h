@@ -34,6 +34,7 @@ public:
 	~EfeitoSonoro();
 	
 	void playMainTheme(bool loop);
+	void playOpenSound();
 	void stopSound();
 	
 	FMOD::Sound getSound();
