@@ -62,6 +62,10 @@ void EfeitoSonoro::playMainTheme(bool loop) {
 void EfeitoSonoro::playOpenTheme() {
 	playSong("Sound/Open_Theme.mp3", false);
 }
+void EfeitoSonoro::playBoomEffect()
+{
+	playSong("Sound/Boom_Effect.mp3", false);
+}
 void EfeitoSonoro::stopSong() {
 	result = sound->release();
 	ERRCHECK(result);

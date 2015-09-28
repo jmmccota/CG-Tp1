@@ -12,13 +12,10 @@ class Personagem;
 #include "Projetil.h"
 #include "Fase.h"
 
-
 /*
 	Classe abstrata para servir como "interface" para
 		os personagens do jogo.
 */
-
-
 
 class Personagem : public Solido
 {

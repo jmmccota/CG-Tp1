@@ -35,13 +35,14 @@ private:
 public:
 	EfeitoSonoro();
 	~EfeitoSonoro();
-	
+
 	//Execução de Sons
 	void playMainTheme(bool loop);
 	void playOpenTheme();
+	void playBoomEffect();
 
 	void stopSong();
-	
+
 	FMOD::Sound getSound();
 
 

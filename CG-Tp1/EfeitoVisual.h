@@ -9,7 +9,9 @@ class EfeitoVisual;
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include "Solido.h"
-
+#include "Spitfire.h"
+#include "Bf109.h"
+#include "EfeitoSonoro.h"
 
 /*
 	Classe usada para efeitos visuais
@@ -19,11 +21,13 @@ class EfeitoVisual;
 
 class EfeitoVisual
 {
-    protected:
-	    bool fullScreen = false;
-    public:
-	    EfeitoVisual();
-	    ~EfeitoVisual();
+protected:
+	bool fullScreen = false;
+	const int sizeX = 1280;
+	const int sizeY = 720;
+public:
+	EfeitoVisual();
+	~EfeitoVisual();
 
 	//COMO FAZER ANIMACAO EXPLOSAO?
 	//void static Explosao(GLfloat x, GLfloat y, GLfloat raio, int estagio);
@@ -34,9 +38,18 @@ class EfeitoVisual
 	//Retorna se a tela está em fullScreen ou não
 	bool IsFullScreen();
 
+	//Retorna a resolução padrão da Tela
+	pair<int, int> sizeScreen();
+
+	//Posição da tela
+	pair<double, double> positionScreen(char *type);
+
 	//Metodo de pressionamento de teclas
 	void Teclas(unsigned char tecla, GLint x, GLint y);
 
-	
+	//Animação Incial
+	void DisplayAnimacaoInicial();
+	void TimerAnimacaoInicial(int value, void(*func)(int));
+
 };
 #endif
