@@ -5,14 +5,14 @@
 #include "Score.h"
 #include "EfeitoSonoro.h"
 
-// Tamanho e posiÁ„o inicial do quadrado
+// Tamanho e posi√ß√£o inicial do quadrado
 using namespace std;
 GLfloat posX1 = 100.0f;
 GLfloat PosY1 = 150.0f;
 GLsizei POSrsize = 50;
 
-// Tamanho do incremento nas direÁıes x e y 
-// (n˙mero de pixels para se mover a cada
+// Tamanho do incremento nas dire√ß√µes x e y 
+// (n√∫mero de pixels para se mover a cada
 // intervalo de tempo)
 GLfloat xstep = 1.0f;
 GLfloat ystep = 1.0f;
@@ -24,13 +24,13 @@ bool fullscreen = false;
 bool melhores = false;
 bool opc = false;
 
-// FunÁ„o callback chamada para fazer o desenho
+// Fun√ß√£o callback chamada para fazer o desenho
 void Desenha(void)
 {
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	// Limpa a janela de visualizaÁ„o com a cor de fundo especificada
+	// Limpa a janela de visualiza√ß√£o com a cor de fundo especificada
 	glClear(GL_COLOR_BUFFER_BIT);
 
 #pragma region "Desenha o melhor Score"
@@ -97,7 +97,7 @@ void Desenha(void)
 	glVertex2i(50, 170);
 	glEnd();
 	if (opc) {
-		//bloco para introduÁ„o
+		//bloco para introdu√ß√£o
 		glColor3f(0.0f, 0.0f, 1.0f);
 		glBegin(GL_LINE_LOOP);
 		glVertex2i(70, 155);
@@ -105,7 +105,7 @@ void Desenha(void)
 		glVertex2i(370, 105);
 		glVertex2i(70, 105);
 		glEnd();
-		//colocar uma introduÁao do jogo, falar que È pro aviao matar tudo
+		//colocar uma introdu√ßao do jogo, falar que √© pro aviao matar tudo
 		string intro = "O objetivo do jogo e terminar as tres fases!";
 		glColor3f(1.0, 1.0, 1.0);
 		glRasterPos2f(80, 140);
@@ -222,14 +222,14 @@ void Desenha(void)
 			glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, voltar[i]);
 		}
 		//fazer 4 quadradinhos com setas para falar de cada movimento
-		//falar que espaÁo atira????
-		//bot„o de voltar
+		//falar que espa√ßo atira????
+		//bot√£o de voltar
 	}
 	else if (melhores) {
-		//colocar n˙mero de 1 atÈ 5 e um traÁo "-"
+		//colocar n√∫mero de 1 at√© 5 e um tra√ßo "-"
 		//de inicio por .... nos nomes, mas fazer o arquivo pra ler(futuramente)
-		//colocar bot„o de limpar
-		//colocar bot„o de atirar
+		//colocar bot√£o de limpar
+		//colocar bot√£o de atirar
 	}
 	else {
 		string start = "Iniciar";
@@ -263,7 +263,48 @@ void Desenha(void)
 		glVertex2i(380, 20);
 		glVertex2i(270, 20);
 		glEnd();
-		// Especifica que a cor corrente È azul
+		glColor3f(0, 1.0, 1.0);
+		string trab = "CG-TP 1";		
+		glRasterPos2f(280, 140);
+		for (int i = 0; i < 7; i++) {
+			glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, trab[i]);
+		}
+		string gru = "Integrantes:";
+		glRasterPos2f(280, 125);
+		for (int i = 0; i < 12; i++) {
+			glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, gru[i]);
+		}
+		string andr = "Andre Filipe";
+		glRasterPos2f(300, 105);
+		for (int i = 0; i < 12; i++) {
+			glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, andr[i]);
+		}
+		string dan = "Daniel";
+		glRasterPos2f(300, 90);
+		for (int i = 0; i < 6; i++) {
+			glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, dan[i]);
+		}
+		string eli = "Elias";
+		glRasterPos2f(300, 75);
+		for (int i = 0; i < 5; i++) {
+			glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, eli[i]);
+		}
+		string hen = "Henrique";
+		glRasterPos2f(300, 60);
+		for (int i = 0; i < 8; i++) {
+			glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, hen[i]);
+		}
+		string bil = "Joao Marcos";
+		glRasterPos2f(300, 45);
+		for (int i = 0; i < 11; i++) {
+			glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, bil[i]);
+		}
+		/*string cefet = "CEFET-MG";
+		glRasterPos2f(300, 25);
+		for (int i = 0; i < 8; i++) {
+			glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, cefet[i]);
+		}*/
+		// Especifica que a cor corrente √© azul
 		glColor3f(0.0f, 0.0f, 1.0f);
 		//glVertex2i(GLint(x1 + rsize), GLint(y1));
 		//glVertex2i(GLint(x1 + rsize), GLint(y1 + rsize));
@@ -299,20 +340,20 @@ void Desenha(void)
 	glutSwapBuffers();
 }
 
-// FunÁ„o callback chamada pela GLUT a cada intervalo de tempo
-// (a window n„o est· sendo redimensionada ou movida)
+// Fun√ß√£o callback chamada pela GLUT a cada intervalo de tempo
+// (a window n√£o est√° sendo redimensionada ou movida)
 void Timer(int value)
 {
-	// Muda a direÁ„o quando chega na borda esquerda ou direita
+	// Muda a dire√ß√£o quando chega na borda esquerda ou direita
 	if (posX1 > windowWidth - POSrsize || posX1 < 0)
 		xstep = -xstep;
 
-	// Muda a direÁ„o quando chega na borda superior ou inferior
+	// Muda a dire√ß√£o quando chega na borda superior ou inferior
 	if (PosY1 > windowHeight - POSrsize || PosY1 < 0)
 		ystep = -ystep;
 
 	// Verifica as bordas.  Se a window for menor e o 
-	// quadrado sair do volume de visualizaÁ„o 
+	// quadrado sair do volume de visualiza√ß√£o 
 	if (posX1 > windowWidth - POSrsize)
 		posX1 = windowWidth - POSrsize - 1;
 
@@ -328,27 +369,27 @@ void Timer(int value)
 	glutTimerFunc(33, Timer, 1);
 }
 
-// Inicializa par‚metros de rendering
+// Inicializa par√¢metros de rendering
 void Inicializa(void)
 {
-	// Define a cor de fundo da janela de visualizaÁ„o como preta
+	// Define a cor de fundo da janela de visualiza√ß√£o como preta
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
 
-// FunÁ„o callback chamada quando o tamanho da janela È alterado 
+// Fun√ß√£o callback chamada quando o tamanho da janela √© alterado 
 void AlteraTamanhoJanela(GLsizei w, GLsizei h)
 {
 	// Evita a divisao por zero
 	if (h == 0) h = 1;
 
-	// Especifica as dimensıes da Viewport
+	// Especifica as dimens√µes da Viewport
 	glViewport(0, 0, w, h);
 
 	// Inicializa o sistema de coordenadas
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	// Estabelece a janela de seleÁ„o (left, right, bottom, top)     
+	// Estabelece a janela de sele√ß√£o (left, right, bottom, top)     
 	if (w <= h) {
 		windowHeight = 250.0f*h / w;
 		windowWidth = 250.0f;
@@ -364,7 +405,7 @@ void keyboardDown(unsigned char key, int x, int y) {
 	if (opc) {
 		switch (key) {
 		case 8:
-			cout << "Voltar Opcoes";//ir pro menu de funÁ„o		
+			cout << "Voltar Opcoes";//ir pro menu de fun√ß√£o		
 			opc = false;
 			break;
 		case 'f':
@@ -384,7 +425,7 @@ void keyboardDown(unsigned char key, int x, int y) {
 	else if (melhores) {
 		switch (key) {
 		case 8:
-			cout << "Voltar Melhores";//ir pro menu de funÁ„o		
+			cout << "Voltar Melhores";//ir pro menu de fun√ß√£o		
 			melhores = false;
 			break;
 		case 'f':
@@ -404,11 +445,11 @@ void keyboardDown(unsigned char key, int x, int y) {
 	else if (!melhores && !opc) {
 		switch (key) {
 		case 'O':
-			cout << "Opcoes";//ir pro menu de funÁ„o		
+			cout << "Opcoes";//ir pro menu de fun√ß√£o		
 			opc = true;
 			break;
 		case 'o':
-			cout << "Opcoes";//ir pro menu de funÁ„o
+			cout << "Opcoes";//ir pro menu de fun√ß√£o
 			opc = true;
 			break;
 		case 13:
@@ -419,11 +460,11 @@ void keyboardDown(unsigned char key, int x, int y) {
 			exit(0);
 			break;
 		case 'm':
-			cout << "melhores";//ir para melhores pontuaÁoes
+			cout << "melhores";//ir para melhores pontua√ßoes
 			melhores = true;
 			break;
 		case 'M':
-			cout << "melhores";//ir para melhores pontuaÁoes
+			cout << "melhores";//ir para melhores pontua√ßoes
 			melhores = true;
 			break;
 		case 'f':
@@ -474,7 +515,7 @@ void mouseClick(int button, int state, int x, int y) {
 			else {
 				if (x >= 216 && x <= 797) {
 					if (y >= 291 && y <= 381) {
-						//comeÁar jogo
+						//come√ßar jogo
 						cout << "Iniciar";
 					}
 					else if (y >= 398 && y <= 492) {
@@ -518,7 +559,7 @@ void mouseClick(int button, int state, int x, int y) {
 			else {
 				if (x >= 203 && x <= 750) {
 					if (y >= 274 && y <= 360) {
-						//comeÁar jogo
+						//come√ßar jogo
 						cout << "Iniciar";
 					}
 					else if (y >= 375 && y <= 462) {
@@ -552,7 +593,7 @@ int main(int argc, char **argv)
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(1280, 720);
 	glutInitWindowPosition((GetSystemMetrics(SM_CXSCREEN) - 1280) / 2, (GetSystemMetrics(SM_CYSCREEN) - 720) / 2);
-	glutCreateWindow("AnimaÁ„o");
+	glutCreateWindow("Anima√ß√£o");
 	glutMouseFunc(mouseClick);
 	glutKeyboardFunc(keyboardDown);
 	glutKeyboardUpFunc(keyboardUp);
