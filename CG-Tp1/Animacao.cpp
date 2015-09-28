@@ -24,29 +24,29 @@ bool explosao = true;
 #include "Bf109.h"
 #include "TiroSimples.h"
 
-Spitfire *s = new Spitfire(-50, 0, (float)20 / 10000, nullptr);
+Spitfire *s = new Spitfire(-45, 0, (float)20 / 10000, nullptr);
 Bf109 *b = new Bf109(50, 0, (float)20 / 10000, nullptr, nullptr);
 TiroSimples *t1 = new TiroSimples(-39.5, 8, (float)2 / 10000);
 TiroSimples *t2 = new TiroSimples(-39.5, -8, (float)2 / 10000);
 
 
-void desenha(void){
+void desenha(void) {
 	glClear(GL_COLOR_BUFFER_BIT);
 	// desenha o primeiro bloco atiraador
 	glPushMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluOrtho2D(-100, 100, -100, 100);
-	glTranslatef(translacaoX, translacaoY, translacaoZ);
+	glTranslatef(translacaoX - 45, translacaoY - 45, translacaoZ);
 	glRotatef(rotacaoX1, 1, 0, 0);
-    glRotatef(rotacaoY1, 0, 1, 0);
+	glRotatef(rotacaoY1, 0, 1, 0);
+	glRotatef(270.0f, 0.0f, 0.0f, 1.0f);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-    s->desenha();
-	glEnd();
+	s->desenha();
 	glPopMatrix();
 
-	if (booldesenha == true){
+	if (booldesenha == true) {
 		// desenha a muniçãoo
 		glPushMatrix();
 		glMatrixMode(GL_PROJECTION);
@@ -55,8 +55,8 @@ void desenha(void){
 		glTranslatef(translacaoX2, 0, 0);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-        t1->desenha();
-        t2->desenha();
+		t1->desenha();
+		t2->desenha();
 		glPopMatrix();
 
 		// desenha o bloco q recebe o tiro
@@ -64,23 +64,24 @@ void desenha(void){
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		gluOrtho2D(-100, 100, -100, 100);
-		glTranslatef(translacaoX, 0, 0);
+		glTranslatef(translacaoX + 45, 50, 0);
+		glRotatef(270.0f, 0.0f, 0.0f, 1.0f);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-        b->desenha();
+		b->desenha();
 		glPopMatrix();
 	}
-	else if(explosao){
+	else if (explosao) {
 		// desenha a explosao
 		glPushMatrix();
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		gluOrtho2D(-100, 100, -100, 100);
 		glTranslatef(translacaoX2, 0, 0);
-		if (escala < 3){
+		if (escala < 3) {
 			escala = escala + 0.3;
 		}
-		else{
+		else {
 			explosao = false;
 		}
 		glScalef(escala, escala, escala);
@@ -120,26 +121,26 @@ void desenha(void){
 }
 
 // de tempo em tempo ele desenha
-void Timer(int value){
+void Timer(int value) {
 	translacaoX += 2;
-	if (booldesenha){
+	if (booldesenha) {
 
-		if (translacaoX >= -20){
+		if (translacaoX >= -20) {
 			translacaoX2 = translacaoX2 + 8;
 		}
-		else{
+		else {
 			translacaoX2 += 2;
 		}
 		//momento em q as balas colidem com o bloco
-		if ((translacaoX2 - translacaoX)>78){
+		if ((translacaoX2 - translacaoX)>78) {
 			translacaoX2 = translacaoX2 - 30;
 			booldesenha = false;
 		}
 	}
-		if (value > 0){
-			glutPostRedisplay();
-			glutTimerFunc(33, Timer, 1);
-		}
+	if (value > 0) {
+		glutPostRedisplay();
+		glutTimerFunc(33, Timer, 1);
+	}
 }
 
 int main(int argc, char **argv)
