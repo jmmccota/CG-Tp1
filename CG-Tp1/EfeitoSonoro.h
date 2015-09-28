@@ -29,13 +29,18 @@ private:
 	//Verificação de erros
 	void ERRCHECK(FMOD_RESULT result);
 
+	//Execura o som
+	void playSong(char *file, bool loop);
+
 public:
 	EfeitoSonoro();
 	~EfeitoSonoro();
 	
+	//Execução de Sons
 	void playMainTheme(bool loop);
-	void playOpenSound();
-	void stopSound();
+	void playOpenTheme();
+
+	void stopSong();
 	
 	FMOD::Sound getSound();
 

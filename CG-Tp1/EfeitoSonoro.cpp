@@ -41,8 +41,10 @@ EfeitoSonoro::~EfeitoSonoro()
 
 }
 
-void EfeitoSonoro::playMainTheme(bool loop) {
-	result = system->createSound("Sound/MainTheme.mp3", FMOD_HARDWARE, 0, &sound);
+
+void EfeitoSonoro::playSong(char *file, bool loop) {
+	
+	result = system->createSound(file, FMOD_HARDWARE, 0, &sound);
 	ERRCHECK(result);
 	result = system->playSound(FMOD_CHANNEL_FREE, sound, false, &channel);
 	ERRCHECK(result);
@@ -50,15 +52,17 @@ void EfeitoSonoro::playMainTheme(bool loop) {
 	if (loop) {
 		channel->setMode(FMOD_LOOP_NORMAL);
 	}
+
 }
 
-void EfeitoSonoro::playOpenSound() {
-	result = system->createSound("Sound/Open_Theme.mp3", FMOD_HARDWARE, 0, &sound);
-	ERRCHECK(result);
-	result = system->playSound(FMOD_CHANNEL_FREE, sound, false, &channel);
-	ERRCHECK(result);
+void EfeitoSonoro::playMainTheme(bool loop) {
+	playSong("Sound/Main_Theme.mp3", loop);
 }
-void EfeitoSonoro::stopSound() {
+
+void EfeitoSonoro::playOpenTheme() {
+	playSong("Sound/Open_Theme.mp3", false);
+}
+void EfeitoSonoro::stopSong() {
 	result = sound->release();
 	ERRCHECK(result);
 }

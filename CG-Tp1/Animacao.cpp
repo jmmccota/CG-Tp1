@@ -145,7 +145,7 @@ void Timer(int value){
 int main(int argc, char **argv)
 {
 	EfeitoSonoro ef;
-	ef.playOpenSound();
+	ef.playOpenTheme();
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
