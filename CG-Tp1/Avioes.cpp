@@ -7,7 +7,7 @@
 Spitfire::Spitfire(GLfloat pX, GLfloat pY, float esc, Fase *f)
     : Personagem(pX, pY, 0.016 * esc, esc, f)
 {
-    this->carrega("modelos/spitfire.txt");
+    this->carrega("modelos/spitfire.dat");
     hp = 40;
     municao[1] = 300;
     municao[2] = 2;
@@ -101,7 +101,7 @@ Bf109::Bf109(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f)
     : Personagem(pX, pY, 0.01*esc, esc, f)
 {
     alvo = a;
-    carrega("modelos/bf109.txt");
+    carrega("modelos/bf109.dat");
     hp = 30;
     municao[0] = 999;
     municao[1] = 0;
@@ -147,7 +147,7 @@ void Bf109::atira(int tipo)
 Me163::Me163(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f) : Personagem(pX, pY, 0.025*esc, esc, f)
 {
     alvo = a;
-    carrega("modelo/me163.txt");
+    carrega("modelo/me163.dat");
     hp = 20;
     municao[0] = 0;
     municao[1] = 0;
