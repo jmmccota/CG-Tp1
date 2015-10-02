@@ -6,9 +6,7 @@ class Bf109;
 class Me163;
 
 #include "Personagem.hpp"
-#include "TiroSimples.hpp"
-#include "Bomba.hpp"
-#include "TiroSimplesInimigo.hpp"
+#include "Armamentos.hpp"
 #include <cmath>
 
 
