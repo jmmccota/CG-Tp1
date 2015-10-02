@@ -1,4 +1,4 @@
-#include "Solido.h"
+#include "Solido.hpp"
 
 Solido::Solido(GLfloat pX, GLfloat pY, GLfloat vel, float esc)
 {

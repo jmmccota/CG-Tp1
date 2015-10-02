@@ -8,7 +8,7 @@ class Projetil;
 #endif
 #include <GL/gl.h>
 #include <GL/glut.h>
-#include "Solido.h"
+#include "Solido.hpp"
 
 
 /*

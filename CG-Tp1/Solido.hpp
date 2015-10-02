@@ -6,8 +6,8 @@ class Solido;
 #ifdef _WIN32
 #include <windows.h>
 #endif
-#include "FuncoesAuxiliares.h"
-#include "Poligono.h"
+#include "FuncoesAuxiliares.hpp"
+#include "Poligono.hpp"
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include <string>

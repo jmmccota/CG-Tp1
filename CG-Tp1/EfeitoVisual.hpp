@@ -8,10 +8,10 @@ class EfeitoVisual;
 #endif
 #include <GL/gl.h>
 #include <GL/glut.h>
-#include "Solido.h"
-#include "Spitfire.h"
-#include "Bf109.h"
-#include "EfeitoSonoro.h"
+#include "Solido.hpp"
+#include "Spitfire.hpp"
+#include "Bf109.hpp"
+#include "EfeitoSonoro.hpp"
 
 /*
 	Classe usada para efeitos visuais

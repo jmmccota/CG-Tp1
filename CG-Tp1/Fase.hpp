@@ -8,9 +8,9 @@ class Fase;
 #endif
 #include <GL/gl.h>
 #include <GL/glut.h>
-#include "Personagem.h"
-#include "Projetil.h"
-#include "Jogo.h"
+#include "Personagem.hpp"
+#include "Projetil.hpp"
+#include "Jogo.hpp"
 #include <queue>
 #include <vector>
 

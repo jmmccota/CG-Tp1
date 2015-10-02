@@ -11,7 +11,7 @@ class Poligono;
 #include <cmath>
 #include <string>
 #include <vector>
-#include "FuncoesAuxiliares.h"
+#include "FuncoesAuxiliares.hpp"
 
 class Poligono
 {

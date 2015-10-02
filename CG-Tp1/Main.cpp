@@ -1,5 +1,5 @@
 //#include <gl/glut.h>
-//#include "Jogo.h"
+//#include "Jogo.hpp"
 //
 //int main(int argc, char **argv) {
 //	Jogo *j = new Jogo();

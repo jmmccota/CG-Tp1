@@ -1,4 +1,4 @@
-#include "EfeitoSonoro.h"
+#include "EfeitoSonoro.hpp"
 
 void EfeitoSonoro::ERRCHECK(FMOD_RESULT result)
 {

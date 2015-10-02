@@ -1,10 +1,10 @@
 #pragma once
-#include "Score.h"
+#include "Score.hpp"
 #include <string>
 #include <fstream>
 #include <iostream>
 #include <vector>
-#include "FuncoesAuxiliares.h"
+#include "FuncoesAuxiliares.hpp"
 
 using namespace std;
 

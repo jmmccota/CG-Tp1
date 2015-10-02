@@ -1,4 +1,4 @@
-#include "FuncoesAuxiliares.h"
+#include "FuncoesAuxiliares.hpp"
 #include <gl/glut.h>
 
 
