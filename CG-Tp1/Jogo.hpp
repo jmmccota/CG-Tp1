@@ -3,7 +3,7 @@
 
 class Jogo;
 
-#include "Fase.h"
+#include "Fase.hpp"
 #include <vector>
 
 //60fps

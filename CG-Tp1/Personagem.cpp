@@ -1,4 +1,4 @@
-#include "Personagem.h"
+#include "Personagem.hpp"
 
 Personagem::Personagem(GLfloat pX, GLfloat pY, GLfloat vel, float esc, Fase* f) : Solido(pX, pY, vel, esc)
 {

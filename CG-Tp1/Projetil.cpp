@@ -1,4 +1,4 @@
-#include "Projetil.h"
+#include "Projetil.hpp"
 
 Projetil::Projetil(GLfloat pX, GLfloat pY, GLfloat vel, float esc)
     : Solido(pX, pY, vel, esc)

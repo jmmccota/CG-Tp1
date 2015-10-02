@@ -1,9 +1,9 @@
 #include <windows.h>
 #include <math.h>
 #include <gl/glut.h>
-#include<iostream>
-#include "EfeitoSonoro.h"
-#include "EfeitoVisual.h"
+#include <iostream>
+#include "EfeitoSonoro.hpp"
+#include "EfeitoVisual.hpp"
 
 using namespace std;
 

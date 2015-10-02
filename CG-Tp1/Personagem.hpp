@@ -8,9 +8,9 @@ class Personagem;
 #endif
 #include <GL/gl.h>
 #include <GL/glut.h>
-#include "Solido.h"
-#include "Projetil.h"
-#include "Fase.h"
+#include "Solido.hpp"
+#include "Projetil.hpp"
+#include "Fase.hpp"
 
 /*
 	Classe abstrata para servir como "interface" para

@@ -1,4 +1,4 @@
-#include "Fase.h"
+#include "Fase.hpp"
 
 void Fase::novoProjetil(Projetil *p)
 {

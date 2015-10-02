@@ -1,4 +1,4 @@
-#include "Poligono.h"
+#include "Poligono.hpp"
 
 Poligono::Poligono(float escala)
 {

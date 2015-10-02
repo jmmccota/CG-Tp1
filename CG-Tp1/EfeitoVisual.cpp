@@ -1,4 +1,4 @@
-#include "EfeitoVisual.h"
+#include "EfeitoVisual.hpp"
 #include <cmath>
 
 EfeitoVisual::EfeitoVisual()
