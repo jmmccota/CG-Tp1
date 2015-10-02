@@ -9,8 +9,7 @@ class EfeitoVisual;
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include "Solido.hpp"
-#include "Spitfire.hpp"
-#include "Bf109.hpp"
+#include "Avioes.hpp"
 #include "EfeitoSonoro.hpp"
 
 /*

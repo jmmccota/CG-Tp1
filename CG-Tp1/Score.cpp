@@ -1,4 +1,4 @@
-#include "Score.h"
+#include "Score.hpp"
 
 Score::Score() {
 }
@@ -14,14 +14,14 @@ Score::Score(string jogador, int score) {
 
 void Score::CriaArquivo() {
 	ofstream makefile;
-	makefile.open("PlayersScores.txt");
+	makefile.open("PlayersScores.dat");
 	makefile.close();
 }
 
 bool Score::SaveScore(string jogador, int score) {
 	try
 	{
-		ofstream file("PlayersScores.txt", ios::app);
+		ofstream file("PlayersScores.dat", ios::app);
 		file << jogador << "\t" << score << "\n";
 		file.close();
 		return 1;
@@ -36,7 +36,7 @@ Score Score::getBestScore() {
 	string line;
 	int maxScore = -1;
 	string bestPlayer;
-	ifstream file("PlayersScores.txt");
+	ifstream file("PlayersScores.dat");
 	if (file.is_open()) {
 		while (file) {
 			getline(file, line);

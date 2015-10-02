@@ -2,8 +2,8 @@
 #include <cstring>
 #include <string>
 #include <iostream>
-#include "Score.h"
-#include "EfeitoSonoro.h"
+#include "Score.hpp"
+#include "EfeitoSonoro.hpp"
 
 // Tamanho e posição inicial do quadrado
 using namespace std;
