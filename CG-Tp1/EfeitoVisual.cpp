@@ -183,7 +183,7 @@ void EfeitoVisual::TimerAnimacaoInicial(int value, void(*func)(int))
 	}
 	if (value > 0) {
 		glutPostRedisplay();
-		glutTimerFunc(33, func, 1);
+		glutTimerFunc(3, func, 1);
 	}
 }
 #pragma endregion 
