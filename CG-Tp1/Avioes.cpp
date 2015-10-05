@@ -164,12 +164,13 @@ void Me163::acao()
     //Se ainda esta "longe" do alvo
     if (abs(alvo->getX() - posX) > (tamX + tamX + tamX))
     {
-        posX += (alvo->getX() - posX > 0 ? velocidade : -velocidade);
+        posX += (alvo->getX() - posX > 0 ? velocidade / 5 : -velocidade / 5);
     }
     //Se esta perto do alvo
     else
     {
-        posX += (alvo->getX() - posX > 0 ? velocidade : -velocidade);
+        posX += (alvo->getX() - posX > 0 ? velocidade / 5 : -velocidade / 5);
     }
     posY -= velocidade;
 }
+ 

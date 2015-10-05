@@ -3,6 +3,10 @@
 
 class FuncoesAuxiliares;
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
+#include <gl/glut.h>
 #include <string>
 #include <sstream>
 #include <vector>
@@ -31,3 +35,4 @@ public:
 };
 
 #endif
+ 

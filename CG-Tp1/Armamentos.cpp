@@ -47,3 +47,4 @@ Bomba::Bomba(GLfloat posX, GLfloat posY, float escala)
 Bomba::~Bomba()
 {
 }
+ 

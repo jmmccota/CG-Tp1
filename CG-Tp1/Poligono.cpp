@@ -73,3 +73,4 @@ int Poligono::getNPontos()
 {
     return pontosX.size();
 }
+ 

@@ -18,3 +18,4 @@ bool Personagem::destruido()
 {
     return hp <= 0;
 }
+ 

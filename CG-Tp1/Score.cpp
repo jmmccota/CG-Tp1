@@ -82,3 +82,4 @@ string Score::getJogador() {
 std::ostream& operator<<(std::ostream &strm, const Score &a) {
 	return strm << a.jogador << " -> " << a.score << endl;
 }
+ 

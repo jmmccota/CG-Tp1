@@ -9,3 +9,4 @@ void Projetil::acao()
 {
     posY += velocidade;
 }
+ 

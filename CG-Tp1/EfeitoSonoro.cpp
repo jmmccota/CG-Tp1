@@ -74,3 +74,9 @@ void EfeitoSonoro::stopSong() {
 FMOD::Sound EfeitoSonoro::getSound() {
 	return *sound;
 }
+
+void EfeitoSonoro::inicializa()
+{
+	channel = 0;
+}
+ 

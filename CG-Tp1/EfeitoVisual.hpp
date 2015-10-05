@@ -21,34 +21,41 @@ class EfeitoVisual;
 class EfeitoVisual
 {
 protected:
-	bool fullScreen = false;
-	const int sizeX = 1280;
-	const int sizeY = 720;
+	static bool fullscreen;
+	static int sizeX;
+	static int sizeY;
 public:
 	EfeitoVisual();
 	~EfeitoVisual();
+
+	//Funcoes de configuracoes basicas
+	void static inicializa();
+	void static ortho2D();
 
 	//COMO FAZER ANIMACAO EXPLOSAO?
 	//void static Explosao(GLfloat x, GLfloat y, GLfloat raio, int estagio);
 
 	//Retorna true caso objetos tenham colidido, false caso contrario
-	bool static Colisao(Solido *a, Solido *b);
+	bool static colisao(Solido *a, Solido *b);
+
+	//Reajusta o tamanho da tela
+	void static resize(GLsizei w, GLsizei h);
 
 	//Retorna se a tela está em fullScreen ou não
-	bool IsFullScreen();
+	bool static isFullScreen();
 
 	//Retorna a resolução padrão da Tela
-	pair<int, int> sizeScreen();
+	pair<int, int> static sizeScreen();
 
 	//Posição da tela
-	pair<double, double> positionScreen(char *type);
+	pair<double, double> static positionScreen(char *type);
 
 	//Metodo de pressionamento de teclas
-	void Teclas(unsigned char tecla, GLint x, GLint y);
+	void static fullScreen();
 
 	//Animação Incial
-	void DisplayAnimacaoInicial();
-	void TimerAnimacaoInicial(int value, void(*func)(int));
-
+	void displayAnimacaoInicial();
+	void timerAnimacaoInicial(int value, void(*func)(int));
 };
 #endif
+ 

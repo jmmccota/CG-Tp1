@@ -10,7 +10,19 @@ EfeitoVisual::~EfeitoVisual()
 {
 }
 
-bool EfeitoVisual::Colisao(Solido *a, Solido *b)
+void EfeitoVisual::inicializa()
+{
+	EfeitoVisual::fullscreen = false;
+	EfeitoVisual::sizeX = 1280;
+	EfeitoVisual::sizeY = 720;
+}
+
+void EfeitoVisual::ortho2D()
+{
+	gluOrtho2D(0, 2000, 0, 2000);
+}
+
+bool EfeitoVisual::colisao(Solido *a, Solido *b)
 {
 	if ((abs(a->getX() - b->getX()) <= (a->getTamX() + b->getTamX()) / 2) ||
 		(abs(a->getY() - b->getY()) <= (a->getTamY() + b->getTamY()) / 2))
@@ -18,7 +30,27 @@ bool EfeitoVisual::Colisao(Solido *a, Solido *b)
 	return false;
 }
 
-bool EfeitoVisual::IsFullScreen() {
+void EfeitoVisual::resize(GLsizei w, GLsizei h)
+{
+	// Evita a divisao por zero
+	if (h == 0) h = 1;
+
+	// Especifica as dimensões da Viewport
+	if (w < h)
+		glViewport(0, 0, w, w);
+	else
+		glViewport(0, 0, h, h);
+
+	// Inicializa o sistema de coordenadas
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+	EfeitoVisual::sizeX = w;
+	EfeitoVisual::sizeY = h;
+}
+
+bool EfeitoVisual::isFullScreen() 
+{
 	return fullScreen;
 }
 
@@ -27,8 +59,8 @@ pair<int, int> EfeitoVisual::sizeScreen()
 	return pair<int, int>(sizeX, sizeY);
 }
 
-pair<double, double> EfeitoVisual::positionScreen(char *type) {
-
+pair<double, double> EfeitoVisual::positionScreen(char * type)
+{
 	pair<double, double> val;
 	if (type == "center") {
 		val.first = ((GetSystemMetrics(SM_CXSCREEN) - sizeScreen().first) / 2);
@@ -37,20 +69,16 @@ pair<double, double> EfeitoVisual::positionScreen(char *type) {
 	return val;
 }
 
-void EfeitoVisual::Teclas(unsigned char tecla, GLint x, GLint y) {
-
-	switch (tecla) {
-    //A tecla 'f' alterna entre a tecla cheia (full screen) e não cheia.
-	case 'f':
-		if (!fullScreen) {
-			glutFullScreen();
-		}
-		else {
-			glutReshapeWindow(sizeScreen().first, sizeScreen().second);
-		}
-		fullScreen = !fullScreen;
-		break;
+void EfeitoVisual::fullScreen()
+{
+	if (!fullscreen) {
+		glutFullScreen();
 	}
+	else {
+		glutReshapeWindow(700, 700);
+		glutInitWindowPosition((GetSystemMetrics(SM_CXSCREEN) - 700) / 2, (GetSystemMetrics(SM_CYSCREEN) - 700) / 2);
+	}
+	fullscreen = !fullscreen;
 }
 
 #pragma region "Animação Inicial"
@@ -67,7 +95,7 @@ bool fullscreen = false;
 bool booldesenha = true;
 bool explosao = true;
 
-void EfeitoVisual::DisplayAnimacaoInicial()
+void EfeitoVisual::displayAnimacaoInicial()
 {
 	Spitfire *s = new Spitfire(-45, 0, (float)20 / 10000, nullptr);
 	Bf109 *b = new Bf109(50, 0, (float)20 / 10000, nullptr, nullptr);
@@ -164,7 +192,7 @@ void EfeitoVisual::DisplayAnimacaoInicial()
 	glutSwapBuffers();
 }
 
-void EfeitoVisual::TimerAnimacaoInicial(int value, void(*func)(int))
+void EfeitoVisual::timerAnimacaoInicial(int value, void(*func)(int))
 {
 	translacaoX += 2;
 	if (booldesenha) {
@@ -187,3 +215,4 @@ void EfeitoVisual::TimerAnimacaoInicial(int value, void(*func)(int))
 	}
 }
 #pragma endregion 
+ 

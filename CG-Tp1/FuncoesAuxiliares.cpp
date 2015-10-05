@@ -1,5 +1,4 @@
 #include "FuncoesAuxiliares.hpp"
-#include <gl/glut.h>
 
 
 FuncoesAuxiliares::FuncoesAuxiliares()
@@ -146,3 +145,4 @@ void FuncoesAuxiliares::bresenhamCircle(int x, int y, int a, int b)
 		FuncoesAuxiliares::bresenham(x + wx, y + wy, x - wx, y + wy);
 	}
 }
+ 

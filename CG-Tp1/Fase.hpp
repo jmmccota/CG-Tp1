@@ -59,7 +59,7 @@ class Fase
 
 		//Define quais alteracoes devem ser feitas do frame anterior
 		//para o frame atual e chama a funcao de desenho
-        virtual void atualiza() = 0;
+        virtual void atualiza(int value) = 0;
 
         //Define funcoes e parametros OpenGL
         virtual void glSetup() = 0;
@@ -74,3 +74,4 @@ class Fase
 
 
 #endif
+ 

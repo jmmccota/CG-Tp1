@@ -1,8 +1,12 @@
 #include "Jogo.hpp"
 
 
-Jogo::Jogo()
+Jogo::Jogo(int* argc, char** argv)
 {
+	glutInit(argc, argv);
+	glutCreateWindow("Jiraya's Fly");
+	EfeitoVisual::inicializa();
+	EfeitoSonoro::inicializa();
     //fases.push_back(new Fase1);
     proxFase = 0;
 }
@@ -29,3 +33,4 @@ void Jogo::fimJogo()
 {
 
 }
+ 

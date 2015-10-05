@@ -4,6 +4,7 @@
 class Jogo;
 
 #include "Fase.hpp"
+#include "EfeitoVisual.hpp"
 #include <vector>
 
 //60fps
@@ -16,7 +17,7 @@ class Jogo
         std::vector<Fase*> fases;
 
     public:
-        Jogo();
+        Jogo(int* argc, char** argv);
         ~Jogo();
 
         void setProxFase(int p);
@@ -25,3 +26,4 @@ class Jogo
 };
 
 #endif
+ 

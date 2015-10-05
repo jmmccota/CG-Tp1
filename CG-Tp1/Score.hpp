@@ -1,4 +1,7 @@
-#pragma once
+#ifndef SCORE_H
+#define SCORE_H
+
+
 #include "Score.hpp"
 #include <string>
 #include <fstream>
@@ -37,3 +40,5 @@ public:
 
 
 
+#endif
+ 

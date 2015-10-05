@@ -71,3 +71,4 @@ void Solido::desenha()
 		poligonos[i].desenha(posX, posY);
 	}
 }
+ 

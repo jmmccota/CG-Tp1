@@ -19,35 +19,36 @@ class EfeitoSonoro
 {
 
 protected:
-	FMOD::System *system;
-	FMOD::Sound *sound;
-	FMOD::Channel *channel = 0;
-	FMOD_RESULT result;
-	unsigned int version;
+	static FMOD::System *system;
+	static FMOD::Sound *sound;
+	static FMOD::Channel *channel;
+	static FMOD_RESULT result;
+	static unsigned int version;
 
 private:
 	//Verificação de erros
-	void ERRCHECK(FMOD_RESULT result);
+	void static ERRCHECK(FMOD_RESULT result);
 
 	//Execura o som
-	void playSong(char *file, bool loop);
+	void static playSong(char *file, bool loop);
 
 public:
 	EfeitoSonoro();
 	~EfeitoSonoro();
 
 	//Execução de Sons
-	void playMainTheme(bool loop);
-	void playOpenTheme();
-	void playBoomEffect();
+	static void playMainTheme(bool loop);
+	static void playOpenTheme();
+	static void playBoomEffect();
 
-	void stopSong();
+	static void stopSong();
 
-	FMOD::Sound getSound();
+	static FMOD::Sound getSound();
 
-
+	static void inicializa();
 };
 
 
 
 #endif
+ 
