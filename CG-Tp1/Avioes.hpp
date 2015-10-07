@@ -63,13 +63,13 @@ class Me163 : public Personagem
 class Me264 : public Personagem
 {
 private:
-	Personagem *alvo;
+	bool movCima = false, movBaixo = false, movEsq = false, movDir = false;
 
 public:
-	Me264(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f);
+	Me264(GLfloat pX, GLfloat pY, float esc, Fase *f);
 	~Me264();
-
 	void acao();
+	void atira(int tipo);
 };
 
 

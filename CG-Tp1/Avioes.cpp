@@ -177,33 +177,38 @@ void Me163::acao()
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-Me264::Me264(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f)
-	: Personagem(pX, pY, 0.01*esc, esc, f)
+Me264::Me264(GLfloat pX, GLfloat pY, float esc, Fase *f)
+	: Personagem(pX, pY, 0.016 * esc, esc, f)
 {
-	alvo = a;
-	carrega("modelos/me264.dat");
-	hp = 30;
-	municao[0] = 999;
-	municao[1] = 0;
+	this->carrega("modelos/me264.dat");
+	hp = 40;
+	municao[1] = 300;
+	municao[2] = 2;
 }
-
-
 Me264::~Me264()
 {
 }
 
-
 void Me264::acao()
 {
-	//Se ainda esta "longe" do alvo
-	if (abs(alvo->getX() - posX) > (tamX + tamX + tamX))
+	if (movCima)
+		posY += velocidade;
+	else if (movBaixo)
+		posY -= velocidade;
+	if (movDir)
+		posX += velocidade;
+	else if (movEsq)
+		posX -= velocidade;
+}
+
+void Me264::atira(int tipo)
+{
+	if (municao[tipo] > 0)
 	{
-		posX += (alvo->getX() - posX > 0 ? velocidade : -velocidade);
+		municao[tipo]--;
+		if (!tipo)
+			fase->novoProjetil(new TiroSimples(posX, posY + tamY, escala));
+		else
+			fase->novoProjetil(new Bomba(posX, posY + tamY, escala));
 	}
-	//Se esta perto do alvo
-	else
-	{
-		posX += (alvo->getX() - posX > 0 ? velocidade : -velocidade);
-	}
-	posY -= velocidade;
 }
