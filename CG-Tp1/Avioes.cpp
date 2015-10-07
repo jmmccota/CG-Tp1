@@ -173,3 +173,37 @@ void Me163::acao()
     }
     posY -= velocidade;
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Me264::Me264(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f)
+	: Personagem(pX, pY, 0.01*esc, esc, f)
+{
+	alvo = a;
+	carrega("modelos/me264.dat");
+	hp = 30;
+	municao[0] = 999;
+	municao[1] = 0;
+}
+
+
+Me264::~Me264()
+{
+}
+
+
+void Me264::acao()
+{
+	//Se ainda esta "longe" do alvo
+	if (abs(alvo->getX() - posX) > (tamX + tamX + tamX))
+	{
+		posX += (alvo->getX() - posX > 0 ? velocidade : -velocidade);
+	}
+	//Se esta perto do alvo
+	else
+	{
+		posX += (alvo->getX() - posX > 0 ? velocidade : -velocidade);
+	}
+	posY -= velocidade;
+}

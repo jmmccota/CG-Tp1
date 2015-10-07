@@ -60,5 +60,17 @@ class Me163 : public Personagem
         void acao();
 };
 
+class Me264 : public Personagem
+{
+private:
+	Personagem *alvo;
+
+public:
+	Me264(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f);
+	~Me264();
+
+	void acao();
+};
+
 
 #endif
