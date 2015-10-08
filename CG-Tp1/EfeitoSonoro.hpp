@@ -13,8 +13,7 @@ using namespace std;
 	===============SINGLETON===============
 	Somente uma instancia vai ser usada no programa todo.
 	Como usar:
-		EfeitoSonoro v = EfeitoSonoro::getInstance();
-		v-> ...
+		EfeitoSonoro::getInstance().FUNCAOQUEEUQUEROCHAMAR(PARAMETROS);
 		...
 
 	Classe usada para efeitos sonoros

@@ -16,8 +16,7 @@ class EfeitoVisual;
 	===============SINGLETON===============
 	Somente uma instancia vai ser usada no programa todo.
 	Como usar:
-		EfeitoVisual v = EfeitoVisual::getInstance();
-		v-> ...
+		EfeitoVisal::getInstance().FUNCAOQUEEUQUEROCHAMAR(PARAMETROS);
 		...
 
 
