@@ -125,7 +125,7 @@ void Bf109::acao()
         posX += (alvo->getX() - posX > 0 ? velocidade / 1.5 : -velocidade / 1.5);
 
         //Atira 3 vezes por segundo caso esteja em posicao
-        estadoTiro = ++estadoTiro % (int)(1 / (3 * TEMPOQUADRO));
+        estadoTiro = ++estadoTiro % (int)(1000 / (3 * TEMPOQUADRO));
         if (!estadoTiro) atira(0);
     }
     posY -= velocidade;
@@ -173,4 +173,43 @@ void Me163::acao()
     }
     posY -= velocidade;
 }
- 
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Me264::Me264(GLfloat pX, GLfloat pY, float esc, Fase *f)
+	: Personagem(pX, pY, 0.016 * esc, esc, f)
+{
+	this->carrega("modelos/me264.dat");
+	hp = 40;
+	municao[1] = 9999;
+	municao[2] = 150;
+}
+Me264::~Me264()
+{
+}
+
+void Me264::acao()
+{
+	if (movCima)
+		posY += velocidade;
+	else if (movBaixo)
+		posY -= velocidade;
+	if (movDir)
+		posX += velocidade;
+	else if (movEsq)
+		posX -= velocidade;
+}
+
+void Me264::atira(int tipo)
+{
+	if (municao[tipo] > 0)
+	{
+		municao[tipo]--;
+		if (!tipo)
+			fase->novoProjetil(new TiroSimples(posX, posY + tamY, escala));
+		else
+			fase->novoProjetil(new Bomba(posX, posY + tamY, escala));
+	}
+}

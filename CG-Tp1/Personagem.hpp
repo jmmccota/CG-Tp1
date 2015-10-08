@@ -3,19 +3,21 @@
 
 class Personagem;
 
-#ifdef _WIN32
-#include <windows.h>
-#endif
-#include <GL/gl.h>
-#include <GL/glut.h>
 #include "Solido.hpp"
 #include "Projetil.hpp"
 #include "Fase.hpp"
+#ifdef _WIN32
+#include <windows.h>
+#include <GL/gl.h>
+#endif
+#include <GL/glut.h>
 
 /*
 	Classe abstrata para servir como "interface" para
 		os personagens do jogo.
 */
+
+#define PERSONAGEM
 
 class Personagem : public Solido
 {
@@ -43,7 +45,7 @@ class Personagem : public Solido
         bool destruido();
 };
 
-
+#include "Avioes.hpp"
 
 #endif
  

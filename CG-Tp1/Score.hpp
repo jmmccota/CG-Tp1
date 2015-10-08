@@ -2,7 +2,6 @@
 #define SCORE_H
 
 
-#include "Score.hpp"
 #include <string>
 #include <fstream>
 #include <iostream>

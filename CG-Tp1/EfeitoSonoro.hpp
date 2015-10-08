@@ -10,6 +10,13 @@ class EfeitoSonoro;
 
 using namespace std;
 /*
+	===============SINGLETON===============
+	Somente uma instancia vai ser usada no programa todo.
+	Como usar:
+		EfeitoSonoro v = EfeitoSonoro::getInstance();
+		v-> ...
+		...
+
 	Classe usada para efeitos sonoros
 		(efeito sonoro, musica, ...)
 */
@@ -18,34 +25,40 @@ using namespace std;
 class EfeitoSonoro
 {
 
-protected:
-	static FMOD::System *system;
-	static FMOD::Sound *sound;
-	static FMOD::Channel *channel;
-	static FMOD_RESULT result;
-	static unsigned int version;
+private:
+	FMOD::System *system;
+	FMOD::Sound *sound;
+	FMOD::Channel *channel;
+	FMOD_RESULT result;
+	unsigned int version;
+	EfeitoSonoro();
+	EfeitoSonoro(EfeitoSonoro const&);
+	void operator=(EfeitoSonoro const&);
 
 private:
 	//Verificação de erros
-	void static ERRCHECK(FMOD_RESULT result);
+	void ERRCHECK(FMOD_RESULT result);
 
 	//Execura o som
-	void static playSong(char *file, bool loop);
+	void playSong(char *file, bool loop);
 
 public:
-	EfeitoSonoro();
 	~EfeitoSonoro();
 
 	//Execução de Sons
-	static void playMainTheme(bool loop);
-	static void playOpenTheme();
-	static void playBoomEffect();
+	void playMainTheme(bool loop);
+	void playOpenTheme();
+	void playBoomEffect();
 
-	static void stopSong();
+	void stopSong();
 
-	static FMOD::Sound getSound();
+	FMOD::Sound getSound();
 
-	static void inicializa();
+	EfeitoSonoro& getInstance()
+	{
+		static EfeitoSonoro singleton;
+		return singleton;
+	}
 };
 
 

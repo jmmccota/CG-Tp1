@@ -61,9 +61,6 @@ class Fase
 		//para o frame atual e chama a funcao de desenho
         virtual void atualiza(int value) = 0;
 
-        //Define funcoes e parametros OpenGL
-        virtual void glSetup() = 0;
-
         //Realiza chamada para definePersonagens e glSetup
         virtual void inicializa();
 

@@ -5,10 +5,9 @@ Jogo::Jogo(int* argc, char** argv)
 {
 	glutInit(argc, argv);
 	glutCreateWindow("Jiraya's Fly");
-	EfeitoVisual::inicializa();
-	EfeitoSonoro::inicializa();
-    //fases.push_back(new Fase1);
+    //fases.push_back(new Menu());
     proxFase = 0;
+	glutMainLoop();
 }
 
 
@@ -31,6 +30,7 @@ void Jogo::setProxFase(int p)
 
 void Jogo::fimJogo()
 {
-
+	//salvar score
+	exit(0);
 }
  

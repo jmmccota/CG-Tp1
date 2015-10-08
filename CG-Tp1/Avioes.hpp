@@ -4,11 +4,14 @@
 class Spitfire;
 class Bf109;
 class Me163;
+class Me264;
 
 #include "Personagem.hpp"
 #include "Armamentos.hpp"
 #include <cmath>
 
+
+#ifdef PERSONAGEM
 
 class Spitfire : public Personagem
 {
@@ -59,6 +62,21 @@ class Me163 : public Personagem
 
         void acao();
 };
+
+
+class Me264 : public Personagem
+{
+private:
+	bool movCima = false, movBaixo = false, movEsq = false, movDir = false;
+
+public:
+	Me264(GLfloat pX, GLfloat pY, float esc, Fase *f);
+	~Me264();
+	void acao();
+	void atira(int tipo);
+};
+
+#endif
 
 
 #endif

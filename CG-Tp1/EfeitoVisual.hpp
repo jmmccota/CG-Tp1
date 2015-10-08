@@ -13,6 +13,14 @@ class EfeitoVisual;
 #include "EfeitoSonoro.hpp"
 
 /*
+	===============SINGLETON===============
+	Somente uma instancia vai ser usada no programa todo.
+	Como usar:
+		EfeitoVisual v = EfeitoVisual::getInstance();
+		v-> ...
+		...
+
+
 	Classe usada para efeitos visuais
 		(deteccao de colisao, explosoes, ...)
 */
@@ -20,42 +28,51 @@ class EfeitoVisual;
 
 class EfeitoVisual
 {
-protected:
-	static bool fullscreen;
-	static int sizeX;
-	static int sizeY;
-public:
-	EfeitoVisual();
-	~EfeitoVisual();
+	private:
 
-	//Funcoes de configuracoes basicas
-	void static inicializa();
-	void static ortho2D();
+		bool fullscreen;
+		int sizeX;
+		int sizeY;
+		EfeitoVisual();
+		EfeitoVisual(EfeitoVisual const&);
+		void operator=(EfeitoVisual const&);
 
-	//COMO FAZER ANIMACAO EXPLOSAO?
-	//void static Explosao(GLfloat x, GLfloat y, GLfloat raio, int estagio);
+	public:
+		~EfeitoVisual();
 
-	//Retorna true caso objetos tenham colidido, false caso contrario
-	bool static colisao(Solido *a, Solido *b);
+		//Funcoes de configuracoes basicas
+		void ortho2D();
 
-	//Reajusta o tamanho da tela
-	void static resize(GLsizei w, GLsizei h);
+		//COMO FAZER ANIMACAO EXPLOSAO?
+		//void static Explosao(GLfloat x, GLfloat y, GLfloat raio, int estagio);
 
-	//Retorna se a tela está em fullScreen ou não
-	bool static isFullScreen();
+		//Retorna true caso objetos tenham colidido, false caso contrario
+		bool colisao(Solido *a, Solido *b);
 
-	//Retorna a resolução padrão da Tela
-	pair<int, int> static sizeScreen();
+		//Reajusta o tamanho da tela
+		void resize(GLsizei w, GLsizei h);
 
-	//Posição da tela
-	pair<double, double> static positionScreen(char *type);
+		//Retorna se a tela está em fullScreen ou não
+		bool isFullScreen();
 
-	//Metodo de pressionamento de teclas
-	void static fullScreen();
+		//Retorna a resolução padrão da Tela
+		pair<int, int> sizeScreen();
 
-	//Animação Incial
-	void displayAnimacaoInicial();
-	void timerAnimacaoInicial(int value, void(*func)(int));
+		//Posição da tela
+		pair<double, double> positionScreen(char *type);
+
+		//Metodo de pressionamento de teclas
+		void setFullScreen();
+
+		//Animação Incial
+		void displayAnimacaoInicial();
+		void timerAnimacaoInicial(int value, void(*func)(int));
+
+		static EfeitoVisual& getInstance()
+		{
+			static EfeitoVisual singleton;
+			return singleton;
+		}
 };
 #endif
  

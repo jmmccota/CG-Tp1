@@ -33,6 +33,7 @@ EfeitoSonoro::EfeitoSonoro()
 	{
 		printf("Error!  You are using an old version of FMOD %08x.  This program requires %08x\n", version, FMOD_VERSION);
 	}
+	channel = 0;
 }
 
 
@@ -74,9 +75,3 @@ void EfeitoSonoro::stopSong() {
 FMOD::Sound EfeitoSonoro::getSound() {
 	return *sound;
 }
-
-void EfeitoSonoro::inicializa()
-{
-	channel = 0;
-}
- 
