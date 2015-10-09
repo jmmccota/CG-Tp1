@@ -167,8 +167,8 @@ void Menu::desenha() {
 		//colocar botão de atirar
 #pragma region "Desenha o melhor Score"
 		string best = "Best Score: ";
-		glColor3f(0.4, 0.9, 1);
-		glRasterPos2f(325, 237.5);
+		glColor3f(0.4f, 0.9f, 1.0f);
+		glRasterPos2f(325.0f, 237.5f);
 		for (int i = 0; i < 13;i++) {
 			glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, best[i]);
 		}
@@ -177,11 +177,11 @@ void Menu::desenha() {
 		string score = std::to_string(bestScore.getScore());
 
 		glRasterPos2f(365, 237.5);
-		for (int i = 0; i < score.length();i++) {
+		for (unsigned int i = 0; i < score.length(); i++) {
 			glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, score[i]);
 		}
 
-		glColor3f(0.2, 0.6, 0.9);
+		glColor3f(0.2f, 0.6f, 0.9f);
 		glLineWidth(3.0);
 		glBegin(GL_LINE_LOOP);
 		glVertex2f(0, 239);
@@ -343,14 +343,9 @@ void Menu::atualiza(int value) {
 	// Move o quadrado
 	posX1 += xstep;
 	PosY1 += ystep;
-
-	// Redesenha o quadrado com as novas coordenadas 
-	glutPostRedisplay();
-	void(*atuali)(int) = this->atualiza;
-	glutTimerFunc(TEMPOQUADRO, atuali, 1);
 }
 
-void Menu::keyboardDown(unsigned char key, int x, int y)
+void Menu::keyDown(unsigned char key, int x, int y)
 {
 	if (opc) {
 		switch (key) {
@@ -403,7 +398,10 @@ void Menu::keyboardDown(unsigned char key, int x, int y)
 		}
 	}
 }
-void Menu::mouseClick(int button, int state, int x, int y) {
+void Menu::keyUp(unsigned char key, int x, int y)
+{
+}
+void Menu::mouse(int button, int state, int x, int y) {
 	//cout << "Iniciar";
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
 
@@ -506,21 +504,5 @@ void Menu::mouseClick(int button, int state, int x, int y) {
 void Menu::inicializa()
 {
 	EfeitoSonoro::getInstance().playMainTheme(true);
-
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	EfeitoVisual::getInstance().ortho2D();
-	glutReshapeFunc(EfeitoVisual::getInstance().resize);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-	glutInitWindowSize(1280, 720);
-	glutInitWindowPosition((GetSystemMetrics(SM_CXSCREEN) - 1280) / 2, (GetSystemMetrics(SM_CYSCREEN) - 720) / 2);
-	void(*mouse)(int, int, int, int) = this->mouseClick;
-	glutMouseFunc(mouse);
-	void(*kbDown)(unsigned char, int, int) = this->keyboardDown;
-	glutKeyboardFunc(kbDown);
-	void(*desen)() = this->desenha;
-	glutDisplayFunc(desen);
-	glutIdleFunc(desen);
-	glutReshapeFunc(EfeitoVisual::getInstance().resize);
-	void(*atuali)(int) = this->atualiza;
-	glutTimerFunc(TEMPOQUADRO, atuali, 1);
 }

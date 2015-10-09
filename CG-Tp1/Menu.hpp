@@ -50,10 +50,11 @@ private:
 	// (a window não está sendo redimensionada ou movida)
 	void atualiza(int value);
 
-	void keyboardDown(unsigned char key, int x, int y);
-
 	//Clique do mouse
-	void mouseClick(int button, int state, int x, int y);
+    void mouse(int button, int state, int x, int y);
+
+    void keyDown(unsigned char key, int x, int y);
+    void keyUp(unsigned char key, int x, int y);
 
 	// Inicializa parâmetros de rendering
 	void inicializa();

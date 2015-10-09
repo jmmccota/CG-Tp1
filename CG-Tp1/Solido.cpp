@@ -26,7 +26,6 @@ void Solido::carrega(std::string arquivo)
 		std::getline(fs, linha);
 		if (linha == "")
 			continue;
-		int nLinhas;
 		std::vector<std::string> vLinha, linhas;
 		vLinha = FuncoesAuxiliares::split(linha, ' ');
 		linhas.push_back(linha);
@@ -66,7 +65,7 @@ void Solido::carrega(std::string arquivo)
 
 void Solido::desenha()
 {
-	for (int i = 0; i < poligonos.size(); i++)
+	for (unsigned int i = 0; i < poligonos.size(); i++)
 	{
 		poligonos[i].desenha(posX, posY);
 	}

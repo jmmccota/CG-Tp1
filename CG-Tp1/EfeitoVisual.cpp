@@ -41,8 +41,8 @@ void EfeitoVisual::resize(GLsizei w, GLsizei h)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	sizeX = w;
-	sizeY = h;
+    EfeitoVisual::getInstance().sizeX = w;
+    EfeitoVisual::getInstance().sizeY = h;
 }
 
 bool EfeitoVisual::isFullScreen() 
@@ -75,6 +75,12 @@ void EfeitoVisual::setFullScreen()
 		glutInitWindowPosition((GetSystemMetrics(SM_CXSCREEN) - 700) / 2, (GetSystemMetrics(SM_CYSCREEN) - 700) / 2);
 	}
 	fullscreen = !fullscreen;
+}
+
+EfeitoVisual& EfeitoVisual::getInstance()
+{
+    static EfeitoVisual singleton;
+    return singleton;
 }
 
 //#pragma region "Animação Inicial"

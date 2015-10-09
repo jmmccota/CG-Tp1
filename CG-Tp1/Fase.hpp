@@ -64,8 +64,19 @@ class Fase
 		//para o frame atual e chama a funcao de desenho
         virtual void atualiza(int value) = 0;
 
+        //Faz os tratamentos necessarios caso haja um clique do mouse
+        virtual void mouse(int button, int state, int x, int y) = 0;
+
+        //Faz os tratamentos necessarios caso seja pressionada uma tecla
+        //  do teclado
+        virtual void keyDown(unsigned char key, int x, int y) = 0;
+
+        //Faz os tratamentos necessarios caso seja solta uma tecla
+        //  do teclado
+        virtual void keyUp(unsigned char key, int x, int y) = 0;
+
         //Realiza chamada para definePersonagens e glSetup
-        virtual void inicializa();
+        virtual void inicializa() = 0;
 
         //Insere um novo projetil na fase
         void novoProjetil(Projetil *p);

@@ -18,7 +18,9 @@ class EfeitoVisual;
 	Como usar:
 		EfeitoVisal::getInstance().FUNCAOQUEEUQUEROCHAMAR(PARAMETROS);
 		...
-
+    Porque:
+        Somente uma instancia pode existir para que as informacoes
+        de estado da tela sejam consistentes durante o jogo todo.
 
 	Classe usada para efeitos visuais
 		(deteccao de colisao, explosoes, ...)
@@ -48,9 +50,6 @@ class EfeitoVisual
 		//Retorna true caso objetos tenham colidido, false caso contrario
 		bool colisao(Solido *a, Solido *b);
 
-		//Reajusta o tamanho da tela
-		void resize(GLsizei w, GLsizei h);
-
 		//Retorna se a tela está em fullScreen ou não
 		bool isFullScreen();
 
@@ -67,11 +66,12 @@ class EfeitoVisual
 		void displayAnimacaoInicial();
 		void timerAnimacaoInicial(int value, void(*func)(int));
 
-		static EfeitoVisual& getInstance()
-		{
-			static EfeitoVisual singleton;
-			return singleton;
-		}
+        static EfeitoVisual& getInstance();
+
+        //Callbacks do OpenGL devem ser estaticos
+
+        //Reajusta o tamanho da tela
+        void static resize(GLsizei w, GLsizei h);
 };
 #endif
  

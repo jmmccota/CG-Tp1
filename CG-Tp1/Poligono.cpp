@@ -16,7 +16,7 @@ void Poligono::carrega(std::vector<std::string> linhas)
     pontosY.clear();
 
     //Lendo a cor do poligono
-    for (int i = 1; i < linha.size(); i++)
+    for (unsigned int i = 1; i < linha.size(); i++)
     {
         cor[i - 1] = std::stof(linha[i]);
     }
@@ -36,7 +36,7 @@ void Poligono::carrega(std::vector<std::string> linhas)
     //Caso seja um poligono
     else
     {
-        for (int i = 1; i < linhas.size(); i++)
+        for (unsigned int i = 1; i < linhas.size(); i++)
         {
             linha = FuncoesAuxiliares::split(linhas[i], ' ');
             int aux = stof(linha[1]);
@@ -53,7 +53,7 @@ void Poligono::desenha(GLfloat x, GLfloat y)
 		glBegin(GL_TRIANGLE_FAN);
 	else
 		glBegin(GL_LINES);
-    for (int i = 0; i < pontosX.size(); i++)
+    for (unsigned int i = 0; i < pontosX.size(); i++)
     {
         glVertex2f(pontosX[i] + x, pontosY[i] + y);
     }

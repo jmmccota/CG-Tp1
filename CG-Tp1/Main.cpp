@@ -2,8 +2,7 @@
 //#include "Jogo.hpp"
 //
 //int main(int argc, char **argv) {
-//	Jogo *j = new Jogo();
-//	j->proximaFase();
+//	Jogo::getInstance().run();
 //	return 0;
 //}
 #include "Jogo.hpp"

@@ -2,7 +2,7 @@
 #define JOGO_H
 
 //60fps
-#define TEMPOQUADRO 16.66
+#define TEMPOQUADRO 16
 class Jogo;
 
 #include "Fase.hpp"
@@ -13,17 +13,47 @@ class Jogo;
 
 #define JOGO
 
+/*
+    ===============SINGLETON===============
+    Somente uma instancia vai ser usada no programa todo.
+    Como usar :
+        Jogo::getInstance().FUNCAOQUEEUQUEROCHAMAR(PARAMETROS);
+        ...
+    Porque:
+        1 - Somente uma instancia pode existir para que as informacoes
+            de estado do jogo sejam consistentes durante o jogo todo.
+        2 - Callbacks OpenGL precisam ser estaticas.
+            Para chamar uma funcao de um objeto dentro de uma funcao
+            estatica e necessario ter uma referencia a essa instancia.
+            A propria classe jogo contendo a referencia resolve esse problema.
+*/
+
 
 class Jogo
 {
     private:
+
         int proxFase;
         std::vector<Fase*> fases;
 
-    public:
-        Jogo(int* argc, char** argv);
-        ~Jogo();
+        Jogo();
+        Jogo(Jogo const&);
+        void operator=(Jogo const&);
 
+    public:
+
+        ~Jogo();
+        static Jogo& getInstance();
+
+        //Callbacks OpenGL
+        static void mouse(int button, int state, int x, int y);
+        static void keyDown(unsigned char key, int x, int y);
+        static void keyUp(unsigned char key, int x, int y);
+        static void draw();
+        static void timer(int value);
+
+        void run();
+        void inicializa(int fase);
         void setProxFase(int p);
         void proximaFase();
         void fimJogo();

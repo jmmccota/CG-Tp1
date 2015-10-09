@@ -75,3 +75,9 @@ void EfeitoSonoro::stopSong() {
 FMOD::Sound EfeitoSonoro::getSound() {
 	return *sound;
 }
+
+EfeitoSonoro& EfeitoSonoro::getInstance()
+{
+    static EfeitoSonoro singleton;
+    return singleton;
+}
