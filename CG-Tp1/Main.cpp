@@ -11,6 +11,7 @@
 #include <gl/glut.h>
 #include <math.h>
 #include <iostream>
+#include "Score.hpp"
 using namespace std;
 
 
@@ -34,7 +35,6 @@ void desenha(void) {
 
 
 int main(int argc, char **argv) {
-
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
