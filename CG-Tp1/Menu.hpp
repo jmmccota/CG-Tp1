@@ -10,6 +10,8 @@
 #include <string>
 #include <iostream>
 
+#if defined(FASE) && defined(JOGO)
+
 using namespace std;
 
 class Menu : public Fase
@@ -399,7 +401,7 @@ class Menu : public Fase
 				opc = false;
 				break;
 			case 'f':
-				EfeitoVisual::fullScreen();
+                EfeitoVisual::getInstance().setFullScreen();
 				break;
 			}
 		}
@@ -409,8 +411,8 @@ class Menu : public Fase
 				cout << "Voltar Melhores";//ir pro menu de função		
 				melhores = false;
 				break;
-			case 'f':
-				EfeitoVisual::fullScreen();
+            case 'f':
+                EfeitoVisual::getInstance().setFullScreen();
 				break;
 			}
 		}
@@ -436,8 +438,8 @@ class Menu : public Fase
 				cout << "melhores";//ir para melhores pontuaçoes
 				melhores = true;
 				break;
-			case 'f':
-				EfeitoVisual::fullScreen();
+            case 'f':
+                EfeitoVisual::getInstance().setFullScreen();
 				break;
 				//exit(0);
 			}
@@ -450,7 +452,7 @@ class Menu : public Fase
 
 			cout << "pos: " << x << "," << y << endl;
 			//cout <<"wx: "<< windowWidth-x << "," << windowHeight-y << endl;	
-			if (EfeitoVisual::isFullScreen()) {
+            if (EfeitoVisual::getInstance().isFullScreen()) {
 				if (opc) {
 					//se clicar em voltar opc=false
 					cout << "Mostrar opcoes";
@@ -546,27 +548,27 @@ class Menu : public Fase
 	// Inicializa parâmetros de rendering
 	void inicializa()
 	{
-		EfeitoSonoro::playMainTheme(true);
+        EfeitoSonoro::getInstance().playMainTheme(true);
 
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		EfeitoVisual::getInstance().ortho2D();
-		glutReshapeFunc(EfeitoVisual::resize);
+        glutReshapeFunc(EfeitoVisual::getInstance().resize);
 		glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 		glutInitWindowSize(1280, 720);
 		glutInitWindowPosition((GetSystemMetrics(SM_CXSCREEN) - 1280) / 2, (GetSystemMetrics(SM_CYSCREEN) - 720) / 2);
-		void (mouse*)(int, int, int, int) = this->mouseClick;
+		void (*mouse)(int, int, int, int) = this->mouseClick;
 		glutMouseFunc(mouse);
-		void (kbDown*)(unsigned char, int, int) = this->keyboardDown;
+		void (*kbDown)(unsigned char, int, int) = this->keyboardDown;
 		glutKeyboardFunc(kbDown);
-		void (desen*)() = this->desenha;
+		void (*desen)() = this->desenha;
 		glutDisplayFunc(desen);
 		glutIdleFunc(desen);
-		glutReshapeFunc(EfeitoVisual::resize);
-		void (atuali*)(int) = this->atualiza;
-		glutTimerFunc(TEMPOQUADRO, (atuali, 1));
+        glutReshapeFunc(EfeitoVisual::getInstance().resize);
+		void (*atuali)(int) = this->atualiza;
+		glutTimerFunc(TEMPOQUADRO, atuali, 1);
 	}
 };
 
-
+#endif
 
 #endif

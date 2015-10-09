@@ -11,6 +11,9 @@ class Jogo;
 #include <vector>
 
 
+#define JOGO
+
+
 class Jogo
 {
     private:
@@ -25,6 +28,9 @@ class Jogo
         void proximaFase();
         void fimJogo();
 };
+
+
+#include "Fase.hpp"
 
 #endif
  

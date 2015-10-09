@@ -53,7 +53,7 @@ public:
 
 	FMOD::Sound getSound();
 
-	EfeitoSonoro& getInstance()
+    static EfeitoSonoro& getInstance()
 	{
 		static EfeitoSonoro singleton;
 		return singleton;

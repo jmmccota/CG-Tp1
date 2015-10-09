@@ -21,6 +21,9 @@ class Fase;
 */
 
 
+#define FASE
+
+
 class Fase
 {
 	protected:
@@ -68,6 +71,8 @@ class Fase
         void novoProjetil(Projetil *p);
 };
 
+
+#include "Menu.hpp"
 
 
 #endif
