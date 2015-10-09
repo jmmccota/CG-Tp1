@@ -23,6 +23,9 @@ public:
 	//Cria o arquivo score.txt
 	void static CriaArquivo();
 
+	//Retorna a quantidade de Scores no arquivo
+	const int QuantScores();
+
 	//Salva a pontuação do jogador, retornando se foi salvo ou não
 	bool SaveScore(string jogador, int score);
 
@@ -40,4 +43,3 @@ public:
 
 
 #endif
- 
