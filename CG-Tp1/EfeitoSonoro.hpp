@@ -15,9 +15,9 @@ using namespace std;
 	Como usar:
 		EfeitoSonoro::getInstance().FUNCAOQUEEUQUEROCHAMAR(PARAMETROS);
 		...
-    Porque:
-        Somente uma instancia pode existir para que as informacoes
-        de estado do som sejam consistentes durante o jogo todo.
+	Porque:
+		Somente uma instancia pode existir para que as informacoes
+		de estado do som sejam consistentes durante o jogo todo.
 
 	Classe usada para efeitos sonoros
 		(efeito sonoro, musica, ...)
@@ -47,19 +47,23 @@ private:
 public:
 	~EfeitoSonoro();
 
-	//Execução de Sons
-	void playMainTheme(bool loop);
+	//Execução de Músicas
 	void playOpenTheme();
+	void playMainTheme();
+	void playFirstFaseTheme();
+	void playSecondFaseTheme();
+	void playThirdFaseTheme();
+
+	//Execução de Sounds
 	void playBoomEffect();
 
 	void stopSong();
 
 	FMOD::Sound getSound();
 
-    static EfeitoSonoro& getInstance();
+	static EfeitoSonoro& getInstance();
 };
 
 
 
 #endif
- 
