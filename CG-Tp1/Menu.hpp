@@ -9,6 +9,7 @@
 #include <cstring>
 #include <string>
 #include <iostream>
+#include "Avioes.hpp"
 
 #ifdef FASE
 

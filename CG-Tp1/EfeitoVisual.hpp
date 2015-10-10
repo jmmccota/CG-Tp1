@@ -53,10 +53,10 @@ class EfeitoVisual
 		//Retorna se a tela está em fullScreen ou não
 		bool isFullScreen();
 
-		//Retorna a resolução padrão da Tela
+		//Retorna a resolução padrão da Tela: First = Eixo X; Second = Eixo Y;
 		pair<int, int> sizeScreen();
 
-		//Posição da tela
+		//Posição da tela: First = Eixo X; Second = Eixo Y;
 		pair<double, double> positionScreen(char *type);
 
 		//Metodo de pressionamento de teclas
