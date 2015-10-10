@@ -18,7 +18,7 @@ EfeitoVisual::~EfeitoVisual()
 
 void EfeitoVisual::ortho2D()
 {
-	gluOrtho2D(0, FULLHD_ORTHO_X, 0, FULLHD_ORTHO_Y);
+	gluOrtho2D(0.0f, FULLHD_ORTHO_X, 0.0f, FULLHD_ORTHO_Y);
 }
 
 pair<float, float> EfeitoVisual::getOrtho2D()

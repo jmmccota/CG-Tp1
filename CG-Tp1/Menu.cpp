@@ -1,5 +1,5 @@
 #include "Menu.hpp"
-#define FONT_DEFAULT GLUT_BITMAP_TIMES_ROMAN_24
+#define FONT_DEFAULT GLUT_BITMAP_HELVETICA_18
 
 
 Menu::Menu() {
@@ -17,35 +17,44 @@ void Menu::desenhaBackground() {
 
 void drawOptionsMenu(char *options[], int quantOptions) {
 
-	float rasterX = 1920;
-	float rasterY = 600;
+	float rasterX = 1200;
+	float rasterY = 550;
 
+	//Escreve na tela
+	for (int pos = 0; pos < quantOptions; pos++) {
+		string titulo = options[pos];
+		glColor3f(0, 1.0, 1.0);
+		glRasterPos2f(rasterX - (titulo.length() * 10) + 251, rasterY - 10);
+		for (int i = 0; i < titulo.length(); i++) {
+			glutBitmapCharacter(FONT_DEFAULT, titulo[i]);
+		}
 #pragma region Boxes
-	glBegin(GL_LINE_LOOP);
-	glVertex2f(1920, 900);
-	glVertex2f(0, 900);
-	glEnd();
-
+		glLineWidth(2.0f);
+		glBegin(GL_LINE_LOOP);
+		glVertex2f(rasterX + 588.8888889, rasterY + 35.5555556);
+		glVertex2f(rasterX + 593.3333333, rasterY + 31.1111111);
+		glVertex2f(rasterX + 596.6666667, rasterY + 24.4444444);
+		glVertex2f(rasterX + 598.8888889, rasterY + 13.3333333);
+		glVertex2f(rasterX + 600, rasterY + 0.1111111);
+		glVertex2f(rasterX + 600, rasterY - 0.1111111);
+		glVertex2f(rasterX + 598.8888889, rasterY - 13.3333333);
+		glVertex2f(rasterX + 596.6666667, rasterY - 24.4444444);
+		glVertex2f(rasterX + 593.3333333, rasterY - 31.1111111);
+		glVertex2f(rasterX + 588.8888889, rasterY - 35.5555556);
+		glVertex2f(rasterX - 88.8888889, rasterY - 35.5555556);
+		glVertex2f(rasterX - 93.3333333, rasterY - 31.1111111);
+		glVertex2f(rasterX - 96.6666667, rasterY - 24.4444444);
+		glVertex2f(rasterX - 98.8888889, rasterY - 13.3333333);
+		glVertex2f(rasterX - 100, rasterY - 0.1111111);
+		glVertex2f(rasterX - 100, rasterY + 0.1111111);
+		glVertex2f(rasterX - 98.8888889, rasterY + 13.3333333);
+		glVertex2f(rasterX - 96.6666667, rasterY + 24.4444444);
+		glVertex2f(rasterX - 93.3333333, rasterY + 31.1111111);
+		glVertex2f(rasterX - 88.8888889, rasterY + 35.5555556);
+		glEnd();
 #pragma endregion
-//	//Escreve na tela
-//	for (int pos = 0; pos < quantOptions; pos++) {
-//		string titulo = options[pos];
-//		glColor3f(0, 1.0, 1.0);
-//		glRasterPos2f(rasterX, rasterY);
-//		for (int i = 0; i < titulo.length(); i++) {
-//			glutBitmapCharacter(FONT_DEFAULT, titulo[i]);
-//		}
-//#pragma region Boxes
-//		glBegin(GL_LINE_LOOP);
-//		glVertex2f(1920, 900);
-//		glVertex2f(0, 900);
-//		glEnd();
-//
-//#pragma endregion
-//
-//
-//		rasterY -= 130;
-//	}
+		rasterY -= 90;
+	}
 }
 
 void Menu::desenha() {
