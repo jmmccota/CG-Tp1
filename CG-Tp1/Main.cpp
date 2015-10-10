@@ -3,6 +3,7 @@
 
 int main(int argc, char **argv) {
 	Jogo::getInstance().run();
+
 	return 0;
 }
 //#include "Jogo.hpp"

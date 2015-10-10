@@ -18,6 +18,7 @@ void Menu::desenhaBackground()
 }
 
 void Menu::desenha() {
+
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
@@ -525,6 +526,6 @@ void Menu::mouse(int button, int state, int x, int y) {
 // Inicializa parâmetros de rendering
 void Menu::inicializa()
 {
-	EfeitoSonoro::getInstance().playMainTheme(true);
+	EfeitoSonoro::getInstance().playMainTheme();
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
