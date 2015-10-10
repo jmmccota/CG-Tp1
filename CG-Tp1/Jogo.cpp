@@ -24,7 +24,7 @@ void Jogo::run()
     EfeitoVisual::getInstance().ortho2D();
 
 
-    //fases.push_back(new Menu());
+    fases.push_back(new Menu());
     proxFase = 0;
     proximaFase();
 

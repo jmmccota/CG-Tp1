@@ -1,5 +1,14 @@
 #include "Menu.hpp"
 
+Menu::Menu()
+{
+}
+
+Menu::~Menu()
+{
+    Fase::~Fase();
+}
+
 void Menu::definePersonagens()
 {
 }
@@ -165,7 +174,7 @@ void Menu::desenha() {
 		//de inicio por .... nos nomes, mas fazer o arquivo pra ler(futuramente)
 		//colocar botão de limpar
 		//colocar botão de atirar
-#pragma region "Desenha o melhor Score"
+    #pragma region "Desenha o melhor Score"
 		string best = "Best Score: ";
 		glColor3f(0.4f, 0.9f, 1.0f);
 		glRasterPos2f(325.0f, 237.5f);
@@ -211,7 +220,7 @@ void Menu::desenha() {
 		glVertex2f(432, 241);
 		glVertex2f(500, 241);
 		glEnd();
-#pragma endregion
+    #pragma endregion
 
 	}
 	else {
@@ -323,6 +332,20 @@ void Menu::desenha() {
 	glutSwapBuffers();
 }
 
+void Menu::terminou()
+{
+    if (saiu)
+    {
+        jogo->setProxFase(-1);
+        jogo->proximaFase();
+    }
+    else if (comecou)
+    {
+        jogo->setProxFase(1);
+        jogo->proximaFase();
+    }
+}
+
 void Menu::atualiza(int value) {
 	// Muda a direção quando chega na borda esquerda ou direita
 	if (posX1 > windowWidth - POSrsize || posX1 < 0)
@@ -377,14 +400,12 @@ void Menu::keyDown(unsigned char key, int x, int y)
 			opc = true;
 			break;
 		case 13:
-			cout << "Iniciar";//ENTER -> ir pro jogo	
-			jogo->setProxFase(1);
-			jogo->proximaFase();
+			cout << "Iniciar";//ENTER -> ir pro jogo
+            comecou = true;
 			break;
 		case  27:
 			cout << "Sair";// ESC-> sair do jogo
-			jogo->setProxFase(-1);
-			jogo->proximaFase();
+            saiu = true;
 			break;
 		case 'M':
 		case 'm':
@@ -431,8 +452,7 @@ void Menu::mouse(int button, int state, int x, int y) {
 					if (y >= 291 && y <= 381) {
 						//começar jogo
 						cout << "Iniciar";
-						jogo->setProxFase(1);
-						jogo->proximaFase();
+                        comecou = true;
 					}
 					else if (y >= 398 && y <= 492) {
 						cout << "Opcoes";
@@ -446,8 +466,7 @@ void Menu::mouse(int button, int state, int x, int y) {
 					}
 					else if (y >= 615 && y <= 704) {
 						cout << "Sair";
-						jogo->setProxFase(-1);
-						jogo->proximaFase();
+                        saiu = true;
 						//fechar tudo
 					}
 				}
@@ -477,8 +496,7 @@ void Menu::mouse(int button, int state, int x, int y) {
 					if (y >= 274 && y <= 360) {
 						//começar jogo
 						cout << "Iniciar";
-						jogo->setProxFase(1);
-						jogo->proximaFase();
+                        comecou = true;
 					}
 					else if (y >= 375 && y <= 462) {
 						cout << "Opcoes";
@@ -490,8 +508,7 @@ void Menu::mouse(int button, int state, int x, int y) {
 					}
 					else if (y >= 577 && y <= 662) {
 						cout << "Sair";
-						jogo->setProxFase(-1);
-						jogo->proximaFase();
+                        saiu = true;
 					}
 				}
 			}

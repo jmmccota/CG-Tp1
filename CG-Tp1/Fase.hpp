@@ -82,7 +82,6 @@ class Fase
         void novoProjetil(Projetil *p);
 };
 
-
 #include "Menu.hpp"
 
 

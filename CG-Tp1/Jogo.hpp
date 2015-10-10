@@ -7,7 +7,6 @@ class Jogo;
 
 #include "Fase.hpp"
 #include "EfeitoVisual.hpp"
-#include "Menu.hpp"
 #include <vector>
 
 
