@@ -44,7 +44,7 @@ EfeitoSonoro::~EfeitoSonoro()
 
 
 void EfeitoSonoro::playSong(char *file, bool loop) {
-	
+
 	result = system->createSound(file, FMOD_HARDWARE, 0, &sound);
 	ERRCHECK(result);
 	result = system->playSound(FMOD_CHANNEL_FREE, sound, false, &channel);
@@ -56,17 +56,38 @@ void EfeitoSonoro::playSong(char *file, bool loop) {
 
 }
 
-void EfeitoSonoro::playMainTheme(bool loop) {
-	playSong("Sound/Main_Theme.mp3", loop);
-}
-
+// -------------------- Musics Themes ------------------------
 void EfeitoSonoro::playOpenTheme() {
 	playSong("Sound/Open_Theme.mp3", false);
 }
+
+void EfeitoSonoro::playMainTheme() {
+	playSong("Sound/Main_Theme.mp3", true);
+}
+
+void EfeitoSonoro::playFirstFaseTheme()
+{
+	playSong("Sound/FirstFase_Theme.mp3", true);
+}
+
+void EfeitoSonoro::playSecondFaseTheme()
+{
+	playSong("Sound/SecondtFase_Theme.mp3", true);
+}
+
+void EfeitoSonoro::playThirdFaseTheme()
+{
+	playSong("Sound/ThirdFase_Theme.mp3", true);
+}
+// ------------------------------------------------------------
+
+// -------------------- Effects Sounds ------------------------
 void EfeitoSonoro::playBoomEffect()
 {
 	playSong("Sound/Boom_Effect.mp3", false);
 }
+// ------------------------------------------------------------
+
 void EfeitoSonoro::stopSong() {
 	result = sound->release();
 	ERRCHECK(result);
@@ -78,6 +99,6 @@ FMOD::Sound EfeitoSonoro::getSound() {
 
 EfeitoSonoro& EfeitoSonoro::getInstance()
 {
-    static EfeitoSonoro singleton;
-    return singleton;
+	static EfeitoSonoro singleton;
+	return singleton;
 }

@@ -62,10 +62,6 @@ class EfeitoVisual
 		//Metodo de pressionamento de teclas
 		void setFullScreen();
 
-		//Animação Incial
-		void displayAnimacaoInicial();
-		void timerAnimacaoInicial(int value, void(*func)(int));
-
         static EfeitoVisual& getInstance();
 
         //Callbacks do OpenGL devem ser estaticos

@@ -31,35 +31,34 @@ void Jogo::run()
     glutMainLoop();
 }
 
-
 Jogo& Jogo::getInstance()
 {
-    static Jogo singleton;
-    return singleton;
+	static Jogo singleton;
+	return singleton;
 }
 
 
 void Jogo::mouse(int button, int state, int x, int y)
 {
-    Jogo::getInstance().fases[Jogo::getInstance().proxFase]->mouse(button, state, x, y);
+	Jogo::getInstance().fases[Jogo::getInstance().proxFase]->mouse(button, state, x, y);
 }
 void Jogo::keyDown(unsigned char key, int x, int y)
 {
-    Jogo::getInstance().fases[Jogo::getInstance().proxFase]->keyDown(key, x, y);
+	Jogo::getInstance().fases[Jogo::getInstance().proxFase]->keyDown(key, x, y);
 }
 void Jogo::keyUp(unsigned char key, int x, int y)
 {
-    Jogo::getInstance().fases[Jogo::getInstance().proxFase]->keyUp(key, x, y);
+	Jogo::getInstance().fases[Jogo::getInstance().proxFase]->keyUp(key, x, y);
 }
 void Jogo::draw()
 {
-    Jogo::getInstance().fases[Jogo::getInstance().proxFase]->desenha();
+	Jogo::getInstance().fases[Jogo::getInstance().proxFase]->desenha();
 }
 void Jogo::timer(int value)
 {
-    Jogo::getInstance().fases[Jogo::getInstance().proxFase]->atualiza(value);
-    glutPostRedisplay();
-    glutTimerFunc(TEMPOQUADRO, Jogo::timer, value+1);
+	Jogo::getInstance().fases[Jogo::getInstance().proxFase]->atualiza(value);
+	glutPostRedisplay();
+	glutTimerFunc(TEMPOQUADRO, Jogo::timer, value + 1);
 }
 
 
@@ -77,15 +76,15 @@ void Jogo::inicializa(int fase)
 
 void Jogo::proximaFase()
 {
-    if (proxFase != -1)
-        inicializa(proxFase);
-    else
-        fimJogo();
+	if (proxFase != -1)
+		inicializa(proxFase);
+	else
+		fimJogo();
 }
 
 void Jogo::setProxFase(int p)
 {
-    proxFase = p;
+	proxFase = p;
 }
 
 void Jogo::fimJogo()
@@ -93,4 +92,3 @@ void Jogo::fimJogo()
 	//salvar score
 	exit(0);
 }
- 
