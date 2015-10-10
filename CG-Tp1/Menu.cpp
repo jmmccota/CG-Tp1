@@ -17,13 +17,11 @@ void Menu::desenhaBackground()
 {
 }
 
+Me264 *s = new Me264(-45.0, 0.0, (float)20 / 10000, nullptr);
 void Menu::desenha() {
-
+	
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-
-	// Limpa a janela de visualização com a cor de fundo especificada
-	glClear(GL_COLOR_BUFFER_BIT);
 
 
 	//Jiraiya

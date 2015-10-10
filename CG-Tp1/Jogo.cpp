@@ -23,7 +23,6 @@ void Jogo::run()
 	glutInitWindowPosition(posScrenn.first, posScrenn.second);
 	glutCreateWindow("Jiraya's Fly");
 	glutReshapeFunc(EfeitoVisual::resize);
-	EfeitoVisual::getInstance().ortho2D();
 
 	fases.push_back(new Menu());
 	proxFase = 0;
@@ -37,7 +36,6 @@ Jogo& Jogo::getInstance()
 	static Jogo singleton;
 	return singleton;
 }
-
 
 void Jogo::mouse(int button, int state, int x, int y)
 {
@@ -53,6 +51,7 @@ void Jogo::keyUp(unsigned char key, int x, int y)
 }
 void Jogo::draw()
 {
+	EfeitoVisual::getInstance().ortho2D();
 	Jogo::getInstance().fases[Jogo::getInstance().proxFase]->desenha();
 }
 void Jogo::timer(int value)
