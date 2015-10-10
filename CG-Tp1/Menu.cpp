@@ -15,6 +15,9 @@ void Menu::definePersonagens() {
 void Menu::desenhaBackground() {
 }
 
+#pragma region "Pack de Desenho"
+
+//Desenha as Opções Dinamicamente - Parametros: options, quantidade de Opções
 void drawOptionsMenu(char *options[], int quantOptions) {
 
 	float rasterX = 1200;
@@ -22,13 +25,20 @@ void drawOptionsMenu(char *options[], int quantOptions) {
 
 	//Escreve na tela
 	for (int pos = 0; pos < quantOptions; pos++) {
+		glColor3f(0, 1.0, 0.9);
+
 		string titulo = options[pos];
-		glColor3f(0, 1.0, 1.0);
-		glRasterPos2f(rasterX - (titulo.length() * 10) + 251, rasterY - 10);
+		if (EfeitoVisual::getInstance().isFullScreen()) {
+			glRasterPos2f(rasterX - (titulo.length() * 5) + 251, rasterY - 10);
+		}
+		else {
+			glRasterPos2f(rasterX - (titulo.length() * 10) + 251, rasterY - 10);
+		}
 		for (int i = 0; i < titulo.length(); i++) {
 			glutBitmapCharacter(FONT_DEFAULT, titulo[i]);
 		}
-#pragma region Boxes
+
+		//-------------------- BEGIN BOXES DE OPÇÕES ---------------------
 		glLineWidth(2.0f);
 		glBegin(GL_LINE_LOOP);
 		glVertex2f(rasterX + 588.8888889, rasterY + 35.5555556);
@@ -52,15 +62,31 @@ void drawOptionsMenu(char *options[], int quantOptions) {
 		glVertex2f(rasterX - 93.3333333, rasterY + 31.1111111);
 		glVertex2f(rasterX - 88.8888889, rasterY + 35.5555556);
 		glEnd();
-#pragma endregion
+		//---------------------- END BOXES DE OPÇÕES ----------------------
+
 		rasterY -= 90;
 	}
 }
+
+//Desenha uma Linha - Parametro: posição em relação ao eixo Y
+void drawLine(float posY) {
+	glColor3f(0, 1.0, 0.9);
+	glLineWidth(3.0f);
+	glBegin(GL_LINE_LOOP);
+	glVertex2f(0.0, posY);
+	glVertex2f(EfeitoVisual::getInstance().getOrtho2D().first, posY);
+	glEnd();
+}
+
+#pragma endregion
 
 void Menu::desenha() {
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+
+	//Desenha Linha Superior
+	drawLine(1000);
 
 	//Opções do Menu
 	char *options[4];
@@ -68,8 +94,12 @@ void Menu::desenha() {
 	options[1] = "MELHORES PONTUACOES";
 	options[2] = "OPCOES";
 	options[3] = "SAIR";
-
 	drawOptionsMenu(options, 4);
+
+	//Desenha Avião
+	Spitfire *spitfire = new Spitfire(500, 500, 0.025, nullptr);
+	spitfire->desenha();
+
 
 	glutSwapBuffers();
 }
