@@ -1,5 +1,8 @@
 #include "EfeitoVisual.hpp"
 #include <cmath>
+#define FULLHD_ORTHO_X 1920
+#define FULLHD_ORTHO_Y 1080
+
 
 EfeitoVisual::EfeitoVisual()
 {
@@ -15,7 +18,12 @@ EfeitoVisual::~EfeitoVisual()
 
 void EfeitoVisual::ortho2D()
 {
-	gluOrtho2D(0, 2000, 0, 2000);
+	gluOrtho2D(0, FULLHD_ORTHO_X, 0, FULLHD_ORTHO_Y);
+}
+
+pair<float, float> EfeitoVisual::getOrtho2D()
+{
+	return pair<float, float>(FULLHD_ORTHO_X, FULLHD_ORTHO_Y);
 }
 
 bool EfeitoVisual::colisao(Solido *a, Solido *b)
@@ -41,11 +49,11 @@ void EfeitoVisual::resize(GLsizei w, GLsizei h)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-    EfeitoVisual::getInstance().sizeX = w;
-    EfeitoVisual::getInstance().sizeY = h;
+	EfeitoVisual::getInstance().sizeX = w;
+	EfeitoVisual::getInstance().sizeY = h;
 }
 
-bool EfeitoVisual::isFullScreen() 
+bool EfeitoVisual::isFullScreen()
 {
 	return fullscreen;
 }
@@ -71,16 +79,20 @@ void EfeitoVisual::setFullScreen()
 		glutFullScreen();
 	}
 	else {
-		glutReshapeWindow(700, 700);
-		glutInitWindowPosition((GetSystemMetrics(SM_CXSCREEN) - 700) / 2, (GetSystemMetrics(SM_CYSCREEN) - 700) / 2);
+		//Default values
+		sizeX = 1280;
+		sizeY = 720;
+		glutReshapeWindow(sizeX, sizeY);
+		pair<int, int> position = positionScreen("center");
+		glutInitWindowPosition(position.first, position.second);
 	}
 	fullscreen = !fullscreen;
 }
 
 EfeitoVisual& EfeitoVisual::getInstance()
 {
-    static EfeitoVisual singleton;
-    return singleton;
+	static EfeitoVisual singleton;
+	return singleton;
 }
 
 //#pragma region "Animação Inicial"

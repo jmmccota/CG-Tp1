@@ -32,7 +32,7 @@ class EfeitoVisual
 	private:
 
 		bool fullscreen;
-		int sizeX;
+		int sizeX ;
 		int sizeY;
 		EfeitoVisual();
 		EfeitoVisual(EfeitoVisual const&);
@@ -43,6 +43,9 @@ class EfeitoVisual
 
 		//Funcoes de configuracoes basicas
 		void ortho2D();
+
+		//Pegar os valores do ortho2D: First = Eixo X; Second = Eixo Y;
+		pair<float, float> getOrtho2D();
 
 		//COMO FAZER ANIMACAO EXPLOSAO?
 		//void static Explosao(GLfloat x, GLfloat y, GLfloat raio, int estagio);
