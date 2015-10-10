@@ -72,6 +72,7 @@ void Jogo::inicializa(int fase)
     glutKeyboardUpFunc(Jogo::keyUp);
     glutDisplayFunc(Jogo::draw);
     glutTimerFunc(TEMPOQUADRO, Jogo::timer, 1);
+    Jogo::getInstance().fases[fase]->inicializa();
 }
 
 void Jogo::proximaFase()
