@@ -28,14 +28,11 @@ bool EfeitoVisual::colisao(Solido *a, Solido *b)
 
 void EfeitoVisual::resize(GLsizei w, GLsizei h)
 {
-	// Evita a divisao por zero
-	if (h == 0) h = 1;
-
 	// Especifica as dimensões da Viewport
-	if (w < h)
-		glViewport(0, 0, w, w);
+	if (w * 9 / 16 < h)
+        glViewport(0, 0, w, w * 9 / 16);
 	else
-		glViewport(0, 0, h, h);
+		glViewport(0, 0, h * 16 / 9, h);
 
 	// Inicializa o sistema de coordenadas
 	glMatrixMode(GL_PROJECTION);
