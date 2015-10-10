@@ -39,11 +39,9 @@ class Fase
         //Lista de projeteis que apareceram na tela
         std::vector<Projetil*> projeteis;
 
-		//Ponteiro para a classe principal
-		//	Usado para devolver o fluxo de controle
-        Jogo *jogo;
-
 	public:
+        Fase();
+
 		//Limpa memoria alocada dinamicamente
 		virtual ~Fase() = 0;
 
@@ -82,6 +80,8 @@ class Fase
         void novoProjetil(Projetil *p);
 };
 
+
+//Incluir todas as fases do jogo
 #include "Menu.hpp"
 
 

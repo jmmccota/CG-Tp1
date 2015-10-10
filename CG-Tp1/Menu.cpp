@@ -336,17 +336,22 @@ void Menu::terminou()
 {
     if (saiu)
     {
-        jogo->setProxFase(-1);
-        jogo->proximaFase();
+        cout << "terminou\n";
+        Jogo::getInstance().setProxFase(-1);
+        Jogo::getInstance().proximaFase();
     }
     else if (comecou)
     {
-        jogo->setProxFase(1);
-        jogo->proximaFase();
+        Jogo::getInstance().setProxFase(1);
+        Jogo::getInstance().proximaFase();
     }
 }
 
 void Menu::atualiza(int value) {
+
+    //Testa se a fase acabou
+    terminou();
+
 	// Muda a direção quando chega na borda esquerda ou direita
 	if (posX1 > windowWidth - POSrsize || posX1 < 0)
 		xstep = -xstep;
