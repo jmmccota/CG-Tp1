@@ -29,9 +29,9 @@ int telaAtual = 0;
 struct PositionMenuElement
 {
 	float posInit_X;
-	float posFinish_X;
+	float posEnd_X;
 	float posInit_Y;
-	float posFinish_Y;
+    float posEnd_Y;
 };
 vector<PositionMenuElement> vetPosMenuElements;
 //----------------------------------------------------------------------------------------------
@@ -99,21 +99,13 @@ void drawOptionsMenu(char *options[], int quantOptions) {
 		glEnd();
 		//---------------------- END BOXES DE OPÇÕES ----------------------
 
-		PositionMenuElement pElement;
-		if (!EfeitoVisual::getInstance().isFullScreen()) {
-			pElement.posInit_X = ((rasterX - 100) - 1.5*(rasterX - 100)) + sizeS.first;
-			pElement.posFinish_X = rasterX;
-			pElement.posInit_Y = ((rasterY + 35.5555556) - 1.5*(rasterY + 35.5555556)) + sizeS.second - 90;
-			pElement.posFinish_Y = ((rasterY - 35.5555556) - 1.5*(rasterY - 35.5555556)) + sizeS.second - 90;
-		}
-		else {
-			pElement.posInit_X = rasterX - 100;
-			pElement.posFinish_X = rasterX + 600;
-			pElement.posInit_Y = rasterY - 35.5555556;
-			pElement.posFinish_Y = rasterY + 35.5555556;
+        PositionMenuElement pElement;
+        pElement.posInit_X = rasterX - 100;
+        pElement.posEnd_X = rasterX + 600;
+        pElement.posInit_Y = rasterY - 160;
+        pElement.posEnd_Y = rasterY - 85;
 
-		}
-		vetPosMenuElements.push_back(pElement);
+        vetPosMenuElements.push_back(pElement);
 
 		rasterY -= 90;
 	}
@@ -323,18 +315,21 @@ void Menu::mouse(int button, int state, int x, int y) {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
 		cout << "Position: (" << x << "," << y << ")" << endl;
 
-		cout << "X-> Init:" << vetPosMenuElements[1].posInit_X << " Finish:" << vetPosMenuElements[1].posFinish_X << endl;
-		cout << "Y-> Init:" << vetPosMenuElements[1].posInit_Y << " Finish:" << vetPosMenuElements[1].posFinish_Y << endl;
-
-
-		for (int i = 0; i < vetPosMenuElements.size(); i++) {
-			float xInit = vetPosMenuElements[i].posInit_X;
-			float xEnd = vetPosMenuElements[i].posFinish_X;
-			float yInit = vetPosMenuElements[i].posInit_Y;
-			float yEnd = vetPosMenuElements[i].posFinish_Y;
-			if ((x >= xInit && x <= xEnd) && (y >= yInit && y <= yEnd)) {
-				telaAtual = i;
-				break;
+        for (int i = 0; i < vetPosMenuElements.size(); i++) {
+            PositionMenuElement p = vetPosMenuElements[i];
+            if ((x >= p.posInit_X && x <= p.posEnd_X) && (y >= p.posInit_Y && y <= p.posEnd_Y)) {
+                switch (i)
+                {
+                    case 1:
+                        melhores = true;
+                        break;
+                    case 2:
+                        opc = true;
+                        break;
+                    case 3:
+                        saiu = true;
+                }
+                return;
 			}
 		}
 	}
