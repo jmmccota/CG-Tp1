@@ -22,7 +22,8 @@ protected:
 	GLfloat posX1 = 100.0f;
 	GLfloat PosY1 = 150.0f;
 	GLsizei POSrsize = 50;
-
+	//posicao inicial do aviao
+	GLint translacaoY = 0.0f;
 	// Tamanho do incremento nas direções x e y 
 	// (número de pixels para se mover a cada
 	// intervalo de tempo)

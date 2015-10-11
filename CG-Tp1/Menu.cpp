@@ -191,7 +191,17 @@ void Menu::desenha() {
 
 		//Desenha Avião
 		Spitfire *spitfire = new Spitfire(500, 500, 0.025, nullptr);
+		glPushMatrix();
+		//movendo aviao do menu
+		if (translacaoY < 900){
+			translacaoY += 8;
+		}
+		else{
+			translacaoY = -700;
+		}
+		glTranslatef(0, translacaoY, 0);
 		spitfire->desenha();
+		glPopMatrix();
 	}
 
 
