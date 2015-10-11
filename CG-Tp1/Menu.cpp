@@ -310,6 +310,14 @@ void Menu::keyDown(unsigned char key, int x, int y)
 void Menu::keyUp(unsigned char key, int x, int y)
 {
 }
+void Menu::specialKeyDown(int key, int x, int y)
+{
+
+}
+void Menu::specialKeyUp(int key, int x, int y)
+{
+
+}
 void Menu::mouse(int button, int state, int x, int y) {
 
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {

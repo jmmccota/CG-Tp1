@@ -58,6 +58,8 @@ class Menu : public Fase
         void mouse(int button, int state, int x, int y);
         void keyDown(unsigned char key, int x, int y);
         void keyUp(unsigned char key, int x, int y);
+        void specialKeyDown(int key, int x, int y);
+        void specialKeyUp(int key, int x, int y);
 
 	    // Inicializa parâmetros de rendering
 	    void inicializa();
