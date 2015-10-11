@@ -10,24 +10,37 @@
 
 using namespace std;
 
+/*
+	===============SINGLETON===============
+	Somente uma instancia vai ser usada no programa todo.
+	Como usar:
+		Score::getInstance().FUNCAOQUEEUQUEROCHAMAR(PARAMETROS);
+		...
+	Porque:
+		Somente uma instancia pode existir para que as informacoes
+		de estado da tela sejam consistentes durante o jogo todo.
+
+*/
+
 class Score {
+
 protected:
 	friend std::ostream& operator<<(std::ostream&, const Score&);
-	string jogador;
+	string player;
 	int score;
 public:
-	Score(string jogador, int score);
+	Score(string player, int score);
 	Score();
 	~Score();
 
 	//Cria o arquivo score.txt
-	void static CriaArquivo();
+	void criaArquivo();
 
 	//Retorna a quantidade de Scores no arquivo
-	const int QuantScores();
+	const int quantScores();
 
 	//Salva a pontuação do jogador, retornando se foi salvo ou não
-	bool SaveScore(string jogador, int score);
+	bool saveScore(string jogador, int score);
 
 	//Pega o melhor Score e o nome do jogador 
 	Score static getBestScore();
@@ -37,7 +50,10 @@ public:
 
 	//Getters
 	int getScore();
-	string getJogador();
+	string getPlayer();
+
+	//Singleton
+	static Score& getInstance();
 };
 
 

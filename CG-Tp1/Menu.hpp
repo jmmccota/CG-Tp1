@@ -10,6 +10,7 @@
 #include <string>
 #include <iostream>
 #include "Avioes.hpp"
+#include "Score.hpp"
 
 #ifdef FASE
 

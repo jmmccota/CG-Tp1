@@ -10,18 +10,18 @@ Score::~Score() {
 }
 
 Score::Score(string jogador, int score) {
-	Score::jogador = jogador;
+	Score::player = jogador;
 	Score::score = score;
 }
 
 
-void Score::CriaArquivo() {
+void Score::criaArquivo() {
 	ofstream makefile;
 	makefile.open(FILE_NAME);
 	makefile.close();
 }
 
-const int Score::QuantScores()
+const int Score::quantScores()
 {
 	int contScores = 0;
 	string line;
@@ -39,7 +39,7 @@ const int Score::QuantScores()
 	return contScores;
 }
 
-bool Score::SaveScore(string jogador, int score) {
+bool Score::saveScore(string jogador, int score) {
 	try
 	{
 		ofstream file(FILE_NAME, ios::app);
@@ -81,17 +81,17 @@ Score Score::getBestScore() {
 		}
 	}
 	else {
-		CriaArquivo();
+		Score::getInstance().criaArquivo();
 		return Score("Unknown", 0);
 	}
 }
 
-vector<Score> Score::getBestScore(int quantScores)
+vector<Score> Score::getBestScore(int qtScores)
 {
-	int totalScores = QuantScores();
+	int totalScores = quantScores();
 	Score *scores[100];
 
-	vector<Score> bestScores(quantScores);
+	vector<Score> bestScores(qtScores);
 	string line;
 	int i = 0;
 	int maxScore = -1;
@@ -114,7 +114,7 @@ vector<Score> Score::getBestScore(int quantScores)
 	int posBest_inMoment;
 
 	//Percorre o vetor de scores
-	while (contBest < totalScores) {
+	while (contBest < totalScores && contBest < qtScores) {
 		for (int x = 0; x < i; x++) {
 			if (scores[x]->score >= maxScore) {
 				maxScore = scores[x]->score;
@@ -132,7 +132,7 @@ vector<Score> Score::getBestScore(int quantScores)
 		maxScore = -1;
 	}
 
-	while (contBest < quantScores) {
+	while (contBest < qtScores) {
 		bestScores[contBest] = Score("Unknown", 0);
 		contBest++;
 	}
@@ -145,10 +145,16 @@ int Score::getScore() {
 	return score;
 }
 
-string Score::getJogador() {
-	return jogador;
+string Score::getPlayer() {
+	return player;
 }
 
 std::ostream& operator<<(std::ostream &strm, const Score &a) {
-	return strm << a.jogador << " -> " << a.score << endl;
+	return strm << a.player << " -> " << a.score << endl;
+}
+
+Score& Score::getInstance()
+{
+	static Score singleton;
+	return singleton;
 }

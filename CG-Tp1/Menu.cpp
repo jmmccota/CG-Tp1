@@ -154,8 +154,51 @@ void drawSquad(float posX, float posY, string titulo) {
 	//-------------------- END BOXES DE BESTSCORES ---------------------
 }
 
-//Desenha Melhores Scores - Parametros: bests, quantidade de melhores pontuações
-void drawBestScores(char *bests[], int quantBests) {
+//Desenha Melhores Scores - Parametros: bests
+void drawBestScores(vector<Score> bestScores, int decRasterY) {
+
+	int rasterX = 250;
+	int rasterY = 510;
+	pair<int, int> sizeScreen = EfeitoVisual::getInstance().sizeScreen();
+	glColor3f(0.1, 0.4, 0.9);
+
+	for (int i = 0; i < bestScores.size(); i++) {
+		glRasterPos2f(rasterX - 50, rasterY);
+		string rank = std::to_string(i + 1) + " -  ";
+		glutBitmapCharacter(FONT_DEFAULT, rank[0]);
+		for (int letter = 1; letter < rank.length(); letter++) {
+			glutBitmapCharacter(FONT_DEFAULT, rank[letter]);
+		}
+
+		string name = bestScores[i].getPlayer();
+		glRasterPos2f(rasterX, rasterY);
+		for (int letter = 0; letter < name.length(); letter++) {
+			glutBitmapCharacter(FONT_DEFAULT, name[letter]);
+		}
+
+		string score = std::to_string(bestScores[i].getScore());
+		if (EfeitoVisual::getInstance().isFullScreen()) {
+			glRasterPos2f(rasterX + (sizeScreen.first / 2) - (score.length() * 10) + 12, rasterY);
+		}
+		else {
+			glRasterPos2f(rasterX + (sizeScreen.first / 2) + (290 - score.length() * 10), rasterY);
+		}
+		for (int letter = 0; letter < score.length(); letter++) {
+			glutBitmapCharacter(FONT_DEFAULT, score[letter]);
+		}
+
+		float comple = (sizeScreen.first / 2) / 10;
+		string desloc = "_";
+		for (int letter = 0; letter < comple; letter++) {
+			desloc += "_";
+		}
+		glRasterPos2f(rasterX, rasterY);
+		for (int letter = 0; letter < desloc.length(); letter++) {
+			glutBitmapCharacter(FONT_DEFAULT, desloc[letter]);
+		}
+
+		rasterY -= decRasterY;
+	}
 
 }
 
@@ -174,6 +217,9 @@ void Menu::desenha() {
 
 	if (optMelhores) {//Tela Melhores Pontuações
 		drawSquad(150, 600, "MELHORES PONTUACOES");
+		// 5 Valores - Passar 70 por parametro
+		// 9 Valores - Passar 35 por Parametro
+		drawBestScores(Score::getInstance().getBestScore(5), 70);
 	}
 	else if (optOpcoes) {//Tela de Opções
 		drawSquad(150, 600, "OPCOES");
@@ -259,22 +305,27 @@ void Menu::mouse(int button, int state, int x, int y) {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
 		cout << "Position: (" << x << "," << y << ")" << endl;
 
-		for (int i = 0; i < vetPosMenuElements.size(); i++) {
-			float xInit = vetPosMenuElements[i].posInit_X;
-			float xEnd = vetPosMenuElements[i].posEnd_X;
-			float yInit = vetPosMenuElements[i].posInit_Y;
-			float yEnd = vetPosMenuElements[i].posEnd_Y;
-			if ((x >= xInit && x <= xEnd) && (y >= yInit && y <= yEnd)) {
-				switch (i)
-				{
-				case 1:
-					optMelhores = true;
-					break;
-				case 2:
-					optOpcoes = true;
-					break;
-				case 3:
-					optSair = true;
+		if (optMelhores) {
+
+		}
+		else {
+			for (int i = 0; i < vetPosMenuElements.size(); i++) {
+				float xInit = vetPosMenuElements[i].posInit_X;
+				float xEnd = vetPosMenuElements[i].posEnd_X;
+				float yInit = vetPosMenuElements[i].posInit_Y;
+				float yEnd = vetPosMenuElements[i].posEnd_Y;
+				if ((x >= xInit && x <= xEnd) && (y >= yInit && y <= yEnd)) {
+					switch (i)
+					{
+					case 1:
+						optMelhores = true;
+						break;
+					case 2:
+						optOpcoes = true;
+						break;
+					case 3:
+						optSair = true;
+					}
 				}
 			}
 		}
