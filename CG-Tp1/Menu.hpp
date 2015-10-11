@@ -22,7 +22,8 @@ class Menu : public Fase
 	    GLfloat posX1 = 100.0f;
 	    GLfloat PosY1 = 150.0f;
 	    GLsizei POSrsize = 50;
-
+	    //posicao inicial do aviao
+	    GLint translacaoY = 0.0f;
 	    // Tamanho do incremento nas direções x e y 
 	    // (número de pixels para se mover a cada
 	    // intervalo de tempo)
@@ -32,10 +33,12 @@ class Menu : public Fase
 	    // Largura e altura da janela
 	    GLfloat windowWidth;
 	    GLfloat windowHeight;
-	    bool melhores = false;
-	    bool opc = false;
-        bool saiu = false;
-        bool comecou = false;
+
+	    bool optIniciar = false;
+	    bool optMelhores = false;
+	    bool optOpcoes = false;
+	    bool optSair = false;
+
 
     public:
 	    Menu();
@@ -48,15 +51,15 @@ class Menu : public Fase
 	    // Função callback chamada para fazer o desenho
 	    void desenha();
 
-        void terminou();
+	    void terminou();
 
 	    // Função callback chamada pela GLUT a cada intervalo de tempo
 	    // (a window não está sendo redimensionada ou movida)
 	    void atualiza(int value);
 
 	    //Clique do mouse
-        void mouse(int button, int state, int x, int y);
-        void keyDown(unsigned char key, int x, int y);
+	    void mouse(int button, int state, int x, int y);
+	    void keyDown(unsigned char key, int x, int y);
         void keyUp(unsigned char key, int x, int y);
         void specialKeyDown(int key, int x, int y);
         void specialKeyUp(int key, int x, int y);

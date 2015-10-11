@@ -15,15 +15,6 @@ void Menu::desenhaBackground() {
 }
 
 #pragma region "Pack de Desenho do Menu"
-int telaAtual = 0;
-/* ---------------------- Variavel inteira de FLAG para TELA de MENU ---------------------------
-
-		telaAtual = 0 -> Tela do Menu Inicial
-			//    = 1 -> Tela de Melhores Pontuação
-			//    = 2 -> Tela de Opções
-			//    = 3 -> Sair
-
-----------------------------------------------------------------------------------------------*/
 
 //-------------- Usado para pegar Dinamicamente a Posição dos Elementos do Menu ---------------
 struct PositionMenuElement
@@ -31,7 +22,8 @@ struct PositionMenuElement
 	float posInit_X;
 	float posEnd_X;
 	float posInit_Y;
-    float posEnd_Y;
+	float posEnd_Y;
+
 };
 vector<PositionMenuElement> vetPosMenuElements;
 //----------------------------------------------------------------------------------------------
@@ -54,9 +46,9 @@ void drawOptionsMenu(char *options[], int quantOptions) {
 		vetPosMenuElements.clear();
 	}
 
-	pair<int, int> sizeS = EfeitoVisual::getInstance().sizeScreen();
+	pair<int, int> ortho = EfeitoVisual::getInstance().getOrtho2D();
 	float rasterX = 1200;
-	float rasterY = 550;
+	float rasterY = 600;
 
 	//Escreve na tela
 	for (int pos = 0; pos < quantOptions; pos++) {
@@ -76,36 +68,36 @@ void drawOptionsMenu(char *options[], int quantOptions) {
 		//-------------------- BEGIN BOXES DE OPÇÕES ---------------------
 		glLineWidth(2.0f);
 		glBegin(GL_LINE_LOOP);
-		glVertex2f(rasterX + 588.8888889, rasterY + 35.5555556);
-		glVertex2f(rasterX + 593.3333333, rasterY + 31.1111111);
-		glVertex2f(rasterX + 596.6666667, rasterY + 24.4444444);
-		glVertex2f(rasterX + 598.8888889, rasterY + 13.3333333);
-		glVertex2f(rasterX + 600, rasterY + 0.1111111);
-		glVertex2f(rasterX + 600, rasterY - 0.1111111);
-		glVertex2f(rasterX + 598.8888889, rasterY - 13.3333333);
-		glVertex2f(rasterX + 596.6666667, rasterY - 24.4444444);
-		glVertex2f(rasterX + 593.3333333, rasterY - 31.1111111);
-		glVertex2f(rasterX + 588.8888889, rasterY - 35.5555556);
-		glVertex2f(rasterX - 88.8888889, rasterY - 35.5555556);
-		glVertex2f(rasterX - 93.3333333, rasterY - 31.1111111);
-		glVertex2f(rasterX - 96.6666667, rasterY - 24.4444444);
-		glVertex2f(rasterX - 98.8888889, rasterY - 13.3333333);
-		glVertex2f(rasterX - 100, rasterY - 0.1111111);
-		glVertex2f(rasterX - 100, rasterY + 0.1111111);
-		glVertex2f(rasterX - 98.8888889, rasterY + 13.3333333);
-		glVertex2f(rasterX - 96.6666667, rasterY + 24.4444444);
-		glVertex2f(rasterX - 93.3333333, rasterY + 31.1111111);
-		glVertex2f(rasterX - 88.8888889, rasterY + 35.5555556);
+		glVertex2f(rasterX + 588.89, rasterY + 35.56);
+		glVertex2f(rasterX + 593.34, rasterY + 31.11);
+		glVertex2f(rasterX + 596.67, rasterY + 24.44);
+		glVertex2f(rasterX + 598.89, rasterY + 13.33);
+		glVertex2f(rasterX + 600, rasterY + 0.11);
+		glVertex2f(rasterX + 600, rasterY - 0.11);
+		glVertex2f(rasterX + 598.89, rasterY - 13.33);
+		glVertex2f(rasterX + 596.67, rasterY - 24.44);
+		glVertex2f(rasterX + 593.33, rasterY - 31.11);
+		glVertex2f(rasterX + 588.89, rasterY - 35.56);
+		glVertex2f(rasterX - 88.89, rasterY - 35.56);
+		glVertex2f(rasterX - 93.33, rasterY - 31.11);
+		glVertex2f(rasterX - 96.67, rasterY - 24.44);
+		glVertex2f(rasterX - 98.89, rasterY - 13.33);
+		glVertex2f(rasterX - 100, rasterY - 0.11);
+		glVertex2f(rasterX - 100, rasterY + 0.11);
+		glVertex2f(rasterX - 98.89, rasterY + 13.33);
+		glVertex2f(rasterX - 96.67, rasterY + 24.44);
+		glVertex2f(rasterX - 93.33, rasterY + 31.11);
+		glVertex2f(rasterX - 88.89, rasterY + 35.56);
 		glEnd();
 		//---------------------- END BOXES DE OPÇÕES ----------------------
 
-        PositionMenuElement pElement;
-        pElement.posInit_X = rasterX - 100;
-        pElement.posEnd_X = rasterX + 600;
-        pElement.posInit_Y = rasterY - 160;
-        pElement.posEnd_Y = rasterY - 85;
+		PositionMenuElement pElement;
+		pElement.posInit_X = rasterX - 100;
+		pElement.posEnd_X = rasterX + 600;
+		pElement.posInit_Y = ortho.second - 35.56 - rasterY;
+		pElement.posEnd_Y = ortho.second + 35.56 - rasterY;
 
-        vetPosMenuElements.push_back(pElement);
+		vetPosMenuElements.push_back(pElement);
 
 		rasterY -= 90;
 	}
@@ -180,18 +172,16 @@ void Menu::desenha() {
 	//Desenha Linha Superior
 	drawLine(1000);
 
-	switch (telaAtual)
-	{
-	case 1: //Tela Melhores Pontuações
+	if (optMelhores) {//Tela Melhores Pontuações
 		drawSquad(150, 600, "MELHORES PONTUACOES");
-		break;
-	case 2: //Tela de Opções
+	}
+	else if (optOpcoes) {//Tela de Opções
 		drawSquad(150, 600, "OPCOES");
-		break;
-	case 3: //Sair
+	}
+	else if (optSair) {
 		exit(1);
-		break;
-	default: //Opções do Menu Inicial
+	}
+	else {//Opções do Menu Inicial
 		char *options[4];
 		options[0] = "NOVO JOGO";
 		options[1] = "MELHORES PONTUACOES";
@@ -201,23 +191,32 @@ void Menu::desenha() {
 
 		//Desenha Avião
 		Spitfire *spitfire = new Spitfire(500, 500, 0.025, nullptr);
+		glPushMatrix();
+		//movendo aviao do menu
+		if (translacaoY < 900){
+			translacaoY += 8;
+		}
+		else{
+			translacaoY = -700;
+		}
+		glTranslatef(0, translacaoY, 0);
 		spitfire->desenha();
-
-		break;
+		glPopMatrix();
 	}
+
 
 	glutSwapBuffers();
 }
 
 void Menu::terminou()
 {
-	if (saiu)
+	if (optSair)
 	{
 		cout << "terminou\n";
 		Jogo::getInstance().setProxFase(-1);
 		Jogo::getInstance().proximaFase();
 	}
-	else if (comecou)
+	else if (optIniciar)
 	{
 		Jogo::getInstance().setProxFase(1);
 		Jogo::getInstance().proximaFase();
@@ -228,13 +227,6 @@ void Menu::atualiza(int value) {
 
 	//Testa se a fase acabou
 	terminou();
-
-    if (melhores)
-        telaAtual = 1;
-    else if (opc)
-        telaAtual = 2;
-    else
-        telaAtual = 0;
 
 	// Muda a direção quando chega na borda esquerda ou direita
 	if (posX1 > windowWidth - POSrsize || posX1 < 0)
@@ -259,52 +251,13 @@ void Menu::atualiza(int value) {
 
 void Menu::keyDown(unsigned char key, int x, int y)
 {
-	if (opc) {
-		switch (key) {
-		    case 8:
-			    cout << "Voltar Opcoes";//ir pro menu de função		
-			    opc = false;
-			    break;
-		    case 'f':
-			    EfeitoVisual::getInstance().setFullScreen();
-			    break;
-		    }
-	}
-    else if (melhores) {
-		switch (key) {
-		    case 8:
-			    cout << "Voltar Melhores";//ir pro menu de função		
-			    melhores = false;
-			    break;
-		    case 'f':
-			    EfeitoVisual::getInstance().setFullScreen();
-			    break;
-		}
-	}
-	else if (!melhores && !opc) {
-		switch (key) {
-		    case 'O':
-		    case 'o':
-			    cout << "Opcoes";//ir pro menu de função		
-			    opc = true;
-			    break;
-		    case 13:
-			    cout << "Iniciar";//ENTER -> ir pro jogo
-			    comecou = true;
-			    break;
-		    case  27:
-			    cout << "Sair";// ESC-> sair do jogo
-			    saiu = true;
-			    break;
-		    case 'M':
-		    case 'm':
-			    cout << "melhores";//ir para melhores pontuaçoes
-			    melhores = true;
-			    break;
-		    case 'f':
-			    EfeitoVisual::getInstance().setFullScreen();
-			    break;
-		}
+	switch (key) {
+	case 27: //Tecla ESC -> Sair do Jogo
+		optSair = true;
+		break;
+	case 'f':
+		EfeitoVisual::getInstance().setFullScreen();
+		break;
 	}
 }
 void Menu::keyUp(unsigned char key, int x, int y)
@@ -323,33 +276,32 @@ void Menu::mouse(int button, int state, int x, int y) {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
 		cout << "Position: (" << x << "," << y << ")" << endl;
 
-        for (int i = 0; i < vetPosMenuElements.size(); i++) {
-            PositionMenuElement p = vetPosMenuElements[i];
-            if ((x >= p.posInit_X && x <= p.posEnd_X) && (y >= p.posInit_Y && y <= p.posEnd_Y)) {
-                switch (i)
-                {
-                    case 1:
-                        melhores = true;
-                        break;
-                    case 2:
-                        opc = true;
-                        break;
-                    case 3:
-                        saiu = true;
-                }
-                return;
+		for (int i = 0; i < vetPosMenuElements.size(); i++) {
+			float xInit = vetPosMenuElements[i].posInit_X;
+			float xEnd = vetPosMenuElements[i].posEnd_X;
+			float yInit = vetPosMenuElements[i].posInit_Y;
+			float yEnd = vetPosMenuElements[i].posEnd_Y;
+			if ((x >= xInit && x <= xEnd) && (y >= yInit && y <= yEnd)) {
+				switch (i)
+				{
+				case 1:
+					optMelhores = true;
+					break;
+				case 2:
+					optOpcoes = true;
+					break;
+				case 3:
+					optSair = true;
+				}
 			}
 		}
 	}
-
-
-
 }
 
 
 // Inicializa parâmetros de rendering
 void Menu::inicializa()
 {
-	EfeitoSonoro::getInstance().playMainTheme();
+	//EfeitoSonoro::getInstance().playMainTheme();
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
