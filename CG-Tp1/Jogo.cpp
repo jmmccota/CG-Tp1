@@ -39,6 +39,12 @@ Jogo& Jogo::getInstance()
 
 void Jogo::mouse(int button, int state, int x, int y)
 {
+    pair<int, int> size = EfeitoVisual::getInstance().sizeScreen();
+    pair<int, int> ortho = EfeitoVisual::getInstance().getOrtho2D();
+
+    x = ((double)x) / size.first * ortho.first;
+    y = ((double)y) / size.second * ortho.second;
+
 	Jogo::getInstance().fases[Jogo::getInstance().proxFase]->mouse(button, state, x, y);
 }
 void Jogo::keyDown(unsigned char key, int x, int y)
