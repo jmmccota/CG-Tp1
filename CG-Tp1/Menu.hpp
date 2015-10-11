@@ -33,13 +33,10 @@ protected:
 	GLfloat windowWidth;
 	GLfloat windowHeight;
 
-	/* ---------------------- Variavel inteira de FLAG para TELA de MENU ---------------------------
-								telaAtual = 0 -> Tela do Menu Inicial
-								//    = 1 -> Tela de Melhores Pontuação
-								//    = 2 -> Tela de Opções
-								//    = 3 -> Sair
-	----------------------------------------------------------------------------------------------*/
-	int telaAtual = 0;
+	bool optIniciar = false;
+	bool optMelhores = false;
+	bool optOpcoes = false;
+	bool optSair = false;
 
 
 public:

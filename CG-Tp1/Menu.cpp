@@ -15,15 +15,6 @@ void Menu::desenhaBackground() {
 }
 
 #pragma region "Pack de Desenho do Menu"
-int telaAtual = 0;
-/* ---------------------- Variavel inteira de FLAG para TELA de MENU ---------------------------
-
-		telaAtual = 0 -> Tela do Menu Inicial
-			//    = 1 -> Tela de Melhores Pontuação
-			//    = 2 -> Tela de Opções
-			//    = 3 -> Sair
-
-----------------------------------------------------------------------------------------------*/
 
 //-------------- Usado para pegar Dinamicamente a Posição dos Elementos do Menu ---------------
 struct PositionMenuElement
@@ -181,18 +172,16 @@ void Menu::desenha() {
 	//Desenha Linha Superior
 	drawLine(1000);
 
-	switch (telaAtual)
-	{
-	case 1: //Tela Melhores Pontuações
+	if (optMelhores) {//Tela Melhores Pontuações
 		drawSquad(150, 600, "MELHORES PONTUACOES");
-		break;
-	case 2: //Tela de Opções
+	}
+	else if (optOpcoes) {//Tela de Opções
 		drawSquad(150, 600, "OPCOES");
-		break;
-	case 3: //Sair
+	}
+	else if (optSair) {
 		exit(1);
-		break;
-	default: //Opções do Menu Inicial
+	}
+	else {//Opções do Menu Inicial
 		char *options[4];
 		options[0] = "NOVO JOGO";
 		options[1] = "MELHORES PONTUACOES";
@@ -203,22 +192,21 @@ void Menu::desenha() {
 		//Desenha Avião
 		Spitfire *spitfire = new Spitfire(500, 500, 0.025, nullptr);
 		spitfire->desenha();
-
-		break;
 	}
+
 
 	glutSwapBuffers();
 }
 
 void Menu::terminou()
 {
-	if (saiu)
+	if (optSair)
 	{
 		cout << "terminou\n";
 		Jogo::getInstance().setProxFase(-1);
 		Jogo::getInstance().proximaFase();
 	}
-	else if (comecou)
+	else if (optIniciar)
 	{
 		Jogo::getInstance().setProxFase(1);
 		Jogo::getInstance().proximaFase();
@@ -253,57 +241,19 @@ void Menu::atualiza(int value) {
 
 void Menu::keyDown(unsigned char key, int x, int y)
 {
-	if (opc) {
-		switch (key) {
-		case 8:
-			cout << "Voltar Opcoes";//ir pro menu de função		
-			opc = false;
-			break;
-		case 'f':
-			EfeitoVisual::getInstance().setFullScreen();
-			break;
-		}
-	}
-	else if (melhores) {
-		switch (key) {
-		case 8:
-			cout << "Voltar Melhores";//ir pro menu de função		
-			melhores = false;
-			break;
-		case 'f':
-			EfeitoVisual::getInstance().setFullScreen();
-			break;
-		}
-	}
-	else if (!melhores && !opc) {
-		switch (key) {
-		case 'O':
-		case 'o':
-			cout << "Opcoes";//ir pro menu de função		
-			opc = true;
-			break;
-		case 13:
-			cout << "Iniciar";//ENTER -> ir pro jogo
-			comecou = true;
-			break;
-		case  27:
-			cout << "Sair";// ESC-> sair do jogo
-			saiu = true;
-			break;
-		case 'M':
-		case 'm':
-			cout << "melhores";//ir para melhores pontuaçoes
-			melhores = true;
-			break;
-		case 'f':
-			EfeitoVisual::getInstance().setFullScreen();
-			break;
-		}
+	switch (key) {
+	case 27: //Tecla ESC -> Sair do Jogo
+		optSair = true;
+		break;
+	case 'f':
+		EfeitoVisual::getInstance().setFullScreen();
+		break;
 	}
 }
 void Menu::keyUp(unsigned char key, int x, int y)
 {
 }
+
 void Menu::mouse(int button, int state, int x, int y) {
 
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
@@ -315,14 +265,20 @@ void Menu::mouse(int button, int state, int x, int y) {
 			float yInit = vetPosMenuElements[i].posInit_Y;
 			float yEnd = vetPosMenuElements[i].posEnd_Y;
 			if ((x >= xInit && x <= xEnd) && (y >= yInit && y <= yEnd)) {
-				telaAtual = i;
-				break;
+				switch (i)
+				{
+				case 1:
+					optMelhores = true;
+					break;
+				case 2:
+					optOpcoes = true;
+					break;
+				case 3:
+					optSair = true;
+				}
 			}
 		}
 	}
-
-
-
 }
 
 
