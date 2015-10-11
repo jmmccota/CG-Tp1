@@ -55,6 +55,11 @@ void Jogo::keyUp(unsigned char key, int x, int y)
 {
 	Jogo::getInstance().fases[Jogo::getInstance().proxFase]->keyUp(key, x, y);
 }
+void Jogo::SpecialkeyUp(unsigned char key, int x, int y)
+{
+	Jogo::getInstance().fases[Jogo::getInstance().proxFase]->keyUp(key, x, y);
+}
+
 void Jogo::draw()
 {
 	EfeitoVisual::getInstance().ortho2D();

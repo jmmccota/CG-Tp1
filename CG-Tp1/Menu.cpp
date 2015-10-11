@@ -28,6 +28,9 @@ struct PositionMenuElement
 vector<PositionMenuElement> vetPosMenuElements;
 //----------------------------------------------------------------------------------------------
 
+int setaSelectOption = 0;
+
+
 //Desenha uma Linha - Parametro: posição em relação ao eixo Y
 void drawLine(float posY) {
 	glColor3f(0, 1.0, 0.9);
@@ -52,7 +55,12 @@ void drawOptionsMenu(char *options[], int quantOptions) {
 
 	//Escreve na tela
 	for (int pos = 0; pos < quantOptions; pos++) {
-		glColor3f(0, 1.0, 0.9);
+		if (pos == selects) {
+			glColor3f(1.0, 1.0, 1.0);
+		}
+		else {
+			glColor3f(0, 1.0, 0.9);
+		}
 
 		string titulo = options[pos];
 		if (EfeitoVisual::getInstance().isFullScreen()) {
@@ -238,18 +246,17 @@ void Menu::desenha() {
 		//Desenha Avião
 		Spitfire *spitfire = new Spitfire(500, 500, 0.025, nullptr);
 		glPushMatrix();
-		//movendo aviao do menu
-		if (translacaoY < 900){
+		//Movendo aviao do menu
+		if (translacaoY < 900) {
 			translacaoY += 8;
 		}
-		else{
+		else {
 			translacaoY = -700;
 		}
 		glTranslatef(0, translacaoY, 0);
 		spitfire->desenha();
 		glPopMatrix();
 	}
-
 
 	glutSwapBuffers();
 }
@@ -297,6 +304,11 @@ void Menu::atualiza(int value) {
 
 void Menu::keyDown(unsigned char key, int x, int y)
 {
+
+}
+
+void Menu::keyUp(unsigned char key, int x, int y)
+{
 	switch (key) {
 	case 'O'://Tela de Opções		
 		optOpcoes = true;
@@ -320,14 +332,31 @@ void Menu::keyDown(unsigned char key, int x, int y)
 	case 27: //Tecla ESC -> Sair do Jogo
 		optSair = true;
 		break;
-
 	case 'f':
 		EfeitoVisual::getInstance().setFullScreen();
 		break;
 	}
 }
-void Menu::keyUp(unsigned char key, int x, int y)
+
+void Menu::specialKeyUp(unsigned char key, int x, int y)
 {
+
+	switch (key)
+	{
+	case GLUT_KEY_UP: //SETA CIMA
+		if (setaSelectOption > 0) {
+			setaSelectOption--;
+		}
+		break;
+	case GLUT_KEY_DOWN: //SETA BAIXO
+		if (setaSelectOption < 3) {
+			setaSelectOption++;
+		}
+		break;
+	default:
+		break;
+	}
+
 }
 
 void Menu::mouse(int button, int state, int x, int y) {
@@ -366,6 +395,6 @@ void Menu::mouse(int button, int state, int x, int y) {
 // Inicializa parâmetros de rendering
 void Menu::inicializa()
 {
-	EfeitoSonoro::getInstance().playMainTheme();
+	//EfeitoSonoro::getInstance().playMainTheme();
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }

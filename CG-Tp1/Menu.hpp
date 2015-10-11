@@ -62,6 +62,7 @@ public:
 	void mouse(int button, int state, int x, int y);
 	void keyDown(unsigned char key, int x, int y);
 	void keyUp(unsigned char key, int x, int y);
+	void specialKeyUp(unsigned char key, int x, int y);
 
 	// Inicializa parâmetros de rendering
 	void inicializa();

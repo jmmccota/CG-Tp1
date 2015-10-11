@@ -48,7 +48,7 @@ class Jogo
         static void mouse(int button, int state, int x, int y);
         static void keyDown(unsigned char key, int x, int y);
         static void keyUp(unsigned char key, int x, int y);
-        static void draw();
+	    static void draw();
         static void timer(int value);
 
         void run();
