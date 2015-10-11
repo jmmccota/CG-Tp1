@@ -48,6 +48,7 @@ class Menu : public Fase
 
 	    void desenhaBackground();
 
+
 	    // Função callback chamada para fazer o desenho
 	    void desenha();
 

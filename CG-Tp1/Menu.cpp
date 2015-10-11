@@ -28,6 +28,9 @@ struct PositionMenuElement
 vector<PositionMenuElement> vetPosMenuElements;
 //----------------------------------------------------------------------------------------------
 int setaSelectOption = 0;
+// mover aviao d opcoes
+GLfloat translacaoOpcoesY = 0.0f;
+GLfloat translacaoOpcoesX = 0.0f;
 
 //Desenha uma Linha - Parametro: posição em relação ao eixo Y
 void drawLine(float pos, char eixo) {
@@ -167,6 +170,7 @@ void drawOptionsMenu(char *options[], int quantOptions, int posY) {
 
 		rasterY -= 90;
 	}
+
 }
 
 //Desenha Melhores Scores - Parametros: bests, deslocamento no Y
@@ -208,6 +212,23 @@ void drawBestScoresMenu(vector<Score> bestScores, int decRasterY) {
 		rasterY -= decRasterY;
 	}
 
+}
+
+void teclasEspeciais(GLint tecla, GLint x, GLint y){
+	switch (tecla){
+	case GLUT_KEY_UP:
+		translacaoOpcoesY+=4;
+		break;
+	case GLUT_KEY_DOWN:
+		translacaoOpcoesY-=4;
+		break;
+	case GLUT_KEY_LEFT:
+		translacaoOpcoesX-=4;
+		break;
+	case GLUT_KEY_RIGHT:
+		translacaoOpcoesX+=4;
+		break;
+	}
 }
 
 //Desenha a Opção do Menu - Parametro: 
@@ -288,9 +309,12 @@ void drawOpcoesMenu() {
 	glEnd();
 
 	/*-------------- END COMANDOS SETAS ------------------*/
-
-	Spitfire *spitfire = new Spitfire(1500, 360, 0.015, nullptr);
+	glutSpecialFunc(teclasEspeciais);
+	glPushMatrix();
+	Spitfire *spitfire = new Spitfire(1400, 360, 0.015, nullptr);
+	glTranslatef(translacaoOpcoesX, translacaoOpcoesY, 0);
 	spitfire->desenha();
+	glPopMatrix();
 }
 
 #pragma endregion
