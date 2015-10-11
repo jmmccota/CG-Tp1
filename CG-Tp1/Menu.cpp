@@ -27,7 +27,6 @@ struct PositionMenuElement
 };
 vector<PositionMenuElement> vetPosMenuElements;
 //----------------------------------------------------------------------------------------------
-
 int setaSelectOption = 0;
 
 //Desenha uma Linha - Parametro: posição em relação ao eixo Y
@@ -176,7 +175,7 @@ void drawBestScoresMenu(vector<Score> bestScores, int decRasterY) {
 	int rasterX = 250;
 	int rasterY = 510;
 	pair<int, int> sizeScreen = EfeitoVisual::getInstance().sizeScreen();
-	glColor3f(1, 0.84, 0);
+	glColor3f(0.93, 0.57, 0.13);
 
 	for (int i = 0; i < bestScores.size(); i++) {
 		glRasterPos2f(rasterX - 50, rasterY);
@@ -222,20 +221,30 @@ void drawOpcoesMenu() {
 	glRasterPos2f(200, 460);
 	FuncoesAuxiliares::writeWord_BITMAP("A cada 100 mil pontos voce ganha uma vida.Caso perca todas, GAME OVER!", FONT_DEFAULT);
 
-	glRasterPos2f(220, 420);
-	FuncoesAuxiliares::writeWord_BITMAP("- Setas direcionais movimentam o Aviao", FONT_DEFAULT);
+	glRasterPos2f(200, 420);
+	FuncoesAuxiliares::writeWord_BITMAP("Comandos:", FONT_DEFAULT);
+
+	glRasterPos2f(220, 380);
+	FuncoesAuxiliares::writeWord_BITMAP("- Setas direcionais movimentam o Aviao.", FONT_DEFAULT);
+
+	glRasterPos2f(220, 340);
+	FuncoesAuxiliares::writeWord_BITMAP("- Barra de espaco Atira.", FONT_DEFAULT);
 
 	glColor3f(1, 0.27, 0);
-	glRasterPos2f(302.5, 250);
+
+	glRasterPos2f(375, 250);
+	FuncoesAuxiliares::writeWord_BITMAP("Barra de Espaco", GLUT_BITMAP_TIMES_ROMAN_24);
+
+	glRasterPos2f(765, 250);
 	FuncoesAuxiliares::writeWord_BITMAP("<-", GLUT_BITMAP_TIMES_ROMAN_24);
 
-	glRasterPos2f(400, 250);
+	glRasterPos2f(863, 250);
 	FuncoesAuxiliares::writeWord_BITMAP("v", GLUT_BITMAP_TIMES_ROMAN_24);
 
-	glRasterPos2f(472.5, 250);
+	glRasterPos2f(935, 250);
 	FuncoesAuxiliares::writeWord_BITMAP("->", GLUT_BITMAP_TIMES_ROMAN_24);
 
-	glRasterPos2f(400, 327.5);
+	glRasterPos2f(863, 327.5);
 	FuncoesAuxiliares::writeWord_BITMAP("^", GLUT_BITMAP_TIMES_ROMAN_24);
 
 	/*glRasterPos2f(205, 420);
@@ -246,34 +255,42 @@ void drawOpcoesMenu() {
 */
 
 	glColor3f(1, 0.27, 0);
-	/*--------------- BOXES SETAS -------------------*/
+	/*--------------- BOXES COMANDOS -------------------*/
+	glBegin(GL_LINE_LOOP);
+	glVertex2i(220, 300); //Barra espaço
+	glVertex2i(730, 300);
+	glVertex2i(730, 220);
+	glVertex2i(220, 220);
+	glEnd();
 	glBegin(GL_LINE_LOOP); //Seta esquerda
-	glVertex2i(280, 300);
-	glVertex2i(360, 300);
-	glVertex2i(360, 220);
-	glVertex2i(280, 220);
+	glVertex2i(745, 300);
+	glVertex2i(825, 300);
+	glVertex2i(825, 220);
+	glVertex2i(745, 220);
 	glEnd();
 	glBegin(GL_LINE_LOOP);
-	glVertex2i(365, 300); //Seta baixo
-	glVertex2i(445, 300);
-	glVertex2i(445, 220);
-	glVertex2i(365, 220);
+	glVertex2i(830, 300); //Seta baixo
+	glVertex2i(910, 300);
+	glVertex2i(910, 220);
+	glVertex2i(830, 220);
 	glEnd();
 	glBegin(GL_LINE_LOOP);
-	glVertex2i(450, 300); //Seta direita
-	glVertex2i(530, 300);
-	glVertex2i(530, 220);
-	glVertex2i(450, 220);
+	glVertex2i(915, 300); //Seta direita
+	glVertex2i(995, 300);
+	glVertex2i(995, 220);
+	glVertex2i(915, 220);
 	glEnd();
 	glBegin(GL_LINE_LOOP);
-	glVertex2i(365, 385); //Seta cima
-	glVertex2i(445, 385);
-	glVertex2i(445, 305);
-	glVertex2i(365, 305);
+	glVertex2i(830, 385); //Seta cima
+	glVertex2i(910, 385);
+	glVertex2i(910, 305);
+	glVertex2i(830, 305);
 	glEnd();
-	/*-------------- END BOXES SETAS ------------------*/
 
+	/*-------------- END COMANDOS SETAS ------------------*/
 
+	Spitfire *spitfire = new Spitfire(1500, 360, 0.015, nullptr);
+	spitfire->desenha();
 }
 
 #pragma endregion
@@ -431,20 +448,29 @@ void Menu::specialKeyDown(int key, int x, int y)
 
 void Menu::specialKeyUp(int key, int x, int y)
 {
-	switch (key)
-	{
-	case GLUT_KEY_UP: //SETA CIMA
-		if (setaSelectOption > 0) {
-			setaSelectOption--;
+	if (optMelhores) {
+
+	}
+	else if (optOpcoes) {
+
+	}
+	else {
+
+		switch (key)
+		{
+		case GLUT_KEY_UP: //SETA CIMA
+			if (setaSelectOption > 0) {
+				setaSelectOption--;
+			}
+			break;
+		case GLUT_KEY_DOWN: //SETA BAIXO
+			if (setaSelectOption < 3) {
+				setaSelectOption++;
+			}
+			break;
+		default:
+			break;
 		}
-		break;
-	case GLUT_KEY_DOWN: //SETA BAIXO
-		if (setaSelectOption < 3) {
-			setaSelectOption++;
-		}
-		break;
-	default:
-		break;
 	}
 }
 
@@ -454,6 +480,9 @@ void Menu::mouse(int button, int state, int x, int y) {
 		cout << "Position: (" << x << "," << y << ")" << endl;
 
 		if (optMelhores) {
+
+		}
+		else if (optOpcoes) {
 
 		}
 		else {
