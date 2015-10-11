@@ -237,6 +237,13 @@ void Menu::atualiza(int value) {
 	//Testa se a fase acabou
 	terminou();
 
+    if (melhores)
+        telaAtual = 1;
+    else if (opc)
+        telaAtual = 2;
+    else
+        telaAtual = 0;
+
 	// Muda a direção quando chega na borda esquerda ou direita
 	if (posX1 > windowWidth - POSrsize || posX1 < 0)
 		xstep = -xstep;
@@ -262,50 +269,49 @@ void Menu::keyDown(unsigned char key, int x, int y)
 {
 	if (opc) {
 		switch (key) {
-		case 8:
-			cout << "Voltar Opcoes";//ir pro menu de função		
-			opc = false;
-			break;
-		case 'f':
-			EfeitoVisual::getInstance().setFullScreen();
-			break;
-		}
+		    case 8:
+			    cout << "Voltar Opcoes";//ir pro menu de função		
+			    opc = false;
+			    break;
+		    case 'f':
+			    EfeitoVisual::getInstance().setFullScreen();
+			    break;
+		    }
 	}
-	else if (melhores) {
+    else if (melhores) {
 		switch (key) {
-		case 8:
-			cout << "Voltar Melhores";//ir pro menu de função		
-			melhores = false;
-			break;
-		case 'f':
-			EfeitoVisual::getInstance().setFullScreen();
-			break;
+		    case 8:
+			    cout << "Voltar Melhores";//ir pro menu de função		
+			    melhores = false;
+			    break;
+		    case 'f':
+			    EfeitoVisual::getInstance().setFullScreen();
+			    break;
 		}
 	}
 	else if (!melhores && !opc) {
 		switch (key) {
-		case 'O':
-		case 'o':
-			cout << "Opcoes";//ir pro menu de função		
-			opc = true;
-			break;
-		case 13:
-			cout << "Iniciar";//ENTER -> ir pro jogo
-			comecou = true;
-			break;
-		case  27:
-			cout << "Sair";// ESC-> sair do jogo
-			saiu = true;
-			break;
-		case 'M':
-		case 'm':
-			cout << "melhores";//ir para melhores pontuaçoes
-			melhores = true;
-			break;
-		case 'f':
-			EfeitoVisual::getInstance().setFullScreen();
-			break;
-			//exit(0);
+		    case 'O':
+		    case 'o':
+			    cout << "Opcoes";//ir pro menu de função		
+			    opc = true;
+			    break;
+		    case 13:
+			    cout << "Iniciar";//ENTER -> ir pro jogo
+			    comecou = true;
+			    break;
+		    case  27:
+			    cout << "Sair";// ESC-> sair do jogo
+			    saiu = true;
+			    break;
+		    case 'M':
+		    case 'm':
+			    cout << "melhores";//ir para melhores pontuaçoes
+			    melhores = true;
+			    break;
+		    case 'f':
+			    EfeitoVisual::getInstance().setFullScreen();
+			    break;
 		}
 	}
 }
@@ -313,6 +319,13 @@ void Menu::keyUp(unsigned char key, int x, int y)
 {
 }
 void Menu::mouse(int button, int state, int x, int y) {
+
+    pair<int, int> size = EfeitoVisual::getInstance().sizeScreen();
+    pair<int, int> ortho = EfeitoVisual::getInstance().getOrtho2D();
+
+    x = ((double) x) / size.first * ortho.first;
+    y = ((double) y) / size.second * ortho.second;
+
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
 		cout << "Position: (" << x << "," << y << ")" << endl;
 
