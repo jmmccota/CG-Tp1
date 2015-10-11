@@ -55,7 +55,7 @@ void drawOptionsMenu(char *options[], int quantOptions) {
 
 	//Escreve na tela
 	for (int pos = 0; pos < quantOptions; pos++) {
-		if (pos == selects) {
+		if (pos == setaSelectOption) {
 			glColor3f(1.0, 1.0, 1.0);
 		}
 		else {
@@ -318,7 +318,20 @@ void Menu::keyUp(unsigned char key, int x, int y)
 		break;
 
 	case 13: //ENTER -> Iniciar Jogo
-		optIniciar = true;
+		switch (setaSelectOption)
+		{
+		case 1:
+			optMelhores = true;
+			break;
+		case 2:
+			optOpcoes = true;
+			break;
+		case 3:
+			optSair = true;
+		default:
+			//optIniciar = true;
+			break;
+		}
 		break;
 
 	case 'm': //Tela de Melhores Pontuações
@@ -338,9 +351,12 @@ void Menu::keyUp(unsigned char key, int x, int y)
 	}
 }
 
-void Menu::specialKeyUp(unsigned char key, int x, int y)
+void Menu::specialKeyDown(int key, int x, int y)
 {
 
+}
+void Menu::specialKeyUp(int key, int x, int y)
+{
 	switch (key)
 	{
 	case GLUT_KEY_UP: //SETA CIMA
@@ -356,9 +372,7 @@ void Menu::specialKeyUp(unsigned char key, int x, int y)
 	default:
 		break;
 	}
-
 }
-
 void Menu::mouse(int button, int state, int x, int y) {
 
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {

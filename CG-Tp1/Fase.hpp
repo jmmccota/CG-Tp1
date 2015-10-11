@@ -73,6 +73,14 @@ class Fase
         //  do teclado
         virtual void keyUp(unsigned char key, int x, int y) = 0;
 
+        //Faz os tratamentos necessarios caso seja pressionada uma tecla
+        //  especial do teclado
+        virtual void specialKeyDown(int key, int x, int y) = 0;
+
+        //Faz os tratamentos necessarios caso seja solta uma tecla
+        //  especial do teclado
+        virtual void specialKeyUp(int key, int x, int y) = 0;
+
         //Realiza chamada para definePersonagens e glSetup
         virtual void inicializa() = 0;
 

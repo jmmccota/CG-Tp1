@@ -39,11 +39,11 @@ Jogo& Jogo::getInstance()
 
 void Jogo::mouse(int button, int state, int x, int y)
 {
-    pair<int, int> size = EfeitoVisual::getInstance().sizeScreen();
-    pair<int, int> ortho = EfeitoVisual::getInstance().getOrtho2D();
+	pair<int, int> size = EfeitoVisual::getInstance().sizeScreen();
+	pair<int, int> ortho = EfeitoVisual::getInstance().getOrtho2D();
 
-    x = ((double)x) / size.first * ortho.first;
-    y = ((double)y) / size.second * ortho.second;
+	x = ((double)x) / size.first * ortho.first;
+	y = ((double)y) / size.second * ortho.second;
 
 	Jogo::getInstance().fases[Jogo::getInstance().proxFase]->mouse(button, state, x, y);
 }
@@ -55,9 +55,14 @@ void Jogo::keyUp(unsigned char key, int x, int y)
 {
 	Jogo::getInstance().fases[Jogo::getInstance().proxFase]->keyUp(key, x, y);
 }
-void Jogo::SpecialkeyUp(unsigned char key, int x, int y)
+
+void Jogo::specialKeyDown(int key, int x, int y)
 {
-	Jogo::getInstance().fases[Jogo::getInstance().proxFase]->keyUp(key, x, y);
+	Jogo::getInstance().fases[Jogo::getInstance().proxFase]->specialKeyDown(key, x, y);
+}
+void Jogo::specialKeyUp(int key, int x, int y)
+{
+	Jogo::getInstance().fases[Jogo::getInstance().proxFase]->specialKeyUp(key, x, y);
 }
 
 void Jogo::draw()
@@ -77,6 +82,8 @@ void Jogo::inicializa(int fase)
 	glutMouseFunc(Jogo::mouse);
 	glutKeyboardFunc(Jogo::keyDown);
 	glutKeyboardUpFunc(Jogo::keyUp);
+	glutSpecialFunc(Jogo::specialKeyDown);
+	glutSpecialUpFunc(Jogo::specialKeyUp);
 	glutDisplayFunc(Jogo::draw);
 	glutTimerFunc(TEMPOQUADRO, Jogo::timer, 1);
 	Jogo::getInstance().fases[fase]->inicializa();
