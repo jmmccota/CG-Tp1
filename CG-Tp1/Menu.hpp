@@ -17,50 +17,55 @@ using namespace std;
 
 class Menu : public Fase
 {
-    protected:
-	    // Tamanho e posição inicial do quadrado 
-	    GLfloat posX1 = 100.0f;
-	    GLfloat PosY1 = 150.0f;
-	    GLsizei POSrsize = 50;
+protected:
+	// Tamanho e posição inicial do quadrado 
+	GLfloat posX1 = 100.0f;
+	GLfloat PosY1 = 150.0f;
+	GLsizei POSrsize = 50;
 
-	    // Tamanho do incremento nas direções x e y 
-	    // (número de pixels para se mover a cada
-	    // intervalo de tempo)
-	    GLfloat xstep = 1.0f;
-	    GLfloat ystep = 1.0f;
+	// Tamanho do incremento nas direções x e y 
+	// (número de pixels para se mover a cada
+	// intervalo de tempo)
+	GLfloat xstep = 1.0f;
+	GLfloat ystep = 1.0f;
 
-	    // Largura e altura da janela
-	    GLfloat windowWidth;
-	    GLfloat windowHeight;
-	    bool melhores = false;
-	    bool opc = false;
-        bool saiu = false;
-        bool comecou = false;
+	// Largura e altura da janela
+	GLfloat windowWidth;
+	GLfloat windowHeight;
 
-    public:
-	    Menu();
-	    ~Menu();
+	/* ---------------------- Variavel inteira de FLAG para TELA de MENU ---------------------------
+								telaAtual = 0 -> Tela do Menu Inicial
+								//    = 1 -> Tela de Melhores Pontuação
+								//    = 2 -> Tela de Opções
+								//    = 3 -> Sair
+	----------------------------------------------------------------------------------------------*/
+	int telaAtual = 0;
 
-	    void definePersonagens();
 
-	    void desenhaBackground();
+public:
+	Menu();
+	~Menu();
 
-	    // Função callback chamada para fazer o desenho
-	    void desenha();
+	void definePersonagens();
 
-        void terminou();
+	void desenhaBackground();
 
-	    // Função callback chamada pela GLUT a cada intervalo de tempo
-	    // (a window não está sendo redimensionada ou movida)
-	    void atualiza(int value);
+	// Função callback chamada para fazer o desenho
+	void desenha();
 
-	    //Clique do mouse
-        void mouse(int button, int state, int x, int y);
-        void keyDown(unsigned char key, int x, int y);
-        void keyUp(unsigned char key, int x, int y);
+	void terminou();
 
-	    // Inicializa parâmetros de rendering
-	    void inicializa();
+	// Função callback chamada pela GLUT a cada intervalo de tempo
+	// (a window não está sendo redimensionada ou movida)
+	void atualiza(int value);
+
+	//Clique do mouse
+	void mouse(int button, int state, int x, int y);
+	void keyDown(unsigned char key, int x, int y);
+	void keyUp(unsigned char key, int x, int y);
+
+	// Inicializa parâmetros de rendering
+	void inicializa();
 };
 
 #endif

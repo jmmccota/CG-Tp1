@@ -32,6 +32,7 @@ struct PositionMenuElement
 	float posEnd_X;
 	float posInit_Y;
 	float posEnd_Y;
+
 };
 vector<PositionMenuElement> vetPosMenuElements;
 //----------------------------------------------------------------------------------------------
