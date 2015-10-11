@@ -1,7 +1,6 @@
 #include "Menu.hpp"
 #define FONT_DEFAULT GLUT_BITMAP_HELVETICA_18
 
-
 Menu::Menu() {
 }
 
@@ -15,11 +14,47 @@ void Menu::definePersonagens() {
 void Menu::desenhaBackground() {
 }
 
-#pragma region "Pack de Desenho"
+#pragma region "Pack de Desenho do Menu"
+int telaAtual = 0;
+/* ---------------------- Variavel inteira de FLAG para TELA de MENU ---------------------------
+
+		telaAtual = 0 -> Tela do Menu Inicial
+			//    = 1 -> Tela de Melhores Pontuação
+			//    = 2 -> Tela de Opções
+			//    = 3 -> Sair
+
+----------------------------------------------------------------------------------------------*/
+
+//-------------- Usado para pegar Dinamicamente a Posição dos Elementos do Menu ---------------
+struct PositionMenuElement
+{
+	float posInit_X;
+	float posFinish_X;
+	float posInit_Y;
+	float posFinish_Y;
+};
+vector<PositionMenuElement> vetPosMenuElements;
+//----------------------------------------------------------------------------------------------
+
+//Desenha uma Linha - Parametro: posição em relação ao eixo Y
+void drawLine(float posY) {
+	glColor3f(0, 1.0, 0.9);
+	glLineWidth(3.0f);
+	glBegin(GL_LINE_LOOP);
+	glVertex2f(0.0, posY);
+	glVertex2f(EfeitoVisual::getInstance().getOrtho2D().first, posY);
+	glEnd();
+}
 
 //Desenha as Opções Dinamicamente - Parametros: options, quantidade de Opções
 void drawOptionsMenu(char *options[], int quantOptions) {
 
+	//Limpa vetor de posições de elementos do menu
+	if (vetPosMenuElements.size() > 0) {
+		vetPosMenuElements.clear();
+	}
+
+	pair<int, int> sizeS = EfeitoVisual::getInstance().sizeScreen();
 	float rasterX = 1200;
 	float rasterY = 550;
 
@@ -64,18 +99,80 @@ void drawOptionsMenu(char *options[], int quantOptions) {
 		glEnd();
 		//---------------------- END BOXES DE OPÇÕES ----------------------
 
+		PositionMenuElement pElement;
+		if (!EfeitoVisual::getInstance().isFullScreen()) {
+			pElement.posInit_X = ((rasterX - 100) - 1.5*(rasterX - 100)) + sizeS.first;
+			pElement.posFinish_X = rasterX;
+			pElement.posInit_Y = ((rasterY + 35.5555556) - 1.5*(rasterY + 35.5555556)) + sizeS.second - 90;
+			pElement.posFinish_Y = ((rasterY - 35.5555556) - 1.5*(rasterY - 35.5555556)) + sizeS.second - 90;
+		}
+		else {
+			pElement.posInit_X = rasterX - 100;
+			pElement.posFinish_X = rasterX + 600;
+			pElement.posInit_Y = rasterY - 35.5555556;
+			pElement.posFinish_Y = rasterY + 35.5555556;
+
+		}
+		vetPosMenuElements.push_back(pElement);
+
 		rasterY -= 90;
 	}
 }
 
-//Desenha uma Linha - Parametro: posição em relação ao eixo Y
-void drawLine(float posY) {
+//Desenha Quadrado para Opções - Paremetros: Posição x, Posição Y, Titulo 
+void drawSquad(float posX, float posY, string titulo) {
+
+	pair<float, float> fullHD = EfeitoVisual::getInstance().getOrtho2D();
+	float rasterX = fullHD.first - posX;
+	float rasterY = 190;
+
+	if (EfeitoVisual::getInstance().isFullScreen()) {
+		glRasterPos2f(posX - (titulo.length() * 5) + ((rasterX - posX) / 2), posY - 10);
+	}
+	else {
+		glRasterPos2f(posX - (titulo.length() * 10) + ((rasterX - posX) / 2), posY - 10);
+
+	}
+
+	for (int i = 0; i < titulo.length(); i++) {
+		glutBitmapCharacter(FONT_DEFAULT, titulo[i]);
+	}
+
+	//-------------------- BEGIN BOXES DE BESTSCORES ---------------------
 	glColor3f(0, 1.0, 0.9);
-	glLineWidth(3.0f);
+	glLineWidth(2.0f);
 	glBegin(GL_LINE_LOOP);
-	glVertex2f(0.0, posY);
-	glVertex2f(EfeitoVisual::getInstance().getOrtho2D().first, posY);
+	glVertex2f(rasterX - 11.1111112, posY + 35.5555556);
+	glVertex2f(rasterX - 6.6666666, posY + 31.1111111);
+	glVertex2f(rasterX - 3.3333333, posY + 24.4444444);
+	glVertex2f(rasterX - 2.2222222, posY + 13.3333333);
+	glVertex2f(rasterX, posY);
+	glVertex2f(rasterX, rasterY);
+	glVertex2f(rasterX - 1.1111111, posY - 13.3333333);
+	glVertex2f(rasterX - 3.3333333, posY - 24.4444444);
+	glVertex2f(rasterX - 6.6666666, posY - 31.1111111);
+	glVertex2f(rasterX - 11.1111112, posY - 35.5555556);
+	glVertex2f(posX + 11.1111112, posY - 35.5555556);
+	glVertex2f(posX + 6.6666666, posY - 31.1111111);
+	glVertex2f(posX + 3.3333333, posY - 24.4444444);
+	glVertex2f(posX + 1.1111111, posY - 13.3333333);
+	glVertex2f(posX, posY);
+	glVertex2f(posX, rasterY);
+	glVertex2f(posX + 1.1111111, posY + 13.3333333);
+	glVertex2f(posX + 3.3333333, posY + 24.4444444);
+	glVertex2f(posX + 6.6666666, posY + 31.1111111);
+	glVertex2f(posX + 11.1111112, posY + 35.5555556);
 	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(posX, rasterY);
+	glVertex2f(rasterX, rasterY);
+	glEnd();
+	//-------------------- END BOXES DE BESTSCORES ---------------------
+}
+
+//Desenha Melhores Scores - Parametros: bests, quantidade de melhores pontuações
+void drawBestScores(char *bests[], int quantBests) {
+
 }
 
 #pragma endregion
@@ -84,22 +181,38 @@ void Menu::desenha() {
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+	// Limpa a janela de visualização com a cor de fundo especificada
+	glClear(GL_COLOR_BUFFER_BIT);
+
 
 	//Desenha Linha Superior
 	drawLine(1000);
 
-	//Opções do Menu
-	char *options[4];
-	options[0] = "NOVO JOGO";
-	options[1] = "MELHORES PONTUACOES";
-	options[2] = "OPCOES";
-	options[3] = "SAIR";
-	drawOptionsMenu(options, 4);
+	switch (telaAtual)
+	{
+	case 1: //Tela Melhores Pontuações
+		drawSquad(150, 600, "MELHORES PONTUACOES");
+		break;
+	case 2: //Tela de Opções
+		drawSquad(150, 600, "OPCOES");
+		break;
+	case 3: //Sair
+		exit(1);
+		break;
+	default: //Opções do Menu Inicial
+		char *options[4];
+		options[0] = "NOVO JOGO";
+		options[1] = "MELHORES PONTUACOES";
+		options[2] = "OPCOES";
+		options[3] = "SAIR";
+		drawOptionsMenu(options, 4);
 
-	//Desenha Avião
-	Spitfire *spitfire = new Spitfire(500, 500, 0.025, nullptr);
-	spitfire->desenha();
+		//Desenha Avião
+		Spitfire *spitfire = new Spitfire(500, 500, 0.025, nullptr);
+		spitfire->desenha();
 
+		break;
+	}
 
 	glutSwapBuffers();
 }
@@ -200,97 +313,27 @@ void Menu::keyUp(unsigned char key, int x, int y)
 {
 }
 void Menu::mouse(int button, int state, int x, int y) {
-	//cout << "Iniciar";
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+		cout << "Position: (" << x << "," << y << ")" << endl;
+
+		cout << "X-> Init:" << vetPosMenuElements[1].posInit_X << " Finish:" << vetPosMenuElements[1].posFinish_X << endl;
+		cout << "Y-> Init:" << vetPosMenuElements[1].posInit_Y << " Finish:" << vetPosMenuElements[1].posFinish_Y << endl;
 
 
-		cout << "pos: " << x << "," << y << endl;
-		//cout <<"wx: "<< windowWidth-x << "," << windowHeight-y << endl;	
-		if (EfeitoVisual::getInstance().isFullScreen()) {
-			if (opc) {
-				//se clicar em voltar opc=false
-				cout << "Mostrar opcoes";
-				//585 630
-				//737 720
-				if (x >= 585 && x <= 737) {
-					if (y >= 630 && y <= 720) {
-						opc = false;
-					}
-				}
-				//opc = false;
-			}
-			else if (melhores) {
-				//se clicar em voltar melhores=false
-				cout << "Mostrar melhores";
-				//melhores = false;
-			}
-			else {
-				if (x >= 216 && x <= 797) {
-					if (y >= 291 && y <= 381) {
-						//começar jogo
-						cout << "Iniciar";
-						comecou = true;
-					}
-					else if (y >= 398 && y <= 492) {
-						cout << "Opcoes";
-						//chamar opcoes
-						opc = true;
-					}
-					else if (y >= 506 && y <= 598) {
-						cout << "Melhores";
-						//chamar melhores
-						melhores = true;
-					}
-					else if (y >= 615 && y <= 704) {
-						cout << "Sair";
-						saiu = true;
-						//fechar tudo
-					}
-				}
-			}
-		}
-		else {
-			if (opc) {
-				//se clicar em voltar opc=false
-				cout << "Mostrar opcoes";
-				//opc = false;
-				//548 591
-				//690 675
-				if (x >= 548 && x <= 690) {
-					if (y >= 591 && y <= 675) {
-						opc = false;
-					}
-				}
-			}
-			else if (melhores) {
-				//se clicar em voltar melhores=false
-				cout << "Mostrar melhores";
-				melhores = false;
-				//melhores = false;
-			}
-			else {
-				if (x >= 203 && x <= 750) {
-					if (y >= 274 && y <= 360) {
-						//começar jogo
-						cout << "Iniciar";
-						comecou = true;
-					}
-					else if (y >= 375 && y <= 462) {
-						cout << "Opcoes";
-						opc = true;
-					}
-					else if (y >= 476 && y <= 562) {
-						cout << "Melhores";
-						melhores = true;
-					}
-					else if (y >= 577 && y <= 662) {
-						cout << "Sair";
-						saiu = true;
-					}
-				}
+		for (int i = 0; i < vetPosMenuElements.size(); i++) {
+			float xInit = vetPosMenuElements[i].posInit_X;
+			float xEnd = vetPosMenuElements[i].posFinish_X;
+			float yInit = vetPosMenuElements[i].posInit_Y;
+			float yEnd = vetPosMenuElements[i].posFinish_Y;
+			if ((x >= xInit && x <= xEnd) && (y >= yInit && y <= yEnd)) {
+				telaAtual = i;
+				break;
 			}
 		}
 	}
+
+
+
 }
 
 
