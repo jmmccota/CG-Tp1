@@ -30,19 +30,79 @@ vector<PositionMenuElement> vetPosMenuElements;
 
 int setaSelectOption = 0;
 
-
 //Desenha uma Linha - Parametro: posição em relação ao eixo Y
-void drawLine(float posY) {
-	glColor3f(0, 1.0, 0.9);
+void drawLine(float pos, char eixo) {
+
+	pair<int, int> size = EfeitoVisual::getInstance().getOrtho2D();
+
+	//glColor3f(0, 1.0, 0.9);
+	glColor3f(1, 0.27, 0);
 	glLineWidth(3.0f);
-	glBegin(GL_LINE_LOOP);
-	glVertex2f(0.0, posY);
-	glVertex2f(EfeitoVisual::getInstance().getOrtho2D().first, posY);
-	glEnd();
+	if (eixo == 'x') {
+		glBegin(GL_LINE_LOOP);
+		glVertex2f(pos, 0.0);
+		glVertex2f(pos, size.second);
+		glEnd();
+	}
+	else if (eixo == 'y') {
+		glBegin(GL_LINE_LOOP);
+		glVertex2f(0.0, pos);
+		glVertex2f(size.first, pos);
+		glEnd();
+	}
 }
 
-//Desenha as Opções Dinamicamente - Parametros: options, quantidade de Opções
-void drawOptionsMenu(char *options[], int quantOptions) {
+//Desenha Quadrado para Opções - Paremetros: Posição x, Posição Y, Titulo 
+void drawSquad(float posX, float posY, string titulo) {
+
+	pair<float, float> fullHD = EfeitoVisual::getInstance().getOrtho2D();
+	float rasterX = fullHD.first - posX;
+	float rasterY = 140;
+
+	if (EfeitoVisual::getInstance().isFullScreen()) {
+		glRasterPos2f(posX - (titulo.length() * 5) + ((rasterX - posX) / 2), posY - 10);
+	}
+	else {
+		glRasterPos2f(posX - (titulo.length() * 10) + ((rasterX - posX) / 2), posY - 10);
+
+	}
+	glColor3f(0.0, 0.0, 1);
+	FuncoesAuxiliares::writeWord_BITMAP(titulo, FONT_DEFAULT);
+
+	//-------------------- BEGIN BOXES DE BESTSCORES ---------------------
+	glColor3f(0.0, 0.0, 1);
+	glLineWidth(3.0f);
+	glBegin(GL_LINE_LOOP);
+	glVertex2f(rasterX - 11.1111112, posY + 35.5555556);
+	glVertex2f(rasterX - 6.6666666, posY + 31.1111111);
+	glVertex2f(rasterX - 3.3333333, posY + 24.4444444);
+	glVertex2f(rasterX - 2.2222222, posY + 13.3333333);
+	glVertex2f(rasterX, posY);
+	glVertex2f(rasterX, rasterY);
+	glVertex2f(rasterX - 1.1111111, posY - 13.3333333);
+	glVertex2f(rasterX - 3.3333333, posY - 24.4444444);
+	glVertex2f(rasterX - 6.6666666, posY - 31.1111111);
+	glVertex2f(rasterX - 11.1111112, posY - 35.5555556);
+	glVertex2f(posX + 11.1111112, posY - 35.5555556);
+	glVertex2f(posX + 6.6666666, posY - 31.1111111);
+	glVertex2f(posX + 3.3333333, posY - 24.4444444);
+	glVertex2f(posX + 1.1111111, posY - 13.3333333);
+	glVertex2f(posX, posY);
+	glVertex2f(posX, rasterY);
+	glVertex2f(posX + 1.1111111, posY + 13.3333333);
+	glVertex2f(posX + 3.3333333, posY + 24.4444444);
+	glVertex2f(posX + 6.6666666, posY + 31.1111111);
+	glVertex2f(posX + 11.1111112, posY + 35.5555556);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(posX, rasterY);
+	glVertex2f(rasterX, rasterY);
+	glEnd();
+	//-------------------- END BOXES DE BESTSCORES ---------------------
+}
+
+//Desenha as Opções Dinamicamente - Parametros: options, quantidade de Opções, e a posição inial Y
+void drawOptionsMenu(char *options[], int quantOptions, int posY) {
 
 	//Limpa vetor de posições de elementos do menu
 	if (vetPosMenuElements.size() > 0) {
@@ -51,7 +111,7 @@ void drawOptionsMenu(char *options[], int quantOptions) {
 
 	pair<int, int> ortho = EfeitoVisual::getInstance().getOrtho2D();
 	float rasterX = 1200;
-	float rasterY = 600;
+	float rasterY = posY;
 
 	//Escreve na tela
 	for (int pos = 0; pos < quantOptions; pos++) {
@@ -59,7 +119,8 @@ void drawOptionsMenu(char *options[], int quantOptions) {
 			glColor3f(1.0, 1.0, 1.0);
 		}
 		else {
-			glColor3f(0, 1.0, 0.9);
+			//glColor3f(0, 1.0, 0.9);
+			glColor3f(1, 0.27, 0);
 		}
 
 		string titulo = options[pos];
@@ -69,9 +130,7 @@ void drawOptionsMenu(char *options[], int quantOptions) {
 		else {
 			glRasterPos2f(rasterX - (titulo.length() * 10) + 251, rasterY - 10);
 		}
-		for (int i = 0; i < titulo.length(); i++) {
-			glutBitmapCharacter(FONT_DEFAULT, titulo[i]);
-		}
+		FuncoesAuxiliares::writeWord_BITMAP(titulo, FONT_DEFAULT);
 
 		//-------------------- BEGIN BOXES DE OPÇÕES ---------------------
 		glLineWidth(2.0f);
@@ -111,78 +170,23 @@ void drawOptionsMenu(char *options[], int quantOptions) {
 	}
 }
 
-//Desenha Quadrado para Opções - Paremetros: Posição x, Posição Y, Titulo 
-void drawSquad(float posX, float posY, string titulo) {
-
-	pair<float, float> fullHD = EfeitoVisual::getInstance().getOrtho2D();
-	float rasterX = fullHD.first - posX;
-	float rasterY = 190;
-
-	if (EfeitoVisual::getInstance().isFullScreen()) {
-		glRasterPos2f(posX - (titulo.length() * 5) + ((rasterX - posX) / 2), posY - 10);
-	}
-	else {
-		glRasterPos2f(posX - (titulo.length() * 10) + ((rasterX - posX) / 2), posY - 10);
-
-	}
-
-	for (int i = 0; i < titulo.length(); i++) {
-		glutBitmapCharacter(FONT_DEFAULT, titulo[i]);
-	}
-
-	//-------------------- BEGIN BOXES DE BESTSCORES ---------------------
-	glColor3f(0, 1.0, 0.9);
-	glLineWidth(2.0f);
-	glBegin(GL_LINE_LOOP);
-	glVertex2f(rasterX - 11.1111112, posY + 35.5555556);
-	glVertex2f(rasterX - 6.6666666, posY + 31.1111111);
-	glVertex2f(rasterX - 3.3333333, posY + 24.4444444);
-	glVertex2f(rasterX - 2.2222222, posY + 13.3333333);
-	glVertex2f(rasterX, posY);
-	glVertex2f(rasterX, rasterY);
-	glVertex2f(rasterX - 1.1111111, posY - 13.3333333);
-	glVertex2f(rasterX - 3.3333333, posY - 24.4444444);
-	glVertex2f(rasterX - 6.6666666, posY - 31.1111111);
-	glVertex2f(rasterX - 11.1111112, posY - 35.5555556);
-	glVertex2f(posX + 11.1111112, posY - 35.5555556);
-	glVertex2f(posX + 6.6666666, posY - 31.1111111);
-	glVertex2f(posX + 3.3333333, posY - 24.4444444);
-	glVertex2f(posX + 1.1111111, posY - 13.3333333);
-	glVertex2f(posX, posY);
-	glVertex2f(posX, rasterY);
-	glVertex2f(posX + 1.1111111, posY + 13.3333333);
-	glVertex2f(posX + 3.3333333, posY + 24.4444444);
-	glVertex2f(posX + 6.6666666, posY + 31.1111111);
-	glVertex2f(posX + 11.1111112, posY + 35.5555556);
-	glEnd();
-	glBegin(GL_LINES);
-	glVertex2f(posX, rasterY);
-	glVertex2f(rasterX, rasterY);
-	glEnd();
-	//-------------------- END BOXES DE BESTSCORES ---------------------
-}
-
-//Desenha Melhores Scores - Parametros: bests
-void drawBestScores(vector<Score> bestScores, int decRasterY) {
+//Desenha Melhores Scores - Parametros: bests, deslocamento no Y
+void drawBestScoresMenu(vector<Score> bestScores, int decRasterY) {
 
 	int rasterX = 250;
 	int rasterY = 510;
 	pair<int, int> sizeScreen = EfeitoVisual::getInstance().sizeScreen();
-	glColor3f(0.1, 0.4, 0.9);
+	glColor3f(1, 0.84, 0);
 
 	for (int i = 0; i < bestScores.size(); i++) {
 		glRasterPos2f(rasterX - 50, rasterY);
 		string rank = std::to_string(i + 1) + " -  ";
-		glutBitmapCharacter(FONT_DEFAULT, rank[0]);
-		for (int letter = 1; letter < rank.length(); letter++) {
-			glutBitmapCharacter(FONT_DEFAULT, rank[letter]);
-		}
+		FuncoesAuxiliares::writeWord_BITMAP(rank, FONT_DEFAULT);
+
 
 		string name = bestScores[i].getPlayer();
 		glRasterPos2f(rasterX, rasterY);
-		for (int letter = 0; letter < name.length(); letter++) {
-			glutBitmapCharacter(FONT_DEFAULT, name[letter]);
-		}
+		FuncoesAuxiliares::writeWord_BITMAP(name, FONT_DEFAULT);
 
 		string score = std::to_string(bestScores[i].getScore());
 		if (EfeitoVisual::getInstance().isFullScreen()) {
@@ -191,9 +195,8 @@ void drawBestScores(vector<Score> bestScores, int decRasterY) {
 		else {
 			glRasterPos2f(rasterX + (sizeScreen.first / 2) + (290 - score.length() * 10), rasterY);
 		}
-		for (int letter = 0; letter < score.length(); letter++) {
-			glutBitmapCharacter(FONT_DEFAULT, score[letter]);
-		}
+		FuncoesAuxiliares::writeWord_BITMAP(score, FONT_DEFAULT);
+
 
 		float comple = (sizeScreen.first / 2) / 10;
 		string desloc = "_";
@@ -201,12 +204,75 @@ void drawBestScores(vector<Score> bestScores, int decRasterY) {
 			desloc += "_";
 		}
 		glRasterPos2f(rasterX, rasterY);
-		for (int letter = 0; letter < desloc.length(); letter++) {
-			glutBitmapCharacter(FONT_DEFAULT, desloc[letter]);
-		}
+		FuncoesAuxiliares::writeWord_BITMAP(desloc, FONT_DEFAULT);
 
 		rasterY -= decRasterY;
 	}
+
+}
+
+//Desenha a Opção do Menu - Parametro: 
+void drawOpcoesMenu() {
+
+	glColor3f(1, 1, 1);
+
+	glRasterPos2f(200, 500);
+	FuncoesAuxiliares::writeWord_BITMAP("O objetivo do jogo e terminar as 3 fases. Mate os 3 chefes e o maximo de inimigos possiveis!", FONT_DEFAULT);
+
+	glRasterPos2f(200, 460);
+	FuncoesAuxiliares::writeWord_BITMAP("A cada 100 mil pontos voce ganha uma vida.Caso perca todas, GAME OVER!", FONT_DEFAULT);
+
+	glRasterPos2f(220, 420);
+	FuncoesAuxiliares::writeWord_BITMAP("- Setas direcionais movimentam o Aviao", FONT_DEFAULT);
+
+	glColor3f(1, 0.27, 0);
+	glRasterPos2f(302.5, 250);
+	FuncoesAuxiliares::writeWord_BITMAP("<-", GLUT_BITMAP_TIMES_ROMAN_24);
+
+	glRasterPos2f(400, 250);
+	FuncoesAuxiliares::writeWord_BITMAP("v", GLUT_BITMAP_TIMES_ROMAN_24);
+
+	glRasterPos2f(472.5, 250);
+	FuncoesAuxiliares::writeWord_BITMAP("->", GLUT_BITMAP_TIMES_ROMAN_24);
+
+	glRasterPos2f(400, 327.5);
+	FuncoesAuxiliares::writeWord_BITMAP("^", GLUT_BITMAP_TIMES_ROMAN_24);
+
+	/*glRasterPos2f(205, 420);
+	FuncoesAuxiliares::writeWord_BITMAP("- Barra de espaco atira!", FONT_DEFAULT);
+
+	glRasterPos2f(205, 140);
+	FuncoesAuxiliares::writeWord_BITMAP("Barra de espaco", FONT_DEFAULT);
+*/
+
+	glColor3f(1, 0.27, 0);
+	/*--------------- BOXES SETAS -------------------*/
+	glBegin(GL_LINE_LOOP); //Seta esquerda
+	glVertex2i(280, 300);
+	glVertex2i(360, 300);
+	glVertex2i(360, 220);
+	glVertex2i(280, 220);
+	glEnd();
+	glBegin(GL_LINE_LOOP);
+	glVertex2i(365, 300); //Seta baixo
+	glVertex2i(445, 300);
+	glVertex2i(445, 220);
+	glVertex2i(365, 220);
+	glEnd();
+	glBegin(GL_LINE_LOOP);
+	glVertex2i(450, 300); //Seta direita
+	glVertex2i(530, 300);
+	glVertex2i(530, 220);
+	glVertex2i(450, 220);
+	glEnd();
+	glBegin(GL_LINE_LOOP);
+	glVertex2i(365, 385); //Seta cima
+	glVertex2i(445, 385);
+	glVertex2i(445, 305);
+	glVertex2i(365, 305);
+	glEnd();
+	/*-------------- END BOXES SETAS ------------------*/
+
 
 }
 
@@ -214,23 +280,29 @@ void drawBestScores(vector<Score> bestScores, int decRasterY) {
 
 void Menu::desenha() {
 
+
+	pair<int, int> sizeScreen = EfeitoVisual::getInstance().getOrtho2D();
+
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	// Limpa a janela de visualização com a cor de fundo especificada
 	glClear(GL_COLOR_BUFFER_BIT);
 
-
-	//Desenha Linha Superior
-	drawLine(1000);
+	//Desenha Linha Superior Y
+	drawLine(sizeScreen.second - 20, 'y');
+	//Desenha Linha Superior Y
+	drawLine(20, 'y');
 
 	if (optMelhores) {//Tela Melhores Pontuações
 		drawSquad(150, 600, "MELHORES PONTUACOES");
-		// 5 Valores - Passar 70 por parametro
-		// 9 Valores - Passar 35 por Parametro
-		drawBestScores(Score::getInstance().getBestScore(5), 70);
+		// 5 Valores - Passar 80 por parametro
+		// 7 Valores - Passar 55 por parametro
+		// 10 Valores - Passar 37 por Parametro
+		drawBestScoresMenu(Score::getInstance().getBestScore(7), 55);
 	}
 	else if (optOpcoes) {//Tela de Opções
 		drawSquad(150, 600, "OPCOES");
+		drawOpcoesMenu();
 	}
 	else if (optSair) {
 		exit(1);
@@ -241,10 +313,10 @@ void Menu::desenha() {
 		options[1] = "MELHORES PONTUACOES";
 		options[2] = "OPCOES";
 		options[3] = "SAIR";
-		drawOptionsMenu(options, 4);
+		drawOptionsMenu(options, 4, 450);
 
 		//Desenha Avião
-		Spitfire *spitfire = new Spitfire(500, 500, 0.025, nullptr);
+		Spitfire *spitfire = new Spitfire(500, 450, 0.025, nullptr);
 		glPushMatrix();
 		//Movendo aviao do menu
 		if (translacaoY < 900) {
@@ -310,45 +382,45 @@ void Menu::keyDown(unsigned char key, int x, int y)
 void Menu::keyUp(unsigned char key, int x, int y)
 {
 	switch (key) {
-	    case 'O'://Tela de Opções
-	    case 'o':
-		    optOpcoes = true;
-		    break;
+	case 'O'://Tela de Opções
+	case 'o':
+		optOpcoes = true;
+		break;
 
-	    case 13: //ENTER -> Iniciar Jogo
-		    switch (setaSelectOption)
-		    {
-		        case 1:
-			        optMelhores = true;
-			        break;
-		        case 2:
-			        optOpcoes = true;
-			        break;
-		        case 3:
-			        optSair = true;
-		        default:
-			        //optIniciar = true;
-			        break;
-		    }
-		    break;
+	case 13: //ENTER -> Iniciar Jogo
+		switch (setaSelectOption)
+		{
+		case 1:
+			optMelhores = true;
+			break;
+		case 2:
+			optOpcoes = true;
+			break;
+		case 3:
+			optSair = true;
+		default:
+			//optIniciar = true;
+			break;
+		}
+		break;
 
-	    case 'm': //Tela de Melhores Pontuações
-	    case 'M':
-		    optMelhores = true;
-            break;
+	case 'm': //Tela de Melhores Pontuações
+	case 'M':
+		optMelhores = true;
+		break;
 
-        case 8:
-            optMelhores = false;
-            optOpcoes = false;
-            break;
+	case 8:
+		optMelhores = false;
+		optOpcoes = false;
+		break;
 
-	    case 27: //Tecla ESC -> Sair do Jogo
-		    optSair = true;
-		    break;
+	case 27: //Tecla ESC -> Sair do Jogo
+		optSair = true;
+		break;
 
-	    case 'f':
-		    EfeitoVisual::getInstance().setFullScreen();
-		    break;
+	case 'f':
+		EfeitoVisual::getInstance().setFullScreen();
+		break;
 	}
 }
 
@@ -356,6 +428,7 @@ void Menu::specialKeyDown(int key, int x, int y)
 {
 
 }
+
 void Menu::specialKeyUp(int key, int x, int y)
 {
 	switch (key)
@@ -374,6 +447,7 @@ void Menu::specialKeyUp(int key, int x, int y)
 		break;
 	}
 }
+
 void Menu::mouse(int button, int state, int x, int y) {
 
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
@@ -405,7 +479,6 @@ void Menu::mouse(int button, int state, int x, int y) {
 		}
 	}
 }
-
 
 // Inicializa parâmetros de rendering
 void Menu::inicializa()

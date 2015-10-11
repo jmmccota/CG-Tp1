@@ -110,7 +110,7 @@ void FuncoesAuxiliares::bresenhamCircle(int x, int y, int a, int b)
 	xa = 0;
 	ya = asq * 2 * b;
 	thresh = asq / 4 - asq * b;
-    while (xa < ya) {
+	while (xa < ya) {
 		thresh += xa + bsq;
 		if (thresh >= 0) {
 			ya -= asq * 2;
@@ -130,7 +130,7 @@ void FuncoesAuxiliares::bresenhamCircle(int x, int y, int a, int b)
 	xa = bsq * 2 * a;
 	ya = 0;
 	thresh = bsq / 4 - bsq * a;
-    while (ya <= xa) {
+	while (ya <= xa) {
 		thresh += ya + asq;
 		if (thresh >= 0) {
 			xa -= bsq * 2;
@@ -145,4 +145,9 @@ void FuncoesAuxiliares::bresenhamCircle(int x, int y, int a, int b)
 		FuncoesAuxiliares::bresenham(x + wx, y + wy, x - wx, y + wy);
 	}
 }
- 
+
+void FuncoesAuxiliares::writeWord_BITMAP(string word, void(*fontStyle)) {
+	for (int i = 0; i < word.length(); i++) {
+		glutBitmapCharacter(fontStyle, word[i]);
+	}
+}
