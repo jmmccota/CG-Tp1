@@ -310,44 +310,45 @@ void Menu::keyDown(unsigned char key, int x, int y)
 void Menu::keyUp(unsigned char key, int x, int y)
 {
 	switch (key) {
-	case 'O'://Tela de Opções		
-		optOpcoes = true;
-		break;
-	case 'o': //Tela de Opções
-		optOpcoes = true;
-		break;
+	    case 'O'://Tela de Opções
+	    case 'o':
+		    optOpcoes = true;
+		    break;
 
-	case 13: //ENTER -> Iniciar Jogo
-		switch (setaSelectOption)
-		{
-		case 1:
-			optMelhores = true;
-			break;
-		case 2:
-			optOpcoes = true;
-			break;
-		case 3:
-			optSair = true;
-		default:
-			//optIniciar = true;
-			break;
-		}
-		break;
+	    case 13: //ENTER -> Iniciar Jogo
+		    switch (setaSelectOption)
+		    {
+		        case 1:
+			        optMelhores = true;
+			        break;
+		        case 2:
+			        optOpcoes = true;
+			        break;
+		        case 3:
+			        optSair = true;
+		        default:
+			        //optIniciar = true;
+			        break;
+		    }
+		    break;
 
-	case 'm': //Tela de Melhores Pontuações
-		optMelhores = true;
-		break;
+	    case 'm': //Tela de Melhores Pontuações
+	    case 'M':
+		    optMelhores = true;
+            break;
 
-	case 'M': //Tela de Melhores Pontuações
-		optMelhores = true;
-		break;
+        case 8:
+            optMelhores = false;
+            optOpcoes = false;
+            break;
 
-	case 27: //Tecla ESC -> Sair do Jogo
-		optSair = true;
-		break;
-	case 'f':
-		EfeitoVisual::getInstance().setFullScreen();
-		break;
+	    case 27: //Tecla ESC -> Sair do Jogo
+		    optSair = true;
+		    break;
+
+	    case 'f':
+		    EfeitoVisual::getInstance().setFullScreen();
+		    break;
 	}
 }
 
