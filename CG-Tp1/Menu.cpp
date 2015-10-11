@@ -288,9 +288,29 @@ void Menu::atualiza(int value) {
 void Menu::keyDown(unsigned char key, int x, int y)
 {
 	switch (key) {
+	case 'O'://Tela de Opções		
+		optOpcoes = true;
+		break;
+	case 'o': //Tela de Opções
+		optOpcoes = true;
+		break;
+
+	case 13: //ENTER -> Iniciar Jogo
+		optIniciar = true;
+		break;
+
+	case 'm': //Tela de Melhores Pontuações
+		optMelhores = true;
+		break;
+
+	case 'M': //Tela de Melhores Pontuações
+		optMelhores = true;
+		break;
+
 	case 27: //Tecla ESC -> Sair do Jogo
 		optSair = true;
 		break;
+
 	case 'f':
 		EfeitoVisual::getInstance().setFullScreen();
 		break;
@@ -336,6 +356,6 @@ void Menu::mouse(int button, int state, int x, int y) {
 // Inicializa parâmetros de rendering
 void Menu::inicializa()
 {
-	//EfeitoSonoro::getInstance().playMainTheme();
+	EfeitoSonoro::getInstance().playMainTheme();
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
