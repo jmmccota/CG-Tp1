@@ -277,6 +277,16 @@ void drawSquad(float posX, float posY, string titulo) {
 	glVertex2f(posX, rasterY);
 	glVertex2f(rasterX, rasterY);
 	glEnd();
+	glColor3f(1, 0.27, 0);
+	glBegin(GL_LINE_LOOP);
+	glVertex2i(200,630);
+	glVertex2i(175, 600);
+	glVertex2i(200, 570);
+	glVertex2i(200, 590);
+	glVertex2i(245, 590);
+	glVertex2i(245, 610);
+	glVertex2i(200, 610);
+	glEnd();
 	//-------------------- END BOXES DE BESTSCORES ---------------------
 }
 
@@ -733,11 +743,25 @@ void Menu::mouse(int button, int state, int x, int y) {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
 		cout << "Position: (" << x << "," << y << ")" << endl;
 
+		int x2, y2;
+		pair<int, int> ortho = EfeitoVisual::getInstance().getOrtho2D();
+		y2 = -y + ortho.second;
+		x2 = 1920 * x / ortho.first;
+		
+		cout << "Position2: (" << x2 << "," << y2 << ")" << endl;
 		if (optMelhores) {
-
+			if (x2>175 && x2<245) {
+				if (y2>570 && y2< 630) {
+					optMelhores = false;
+				}
+			}			
 		}
 		else if (optOpcoes) {
-
+			if (x2>175 && x2<245) {
+				if (y2>570 && y2< 630) {
+					optOpcoes = false;
+				}
+			}
 		}
 		else {
 			for (int i = 0; i < vetPosMenuElements.size(); i++) {
