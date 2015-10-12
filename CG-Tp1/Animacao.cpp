@@ -150,10 +150,10 @@ void Animacao::terminou()
 
 void Animacao::atualiza(int value)
 {
+    if (value >= 300)
+        pularAnimacao = true;
 	//Testa se a fase acabou
-	terminou();
-
-
+    terminou();
 }
 
 void Animacao::mouse(int button, int state, int x, int y)

@@ -90,6 +90,9 @@ void Jogo::timer(int value)
 
 void Jogo::inicializa(int fase)
 {
+    // Inicializa o sistema de coordenadas
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
 	glutMouseFunc(Jogo::mouse);
 	glutKeyboardFunc(Jogo::keyDown);
 	glutKeyboardUpFunc(Jogo::keyUp);

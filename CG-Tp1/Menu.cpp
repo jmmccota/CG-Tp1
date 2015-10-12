@@ -558,6 +558,8 @@ void drawOpcoesMenu() {
 
 void Menu::desenha() {
 
+    cout << "desenha";
+
 	pair<int, int> sizeScreen = EfeitoVisual::getInstance().getOrtho2D();
 
 	glMatrixMode(GL_MODELVIEW);
