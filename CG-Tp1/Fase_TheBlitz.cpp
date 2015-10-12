@@ -1,5 +1,8 @@
 #include "Fase_TheBlitz.hpp"
 
+// pontos do efeito de agua
+GLfloat Pontos[16][2];
+
 Fase_TheBlitz::Fase_TheBlitz()
 {
 }
@@ -16,14 +19,66 @@ void Fase_TheBlitz::desenhaBackground()
 {
 }
 
+
+void desenha2(float translacaoX, float translacaoY, float escala){
+	glPushMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluOrtho2D(-100, 100, -100, 100);
+	glScalef(escala, escala, 0);
+	glTranslatef(translacaoX, translacaoY, 0);
+	glColor3f(1.0, 1.0, 1.0);
+	glBegin(GL_LINES);
+	glVertex2i(-10, 0);
+	glVertex2i(0, 10);
+	glVertex2i(0, 10);
+	glVertex2i(10, 0);
+	glVertex2i(10, 0);
+	glVertex2i(20, 10);
+	glEnd();
+	glPopMatrix();
+	glFlush();
+}
+
+// Função callback chamada para fazer o desenho
+void Desenha(void)
+{
+	glClear(GL_COLOR_BUFFER_BIT);
+	glClearColor(0.1137, 0.8627, 0.8902, 1.0);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	for (int i = 0; i < 16; i++){
+		desenha2(Pontos[i][0], Pontos[i][1], 0.25);
+	}
+
+
+	// Executa os comandos OpenGL
+	glutSwapBuffers();
+}
+
 void Fase_TheBlitz::desenha()
 {
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	// Limpa a janela de visualização com a cor de fundo especificada
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	glutSwapBuffers();
+	Pontos[0][0] = -265;
+	Pontos[0][1] = 220;
+	Pontos[1][0] = 0;
+	Pontos[1][1] = 150;
+	Pontos[2][0] = 225;
+	Pontos[2][1] = 0;
+	Pontos[3][0] = 265;
+	Pontos[3][1] = 220;
+	Pontos[4][0] = -225;
+	Pontos[4][1] = 0;
+	Pontos[5][0] = -265;
+	Pontos[5][1] = -220;
+	Pontos[6][0] = 0;
+	Pontos[6][1] = -150;
+	Pontos[7][0] = 265;
+	Pontos[7][1] = -220;
+	for (int i = 8; i < 16; i++){
+		Pontos[i][0] = Pontos[i - 8][0];
+		Pontos[i][1] = Pontos[i - 8][1] + 570;
+	}
+	glutDisplayFunc(Desenha);
 }
 
 void Fase_TheBlitz::terminou()
@@ -32,6 +87,14 @@ void Fase_TheBlitz::terminou()
 
 void Fase_TheBlitz::atualiza(int value)
 {
+	for (int i = 0; i < 16; i++){
+		Pontos[i][1] -= 2;
+	}
+	for (int i = 0; i < 16; i++){
+		if (Pontos[i][1] < -400){
+			Pontos[i][1] = 600;
+		}
+	}
 }
 
 void Fase_TheBlitz::mouse(int button, int state, int x, int y)
