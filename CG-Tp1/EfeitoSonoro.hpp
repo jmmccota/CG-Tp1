@@ -36,6 +36,7 @@ private:
 	EfeitoSonoro();
 	EfeitoSonoro(EfeitoSonoro const&);
 	void operator=(EfeitoSonoro const&);
+	void createObjectSystem();
 
 private:
 	//Verificação de erros

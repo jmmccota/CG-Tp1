@@ -9,8 +9,9 @@ using namespace std;
 
 class Fase_TheBlitz : public Fase
 {
-public:
+protected:
 
+public:
 	Fase_TheBlitz();
 	~Fase_TheBlitz();
 
