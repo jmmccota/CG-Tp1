@@ -9,24 +9,20 @@ void EfeitoSonoro::ERRCHECK(FMOD_RESULT result)
 	}
 }
 
-EfeitoSonoro::EfeitoSonoro()
-{
+void EfeitoSonoro::createObjectSystem() {
 	try
 	{
 		/*
 		Create a System object and initialize.
 		*/
 		result = FMOD::System_Create(&system);
-		ERRCHECK(result);
-
 		result = system->getVersion(&version);
-		ERRCHECK(result);
-
+		
 		if (version < FMOD_VERSION)
 		{
 			throw;
 		}
-		result = system->init(32, FMOD_INIT_NORMAL, 0);
+		result = system->init(10, FMOD_INIT_NORMAL, 0);
 		ERRCHECK(result);
 	}
 	catch (const std::exception&)
@@ -37,18 +33,21 @@ EfeitoSonoro::EfeitoSonoro()
 }
 
 
+EfeitoSonoro::EfeitoSonoro()
+{
+	createObjectSystem();
+}
+
+
 EfeitoSonoro::~EfeitoSonoro()
 {
 
 }
 
-
 void EfeitoSonoro::playSong(char *file, bool loop) {
 
 	result = system->createSound(file, FMOD_HARDWARE, 0, &sound);
-	ERRCHECK(result);
 	result = system->playSound(FMOD_CHANNEL_FREE, sound, false, &channel);
-	ERRCHECK(result);
 
 	if (loop) {
 		channel->setMode(FMOD_LOOP_NORMAL);
@@ -97,8 +96,10 @@ void EfeitoSonoro::playEnterMenuEffect()
 // ------------------------------------------------------------
 
 void EfeitoSonoro::stopSong() {
-	result = sound->release();
-	ERRCHECK(result);
+	channel->stop();
+	sound->release();
+	system->release();
+	createObjectSystem();	
 }
 
 FMOD::Sound EfeitoSonoro::getSound() {
