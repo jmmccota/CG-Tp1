@@ -265,7 +265,6 @@ void Menu::terminou()
 {
 	if (optSair)
 	{
-		cout << "terminou\n";
 		Jogo::getInstance().setProxFase(-1);
 		Jogo::getInstance().proximaFase();
 	}
@@ -360,18 +359,18 @@ void Menu::specialKeyUp(int key, int x, int y)
 {
 	switch (key)
 	{
-	case GLUT_KEY_UP: //SETA CIMA
-		if (setaSelectOption > 0) {
-			setaSelectOption--;
-		}
-		break;
-	case GLUT_KEY_DOWN: //SETA BAIXO
-		if (setaSelectOption < 3) {
-			setaSelectOption++;
-		}
-		break;
-	default:
-		break;
+	    case GLUT_KEY_UP: //SETA CIMA
+		    if (setaSelectOption > 0) {
+			    setaSelectOption--;
+		    }
+		    break;
+	    case GLUT_KEY_DOWN: //SETA BAIXO
+		    if (setaSelectOption < 3) {
+			    setaSelectOption++;
+		    }
+		    break;
+	    default:
+		    break;
 	}
 }
 void Menu::mouse(int button, int state, int x, int y) {
