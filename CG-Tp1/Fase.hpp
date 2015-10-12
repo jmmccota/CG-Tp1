@@ -85,7 +85,7 @@ class Fase
         virtual void inicializa() = 0;
 
         //Insere um novo projetil na fase
-        void novoProjetil(Projetil *p);
+        void novoProjetil(Projetil *p);*/
 };
 
 
