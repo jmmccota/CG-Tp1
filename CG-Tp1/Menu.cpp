@@ -217,16 +217,24 @@ void drawBestScoresMenu(vector<Score> bestScores, int decRasterY) {
 void teclasEspeciais(GLint tecla, GLint x, GLint y){
 	switch (tecla){
 	case GLUT_KEY_UP:
-		translacaoOpcoesY+=4;
+		if (translacaoOpcoesY < 100){
+			translacaoOpcoesY += 4;
+		}
 		break;
 	case GLUT_KEY_DOWN:
-		translacaoOpcoesY-=4;
+		if (translacaoOpcoesY > -100){
+			translacaoOpcoesY -= 4;
+		}
 		break;
 	case GLUT_KEY_LEFT:
-		translacaoOpcoesX-=4;
+		if (translacaoOpcoesX > -100){
+			translacaoOpcoesX -= 4;
+		}
 		break;
 	case GLUT_KEY_RIGHT:
-		translacaoOpcoesX+=4;
+		if (translacaoOpcoesX < 100){
+			translacaoOpcoesX += 4;
+		}
 		break;
 	}
 }
@@ -311,9 +319,11 @@ void drawOpcoesMenu() {
 	/*-------------- END COMANDOS SETAS ------------------*/
 	glutSpecialFunc(teclasEspeciais);
 	glPushMatrix();
+	TiroSimples *tiro = new TiroSimples(1300, 360, 1);
 	Spitfire *spitfire = new Spitfire(1400, 360, 0.015, nullptr);
 	glTranslatef(translacaoOpcoesX, translacaoOpcoesY, 0);
 	spitfire->desenha();
+	tiro->desenha();
 	glPopMatrix();
 }
 
