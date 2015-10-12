@@ -92,6 +92,7 @@ EfeitoVisual& EfeitoVisual::getInstance()
 	return singleton;
 }
 
+
 //#pragma region "Animação Inicial"
 //GLfloat escala = 1;
 //GLfloat rotacaoX1 = 0;

@@ -71,6 +71,12 @@ class EfeitoVisual
 
         //Reajusta o tamanho da tela
         void static resize(GLsizei w, GLsizei h);
+
+		//Criar uma nuvem qualquer
+		void desenhaNuvem();
+
+		//Cria Estrelas
+		void desenhaEstrelas(int quantEstrelas);
 };
 #endif
  

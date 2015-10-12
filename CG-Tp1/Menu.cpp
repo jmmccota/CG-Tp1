@@ -214,23 +214,6 @@ void drawBestScoresMenu(vector<Score> bestScores, int decRasterY) {
 
 }
 
-void teclasEspeciais(GLint tecla, GLint x, GLint y){
-	switch (tecla){
-	case GLUT_KEY_UP:
-		translacaoOpcoesY+=4;
-		break;
-	case GLUT_KEY_DOWN:
-		translacaoOpcoesY-=4;
-		break;
-	case GLUT_KEY_LEFT:
-		translacaoOpcoesX-=4;
-		break;
-	case GLUT_KEY_RIGHT:
-		translacaoOpcoesX+=4;
-		break;
-	}
-}
-
 //Desenha a Opção do Menu - Parametro: 
 void drawOpcoesMenu() {
 
@@ -274,7 +257,6 @@ void drawOpcoesMenu() {
 	glRasterPos2f(205, 140);
 	FuncoesAuxiliares::writeWord_BITMAP("Barra de espaco", FONT_DEFAULT);
 */
-
 	glColor3f(1, 0.27, 0);
 	/*--------------- BOXES COMANDOS -------------------*/
 	glBegin(GL_LINE_LOOP);
@@ -309,7 +291,6 @@ void drawOpcoesMenu() {
 	glEnd();
 
 	/*-------------- END COMANDOS SETAS ------------------*/
-	glutSpecialFunc(teclasEspeciais);
 	glPushMatrix();
 	Spitfire *spitfire = new Spitfire(1400, 360, 0.015, nullptr);
 	glTranslatef(translacaoOpcoesX, translacaoOpcoesY, 0);
@@ -319,8 +300,8 @@ void drawOpcoesMenu() {
 
 #pragma endregion
 
+bool limitX = false;
 void Menu::desenha() {
-
 
 	pair<int, int> sizeScreen = EfeitoVisual::getInstance().getOrtho2D();
 
@@ -357,18 +338,28 @@ void Menu::desenha() {
 		drawOptionsMenu(options, 4, 450);
 
 		//Desenha Avião
-		Spitfire *spitfire = new Spitfire(500, 450, 0.025, nullptr);
+		Spitfire *spitfire = new Spitfire(300, 380, 0.025, nullptr);
 		glPushMatrix();
+
 		//Movendo aviao do menu
-		if (translacaoY < 900) {
-			translacaoY += 8;
+		if (translacaoY < 500 && !limitX) {
+			translacaoY += 4;
+			if (translacaoY >= 500) {
+				limitX = true;
+			}
+			
 		}
-		else {
-			translacaoY = -700;
+		else if (limitX) {
+			translacaoY -= 4;
+			if (translacaoY <= 0) {
+				limitX = false;
+			}
 		}
-		glTranslatef(0, translacaoY, 0);
+		glTranslatef(translacaoY, 0, 0);
 		spitfire->desenha();
 		glPopMatrix();
+
+		
 	}
 
 	glutSwapBuffers();
@@ -417,7 +408,6 @@ void Menu::atualiza(int value) {
 
 void Menu::keyDown(unsigned char key, int x, int y)
 {
-
 }
 
 void Menu::keyUp(unsigned char key, int x, int y)
@@ -467,7 +457,22 @@ void Menu::keyUp(unsigned char key, int x, int y)
 
 void Menu::specialKeyDown(int key, int x, int y)
 {
-
+	if (optOpcoes) {
+		switch (key) {
+		case GLUT_KEY_UP:
+			translacaoOpcoesY += 20;
+			break;
+		case GLUT_KEY_DOWN:
+			translacaoOpcoesY -= 20;
+			break;
+		case GLUT_KEY_LEFT:
+			translacaoOpcoesX -= 20;
+			break;
+		case GLUT_KEY_RIGHT:
+			translacaoOpcoesX += 20;
+			break;
+		}
+	}
 }
 
 void Menu::specialKeyUp(int key, int x, int y)
@@ -536,6 +541,10 @@ void Menu::mouse(int button, int state, int x, int y) {
 // Inicializa parâmetros de rendering
 void Menu::inicializa()
 {
-	//EfeitoSonoro::getInstance().playMainTheme();
+	//Transparencia
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//-------------
+	EfeitoSonoro::getInstance().playMainTheme();
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
