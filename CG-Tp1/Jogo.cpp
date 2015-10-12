@@ -1,6 +1,5 @@
 #include "Jogo.hpp"
 
-
 Jogo::Jogo()
 {
 }
@@ -26,6 +25,9 @@ void Jogo::run()
 
 	fases.push_back(new Animacao());
 	fases.push_back(new Menu());
+	fases.push_back(new Fase_TheBlitz());
+	fases.push_back(new Fase_TheBatlleOfBritain());
+	fases.push_back(new Fase_TheVengeanceWeapon());
 	proxFase = 0;
 	proximaFase();
 
@@ -90,9 +92,9 @@ void Jogo::timer(int value)
 
 void Jogo::inicializa(int fase)
 {
-    // Inicializa o sistema de coordenadas
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
+	// Inicializa o sistema de coordenadas
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
 	glutMouseFunc(Jogo::mouse);
 	glutKeyboardFunc(Jogo::keyDown);
 	glutKeyboardUpFunc(Jogo::keyUp);
@@ -105,8 +107,8 @@ void Jogo::inicializa(int fase)
 
 void Jogo::proximaFase()
 {
-	if (proxFase != -1)
-		inicializa(proxFase);
+	if (proxFase != -1){
+		inicializa(proxFase);}
 	else
 		fimJogo();
 }

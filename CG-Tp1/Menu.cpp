@@ -558,8 +558,6 @@ void drawOpcoesMenu() {
 
 void Menu::desenha() {
 
-    cout << "desenha";
-
 	pair<int, int> sizeScreen = EfeitoVisual::getInstance().getOrtho2D();
 
 	glMatrixMode(GL_MODELVIEW);
@@ -629,7 +627,8 @@ void Menu::terminou()
 	}
 	else if (optIniciar)
 	{
-		Jogo::getInstance().setProxFase(1);
+		EfeitoSonoro::getInstance().stopSong();
+		Jogo::getInstance().setProxFase(2);
 		Jogo::getInstance().proximaFase();
 	}
 }
@@ -699,8 +698,8 @@ void Menu::keyUp(unsigned char key, int x, int y)
 			case 3:
 				optSair = true;
 			default:
-				//EfeitoSonoro::getInstance().playEnterMenuEffect();
-				//optIniciar = true;
+				EfeitoSonoro::getInstance().playEnterMenuEffect();
+				optIniciar = true;
 				break;
 			}
 			break;
@@ -812,6 +811,9 @@ void Menu::mouse(int button, int state, int x, int y) {
 					EfeitoSonoro::getInstance().playEnterMenuEffect();
 					switch (i)
 					{
+					case 0:
+						optIniciar = true;
+						break;
 					case 1:
 						optMelhores = true;
 						break;

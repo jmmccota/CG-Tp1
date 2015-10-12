@@ -88,11 +88,12 @@ class Fase
         void novoProjetil(Projetil *p);
 };
 
-
 //Incluir todas as fases do jogo
 #include "Animacao.hpp"
 #include "Menu.hpp"
-
+#include "Fase_TheBlitz.hpp"
+#include "Fase_TheBatlleOfBritain.hpp"
+#include "Fase_TheVengeanceWeapon.hpp"
 
 #endif
  

@@ -1,11 +1,5 @@
 #include "Animacao.hpp"
 
-void Animacao::inicializa()
-{
-	EfeitoSonoro::getInstance().playOpenTheme();
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-}
-
 Animacao::Animacao()
 {
 }
@@ -140,9 +134,7 @@ void Animacao::terminou()
 {
 	if (pularAnimacao)
 	{
-		glClear(GL_COLOR_BUFFER_BIT);
 		EfeitoSonoro::getInstance().stopSong();
-		cout << "Menu Iniciado\n";
 		Jogo::getInstance().setProxFase(1);
 		Jogo::getInstance().proximaFase();
 	}
@@ -150,10 +142,10 @@ void Animacao::terminou()
 
 void Animacao::atualiza(int value)
 {
-    if (value >= 300)
-        pularAnimacao = true;
+	if (value >= 300)
+		pularAnimacao = true;
 	//Testa se a fase acabou
-    terminou();
+	terminou();
 }
 
 void Animacao::mouse(int button, int state, int x, int y)
@@ -181,4 +173,10 @@ void Animacao::specialKeyDown(int key, int x, int y)
 
 void Animacao::specialKeyUp(int key, int x, int y)
 {
+}
+
+void Animacao::inicializa()
+{
+	EfeitoSonoro::getInstance().playOpenTheme();
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
