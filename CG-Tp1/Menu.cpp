@@ -56,12 +56,13 @@ void drawLine(float pos, char eixo) {
 		glEnd();
 	}
 }
+
 void drawTitulo() {
 	glColor3f(0, 1.0, 1.0);
 	int x1, y1;
 	//J
 	x1 = 50;
-	y1 = 180;
+	y1 = 100;
 	//j
 	FuncoesAuxiliares::bresenham(1170 + x1, 750 + y1 + 80, 1170 + x1, 660 + y1); //  |
 	FuncoesAuxiliares::bresenham(1120, 660 + y1, 1170 + x1, 660 + y1); // _
@@ -150,7 +151,7 @@ void drawTitulo() {
 	FuncoesAuxiliares::bresenham(1470 + x1, 683 + y1 + 15, 1495 + x1 + 15, 683 + y1 + 15);
 	//fly	
 	//f
-	int y2 = 80;
+	int y2 = -40;
 	int x3 = 40;
 	FuncoesAuxiliares::bresenham(1330 + x3, 635 + y2, 1330 + x3, 730 + y2);
 	FuncoesAuxiliares::bresenham(1330 + x3, 730 + y2, 1390 + x3, 730 + y2);
@@ -181,53 +182,106 @@ void drawTitulo() {
 	FuncoesAuxiliares::bresenham(1368 + x2 + x3, 698 + y2, 1380 + x2 + x3, 730 + y2);
 	//circulo?????????
 	glColor3f(1.0, 1.0, 0.0); //amarelo
-	FuncoesAuxiliares::bresenhamCircle(1460, 600, 90, 90);
+	FuncoesAuxiliares::bresenhamCircle(1700, 650, 90, 90);
 	glColor3f(0, 0.0, 0.8);
-	FuncoesAuxiliares::bresenhamCircle(1460, 600, 80, 80);
+	FuncoesAuxiliares::bresenhamCircle(1700, 650, 80, 80);
 	glColor3f(1.0, 1.0, 1.0);
-	FuncoesAuxiliares::bresenhamCircle(1460, 600, 40, 40);
+	FuncoesAuxiliares::bresenhamCircle(1700, 650, 40, 40);
 	glColor3f(1.0, 0.0, 0.0);
-	FuncoesAuxiliares::bresenhamCircle(1460, 600, 30, 30);
+	FuncoesAuxiliares::bresenhamCircle(1700, 650, 30, 30);
 
 	//katana
-	int xk = 220;
+	int xk = 460;
+	int yk = 50;
 	glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_LINE_LOOP);
-	glVertex2i(1150 + xk, 518);
-	glVertex2i(1160 + xk, 498);
-	glVertex2i(1190 + xk, 528);
-	glVertex2i(1180 + xk, 548);
+	glVertex2i(1150 + xk, yk + 518);
+	glVertex2i(1160 + xk, yk + 498);
+	glVertex2i(1190 + xk, yk + 528);
+	glVertex2i(1180 + xk, yk + 548);
 	glEnd();
 	glColor3f(0.0, 0.0, 0.0);
 	glBegin(GL_QUADS);
-	glVertex2i(1151 + xk, 518);
-	glVertex2i(1159 + xk, 498);
-	glVertex2i(1189 + xk, 528);
-	glVertex2i(1181 + xk, 548);
+	glVertex2i(1151 + xk, yk + 518);
+	glVertex2i(1159 + xk, yk + 498);
+	glVertex2i(1189 + xk, yk + 528);
+	glVertex2i(1181 + xk, yk + 548);
 	glEnd();
 	glColor3f(1.0, 1.0, 1.0);
-	FuncoesAuxiliares::bresenhamCircle(1162 + xk, 515, 2, 2);
-	FuncoesAuxiliares::bresenhamCircle(1177 + xk, 530, 2, 2);
+	FuncoesAuxiliares::bresenhamCircle(1162 + xk, yk + 515, 2, 2);
+	FuncoesAuxiliares::bresenhamCircle(1177 + xk, yk + 530, 2, 2);
 	glBegin(GL_LINE_LOOP);
-	glVertex2i(1197 + xk, 521);
-	glVertex2i(1177 + xk, 558);
-	glVertex2i(1184 + xk, 565);
-	glVertex2i(1205 + xk, 525);
+	glVertex2i(1197 + xk, yk + 521);
+	glVertex2i(1177 + xk, yk + 558);
+	glVertex2i(1184 + xk, yk + 565);
+	glVertex2i(1205 + xk, yk + 525);
 	glEnd();
 	glColor3f(0.0, 0.0, 0.0);
 	glBegin(GL_QUADS);
-	glVertex2i(1196 + xk, 521);
-	glVertex2i(1178 + xk, 558);
-	glVertex2i(1185 + xk, 565);
-	glVertex2i(1204 + xk, 525);
+	glVertex2i(1196 + xk, yk + 521);
+	glVertex2i(1178 + xk, yk + 558);
+	glVertex2i(1185 + xk, yk + 565);
+	glVertex2i(1204 + xk, yk + 525);
 	glEnd();
 	glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_QUADS);
-	glVertex2i(1198 + xk, 537);
-	glVertex2i(1340 + xk, 669);
-	glVertex2i(1340 + xk, 695);
-	glVertex2i(1189 + xk, 552);
+	glVertex2i(1198 + xk, yk + 537);
+	glVertex2i(1340 + xk, yk + 669);
+	glVertex2i(1340 + xk, yk + 695);
+	glVertex2i(1189 + xk, yk + 552);
 
+	glEnd();
+
+
+	//circulo?????????
+	glColor3f(1.0, 1.0, 0.0); //amarelo
+	FuncoesAuxiliares::bresenhamCircle(1200, 650, 90, 90);
+	glColor3f(0, 0.0, 0.8);
+	FuncoesAuxiliares::bresenhamCircle(1200, 650, 80, 80);
+	glColor3f(1.0, 1.0, 1.0);
+	FuncoesAuxiliares::bresenhamCircle(1200, 650, 40, 40);
+	glColor3f(1.0, 0.0, 0.0);
+	FuncoesAuxiliares::bresenhamCircle(1200, 650, 30, 30);
+
+	//katana
+	int xk2 = -50;
+	int yk2= 50;
+	glColor3f(1.0, 1.0, 1.0);
+	glBegin(GL_LINE_LOOP);
+	glVertex2i(1150 + xk2, yk2 + 518);
+	glVertex2i(1160 + xk2, yk2 + 498);
+	glVertex2i(1190 + xk2, yk2 + 528);
+	glVertex2i(1180 + xk2, yk2 + 548);
+	glEnd();
+	glColor3f(0.0, 0.0, 0.0);
+	glBegin(GL_QUADS);
+	glVertex2i(1151 + xk2, yk2 + 518);
+	glVertex2i(1159 + xk2, yk2 + 498);
+	glVertex2i(1189 + xk2, yk2 + 528);
+	glVertex2i(1181 + xk2, yk2 + 548);
+	glEnd();
+	glColor3f(1.0, 1.0, 1.0);
+	FuncoesAuxiliares::bresenhamCircle(1162 + xk2, yk2 + 515, 2, 2);
+	FuncoesAuxiliares::bresenhamCircle(1177 + xk2, yk2 + 530, 2, 2);
+	glBegin(GL_LINE_LOOP);
+	glVertex2i(1197 + xk2, yk2 + 521);
+	glVertex2i(1177 + xk2, yk2 + 558);
+	glVertex2i(1184 + xk2, yk2 + 565);
+	glVertex2i(1205 + xk2, yk2 + 525);
+	glEnd();
+	glColor3f(0.0, 0.0, 0.0);
+	glBegin(GL_QUADS);
+	glVertex2i(1196 + xk2, yk2 + 521);
+	glVertex2i(1178 + xk2, yk2 + 558);
+	glVertex2i(1185 + xk2, yk2 + 565);
+	glVertex2i(1204 + xk2, yk2 + 525);
+	glEnd();
+	glColor3f(1.0, 1.0, 1.0);
+	glBegin(GL_QUADS);
+	glVertex2i(1198 + xk2, yk2 + 537);
+	glVertex2i(1340 + xk2, yk2 + 669);
+	glVertex2i(1340 + xk2, yk2 + 695);
+	glVertex2i(1189 + xk2, yk2 + 552);
 	glEnd();
 }
 
@@ -502,9 +556,9 @@ void Menu::desenha() {
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	//Desenha Linha Superior Y
-	drawLine(sizeScreen.second - 20, 'y');
-	//Desenha Linha Superior Y
-	drawLine(20, 'y');
+	drawLine(sizeScreen.second - 40, 'y');
+	//Desenha Linha Inferior Y
+	drawLine(40, 'y');
 
 	if (optMelhores) {//Tela Melhores Pontuações
 		drawSquad(150, 600, "MELHORES PONTUACOES");
@@ -772,6 +826,6 @@ void Menu::inicializa()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	//-------------
-	EfeitoSonoro::getInstance().playMainTheme();
+	//EfeitoSonoro::getInstance().playMainTheme();
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
