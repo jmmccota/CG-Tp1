@@ -90,6 +90,7 @@ class Fase
 
 
 //Incluir todas as fases do jogo
+#include "Animacao.hpp"
 #include "Menu.hpp"
 
 

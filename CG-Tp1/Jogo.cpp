@@ -24,6 +24,7 @@ void Jogo::run()
 	glutCreateWindow("Jiraya's Fly");
 	glutReshapeFunc(EfeitoVisual::resize);
 
+	fases.push_back(new Animacao());
 	fases.push_back(new Menu());
 	proxFase = 0;
 	proximaFase();
@@ -53,6 +54,16 @@ void Jogo::keyDown(unsigned char key, int x, int y)
 }
 void Jogo::keyUp(unsigned char key, int x, int y)
 {
+	switch (key)
+	{
+	case 'f':
+		EfeitoVisual::getInstance().setFullScreen();
+		break;
+	case 27: //Tecla ESC -> Sair do Jogo
+		exit(0);
+		break;
+	}
+
 	Jogo::getInstance().fases[Jogo::getInstance().proxFase]->keyUp(key, x, y);
 }
 
