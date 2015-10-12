@@ -58,89 +58,177 @@ void drawLine(float pos, char eixo) {
 }
 void drawTitulo() {
 	glColor3f(0, 1.0, 1.0);
+	int x1, y1;
 	//J
-	FuncoesAuxiliares::bresenham(1170, 750, 1170, 660);
-	FuncoesAuxiliares::bresenham(1120, 660, 1170, 660);
-	FuncoesAuxiliares::bresenham(1120, 660, 1120, 685);
-	FuncoesAuxiliares::bresenham(1120, 685, 1134, 685);
-	FuncoesAuxiliares::bresenham(1134, 685, 1134, 674);
-	FuncoesAuxiliares::bresenham(1134, 674, 1155, 674);
-	FuncoesAuxiliares::bresenham(1155, 674, 1155, 750);
-	FuncoesAuxiliares::bresenham(1155, 750, 1170, 750);
+	x1 = 50;
+	y1 = 180;
+	//j
+	FuncoesAuxiliares::bresenham(1170 + x1, 750 + y1 + 80, 1170 + x1, 660 + y1); //  |
+	FuncoesAuxiliares::bresenham(1120, 660 + y1, 1170 + x1, 660 + y1); // _
+	FuncoesAuxiliares::bresenham(1120, 660 + y1, 1120, 698 + y1); //i 
+	FuncoesAuxiliares::bresenham(1120, 698 + y1, 1150, 698 + y1);//-
+	FuncoesAuxiliares::bresenham(1150, 698 + y1, 1150, 680 + y1);//'
+	FuncoesAuxiliares::bresenham(1150, 680 + y1, 1142 + x1, 680 + y1);//---
+	FuncoesAuxiliares::bresenham(1142 + x1, 680 + y1, 1142 + x1, 750 + y1 + 80);// I
+	FuncoesAuxiliares::bresenham(1142 + x1, 750 + y1 + 80, 1170 + x1, 750 + y1 + 80); //-
 	//I
-	FuncoesAuxiliares::bresenham(1185, 750, 1185, 660);
-	FuncoesAuxiliares::bresenham(1200, 660, 1185, 660);
-	FuncoesAuxiliares::bresenham(1200, 660, 1200, 750);
-	FuncoesAuxiliares::bresenham(1200, 750, 1185, 750);
+	x1 = 50;
+	FuncoesAuxiliares::bresenham(1185 + x1, 750 + y1 + 80, 1185 + x1, 660 + y1);
+	FuncoesAuxiliares::bresenham(1215 + x1, 660 + y1, 1185 + x1, 660 + y1);
+	FuncoesAuxiliares::bresenham(1215 + x1, 660 + y1, 1215 + x1, 750 + y1 + 80);
+	FuncoesAuxiliares::bresenham(1215 + x1, 750 + y1 + 80, 1185 + x1, 750 + y1 + 80);
 	//R
-	FuncoesAuxiliares::bresenham(1215, 750, 1215, 660);
-	FuncoesAuxiliares::bresenham(1215, 750, 1265, 750);
-	FuncoesAuxiliares::bresenham(1265, 750, 1265, 700);
-	FuncoesAuxiliares::bresenham(1265, 700, 1227, 700);
-	FuncoesAuxiliares::bresenham(1227, 700, 1265, 660);
-	FuncoesAuxiliares::bresenham(1265, 660, 1250, 660);
-	FuncoesAuxiliares::bresenham(1227, 688, 1250, 660);
-	FuncoesAuxiliares::bresenham(1227, 688, 1227, 660);
-	FuncoesAuxiliares::bresenham(1227, 660, 1215, 660);
-	FuncoesAuxiliares::bresenham(1232, 715, 1247, 715);//quadradinho
-	FuncoesAuxiliares::bresenham(1247, 715, 1247, 735);
-	FuncoesAuxiliares::bresenham(1247, 735, 1232, 735);
-	FuncoesAuxiliares::bresenham(1232, 735, 1232, 715);
+	x1 = 65;
+	FuncoesAuxiliares::bresenham(1215 + x1, 750 + y1 + 80, 1215 + x1, 660 + y1); //|
+	FuncoesAuxiliares::bresenham(1215 + x1, 750 + y1 + 80, 1265 + 50 + x1, 750 + y1 + 80);//- em cima
+	FuncoesAuxiliares::bresenham(1265 + x1 + 50, 750 + y1 + 80, 1265 + 50 + x1, 700 + y1 + 30);// ' ate o meio
+	FuncoesAuxiliares::bresenham(1265 + 50 + x1, 700 + y1 + 30, 1240 + x1, 700 + y1 + 30);// - ate o meio do R
+	FuncoesAuxiliares::bresenham(1240 + x1, 700 + y1 + 30, 1265 + 50 + x1, 660 + y1);// \ate o fim do r
+	FuncoesAuxiliares::bresenham(1265 + 50 + x1, 660 + y1, 1250 + x1 + 35, 660 + y1);//
+	FuncoesAuxiliares::bresenham(1240 + x1, 695 + y1 + 10, 1250 + x1 + 35, 660 + y1);//
+	FuncoesAuxiliares::bresenham(1240 + x1, 695 + y1 + 10, 1240 + x1, 660 + y1);//
+	FuncoesAuxiliares::bresenham(1240 + x1, 660 + y1, 1215 + x1, 660 + y1);//
+	FuncoesAuxiliares::bresenham(1245 + x1 + 5, 715 + y1 + 40, 1277 + x1 + 5, 715 + y1 + 40);//quadradinho
+	FuncoesAuxiliares::bresenham(1277 + x1 + 5, 715 + y1 + 40, 1277 + x1 + 5, 740 + y1 + 50);//
+	FuncoesAuxiliares::bresenham(1277 + x1 + 5, 740 + y1 + 50, 1245 + x1 + 5, 740 + y1 + 50);//
+	FuncoesAuxiliares::bresenham(1245 + x1 + 5, 740 + y1 + 50, 1245 + x1 + 5, 715 + y1 + 40);//
 	//A
-	FuncoesAuxiliares::bresenham(1280, 750, 1280, 660);
-	FuncoesAuxiliares::bresenham(1280, 750, 1330, 750);
-	FuncoesAuxiliares::bresenham(1330, 750, 1330, 660);
-	FuncoesAuxiliares::bresenham(1330, 660, 1313, 660);
-	FuncoesAuxiliares::bresenham(1313, 660, 1313, 700);
-	FuncoesAuxiliares::bresenham(1280, 660, 1297, 660);
-	FuncoesAuxiliares::bresenham(1297, 700, 1297, 660);
-	FuncoesAuxiliares::bresenham(1297, 700, 1313, 700);
-	FuncoesAuxiliares::bresenham(1297, 715, 1313, 715);//quadradinho
-	FuncoesAuxiliares::bresenham(1297, 715, 1297, 735);
-	FuncoesAuxiliares::bresenham(1297, 735, 1313, 735);
-	FuncoesAuxiliares::bresenham(1313, 715, 1313, 735);
+	x1 = 115;
+	FuncoesAuxiliares::bresenham(1280 + x1, 750 + y1 + 80, 1280 + x1, 660 + y1);
+	FuncoesAuxiliares::bresenham(1280 + x1, 750 + y1 + 80, 1330 + x1 + 50, 750 + y1 + 80);
+	FuncoesAuxiliares::bresenham(1330 + x1 + 50, 750 + y1 + 80, 1330 + x1 + 50, 660 + y1);
+	FuncoesAuxiliares::bresenham(1330 + x1 + 50, 660 + y1, 1313 + x1 + 35, 660 + y1);
+	FuncoesAuxiliares::bresenham(1313 + x1 + 35, 660 + y1, 1313 + x1 + 35, 700 + y1 + 30);
+	FuncoesAuxiliares::bresenham(1280 + x1, 660 + y1, 1297 + x1 + 15, 660 + y1);
+	FuncoesAuxiliares::bresenham(1297 + x1 + 15, 700 + y1 + 30, 1297 + x1 + 15, 660 + y1);
+	FuncoesAuxiliares::bresenham(1297 + x1 + 15, 700 + y1 + 30, 1313 + x1 + 35, 700 + y1 + 30);
+	FuncoesAuxiliares::bresenham(1297 + x1 + 15, 715 + y1 + 45, 1313 + x1 + 35, 715 + y1 + 45);//quadradinho
+	FuncoesAuxiliares::bresenham(1297 + x1 + 15, 715 + y1 + 45, 1297 + x1 + 15, 735 + y1 + 60);
+	FuncoesAuxiliares::bresenham(1297 + x1 + 15, 735 + y1 + 60, 1313 + x1 + 35, 735 + y1 + 60);
+	FuncoesAuxiliares::bresenham(1313 + x1 + 35, 715 + y1 + 45, 1313 + x1 + 35, 735 + y1 + 60);
 	//Y
-	FuncoesAuxiliares::bresenham(1345, 660, 1360, 660);
-	FuncoesAuxiliares::bresenham(1360, 660, 1395, 750);
-	FuncoesAuxiliares::bresenham(1395, 750, 1380, 750);
-	FuncoesAuxiliares::bresenham(1345, 660, 1363, 705);
-	FuncoesAuxiliares::bresenham(1363, 705, 1340, 750);
-	FuncoesAuxiliares::bresenham(1340, 750, 1350, 750);
-	FuncoesAuxiliares::bresenham(1350, 750, 1368, 718);
-	FuncoesAuxiliares::bresenham(1368, 718, 1380, 750);
+	x1 = 165;
+	FuncoesAuxiliares::bresenham(1345 + x1, 660 + y1, 1360 + x1 + 20, 660 + y1);
+	FuncoesAuxiliares::bresenham(1360 + x1 + 20, 660 + y1, 1395 + x1 + 55, 750 + y1 + 80);
+	FuncoesAuxiliares::bresenham(1395 + x1 + 55, 750 + y1 + 80, 1380 + x1 + 35, 750 + y1 + 80);
+	FuncoesAuxiliares::bresenham(1345 + x1, 660 + y1, 1363 + x1, 705 + y1);
+	FuncoesAuxiliares::bresenham(1363 + x1, 705 + y1, 1340 + x1, 750 + y1 + 80);
+	FuncoesAuxiliares::bresenham(1340 + x1, 750 + y1 + 80, 1350 + x1 + 15, 750 + y1 + 80);
+	FuncoesAuxiliares::bresenham(1350 + x1 + 15, 750 + y1 + 80, 1368 + x1 + 15, 718 + y1 + 35);
+	FuncoesAuxiliares::bresenham(1368 + x1 + 15, 718 + y1 + 35, 1380 + x1 + 35, 750 + y1 + 80);
 	//A
-	int x = 1410 - 1280 - 3;
-	FuncoesAuxiliares::bresenham(1280 + x, 750, 1280 + x, 660);
-	FuncoesAuxiliares::bresenham(1280 + x, 750, 1330 + x, 750);
-	FuncoesAuxiliares::bresenham(1330 + x, 750, 1330 + x, 660);
-	FuncoesAuxiliares::bresenham(1330 + x, 660, 1313 + x, 660);
-	FuncoesAuxiliares::bresenham(1313 + x, 660, 1313 + x, 700);
-	FuncoesAuxiliares::bresenham(1280 + x, 660, 1297 + x, 660);
-	FuncoesAuxiliares::bresenham(1297 + x, 700, 1297 + x, 660);
-	FuncoesAuxiliares::bresenham(1297 + x, 700, 1313 + x, 700);
-	FuncoesAuxiliares::bresenham(1297 + x, 715, 1313 + x, 715);//quadradinho
-	FuncoesAuxiliares::bresenham(1297 + x, 715, 1297 + x, 735);
-	FuncoesAuxiliares::bresenham(1297 + x, 735, 1313 + x, 735);
-	FuncoesAuxiliares::bresenham(1313 + x, 715, 1313 + x, 735);
+	x1 = 340;
+	FuncoesAuxiliares::bresenham(1280 + x1, 750 + y1 + 80, 1280 + x1, 660 + y1);
+	FuncoesAuxiliares::bresenham(1280 + x1, 750 + y1 + 80, 1330 + x1 + 50, 750 + y1 + 80);
+	FuncoesAuxiliares::bresenham(1330 + x1 + 50, 750 + y1 + 80, 1330 + x1 + 50, 660 + y1);
+	FuncoesAuxiliares::bresenham(1330 + x1 + 50, 660 + y1, 1313 + x1 + 35, 660 + y1);
+	FuncoesAuxiliares::bresenham(1313 + x1 + 35, 660 + y1, 1313 + x1 + 35, 700 + y1 + 30);
+	FuncoesAuxiliares::bresenham(1280 + x1, 660 + y1, 1297 + x1 + 15, 660 + y1);
+	FuncoesAuxiliares::bresenham(1297 + x1 + 15, 700 + y1 + 30, 1297 + x1 + 15, 660 + y1);
+	FuncoesAuxiliares::bresenham(1297 + x1 + 15, 700 + y1 + 30, 1313 + x1 + 35, 700 + y1 + 30);
+	FuncoesAuxiliares::bresenham(1297 + x1 + 15, 715 + y1 + 45, 1313 + x1 + 35, 715 + y1 + 45);//quadradinho
+	FuncoesAuxiliares::bresenham(1297 + x1 + 15, 715 + y1 + 45, 1297 + x1 + 15, 735 + y1 + 60);
+	FuncoesAuxiliares::bresenham(1297 + x1 + 15, 735 + y1 + 60, 1313 + x1 + 35, 735 + y1 + 60);
+	FuncoesAuxiliares::bresenham(1313 + x1 + 35, 715 + y1 + 45, 1313 + x1 + 35, 735 + y1 + 60);
 	//'
-	FuncoesAuxiliares::bresenham(1465, 750, 1465, 720);
-	FuncoesAuxiliares::bresenham(1465, 750, 1480, 750);
-	FuncoesAuxiliares::bresenham(1465, 720, 1480, 750);
+	x1 = 265;
+	FuncoesAuxiliares::bresenham(1465 + x1, 750 + y1 + 80, 1465 + x1, 720 + y1 + 70);
+	FuncoesAuxiliares::bresenham(1465 + x1, 750 + y1 + 80, 1480 + x1 + 10, 750 + y1 + 80);
+	FuncoesAuxiliares::bresenham(1465 + x1, 720 + y1 + 70, 1480 + x1 + 10, 750 + y1 + 80);
 	//s
-	FuncoesAuxiliares::bresenham(1470, 718, 1510, 718);
-	FuncoesAuxiliares::bresenham(1510, 718, 1510, 703);
-	FuncoesAuxiliares::bresenham(1485, 703, 1510, 703);
-	FuncoesAuxiliares::bresenham(1470, 718, 1470, 683);
-	FuncoesAuxiliares::bresenham(1485, 703, 1485, 695);
-	FuncoesAuxiliares::bresenham(1510, 695, 1485, 695);
-	FuncoesAuxiliares::bresenham(1510, 695, 1510, 660);
-	FuncoesAuxiliares::bresenham(1510, 660, 1470, 660);
-	FuncoesAuxiliares::bresenham(1470, 671, 1470, 660);
-	FuncoesAuxiliares::bresenham(1470, 671, 1495, 671);
-	FuncoesAuxiliares::bresenham(1495, 683, 1495, 671);
-	FuncoesAuxiliares::bresenham(1470, 683, 1495, 683);
+	FuncoesAuxiliares::bresenham(1470 + x1, 718 + y1 + 30, 1510 + x1 + 15, 718 + y1 + 30);
+	FuncoesAuxiliares::bresenham(1510 + x1 + 15, 718 + y1 + 30, 1510 + x1 + 15, 703 + y1 + 25);
+	FuncoesAuxiliares::bresenham(1485 + x1, 703 + y1 + 25, 1510 + x1 + 15, 703 + y1 + 25);
+	FuncoesAuxiliares::bresenham(1470 + x1, 718 + y1 + 30, 1470 + x1, 683 + y1 + 15);
+	FuncoesAuxiliares::bresenham(1485 + x1, 703 + y1 + 25, 1485 + x1, 695 + y1 + 15);
+	FuncoesAuxiliares::bresenham(1510 + x1 + 15, 695 + y1 + 15, 1485 + x1, 695 + y1 + 15);
+	FuncoesAuxiliares::bresenham(1510 + x1 + 15, 695 + y1 + 15, 1510 + x1 + 15, 660 + y1);
+	FuncoesAuxiliares::bresenham(1510 + x1 + 15, 660 + y1, 1470 + x1, 660 + y1);
+	FuncoesAuxiliares::bresenham(1470 + x1, 671 + y1, 1470 + x1, 660 + y1);
+	FuncoesAuxiliares::bresenham(1470 + x1, 671 + y1, 1495 + x1 + 15, 671 + y1);
+	FuncoesAuxiliares::bresenham(1495 + x1 + 15, 683 + y1 + 15, 1495 + x1 + 15, 671 + y1);
+	FuncoesAuxiliares::bresenham(1470 + x1, 683 + y1 + 15, 1495 + x1 + 15, 683 + y1 + 15);
+	//fly	
+	//f
+	int y2 = 80;
+	int x3 = 40;
+	FuncoesAuxiliares::bresenham(1330 + x3, 635 + y2, 1330 + x3, 730 + y2);
+	FuncoesAuxiliares::bresenham(1330 + x3, 730 + y2, 1390 + x3, 730 + y2);
+	FuncoesAuxiliares::bresenham(1390 + x3, 730 + y2, 1390 + x3, 705 + y2);
+	FuncoesAuxiliares::bresenham(1390 + x3, 705 + y2, 1350 + x3, 705 + y2);
+	FuncoesAuxiliares::bresenham(1350 + x3, 705 + y2, 1350 + x3, 685 + y2);
+	FuncoesAuxiliares::bresenham(1350 + x3, 685 + y2, 1370 + x3, 685 + y2);
+	FuncoesAuxiliares::bresenham(1370 + x3, 685 + y2, 1370 + x3, 665 + y2);
+	FuncoesAuxiliares::bresenham(1370 + x3, 665 + y2, 1350 + x3, 665 + y2);
+	FuncoesAuxiliares::bresenham(1350 + x3, 665 + y2, 1350 + x3, 635 + y2);
+	FuncoesAuxiliares::bresenham(1330 + x3, 635 + y2, 1350 + x3, 635 + y2);
+	//l
+	FuncoesAuxiliares::bresenham(1400 + x3, 635 + y2, 1400 + x3, 730 + y2);
+	FuncoesAuxiliares::bresenham(1400 + x3, 635 + y2, 1445 + x3, 635 + y2);
+	FuncoesAuxiliares::bresenham(1445 + x3, 635 + y2, 1445 + x3, 655 + y2);
+	FuncoesAuxiliares::bresenham(1445 + x3, 655 + y2, 1420 + x3, 655 + y2);
+	FuncoesAuxiliares::bresenham(1420 + x3, 655 + y2, 1420 + x3, 730 + y2);
+	FuncoesAuxiliares::bresenham(1400 + x3, 730 + y2, 1420 + x3, 730 + y2);
+	//y
+	int x2 = 115;
+	FuncoesAuxiliares::bresenham(1345 + x2 + x3, 635 + y2, 1360 + x2 + 5 + x3, 635 + y2);
+	FuncoesAuxiliares::bresenham(1360 + x2 + 5 + x3, 635 + y2, 1395 + x2 + 5 + x3, 730 + y2);
+	FuncoesAuxiliares::bresenham(1395 + x2 + 5 + x3, 730 + y2, 1380 + x2 + x3, 730 + y2);
+	FuncoesAuxiliares::bresenham(1345 + x2 + x3, 635 + y2, 1363 + x2 + x3, 680 + y2);
+	FuncoesAuxiliares::bresenham(1363 + x2 + x3, 680 + y2, 1335 + x2 + x3, 730 + y2);
+	FuncoesAuxiliares::bresenham(1335 + x2 + x3, 730 + y2, 1350 + x2 + x3, 730 + y2);
+	FuncoesAuxiliares::bresenham(1350 + x2 + x3, 730 + y2, 1368 + x2 + x3, 698 + y2);
+	FuncoesAuxiliares::bresenham(1368 + x2 + x3, 698 + y2, 1380 + x2 + x3, 730 + y2);
+	//circulo?????????
+	glColor3f(1.0, 1.0, 0.0); //amarelo
+	FuncoesAuxiliares::bresenhamCircle(1460, 600, 90, 90);
+	glColor3f(0, 0.0, 0.8);
+	FuncoesAuxiliares::bresenhamCircle(1460, 600, 80, 80);
+	glColor3f(1.0, 1.0, 1.0);
+	FuncoesAuxiliares::bresenhamCircle(1460, 600, 40, 40);
+	glColor3f(1.0, 0.0, 0.0);
+	FuncoesAuxiliares::bresenhamCircle(1460, 600, 30, 30);
 
-	//fly
+	//katana
+	int xk = 220;
+	glColor3f(1.0, 1.0, 1.0);
+	glBegin(GL_LINE_LOOP);
+	glVertex2i(1150 + xk, 518);
+	glVertex2i(1160 + xk, 498);
+	glVertex2i(1190 + xk, 528);
+	glVertex2i(1180 + xk, 548);
+	glEnd();
+	glColor3f(0.0, 0.0, 0.0);
+	glBegin(GL_QUADS);
+	glVertex2i(1151 + xk, 518);
+	glVertex2i(1159 + xk, 498);
+	glVertex2i(1189 + xk, 528);
+	glVertex2i(1181 + xk, 548);
+	glEnd();
+	glColor3f(1.0, 1.0, 1.0);
+	FuncoesAuxiliares::bresenhamCircle(1162 + xk, 515, 2, 2);
+	FuncoesAuxiliares::bresenhamCircle(1177 + xk, 530, 2, 2);
+	glBegin(GL_LINE_LOOP);
+	glVertex2i(1197 + xk, 521);
+	glVertex2i(1177 + xk, 558);
+	glVertex2i(1184 + xk, 565);
+	glVertex2i(1205 + xk, 525);
+	glEnd();
+	glColor3f(0.0, 0.0, 0.0);
+	glBegin(GL_QUADS);
+	glVertex2i(1196 + xk, 521);
+	glVertex2i(1178 + xk, 558);
+	glVertex2i(1185 + xk, 565);
+	glVertex2i(1204 + xk, 525);
+	glEnd();
+	glColor3f(1.0, 1.0, 1.0);
+	glBegin(GL_QUADS);
+	glVertex2i(1198 + xk, 537);
+	glVertex2i(1340 + xk, 669);
+	glVertex2i(1340 + xk, 695);
+	glVertex2i(1189 + xk, 552);
+
+	glEnd();
 }
 
 //Desenha Quadrado para Opções - Paremetros: Posição x, Posição Y, Titulo 
