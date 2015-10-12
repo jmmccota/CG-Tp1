@@ -56,6 +56,8 @@ public:
 
 	//Execução de Sounds
 	void playBoomEffect();
+	void playTransitioningMenuEffect();
+	void playEnterMenuEffect();
 
 	void stopSong();
 

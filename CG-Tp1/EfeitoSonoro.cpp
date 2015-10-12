@@ -86,6 +86,14 @@ void EfeitoSonoro::playBoomEffect()
 {
 	playSong("Sound/Boom_Effect.mp3", false);
 }
+void EfeitoSonoro::playTransitioningMenuEffect()
+{
+	playSong("Sound/TransitioningMenu_Effect.mp3", false);
+}
+void EfeitoSonoro::playEnterMenuEffect()
+{
+	playSong("Sound/EnterMenu_Effect.mp3", false);
+}
 // ------------------------------------------------------------
 
 void EfeitoSonoro::stopSong() {

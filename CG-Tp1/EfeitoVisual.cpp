@@ -11,7 +11,6 @@ EfeitoVisual::EfeitoVisual()
 	sizeY = 720;
 }
 
-
 EfeitoVisual::~EfeitoVisual()
 {
 }
@@ -38,7 +37,7 @@ void EfeitoVisual::resize(GLsizei w, GLsizei h)
 {
 	// Especifica as dimensões da Viewport
 	if (w * 9 / 16 < h)
-        glViewport(0, 0, w, w * 9 / 16);
+		glViewport(0, 0, w, w * 9 / 16);
 	else
 		glViewport(0, 0, h * 16 / 9, h);
 
@@ -84,6 +83,27 @@ void EfeitoVisual::setFullScreen()
 		glutInitWindowPosition(position.first, position.second);
 	}
 	fullscreen = !fullscreen;
+}
+
+void EfeitoVisual::desenhaEstrelas(int quantEstrelas) {
+
+	srand((unsigned)time(NULL));
+	float posRand = 0, posRandY = 0;
+
+	glPointSize(5);
+	glColor4f(0.5, 0.5,0.5, 0.15);
+
+	
+	while (quantEstrelas > 0) {
+		posRand = rand() / 10 ;
+		posRandY = rand() / 10;
+		glBegin(GL_POINTS);
+		glVertex2f(posRand, posRandY);
+		glEnd();
+
+		quantEstrelas--;
+	}
+
 }
 
 EfeitoVisual& EfeitoVisual::getInstance()

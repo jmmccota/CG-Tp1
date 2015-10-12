@@ -28,6 +28,7 @@ struct PositionMenuElement
 vector<PositionMenuElement> vetPosMenuElements;
 //----------------------------------------------------------------------------------------------
 int setaSelectOption = 0;
+bool limitX = false;
 // mover aviao d opcoes
 GLfloat translacaoOpcoesY = 0.0f;
 GLfloat translacaoOpcoesX = 0.0f;
@@ -402,7 +403,7 @@ void drawOpcoesMenu() {
 
 #pragma endregion
 
-bool limitX = false;
+
 void Menu::desenha() {
 
 	pair<int, int> sizeScreen = EfeitoVisual::getInstance().getOrtho2D();
@@ -460,8 +461,6 @@ void Menu::desenha() {
 		glTranslatef(translacaoY, 0, 0);
 		spitfire->desenha();
 		glPopMatrix();
-
-
 	}
 
 	glutSwapBuffers();
@@ -528,21 +527,26 @@ void Menu::keyUp(unsigned char key, int x, int y)
 		switch (key) {
 		case 'O'://Tela de Opções
 		case 'o':
+			EfeitoSonoro::getInstance().playEnterMenuEffect();
 			optOpcoes = true;
+			setaSelectOption = 2;
 			break;
 
 		case 13: //ENTER -> Iniciar Jogo
 			switch (setaSelectOption)
 			{
 			case 1:
+				EfeitoSonoro::getInstance().playEnterMenuEffect();
 				optMelhores = true;
 				break;
 			case 2:
+				EfeitoSonoro::getInstance().playEnterMenuEffect();
 				optOpcoes = true;
 				break;
 			case 3:
 				optSair = true;
 			default:
+				//EfeitoSonoro::getInstance().playEnterMenuEffect();
 				//optIniciar = true;
 				break;
 			}
@@ -550,7 +554,9 @@ void Menu::keyUp(unsigned char key, int x, int y)
 
 		case 'm': //Tela de Melhores Pontuações
 		case 'M':
+			EfeitoSonoro::getInstance().playEnterMenuEffect();
 			optMelhores = true;
+			setaSelectOption = 1;
 			break;
 		}
 	}
@@ -618,11 +624,14 @@ void Menu::specialKeyUp(int key, int x, int y)
 		case GLUT_KEY_UP: //SETA CIMA
 			if (setaSelectOption > 0) {
 				setaSelectOption--;
+				EfeitoSonoro::getInstance().playTransitioningMenuEffect();
 			}
 			break;
 		case GLUT_KEY_DOWN: //SETA BAIXO
 			if (setaSelectOption < 3) {
 				setaSelectOption++;
+
+				EfeitoSonoro::getInstance().playTransitioningMenuEffect();
 			}
 			break;
 		default:
@@ -649,6 +658,8 @@ void Menu::mouse(int button, int state, int x, int y) {
 				float yInit = vetPosMenuElements[i].posInit_Y;
 				float yEnd = vetPosMenuElements[i].posEnd_Y;
 				if ((x >= xInit && x <= xEnd) && (y >= yInit && y <= yEnd)) {
+					setaSelectOption = i;
+					EfeitoSonoro::getInstance().playEnterMenuEffect();
 					switch (i)
 					{
 					case 1:

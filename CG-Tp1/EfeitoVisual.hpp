@@ -11,6 +11,7 @@ class EfeitoVisual;
 #include "Solido.hpp"
 #include "Avioes.hpp"
 #include "EfeitoSonoro.hpp"
+#include <time.h>
 
 /*
 	===============SINGLETON===============
