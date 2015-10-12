@@ -56,6 +56,6 @@ void Fase_TheBlitz::specialKeyUp(int key, int x, int y)
 
 void Fase_TheBlitz::inicializa()
 {
-	EfeitoSonoro::getInstance().playFirstFaseTheme();
+	EfeitoSonoro::getInstance().playFirstLevelTheme();
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }

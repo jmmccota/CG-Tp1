@@ -56,6 +56,6 @@ void Fase_TheVengeanceWeapon::specialKeyUp(int key, int x, int y)
 
 void Fase_TheVengeanceWeapon::inicializa()
 {
-	EfeitoSonoro::getInstance().playThirdFaseTheme();
+	EfeitoSonoro::getInstance().playThirdLevelTheme();
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }

@@ -56,28 +56,26 @@ void EfeitoSonoro::playSong(char *file, bool loop) {
 
 }
 
-// -------------------- Musics Themes ------------------------
-void EfeitoSonoro::playOpenTheme() {
-	playSong("Sound/Open_Theme.mp3", false);
-}
-
+// -------------------- Musics ------------------------
 void EfeitoSonoro::playMainTheme() {
-	playSong("Sound/Main_Theme.mp3", true);
+    cout << "vai tocar";
+    playSong("music/MainTitles.mp3", true);
+    cout << "tocou";
 }
-
-void EfeitoSonoro::playFirstFaseTheme()
+void EfeitoSonoro::playFirstLevelTheme()
 {
-	playSong("Sound/FirstFase_Theme.mp3", true);
+	playSong("music/TheBlitz.mp3", true);
 }
-
-void EfeitoSonoro::playSecondFaseTheme()
+void EfeitoSonoro::playSecondLevelTheme()
 {
-	playSong("Sound/SecondtFase_Theme.mp3", true);
+	playSong("music/TheBattleOfBritain.mp3", true);
 }
-
-void EfeitoSonoro::playThirdFaseTheme()
+void EfeitoSonoro::playThirdLevelTheme()
 {
-	playSong("Sound/ThirdFase_Theme.mp3", true);
+	playSong("music/TheVengeanceWeapon.mp3", true);
+}
+void EfeitoSonoro::playEndingTheme() {
+    playSong("music/Ending.mp3", false);
 }
 // ------------------------------------------------------------
 

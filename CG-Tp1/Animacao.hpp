@@ -21,6 +21,7 @@ protected:
 	GLfloat translacaoZ = 0;
 	bool booldesenha = true;
 	bool explosao = true;
+    bool comecouExplosao = false;
 	bool pularAnimacao = false;
 public:
 	Animacao();

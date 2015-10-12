@@ -82,7 +82,11 @@ void Animacao::desenha()
 	}
 	else if (explosao) {
 		// desenha a explosao
-		EfeitoSonoro::getInstance().playBoomEffect();
+        if (!comecouExplosao)
+        {
+            EfeitoSonoro::getInstance().playBoomEffect();
+            comecouExplosao = true;
+        }
 		glPushMatrix();
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
@@ -134,7 +138,6 @@ void Animacao::terminou()
 {
 	if (pularAnimacao)
 	{
-		EfeitoSonoro::getInstance().stopSong();
 		Jogo::getInstance().setProxFase(1);
 		Jogo::getInstance().proximaFase();
 	}
@@ -160,10 +163,11 @@ void Animacao::keyUp(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
-	case 13: //Tecla enter para pular animação
-		pularAnimacao = true;
-	default:
-		break;
+	    case 13: //Tecla enter para pular animação
+		    pularAnimacao = true;
+            break;
+	    default:
+		    break;
 	}
 }
 
@@ -177,6 +181,6 @@ void Animacao::specialKeyUp(int key, int x, int y)
 
 void Animacao::inicializa()
 {
-	EfeitoSonoro::getInstance().playOpenTheme();
+	//EfeitoSonoro::getInstance().playOpenTheme();
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }

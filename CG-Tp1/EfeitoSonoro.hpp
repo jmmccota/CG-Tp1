@@ -48,11 +48,11 @@ public:
 	~EfeitoSonoro();
 
 	//Execução de Músicas
-	void playOpenTheme();
-	void playMainTheme();
-	void playFirstFaseTheme();
-	void playSecondFaseTheme();
-	void playThirdFaseTheme();
+    void playMainTheme();
+    void playFirstLevelTheme();
+    void playSecondLevelTheme();
+    void playThirdLevelTheme();
+    void playEndingTheme();
 
 	//Execução de Sounds
 	void playBoomEffect();
