@@ -31,6 +31,8 @@ int setaSelectOption = 0;
 // mover aviao d opcoes
 GLfloat translacaoOpcoesY = 0.0f;
 GLfloat translacaoOpcoesX = 0.0f;
+GLfloat translacaoTiro = 0.0f;
+boolean atirou = false;
 
 //Desenha uma Linha - Parametro: posição em relação ao eixo Y
 void drawLine(float pos, char eixo) {
@@ -52,6 +54,92 @@ void drawLine(float pos, char eixo) {
 		glVertex2f(size.first, pos);
 		glEnd();
 	}
+}
+void drawTitulo() {
+	glColor3f(0, 1.0, 1.0);
+	//J
+	FuncoesAuxiliares::bresenham(1170, 750, 1170, 660);
+	FuncoesAuxiliares::bresenham(1120, 660, 1170, 660);
+	FuncoesAuxiliares::bresenham(1120, 660, 1120, 685);
+	FuncoesAuxiliares::bresenham(1120, 685, 1134, 685);
+	FuncoesAuxiliares::bresenham(1134, 685, 1134, 674);
+	FuncoesAuxiliares::bresenham(1134, 674, 1155, 674);
+	FuncoesAuxiliares::bresenham(1155, 674, 1155, 750);
+	FuncoesAuxiliares::bresenham(1155, 750, 1170, 750);
+	//I
+	FuncoesAuxiliares::bresenham(1185, 750, 1185, 660);
+	FuncoesAuxiliares::bresenham(1200, 660, 1185, 660);
+	FuncoesAuxiliares::bresenham(1200, 660, 1200, 750);
+	FuncoesAuxiliares::bresenham(1200, 750, 1185, 750);
+	//R
+	FuncoesAuxiliares::bresenham(1215, 750, 1215, 660);
+	FuncoesAuxiliares::bresenham(1215, 750, 1265, 750);
+	FuncoesAuxiliares::bresenham(1265, 750, 1265, 700);
+	FuncoesAuxiliares::bresenham(1265, 700, 1227, 700);
+	FuncoesAuxiliares::bresenham(1227, 700, 1265, 660);
+	FuncoesAuxiliares::bresenham(1265, 660, 1250, 660);
+	FuncoesAuxiliares::bresenham(1227, 688, 1250, 660);
+	FuncoesAuxiliares::bresenham(1227, 688, 1227, 660);
+	FuncoesAuxiliares::bresenham(1227, 660, 1215, 660);
+	FuncoesAuxiliares::bresenham(1232, 715, 1247, 715);//quadradinho
+	FuncoesAuxiliares::bresenham(1247, 715, 1247, 735);
+	FuncoesAuxiliares::bresenham(1247, 735, 1232, 735);
+	FuncoesAuxiliares::bresenham(1232, 735, 1232, 715);
+	//A
+	FuncoesAuxiliares::bresenham(1280, 750, 1280, 660);
+	FuncoesAuxiliares::bresenham(1280, 750, 1330, 750);
+	FuncoesAuxiliares::bresenham(1330, 750, 1330, 660);
+	FuncoesAuxiliares::bresenham(1330, 660, 1313, 660);
+	FuncoesAuxiliares::bresenham(1313, 660, 1313, 700);
+	FuncoesAuxiliares::bresenham(1280, 660, 1297, 660);
+	FuncoesAuxiliares::bresenham(1297, 700, 1297, 660);
+	FuncoesAuxiliares::bresenham(1297, 700, 1313, 700);
+	FuncoesAuxiliares::bresenham(1297, 715, 1313, 715);//quadradinho
+	FuncoesAuxiliares::bresenham(1297, 715, 1297, 735);
+	FuncoesAuxiliares::bresenham(1297, 735, 1313, 735);
+	FuncoesAuxiliares::bresenham(1313, 715, 1313, 735);
+	//Y
+	FuncoesAuxiliares::bresenham(1345, 660, 1360, 660);
+	FuncoesAuxiliares::bresenham(1360, 660, 1395, 750);
+	FuncoesAuxiliares::bresenham(1395, 750, 1380, 750);
+	FuncoesAuxiliares::bresenham(1345, 660, 1363, 705);
+	FuncoesAuxiliares::bresenham(1363, 705, 1340, 750);
+	FuncoesAuxiliares::bresenham(1340, 750, 1350, 750);
+	FuncoesAuxiliares::bresenham(1350, 750, 1368, 718);
+	FuncoesAuxiliares::bresenham(1368, 718, 1380, 750);
+	//A
+	int x = 1410 - 1280 - 3;
+	FuncoesAuxiliares::bresenham(1280 + x, 750, 1280 + x, 660);
+	FuncoesAuxiliares::bresenham(1280 + x, 750, 1330 + x, 750);
+	FuncoesAuxiliares::bresenham(1330 + x, 750, 1330 + x, 660);
+	FuncoesAuxiliares::bresenham(1330 + x, 660, 1313 + x, 660);
+	FuncoesAuxiliares::bresenham(1313 + x, 660, 1313 + x, 700);
+	FuncoesAuxiliares::bresenham(1280 + x, 660, 1297 + x, 660);
+	FuncoesAuxiliares::bresenham(1297 + x, 700, 1297 + x, 660);
+	FuncoesAuxiliares::bresenham(1297 + x, 700, 1313 + x, 700);
+	FuncoesAuxiliares::bresenham(1297 + x, 715, 1313 + x, 715);//quadradinho
+	FuncoesAuxiliares::bresenham(1297 + x, 715, 1297 + x, 735);
+	FuncoesAuxiliares::bresenham(1297 + x, 735, 1313 + x, 735);
+	FuncoesAuxiliares::bresenham(1313 + x, 715, 1313 + x, 735);
+	//'
+	FuncoesAuxiliares::bresenham(1465, 750, 1465, 720);
+	FuncoesAuxiliares::bresenham(1465, 750, 1480, 750);
+	FuncoesAuxiliares::bresenham(1465, 720, 1480, 750);
+	//s
+	FuncoesAuxiliares::bresenham(1470, 718, 1510, 718);
+	FuncoesAuxiliares::bresenham(1510, 718, 1510, 703);
+	FuncoesAuxiliares::bresenham(1485, 703, 1510, 703);
+	FuncoesAuxiliares::bresenham(1470, 718, 1470, 683);
+	FuncoesAuxiliares::bresenham(1485, 703, 1485, 695);
+	FuncoesAuxiliares::bresenham(1510, 695, 1485, 695);
+	FuncoesAuxiliares::bresenham(1510, 695, 1510, 660);
+	FuncoesAuxiliares::bresenham(1510, 660, 1470, 660);
+	FuncoesAuxiliares::bresenham(1470, 671, 1470, 660);
+	FuncoesAuxiliares::bresenham(1470, 671, 1495, 671);
+	FuncoesAuxiliares::bresenham(1495, 683, 1495, 671);
+	FuncoesAuxiliares::bresenham(1470, 683, 1495, 683);
+
+	//fly
 }
 
 //Desenha Quadrado para Opções - Paremetros: Posição x, Posição Y, Titulo 
@@ -211,7 +299,6 @@ void drawBestScoresMenu(vector<Score> bestScores, int decRasterY) {
 
 		rasterY -= decRasterY;
 	}
-
 }
 
 //Desenha a Opção do Menu - Parametro: 
@@ -291,9 +378,24 @@ void drawOpcoesMenu() {
 	glEnd();
 
 	/*-------------- END COMANDOS SETAS ------------------*/
+
+	if (atirou) {
+		translacaoTiro += 40;
+		if ((translacaoTiro > 700)) {
+			atirou = false;
+			translacaoTiro = 0;
+		}
+	}
 	glPushMatrix();
+	TiroSimples *tiro = new TiroSimples(1300, 400, 0.002);
+	TiroSimples *tiro2 = new TiroSimples(1500, 400, 0.002);
 	Spitfire *spitfire = new Spitfire(1400, 360, 0.015, nullptr);
 	glTranslatef(translacaoOpcoesX, translacaoOpcoesY, 0);
+	glPushMatrix();
+	glTranslatef(0, translacaoTiro, 0);
+	tiro->desenha();
+	tiro2->desenha();
+	glPopMatrix();
 	spitfire->desenha();
 	glPopMatrix();
 }
@@ -336,7 +438,7 @@ void Menu::desenha() {
 		options[2] = "OPCOES";
 		options[3] = "SAIR";
 		drawOptionsMenu(options, 4, 450);
-
+		drawTitulo();
 		//Desenha Avião
 		Spitfire *spitfire = new Spitfire(300, 380, 0.025, nullptr);
 		glPushMatrix();
@@ -347,7 +449,7 @@ void Menu::desenha() {
 			if (translacaoY >= 500) {
 				limitX = true;
 			}
-			
+
 		}
 		else if (limitX) {
 			translacaoY -= 4;
@@ -359,7 +461,7 @@ void Menu::desenha() {
 		spitfire->desenha();
 		glPopMatrix();
 
-		
+
 	}
 
 	glutSwapBuffers();
@@ -412,34 +514,49 @@ void Menu::keyDown(unsigned char key, int x, int y)
 
 void Menu::keyUp(unsigned char key, int x, int y)
 {
-	switch (key) {
-	case 'O'://Tela de Opções
-	case 'o':
-		optOpcoes = true;
-		break;
+	if (optMelhores) {
 
-	case 13: //ENTER -> Iniciar Jogo
-		switch (setaSelectOption)
-		{
-		case 1:
-			optMelhores = true;
-			break;
-		case 2:
-			optOpcoes = true;
-			break;
-		case 3:
-			optSair = true;
-		default:
-			//optIniciar = true;
+	}
+	else if (optOpcoes) {
+		switch (key) {
+		case 32:
+			atirou = true;
 			break;
 		}
-		break;
+	}
+	else {
+		switch (key) {
+		case 'O'://Tela de Opções
+		case 'o':
+			optOpcoes = true;
+			break;
 
-	case 'm': //Tela de Melhores Pontuações
-	case 'M':
-		optMelhores = true;
-		break;
+		case 13: //ENTER -> Iniciar Jogo
+			switch (setaSelectOption)
+			{
+			case 1:
+				optMelhores = true;
+				break;
+			case 2:
+				optOpcoes = true;
+				break;
+			case 3:
+				optSair = true;
+			default:
+				//optIniciar = true;
+				break;
+			}
+			break;
 
+		case 'm': //Tela de Melhores Pontuações
+		case 'M':
+			optMelhores = true;
+			break;
+		}
+	}
+	//Teclas Gerais
+	switch (key)
+	{
 	case 8:
 		optMelhores = false;
 		optOpcoes = false;
@@ -452,7 +569,10 @@ void Menu::keyUp(unsigned char key, int x, int y)
 	case 'f':
 		EfeitoVisual::getInstance().setFullScreen();
 		break;
+	default:
+		break;
 	}
+
 }
 
 void Menu::specialKeyDown(int key, int x, int y)
@@ -460,16 +580,24 @@ void Menu::specialKeyDown(int key, int x, int y)
 	if (optOpcoes) {
 		switch (key) {
 		case GLUT_KEY_UP:
-			translacaoOpcoesY += 20;
+			if (translacaoOpcoesY < 100) {
+				translacaoOpcoesY += 8;
+			}
 			break;
 		case GLUT_KEY_DOWN:
-			translacaoOpcoesY -= 20;
+			if (translacaoOpcoesY > -80) {
+				translacaoOpcoesY -= 8;
+			}
 			break;
 		case GLUT_KEY_LEFT:
-			translacaoOpcoesX -= 20;
+			if (translacaoOpcoesX > -50) {
+				translacaoOpcoesX -= 8;
+			}
 			break;
 		case GLUT_KEY_RIGHT:
-			translacaoOpcoesX += 20;
+			if (translacaoOpcoesX < 150) {
+				translacaoOpcoesX += 8;
+			}
 			break;
 		}
 	}
