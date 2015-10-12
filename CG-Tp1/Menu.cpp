@@ -53,7 +53,92 @@ void drawLine(float pos, char eixo) {
 		glEnd();
 	}
 }
+void drawTitulo() {
+	glColor3f(0, 1.0, 1.0);	
+	//J
+	FuncoesAuxiliares::bresenham(1170, 750, 1170, 660);
+	FuncoesAuxiliares::bresenham(1120, 660, 1170, 660);
+	FuncoesAuxiliares::bresenham(1120, 660,1120,685);
+	FuncoesAuxiliares::bresenham(1120, 685,1134,685);
+	FuncoesAuxiliares::bresenham(1134, 685,1134,674);
+	FuncoesAuxiliares::bresenham(1134, 674,1155,674);
+	FuncoesAuxiliares::bresenham(1155, 674,1155,750);
+	FuncoesAuxiliares::bresenham(1155, 750,1170,750);
+	//I
+	FuncoesAuxiliares::bresenham(1185,750,1185,660);
+	FuncoesAuxiliares::bresenham(1200, 660, 1185, 660);
+	FuncoesAuxiliares::bresenham(1200, 660, 1200,750);
+	FuncoesAuxiliares::bresenham(1200, 750,1185,750);
+	//R
+	FuncoesAuxiliares::bresenham(1215, 750, 1215, 660);
+	FuncoesAuxiliares::bresenham(1215, 750, 1265, 750);
+	FuncoesAuxiliares::bresenham(1265, 750,1265,700);
+	FuncoesAuxiliares::bresenham(1265, 700,1227,700);
+	FuncoesAuxiliares::bresenham(1227, 700,1265,660);
+	FuncoesAuxiliares::bresenham(1265, 660,1250,660);
+	FuncoesAuxiliares::bresenham(1227, 688,1250, 660);
+	FuncoesAuxiliares::bresenham(1227, 688, 1227, 660);
+	FuncoesAuxiliares::bresenham(1227, 660,1215,660);
+	FuncoesAuxiliares::bresenham(1232, 715, 1247, 715);//quadradinho
+	FuncoesAuxiliares::bresenham(1247, 715,1247,735);
+	FuncoesAuxiliares::bresenham(1247, 735,1232,735);
+	FuncoesAuxiliares::bresenham(1232, 735,1232,715);
+	//A
+	FuncoesAuxiliares::bresenham(1280, 750, 1280, 660);
+	FuncoesAuxiliares::bresenham(1280, 750, 1330, 750);
+	FuncoesAuxiliares::bresenham(1330, 750,1330,660);
+	FuncoesAuxiliares::bresenham(1330, 660,1313,660);
+	FuncoesAuxiliares::bresenham(1313, 660,1313,700);
+	FuncoesAuxiliares::bresenham(1280, 660, 1297, 660);
+	FuncoesAuxiliares::bresenham(1297, 700, 1297, 660);
+	FuncoesAuxiliares::bresenham(1297, 700, 1313, 700);
+	FuncoesAuxiliares::bresenham(1297, 715, 1313, 715);//quadradinho
+	FuncoesAuxiliares::bresenham(1297, 715, 1297, 735);
+	FuncoesAuxiliares::bresenham(1297, 735,1313,735);
+	FuncoesAuxiliares::bresenham(1313, 715, 1313, 735);
+	//Y
+	FuncoesAuxiliares::bresenham(1345, 660, 1360,660);
+	FuncoesAuxiliares::bresenham(1360, 660, 1395, 750);
+	FuncoesAuxiliares::bresenham(1395, 750,1380,750);
+	FuncoesAuxiliares::bresenham(1345, 660, 1363, 705);
+	FuncoesAuxiliares::bresenham(1363, 705, 1340, 750);
+	FuncoesAuxiliares::bresenham(1340, 750, 1350, 750);
+	FuncoesAuxiliares::bresenham(1350, 750, 1368, 718);
+	FuncoesAuxiliares::bresenham(1368, 718, 1380, 750);
+	//A
+	int x = 1410 - 1280 - 3;
+	FuncoesAuxiliares::bresenham(1280+x, 750, 1280 + x, 660);
+	FuncoesAuxiliares::bresenham(1280 + x, 750, 1330 + x, 750);
+	FuncoesAuxiliares::bresenham(1330 + x, 750, 1330 + x, 660);
+	FuncoesAuxiliares::bresenham(1330 + x, 660, 1313 + x, 660);
+	FuncoesAuxiliares::bresenham(1313 + x, 660, 1313 + x, 700);
+	FuncoesAuxiliares::bresenham(1280 + x, 660, 1297 + x, 660);
+	FuncoesAuxiliares::bresenham(1297 + x, 700, 1297 + x, 660);
+	FuncoesAuxiliares::bresenham(1297 + x, 700, 1313 + x, 700);
+	FuncoesAuxiliares::bresenham(1297 + x, 715, 1313 + x, 715);//quadradinho
+	FuncoesAuxiliares::bresenham(1297 + x, 715, 1297 + x, 735);
+	FuncoesAuxiliares::bresenham(1297 + x, 735, 1313 + x, 735);
+	FuncoesAuxiliares::bresenham(1313 + x, 715, 1313 + x, 735);
+	//'
+	FuncoesAuxiliares::bresenham(1465, 750, 1465, 720);
+	FuncoesAuxiliares::bresenham(1465, 750, 1480,750);
+	FuncoesAuxiliares::bresenham(1465, 720, 1480, 750);	
+	//s
+	FuncoesAuxiliares::bresenham(1470, 718, 1510, 718);
+	FuncoesAuxiliares::bresenham(1510, 718, 1510, 703);
+	FuncoesAuxiliares::bresenham(1485, 703, 1510, 703);
+	FuncoesAuxiliares::bresenham(1470, 718, 1470, 683);
+	FuncoesAuxiliares::bresenham(1485, 703, 1485, 695);
+	FuncoesAuxiliares::bresenham(1510, 695, 1485, 695);
+	FuncoesAuxiliares::bresenham(1510, 695, 1510, 660);
+	FuncoesAuxiliares::bresenham(1510, 660, 1470, 660);
+	FuncoesAuxiliares::bresenham(1470, 671, 1470, 660);
+	FuncoesAuxiliares::bresenham(1470, 671, 1495, 671);
+	FuncoesAuxiliares::bresenham(1495, 683, 1495, 671);
+	FuncoesAuxiliares::bresenham(1470, 683, 1495, 683);
 
+	//fly
+}
 //Desenha Quadrado para Opções - Paremetros: Posição x, Posição Y, Titulo 
 void drawSquad(float posX, float posY, string titulo) {
 
@@ -365,7 +450,7 @@ void Menu::desenha() {
 		options[2] = "OPCOES";
 		options[3] = "SAIR";
 		drawOptionsMenu(options, 4, 450);
-
+		drawTitulo();
 		//Desenha Avião
 		Spitfire *spitfire = new Spitfire(500, 450, 0.025, nullptr);
 		glPushMatrix();
