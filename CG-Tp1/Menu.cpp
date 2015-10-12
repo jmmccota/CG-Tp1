@@ -31,6 +31,8 @@ int setaSelectOption = 0;
 // mover aviao d opcoes
 GLfloat translacaoOpcoesY = 0.0f;
 GLfloat translacaoOpcoesX = 0.0f;
+GLfloat translacaoTiro = 0.0f;
+boolean atirou = false;
 
 //Desenha uma Linha - Parametro: posição em relação ao eixo Y
 void drawLine(float pos, char eixo) {
@@ -303,23 +305,31 @@ void teclasEspeciais(GLint tecla, GLint x, GLint y){
 	switch (tecla){
 	case GLUT_KEY_UP:
 		if (translacaoOpcoesY < 100){
-			translacaoOpcoesY += 4;
+			translacaoOpcoesY += 8;
 		}
 		break;
 	case GLUT_KEY_DOWN:
-		if (translacaoOpcoesY > -100){
-			translacaoOpcoesY -= 4;
+		if (translacaoOpcoesY > -80){
+			translacaoOpcoesY -= 8;
 		}
 		break;
 	case GLUT_KEY_LEFT:
-		if (translacaoOpcoesX > -100){
-			translacaoOpcoesX -= 4;
+		if (translacaoOpcoesX > -50){
+			translacaoOpcoesX -= 8;
 		}
 		break;
 	case GLUT_KEY_RIGHT:
-		if (translacaoOpcoesX < 100){
-			translacaoOpcoesX += 4;
+		if (translacaoOpcoesX < 150){
+			translacaoOpcoesX += 8;
 		}
+		break;
+	}
+}
+
+void teclas(unsigned char tecla, GLint x, GLint y){
+	switch (tecla){
+	case 32:
+		atirou = true;
 		break;
 	}
 }
@@ -403,12 +413,25 @@ void drawOpcoesMenu() {
 
 	/*-------------- END COMANDOS SETAS ------------------*/
 	glutSpecialFunc(teclasEspeciais);
+	glutKeyboardFunc(teclas);
+	if (atirou){
+		translacaoTiro += 40;
+		if ((translacaoTiro > 700)){
+			atirou = false;
+			translacaoTiro = 0;
+		}
+	}
 	glPushMatrix();
-	TiroSimples *tiro = new TiroSimples(1300, 360, 1);
+	TiroSimples *tiro = new TiroSimples(1300, 400, 0.002);
+	TiroSimples *tiro2 = new TiroSimples(1500, 400, 0.002);
 	Spitfire *spitfire = new Spitfire(1400, 360, 0.015, nullptr);
 	glTranslatef(translacaoOpcoesX, translacaoOpcoesY, 0);
-	spitfire->desenha();
+	glPushMatrix();
+	glTranslatef(0, translacaoTiro, 0);
 	tiro->desenha();
+	tiro2->desenha();
+	glPopMatrix();
+	spitfire->desenha();
 	glPopMatrix();
 }
 
