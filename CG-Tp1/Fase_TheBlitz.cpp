@@ -44,13 +44,12 @@ void desenha2(float translacaoX, float translacaoY, float escala){
 void Desenha(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
-	glClearColor(0.1137, 0.8627, 0.8902, 1.0);
+	glClearColor(0.25098, 0.6431, 0.9137, 1.0);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	for (int i = 0; i < 16; i++){
 		desenha2(Pontos[i][0], Pontos[i][1], 0.25);
 	}
-
 
 	// Executa os comandos OpenGL
 	glutSwapBuffers();
