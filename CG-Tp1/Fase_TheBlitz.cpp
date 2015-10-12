@@ -50,7 +50,8 @@ void Desenha(void)
 	for (int i = 0; i < 16; i++){
 		desenha2(Pontos[i][0], Pontos[i][1], 0.25);
 	}
-
+	Spitfire *spitfire = new Spitfire(0, -0.6, 0.00002, nullptr);
+	spitfire->desenha();
 	// Executa os comandos OpenGL
 	glutSwapBuffers();
 }
