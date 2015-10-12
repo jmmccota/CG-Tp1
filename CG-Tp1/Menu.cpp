@@ -622,7 +622,6 @@ void Menu::terminou()
 {
 	if (optSair)
 	{
-		cout << "terminou\n";
 		Jogo::getInstance().setProxFase(-1);
 		Jogo::getInstance().proximaFase();
 	}
