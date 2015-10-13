@@ -18,7 +18,7 @@ void Fase_TheBlitz::definePersonagens()
 }
 
 
-void desenha2(float translacaoX, float translacaoY, float escala){
+void drawWaves(float translacaoX, float translacaoY, float escala){
     glPushMatrix();
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -41,7 +41,7 @@ void desenha2(float translacaoX, float translacaoY, float escala){
 void Fase_TheBlitz::desenhaBackground()
 {
     for (int i = 0; i < 16; i++){
-        desenha2(Pontos[i][0], Pontos[i][1], 0.25);
+        drawWaves(Pontos[i][0], Pontos[i][1], 0.25);
     }
     EfeitoVisual::getInstance().ortho2D();
 }
