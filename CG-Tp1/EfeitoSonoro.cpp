@@ -71,9 +71,6 @@ void EfeitoSonoro::playThirdLevelTheme()
 {
 	playSong("music/TheVengeanceWeapon.mp3", true);
 }
-void EfeitoSonoro::playEndingTheme() {
-    playSong("music/Ending.mp3", false);
-}
 // ------------------------------------------------------------
 
 // -------------------- Effects Sounds ------------------------
