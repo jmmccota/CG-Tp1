@@ -58,12 +58,14 @@ public:
 	void playBoomEffect();
 	void playTransitioningMenuEffect();
 	void playEnterMenuEffect();
-    void vickersShot();
     void airRaidSiren();
     //Spitfire
     void spitfireFlyBy();
     void spitfireMotor();
     void spitfireMotorAway();
+    //Armamentos
+    void vickersShot();
+    void bombDrop();
 
 	void stopSong();
 

@@ -12,9 +12,10 @@ Fase_TheBlitz::~Fase_TheBlitz()
 
 void Fase_TheBlitz::definePersonagens()
 {
-    principal = new Spitfire(500, 500, (float)100 / 10000, this);
+    pair<float, float> size = EfeitoVisual::getInstance().getOrtho2D();
+    principal = new Spitfire(size.first / 2, size.second / 10, (float)100 / 10000, this);
 
-    //Fora da tela so pra nao comecao vazio
+    //Fora da tela so pra nao comecar vazio
     projeteisAmigos.push_back(new TiroSimples(-1000, -1000, 0));
     projeteisInimigos.push_back(new TiroSimples(-1000, -1000, 0));
     inimigosAtivos.push_back(new Bf109(-1000, -1000, 0, principal, this));
@@ -22,6 +23,7 @@ void Fase_TheBlitz::definePersonagens()
 
 void Fase_TheBlitz::desenhaBackground()
 {
+    EfeitoVisual::getInstance().ortho2D();
 }
 
 void Fase_TheBlitz::desenha()
@@ -126,7 +128,7 @@ void Fase_TheBlitz::keyUp(unsigned char key, int x, int y)
 
 void Fase_TheBlitz::specialKeyDown(int key, int x, int y)
 {
-    principal->detectaMovimentoDown(key, x, y);
+   principal->detectaMovimentoDown(key, x, y);
 }
 
 void Fase_TheBlitz::specialKeyUp(int key, int x, int y)

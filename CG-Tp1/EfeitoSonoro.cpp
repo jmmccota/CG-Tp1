@@ -22,7 +22,7 @@ void EfeitoSonoro::createObjectSystem() {
 		{
 			throw;
 		}
-		result = system->init(10, FMOD_INIT_NORMAL, 0);
+		result = system->init(20, FMOD_INIT_NORMAL, 0);
 		ERRCHECK(result);
 	}
 	catch (const std::exception&)
@@ -86,10 +86,6 @@ void EfeitoSonoro::playEnterMenuEffect()
 {
 	playSong("Sound/EnterMenu_Effect.mp3", false);
 }
-void EfeitoSonoro::vickersShot()
-{
-    playSong("sfx/vickers.mp3", false);
-}
 void EfeitoSonoro::airRaidSiren()
 {
     playSong("sfx/airRaid.mp3", false);
@@ -105,6 +101,14 @@ void EfeitoSonoro::spitfireMotor()
 void EfeitoSonoro::spitfireMotorAway()
 {
     playSong("sfx/spitfireMotorAway.mp3", false);
+}
+void EfeitoSonoro::vickersShot()
+{
+    playSong("sfx/vickers.mp3", false);
+}
+void EfeitoSonoro::bombDrop()
+{
+    playSong("sfx/bombDrop.mp3", false);
 }
 // ------------------------------------------------------------
 

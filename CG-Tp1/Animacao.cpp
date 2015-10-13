@@ -137,7 +137,8 @@ void Animacao::desenha()
 void Animacao::terminou()
 {
 	if (pularAnimacao)
-	{
+    {
+        EfeitoSonoro::getInstance().stopSong();
 		Jogo::getInstance().setProxFase(1);
 		Jogo::getInstance().proximaFase();
 	}

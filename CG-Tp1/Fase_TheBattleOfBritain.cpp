@@ -16,10 +16,14 @@ void Fase_TheBattleOfBritain::definePersonagens()
 {
     pair<float, float> size = EfeitoVisual::getInstance().getOrtho2D();
     principal = new Spitfire(size.first / 2, size.second / 10, (float)100 / 10000, this);
+
+    //Fora da tela so pra nao comecar vazio
+    projeteisAmigos.push_back(new TiroSimples(-1000, -1000, 0));
+    projeteisInimigos.push_back(new TiroSimples(-1000, -1000, 0));
+    inimigosAtivos.push_back(new Bf109(-1000, -1000, 0, principal, this));
 }
 
-
-void desenha2(float translacaoX, float translacaoY, float escala){
+void drawWaves(float translacaoX, float translacaoY, float escala){
     glPushMatrix();
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -42,7 +46,7 @@ void desenha2(float translacaoX, float translacaoY, float escala){
 void Fase_TheBattleOfBritain::desenhaBackground()
 {
     for (int i = 0; i < 16; i++){
-        desenha2(Pontos[i][0], Pontos[i][1], 0.25);
+        drawWaves(Pontos[i][0], Pontos[i][1], 0.25);
     }
     EfeitoVisual::getInstance().ortho2D();
 }
@@ -86,7 +90,7 @@ void Fase_TheBattleOfBritain::atualiza(int value)
         }
     }
 
-    /*
+
 
     for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end(); ++i)
     {
@@ -94,7 +98,7 @@ void Fase_TheBattleOfBritain::atualiza(int value)
         (*i)->acao();
 
         //Atualiza situacao dos inimigos
-        for (std::list<Personagem*>::iterator j = inimigosAtivos.begin(); j != inimigosAtivos.end(); ++j)
+        for (std::list<Personagem*>::iterator j = inimigosAtivos.begin(); j != inimigosAtivos.end();)
         {
             //Se foi alvejado
             if (EfeitoVisual::getInstance().colisao((*j), (*i)))
@@ -103,11 +107,14 @@ void Fase_TheBattleOfBritain::atualiza(int value)
             if ((*j)->destruido())
             {
                 //Explode
-                inimigosAtivos.remove((*j));
+                j = inimigosAtivos.erase(j);
             }
             //Se ta de boa ainda
             else
+            {
                 (*j)->acao();
+                j++;
+            }
         }
     }
 
@@ -130,8 +137,6 @@ void Fase_TheBattleOfBritain::atualiza(int value)
             principal->acao();
         }
     }
-
-    */
 }
 
 void Fase_TheBattleOfBritain::mouse(int button, int state, int x, int y)
@@ -161,6 +166,7 @@ void Fase_TheBattleOfBritain::inicializa()
 {
     definePersonagens();
     EfeitoSonoro::getInstance().playSecondLevelTheme();
+    EfeitoSonoro::getInstance().spitfireMotor();
     Pontos[0][0] = -265;
     Pontos[0][1] = 220;
     Pontos[1][0] = 0;
