@@ -57,7 +57,7 @@ void EfeitoSonoro::playSong(char *file, bool loop) {
 
 // -------------------- Musics ------------------------
 void EfeitoSonoro::playMainTheme() {
-    playSong("Sound/ThirdFase_Theme.mp3", true);
+    playSong("music/MainTitles.mp3", true);
 }
 void EfeitoSonoro::playFirstLevelTheme()
 {

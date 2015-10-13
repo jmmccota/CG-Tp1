@@ -107,7 +107,7 @@ void Fase_TheBlitz::keyUp(unsigned char key, int x, int y)
 
 void Fase_TheBlitz::specialKeyDown(int key, int x, int y)
 {
-    principal->detectaMovimentoDown(key, x, y);
+   principal->detectaMovimentoDown(key, x, y);
 }
 
 void Fase_TheBlitz::specialKeyUp(int key, int x, int y)

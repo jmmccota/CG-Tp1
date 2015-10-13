@@ -63,234 +63,6 @@ void drawLine(float pos, char eixo) {
 	}
 }
 
-void drawTitulo() {
-	glColor3f(0, 1.0, 1.0);
-	int x1, y1;
-	//J
-	x1 = 50;
-	y1 = 100;
-	//j
-	FuncoesAuxiliares::bresenham(1170 + x1, 750 + y1 + 80, 1170 + x1, 660 + y1); //  |
-	FuncoesAuxiliares::bresenham(1120, 660 + y1, 1170 + x1, 660 + y1); // _
-	FuncoesAuxiliares::bresenham(1120, 660 + y1, 1120, 698 + y1); //i 
-	FuncoesAuxiliares::bresenham(1120, 698 + y1, 1150, 698 + y1);//-
-	FuncoesAuxiliares::bresenham(1150, 698 + y1, 1150, 680 + y1);//'
-	FuncoesAuxiliares::bresenham(1150, 680 + y1, 1142 + x1, 680 + y1);//---
-	FuncoesAuxiliares::bresenham(1142 + x1, 680 + y1, 1142 + x1, 750 + y1 + 80);// I
-	FuncoesAuxiliares::bresenham(1142 + x1, 750 + y1 + 80, 1170 + x1, 750 + y1 + 80); //-
-	//I
-	x1 = 50;
-	FuncoesAuxiliares::bresenham(1185 + x1, 750 + y1 + 80, 1185 + x1, 660 + y1);
-	FuncoesAuxiliares::bresenham(1215 + x1, 660 + y1, 1185 + x1, 660 + y1);
-	FuncoesAuxiliares::bresenham(1215 + x1, 660 + y1, 1215 + x1, 750 + y1 + 80);
-	FuncoesAuxiliares::bresenham(1215 + x1, 750 + y1 + 80, 1185 + x1, 750 + y1 + 80);
-	//R
-	x1 = 65;
-	FuncoesAuxiliares::bresenham(1215 + x1, 750 + y1 + 80, 1215 + x1, 660 + y1); //|
-	FuncoesAuxiliares::bresenham(1215 + x1, 750 + y1 + 80, 1265 + 50 + x1, 750 + y1 + 80);//- em cima
-	FuncoesAuxiliares::bresenham(1265 + x1 + 50, 750 + y1 + 80, 1265 + 50 + x1, 700 + y1 + 30);// ' ate o meio
-	FuncoesAuxiliares::bresenham(1265 + 50 + x1, 700 + y1 + 30, 1240 + x1, 700 + y1 + 30);// - ate o meio do R
-	FuncoesAuxiliares::bresenham(1240 + x1, 700 + y1 + 30, 1265 + 50 + x1, 660 + y1);// \ate o fim do r
-	FuncoesAuxiliares::bresenham(1265 + 50 + x1, 660 + y1, 1250 + x1 + 35, 660 + y1);//
-	FuncoesAuxiliares::bresenham(1240 + x1, 695 + y1 + 10, 1250 + x1 + 35, 660 + y1);//
-	FuncoesAuxiliares::bresenham(1240 + x1, 695 + y1 + 10, 1240 + x1, 660 + y1);//
-	FuncoesAuxiliares::bresenham(1240 + x1, 660 + y1, 1215 + x1, 660 + y1);//
-	FuncoesAuxiliares::bresenham(1245 + x1 + 5, 715 + y1 + 40, 1277 + x1 + 5, 715 + y1 + 40);//quadradinho
-	FuncoesAuxiliares::bresenham(1277 + x1 + 5, 715 + y1 + 40, 1277 + x1 + 5, 740 + y1 + 50);//
-	FuncoesAuxiliares::bresenham(1277 + x1 + 5, 740 + y1 + 50, 1245 + x1 + 5, 740 + y1 + 50);//
-	FuncoesAuxiliares::bresenham(1245 + x1 + 5, 740 + y1 + 50, 1245 + x1 + 5, 715 + y1 + 40);//
-	//A
-	x1 = 115;
-	FuncoesAuxiliares::bresenham(1280 + x1, 750 + y1 + 80, 1280 + x1, 660 + y1);
-	FuncoesAuxiliares::bresenham(1280 + x1, 750 + y1 + 80, 1330 + x1 + 50, 750 + y1 + 80);
-	FuncoesAuxiliares::bresenham(1330 + x1 + 50, 750 + y1 + 80, 1330 + x1 + 50, 660 + y1);
-	FuncoesAuxiliares::bresenham(1330 + x1 + 50, 660 + y1, 1313 + x1 + 35, 660 + y1);
-	FuncoesAuxiliares::bresenham(1313 + x1 + 35, 660 + y1, 1313 + x1 + 35, 700 + y1 + 30);
-	FuncoesAuxiliares::bresenham(1280 + x1, 660 + y1, 1297 + x1 + 15, 660 + y1);
-	FuncoesAuxiliares::bresenham(1297 + x1 + 15, 700 + y1 + 30, 1297 + x1 + 15, 660 + y1);
-	FuncoesAuxiliares::bresenham(1297 + x1 + 15, 700 + y1 + 30, 1313 + x1 + 35, 700 + y1 + 30);
-	FuncoesAuxiliares::bresenham(1297 + x1 + 15, 715 + y1 + 45, 1313 + x1 + 35, 715 + y1 + 45);//quadradinho
-	FuncoesAuxiliares::bresenham(1297 + x1 + 15, 715 + y1 + 45, 1297 + x1 + 15, 735 + y1 + 60);
-	FuncoesAuxiliares::bresenham(1297 + x1 + 15, 735 + y1 + 60, 1313 + x1 + 35, 735 + y1 + 60);
-	FuncoesAuxiliares::bresenham(1313 + x1 + 35, 715 + y1 + 45, 1313 + x1 + 35, 735 + y1 + 60);
-	//Y
-	x1 = 165;
-	FuncoesAuxiliares::bresenham(1345 + x1, 660 + y1, 1360 + x1 + 20, 660 + y1);
-	FuncoesAuxiliares::bresenham(1360 + x1 + 20, 660 + y1, 1395 + x1 + 55, 750 + y1 + 80);
-	FuncoesAuxiliares::bresenham(1395 + x1 + 55, 750 + y1 + 80, 1380 + x1 + 35, 750 + y1 + 80);
-	FuncoesAuxiliares::bresenham(1345 + x1, 660 + y1, 1363 + x1, 705 + y1);
-	FuncoesAuxiliares::bresenham(1363 + x1, 705 + y1, 1340 + x1, 750 + y1 + 80);
-	FuncoesAuxiliares::bresenham(1340 + x1, 750 + y1 + 80, 1350 + x1 + 15, 750 + y1 + 80);
-	FuncoesAuxiliares::bresenham(1350 + x1 + 15, 750 + y1 + 80, 1368 + x1 + 15, 718 + y1 + 35);
-	FuncoesAuxiliares::bresenham(1368 + x1 + 15, 718 + y1 + 35, 1380 + x1 + 35, 750 + y1 + 80);
-	//A
-	x1 = 340;
-	FuncoesAuxiliares::bresenham(1280 + x1, 750 + y1 + 80, 1280 + x1, 660 + y1);
-	FuncoesAuxiliares::bresenham(1280 + x1, 750 + y1 + 80, 1330 + x1 + 50, 750 + y1 + 80);
-	FuncoesAuxiliares::bresenham(1330 + x1 + 50, 750 + y1 + 80, 1330 + x1 + 50, 660 + y1);
-	FuncoesAuxiliares::bresenham(1330 + x1 + 50, 660 + y1, 1313 + x1 + 35, 660 + y1);
-	FuncoesAuxiliares::bresenham(1313 + x1 + 35, 660 + y1, 1313 + x1 + 35, 700 + y1 + 30);
-	FuncoesAuxiliares::bresenham(1280 + x1, 660 + y1, 1297 + x1 + 15, 660 + y1);
-	FuncoesAuxiliares::bresenham(1297 + x1 + 15, 700 + y1 + 30, 1297 + x1 + 15, 660 + y1);
-	FuncoesAuxiliares::bresenham(1297 + x1 + 15, 700 + y1 + 30, 1313 + x1 + 35, 700 + y1 + 30);
-	FuncoesAuxiliares::bresenham(1297 + x1 + 15, 715 + y1 + 45, 1313 + x1 + 35, 715 + y1 + 45);//quadradinho
-	FuncoesAuxiliares::bresenham(1297 + x1 + 15, 715 + y1 + 45, 1297 + x1 + 15, 735 + y1 + 60);
-	FuncoesAuxiliares::bresenham(1297 + x1 + 15, 735 + y1 + 60, 1313 + x1 + 35, 735 + y1 + 60);
-	FuncoesAuxiliares::bresenham(1313 + x1 + 35, 715 + y1 + 45, 1313 + x1 + 35, 735 + y1 + 60);
-	//'
-	x1 = 265;
-	FuncoesAuxiliares::bresenham(1465 + x1, 750 + y1 + 80, 1465 + x1, 720 + y1 + 70);
-	FuncoesAuxiliares::bresenham(1465 + x1, 750 + y1 + 80, 1480 + x1 + 10, 750 + y1 + 80);
-	FuncoesAuxiliares::bresenham(1465 + x1, 720 + y1 + 70, 1480 + x1 + 10, 750 + y1 + 80);
-	//s
-	FuncoesAuxiliares::bresenham(1470 + x1, 718 + y1 + 30, 1510 + x1 + 15, 718 + y1 + 30);
-	FuncoesAuxiliares::bresenham(1510 + x1 + 15, 718 + y1 + 30, 1510 + x1 + 15, 703 + y1 + 25);
-	FuncoesAuxiliares::bresenham(1485 + x1, 703 + y1 + 25, 1510 + x1 + 15, 703 + y1 + 25);
-	FuncoesAuxiliares::bresenham(1470 + x1, 718 + y1 + 30, 1470 + x1, 683 + y1 + 15);
-	FuncoesAuxiliares::bresenham(1485 + x1, 703 + y1 + 25, 1485 + x1, 695 + y1 + 15);
-	FuncoesAuxiliares::bresenham(1510 + x1 + 15, 695 + y1 + 15, 1485 + x1, 695 + y1 + 15);
-	FuncoesAuxiliares::bresenham(1510 + x1 + 15, 695 + y1 + 15, 1510 + x1 + 15, 660 + y1);
-	FuncoesAuxiliares::bresenham(1510 + x1 + 15, 660 + y1, 1470 + x1, 660 + y1);
-	FuncoesAuxiliares::bresenham(1470 + x1, 671 + y1, 1470 + x1, 660 + y1);
-	FuncoesAuxiliares::bresenham(1470 + x1, 671 + y1, 1495 + x1 + 15, 671 + y1);
-	FuncoesAuxiliares::bresenham(1495 + x1 + 15, 683 + y1 + 15, 1495 + x1 + 15, 671 + y1);
-	FuncoesAuxiliares::bresenham(1470 + x1, 683 + y1 + 15, 1495 + x1 + 15, 683 + y1 + 15);
-	//fly	
-	//f
-	int y2 = -40;
-	int x3 = 40;
-	FuncoesAuxiliares::bresenham(1330 + x3, 635 + y2, 1330 + x3, 730 + y2);
-	FuncoesAuxiliares::bresenham(1330 + x3, 730 + y2, 1390 + x3, 730 + y2);
-	FuncoesAuxiliares::bresenham(1390 + x3, 730 + y2, 1390 + x3, 705 + y2);
-	FuncoesAuxiliares::bresenham(1390 + x3, 705 + y2, 1350 + x3, 705 + y2);
-	FuncoesAuxiliares::bresenham(1350 + x3, 705 + y2, 1350 + x3, 685 + y2);
-	FuncoesAuxiliares::bresenham(1350 + x3, 685 + y2, 1370 + x3, 685 + y2);
-	FuncoesAuxiliares::bresenham(1370 + x3, 685 + y2, 1370 + x3, 665 + y2);
-	FuncoesAuxiliares::bresenham(1370 + x3, 665 + y2, 1350 + x3, 665 + y2);
-	FuncoesAuxiliares::bresenham(1350 + x3, 665 + y2, 1350 + x3, 635 + y2);
-	FuncoesAuxiliares::bresenham(1330 + x3, 635 + y2, 1350 + x3, 635 + y2);
-	//l
-	FuncoesAuxiliares::bresenham(1400 + x3, 635 + y2, 1400 + x3, 730 + y2);
-	FuncoesAuxiliares::bresenham(1400 + x3, 635 + y2, 1445 + x3, 635 + y2);
-	FuncoesAuxiliares::bresenham(1445 + x3, 635 + y2, 1445 + x3, 655 + y2);
-	FuncoesAuxiliares::bresenham(1445 + x3, 655 + y2, 1420 + x3, 655 + y2);
-	FuncoesAuxiliares::bresenham(1420 + x3, 655 + y2, 1420 + x3, 730 + y2);
-	FuncoesAuxiliares::bresenham(1400 + x3, 730 + y2, 1420 + x3, 730 + y2);
-	//y
-	int x2 = 115;
-	FuncoesAuxiliares::bresenham(1345 + x2 + x3, 635 + y2, 1360 + x2 + 5 + x3, 635 + y2);
-	FuncoesAuxiliares::bresenham(1360 + x2 + 5 + x3, 635 + y2, 1395 + x2 + 5 + x3, 730 + y2);
-	FuncoesAuxiliares::bresenham(1395 + x2 + 5 + x3, 730 + y2, 1380 + x2 + x3, 730 + y2);
-	FuncoesAuxiliares::bresenham(1345 + x2 + x3, 635 + y2, 1363 + x2 + x3, 680 + y2);
-	FuncoesAuxiliares::bresenham(1363 + x2 + x3, 680 + y2, 1335 + x2 + x3, 730 + y2);
-	FuncoesAuxiliares::bresenham(1335 + x2 + x3, 730 + y2, 1350 + x2 + x3, 730 + y2);
-	FuncoesAuxiliares::bresenham(1350 + x2 + x3, 730 + y2, 1368 + x2 + x3, 698 + y2);
-	FuncoesAuxiliares::bresenham(1368 + x2 + x3, 698 + y2, 1380 + x2 + x3, 730 + y2);
-	//circulo?????????
-	glColor3f(1.0, 1.0, 0.0); //amarelo
-	FuncoesAuxiliares::bresenhamCircle(1700, 650, 90, 90);
-	glColor3f(0, 0.0, 0.8);
-	FuncoesAuxiliares::bresenhamCircle(1700, 650, 80, 80);
-	glColor3f(1.0, 1.0, 1.0);
-	FuncoesAuxiliares::bresenhamCircle(1700, 650, 40, 40);
-	glColor3f(1.0, 0.0, 0.0);
-	FuncoesAuxiliares::bresenhamCircle(1700, 650, 30, 30);
-
-	//katana
-	int xk = 460;
-	int yk = 50;
-	glColor3f(1.0, 1.0, 1.0);
-	glBegin(GL_LINE_LOOP);
-	glVertex2i(1150 + xk, yk + 518);
-	glVertex2i(1160 + xk, yk + 498);
-	glVertex2i(1190 + xk, yk + 528);
-	glVertex2i(1180 + xk, yk + 548);
-	glEnd();
-	glColor3f(0.0, 0.0, 0.0);
-	glBegin(GL_QUADS);
-	glVertex2i(1151 + xk, yk + 518);
-	glVertex2i(1159 + xk, yk + 498);
-	glVertex2i(1189 + xk, yk + 528);
-	glVertex2i(1181 + xk, yk + 548);
-	glEnd();
-	glColor3f(1.0, 1.0, 1.0);
-	FuncoesAuxiliares::bresenhamCircle(1162 + xk, yk + 515, 2, 2);
-	FuncoesAuxiliares::bresenhamCircle(1177 + xk, yk + 530, 2, 2);
-	glBegin(GL_LINE_LOOP);
-	glVertex2i(1197 + xk, yk + 521);
-	glVertex2i(1177 + xk, yk + 558);
-	glVertex2i(1184 + xk, yk + 565);
-	glVertex2i(1205 + xk, yk + 525);
-	glEnd();
-	glColor3f(0.0, 0.0, 0.0);
-	glBegin(GL_QUADS);
-	glVertex2i(1196 + xk, yk + 521);
-	glVertex2i(1178 + xk, yk + 558);
-	glVertex2i(1185 + xk, yk + 565);
-	glVertex2i(1204 + xk, yk + 525);
-	glEnd();
-	glColor3f(1.0, 1.0, 1.0);
-	glBegin(GL_QUADS);
-	glVertex2i(1198 + xk, yk + 537);
-	glVertex2i(1340 + xk, yk + 669);
-	glVertex2i(1340 + xk, yk + 695);
-	glVertex2i(1189 + xk, yk + 552);
-
-	glEnd();
-
-
-	//circulo?????????
-	glColor3f(1.0, 1.0, 0.0); //amarelo
-	FuncoesAuxiliares::bresenhamCircle(1200, 650, 90, 90);
-	glColor3f(0, 0.0, 0.8);
-	FuncoesAuxiliares::bresenhamCircle(1200, 650, 80, 80);
-	glColor3f(1.0, 1.0, 1.0);
-	FuncoesAuxiliares::bresenhamCircle(1200, 650, 40, 40);
-	glColor3f(1.0, 0.0, 0.0);
-	FuncoesAuxiliares::bresenhamCircle(1200, 650, 30, 30);
-
-	//katana
-	int xk2 = -50;
-	int yk2 = 50;
-	glColor3f(1.0, 1.0, 1.0);
-	glBegin(GL_LINE_LOOP);
-	glVertex2i(1150 + xk2, yk2 + 518);
-	glVertex2i(1160 + xk2, yk2 + 498);
-	glVertex2i(1190 + xk2, yk2 + 528);
-	glVertex2i(1180 + xk2, yk2 + 548);
-	glEnd();
-	glColor3f(0.0, 0.0, 0.0);
-	glBegin(GL_QUADS);
-	glVertex2i(1151 + xk2, yk2 + 518);
-	glVertex2i(1159 + xk2, yk2 + 498);
-	glVertex2i(1189 + xk2, yk2 + 528);
-	glVertex2i(1181 + xk2, yk2 + 548);
-	glEnd();
-	glColor3f(1.0, 1.0, 1.0);
-	FuncoesAuxiliares::bresenhamCircle(1162 + xk2, yk2 + 515, 2, 2);
-	FuncoesAuxiliares::bresenhamCircle(1177 + xk2, yk2 + 530, 2, 2);
-	glBegin(GL_LINE_LOOP);
-	glVertex2i(1197 + xk2, yk2 + 521);
-	glVertex2i(1177 + xk2, yk2 + 558);
-	glVertex2i(1184 + xk2, yk2 + 565);
-	glVertex2i(1205 + xk2, yk2 + 525);
-	glEnd();
-	glColor3f(0.0, 0.0, 0.0);
-	glBegin(GL_QUADS);
-	glVertex2i(1196 + xk2, yk2 + 521);
-	glVertex2i(1178 + xk2, yk2 + 558);
-	glVertex2i(1185 + xk2, yk2 + 565);
-	glVertex2i(1204 + xk2, yk2 + 525);
-	glEnd();
-	glColor3f(1.0, 1.0, 1.0);
-	glBegin(GL_QUADS);
-	glVertex2i(1198 + xk2, yk2 + 537);
-	glVertex2i(1340 + xk2, yk2 + 669);
-	glVertex2i(1340 + xk2, yk2 + 695);
-	glVertex2i(1189 + xk2, yk2 + 552);
-	glEnd();
-}
-
 //Desenha Quadrado para Opções - Paremetros: Posição x, Posição Y, Titulo 
 void drawSquad(float posX, float posY, string titulo) {
 
@@ -337,15 +109,16 @@ void drawSquad(float posX, float posY, string titulo) {
 	glVertex2f(posX, rasterY);
 	glVertex2f(rasterX, rasterY);
 	glEnd();
+	//Desenha Seta para Volta
 	glColor3f(1, 0.27, 0);
 	glBegin(GL_LINE_LOOP);
-	glVertex2i(200, 630);
-	glVertex2i(175, 600);
-	glVertex2i(200, 570);
-	glVertex2i(200, 590);
-	glVertex2i(245, 590);
-	glVertex2i(245, 610);
-	glVertex2i(200, 610);
+	glVertex2i(200, 580);
+	glVertex2i(175, 550);
+	glVertex2i(200, 520);
+	glVertex2i(200, 540);
+	glVertex2i(245, 540);
+	glVertex2i(245, 560);
+	glVertex2i(200, 560);
 	glEnd();
 	//-------------------- END BOXES DE BESTSCORES ---------------------
 }
@@ -424,7 +197,7 @@ void drawOptionsMenu(char *options[], int quantOptions, int posY) {
 void drawBestScoresMenu(vector<Score> bestScores, int decRasterY) {
 
 	int rasterX = 250;
-	int rasterY = 510;
+	int rasterY = 460;
 	pair<int, int> sizeScreen = EfeitoVisual::getInstance().sizeScreen();
 	glColor3f(0.93, 0.57, 0.13);
 
@@ -432,7 +205,6 @@ void drawBestScoresMenu(vector<Score> bestScores, int decRasterY) {
 		glRasterPos2f(rasterX - 50, rasterY);
 		string rank = std::to_string(i + 1) + " -  ";
 		FuncoesAuxiliares::writeWord_BITMAP(rank, FONT_DEFAULT);
-
 
 		string name = bestScores[i].getPlayer();
 		glRasterPos2f(rasterX, rasterY);
@@ -447,7 +219,6 @@ void drawBestScoresMenu(vector<Score> bestScores, int decRasterY) {
 		}
 		FuncoesAuxiliares::writeWord_BITMAP(score, FONT_DEFAULT);
 
-
 		float comple = (sizeScreen.first / 2) / 10;
 		string desloc = "_";
 		for (int letter = 0; letter < comple; letter++) {
@@ -460,80 +231,75 @@ void drawBestScoresMenu(vector<Score> bestScores, int decRasterY) {
 	}
 }
 
-//Desenha a Opção do Menu - Parametro: 
+//Desenha a Opção do Menu 
 void drawOpcoesMenu() {
 
+	int rasterY = 460;
 	glColor3f(1, 1, 1);
 
-	glRasterPos2f(200, 500);
+	glRasterPos2f(200, 460);
 	FuncoesAuxiliares::writeWord_BITMAP("O objetivo do jogo e terminar as 3 fases. Mate os 3 chefes e o maximo de inimigos possiveis!", FONT_DEFAULT);
 
-	glRasterPos2f(200, 460);
+	glRasterPos2f(200, rasterY - 40);
 	FuncoesAuxiliares::writeWord_BITMAP("A cada 100 mil pontos voce ganha uma vida.Caso perca todas, GAME OVER!", FONT_DEFAULT);
 
-	glRasterPos2f(200, 420);
+	glRasterPos2f(200, rasterY - 80);
 	FuncoesAuxiliares::writeWord_BITMAP("Comandos:", FONT_DEFAULT);
 
-	glRasterPos2f(220, 380);
+	glRasterPos2f(220, rasterY - 120);
 	FuncoesAuxiliares::writeWord_BITMAP("- Setas direcionais movimentam o Aviao.", FONT_DEFAULT);
 
-	glRasterPos2f(220, 340);
+	glRasterPos2f(220, rasterY - 160);
 	FuncoesAuxiliares::writeWord_BITMAP("- Barra de espaco Atira.", FONT_DEFAULT);
 
 	glColor3f(1, 0.27, 0);
 
-	glRasterPos2f(375, 250);
+	glRasterPos2f(375, 210);
 	FuncoesAuxiliares::writeWord_BITMAP("Barra de Espaco", GLUT_BITMAP_TIMES_ROMAN_24);
 
-	glRasterPos2f(765, 250);
+	glRasterPos2f(765, 210);
 	FuncoesAuxiliares::writeWord_BITMAP("<-", GLUT_BITMAP_TIMES_ROMAN_24);
 
-	glRasterPos2f(863, 250);
+	glRasterPos2f(863, 210);
 	FuncoesAuxiliares::writeWord_BITMAP("v", GLUT_BITMAP_TIMES_ROMAN_24);
 
-	glRasterPos2f(935, 250);
+	glRasterPos2f(935, 210);
 	FuncoesAuxiliares::writeWord_BITMAP("->", GLUT_BITMAP_TIMES_ROMAN_24);
 
-	glRasterPos2f(863, 327.5);
+	glRasterPos2f(863, 287.5);
 	FuncoesAuxiliares::writeWord_BITMAP("^", GLUT_BITMAP_TIMES_ROMAN_24);
 
-	/*glRasterPos2f(205, 420);
-	FuncoesAuxiliares::writeWord_BITMAP("- Barra de espaco atira!", FONT_DEFAULT);
-
-	glRasterPos2f(205, 140);
-	FuncoesAuxiliares::writeWord_BITMAP("Barra de espaco", FONT_DEFAULT);
-*/
 	glColor3f(1, 0.27, 0);
 	/*--------------- BOXES COMANDOS -------------------*/
 	glBegin(GL_LINE_LOOP);
-	glVertex2i(220, 300); //Barra espaço
-	glVertex2i(730, 300);
-	glVertex2i(730, 220);
-	glVertex2i(220, 220);
+	glVertex2i(220, 260); //Barra espaço
+	glVertex2i(730, 260);
+	glVertex2i(730, 180);
+	glVertex2i(220, 180);
 	glEnd();
 	glBegin(GL_LINE_LOOP); //Seta esquerda
-	glVertex2i(745, 300);
-	glVertex2i(825, 300);
-	glVertex2i(825, 220);
-	glVertex2i(745, 220);
+	glVertex2i(745, 260);
+	glVertex2i(825, 260);
+	glVertex2i(825, 180);
+	glVertex2i(745, 180);
 	glEnd();
 	glBegin(GL_LINE_LOOP);
-	glVertex2i(830, 300); //Seta baixo
-	glVertex2i(910, 300);
-	glVertex2i(910, 220);
-	glVertex2i(830, 220);
+	glVertex2i(830, 260); //Seta baixo
+	glVertex2i(910, 260);
+	glVertex2i(910, 180);
+	glVertex2i(830, 180);
 	glEnd();
 	glBegin(GL_LINE_LOOP);
-	glVertex2i(915, 300); //Seta direita
-	glVertex2i(995, 300);
-	glVertex2i(995, 220);
-	glVertex2i(915, 220);
+	glVertex2i(915, 260); //Seta direita
+	glVertex2i(995, 260);
+	glVertex2i(995, 180);
+	glVertex2i(915, 180);
 	glEnd();
 	glBegin(GL_LINE_LOOP);
-	glVertex2i(830, 385); //Seta cima
-	glVertex2i(910, 385);
-	glVertex2i(910, 305);
-	glVertex2i(830, 305);
+	glVertex2i(830, 345); //Seta cima
+	glVertex2i(910, 345);
+	glVertex2i(910, 265);
+	glVertex2i(830, 265);
 	glEnd();
 
 	/*-------------- END COMANDOS SETAS ------------------*/
@@ -561,7 +327,6 @@ void drawOpcoesMenu() {
 
 #pragma endregion
 
-
 void Menu::desenha() {
 
 	pair<int, int> sizeScreen = EfeitoVisual::getInstance().getOrtho2D();
@@ -577,27 +342,30 @@ void Menu::desenha() {
 	drawLine(40, 'y');
 
 	if (optMelhores) {//Tela Melhores Pontuações
-		drawSquad(150, 600, "MELHORES PONTUACOES");
+		EfeitoVisual::getInstance().desenhaTitulo(600, 65);
+		drawSquad(150, 550, "MELHORES PONTUACOES");
 		// 5 Valores - Passar 80 por parametro
-		// 7 Valores - Passar 55 por parametro
-		// 10 Valores - Passar 37 por Parametro
-		drawBestScoresMenu(Score::getInstance().getBestScore(7), 55);
+		// 7 Valores - Passar 47 por parametro
+		// 10 Valores - Passar 30 por Parametro
+		drawBestScoresMenu(Score::getInstance().getBestScore(7), 47);
 	}
 	else if (optOpcoes) {//Tela de Opções
-		drawSquad(150, 600, "OPCOES");
+		EfeitoVisual::getInstance().desenhaTitulo(600, 65);
+		drawSquad(150, 550, "OPCOES");
 		drawOpcoesMenu();
 	}
 	else if (optSair) {
 		exit(1);
 	}
 	else {//Opções do Menu Inicial
+		EfeitoVisual::getInstance().desenhaTitulo(1100, 0);
+
 		char *options[4];
 		options[0] = "NOVO JOGO";
 		options[1] = "MELHORES PONTUACOES";
 		options[2] = "OPCOES";
 		options[3] = "SAIR";
 		drawOptionsMenu(options, 4, 450);
-		drawTitulo();
 		//Desenha Avião
 		TiroSimples *municao1 = new TiroSimples(200, 460, 0.002);
 		TiroSimples *municao2 = new TiroSimples(400, 460, 0.002);
@@ -670,12 +438,12 @@ void Menu::atualiza(int value) {
 	// Move o quadrado
 	posX1 += xstep;
 	PosY1 += ystep;
-	if (translacaoY == 100 || translacaoY == 400){
+	if (translacaoY == 100 || translacaoY == 400) {
 		atirou2 = true;
 	}
-	if (atirou2){
+	if (atirou2) {
 		translacaoTiro2 += 20;
-		if (translacaoTiro2 == 600){
+		if (translacaoTiro2 == 600) {
 			atirou2 = false;
 			translacaoTiro2 = 0;
 		}
@@ -814,12 +582,12 @@ void Menu::mouse(int button, int state, int x, int y) {
 		cout << "Position: (" << x << "," << y << ")" << endl;
 
 		if (optMelhores) {
-			if ((x > 175 && x < 245) && (y > 450 && y < 510)) {
+			if ((x > 175 && x < 245) && (y > 500 && y < 560)) {
 				optMelhores = false;
 			}
 		}
 		else if (optOpcoes) {
-			if ((x > 175 && x < 245) && (y > 450 && y < 510)) {
+			if ((x > 175 && x < 245) && (y > 500 && y < 560)) {
 				optOpcoes = false;
 			}
 		}
@@ -859,6 +627,6 @@ void Menu::inicializa()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	//-------------
-	EfeitoSonoro::getInstance().playMainTheme();
+	//EfeitoSonoro::getInstance().playMainTheme();
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
