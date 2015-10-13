@@ -17,6 +17,7 @@ class Spitfire : public Personagem
 {
     private:
         bool movCima = false, movBaixo = false, movEsq = false, movDir = false;
+        GLfloat velX = 0, velY = 0;
 
     public:
         Spitfire(GLfloat pX, GLfloat pY, float esc, Fase *f);

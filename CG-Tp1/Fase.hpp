@@ -28,7 +28,7 @@ class Fase
 {
 	protected:
 		//Personagem jogavel
-        Personagem *principal;
+        Spitfire *principal;
 
 		//Fila de inimigos que apareceram na tela
 		std::queue<Personagem*> inimigosInativos;
@@ -92,7 +92,7 @@ class Fase
 #include "Animacao.hpp"
 #include "Menu.hpp"
 #include "Fase_TheBlitz.hpp"
-#include "Fase_TheBatlleOfBritain.hpp"
+#include "Fase_TheBattleOfBritain.hpp"
 #include "Fase_TheVengeanceWeapon.hpp"
 
 #endif

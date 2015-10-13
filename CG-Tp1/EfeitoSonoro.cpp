@@ -57,9 +57,7 @@ void EfeitoSonoro::playSong(char *file, bool loop) {
 
 // -------------------- Musics ------------------------
 void EfeitoSonoro::playMainTheme() {
-    cout << "vai tocar";
     playSong("music/MainTitles.mp3", true);
-    cout << "tocou";
 }
 void EfeitoSonoro::playFirstLevelTheme()
 {
@@ -90,6 +88,10 @@ void EfeitoSonoro::playTransitioningMenuEffect()
 void EfeitoSonoro::playEnterMenuEffect()
 {
 	playSong("Sound/EnterMenu_Effect.mp3", false);
+}
+void EfeitoSonoro::vickersShot()
+{
+    playSong("sfx/vickers.mp3", false);
 }
 // ------------------------------------------------------------
 

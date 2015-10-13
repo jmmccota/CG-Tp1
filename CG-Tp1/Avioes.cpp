@@ -5,12 +5,12 @@
 
 
 Spitfire::Spitfire(GLfloat pX, GLfloat pY, float esc, Fase *f)
-    : Personagem(pX, pY, 0.016 * esc, esc, f)
+    : Personagem(pX, pY, 200 * esc, esc, f)
 {
     this->carrega("modelos/spitfire.dat");
     hp = 40;
-    municao[1] = 300;
-    municao[2] = 2;
+    municao[0] = 9999999;
+    municao[1] = 2;
 }
 
 
@@ -28,6 +28,8 @@ void Spitfire::acao()
         posX += velocidade;
     else if (movEsq)
         posX -= velocidade;
+    //posY += velY;
+    //posX += velX;
 }
 
 void Spitfire::atira(int tipo)
@@ -36,9 +38,12 @@ void Spitfire::atira(int tipo)
     {
         municao[tipo]--;
         if (!tipo)
-            fase->novoProjetil(new TiroSimples(posX, posY + tamY, escala));
+        {
+            EfeitoSonoro::getInstance().vickersShot();
+            fase->novoProjetil(new TiroSimples(posX, posY + tamY * escala, 0.2 * escala));
+        }
         else
-            fase->novoProjetil(new Bomba(posX, posY + tamY, escala));
+            fase->novoProjetil(new Bomba(posX, posY + tamY * escala, escala));
     }
 }
 
@@ -66,11 +71,11 @@ void Spitfire::detectaMovimentoDown(int key, int x, int y)
     case GLUT_KEY_DOWN:
         movBaixo = true;
         break;
-    case GLUT_KEY_LEFT:
-        movEsq = true;
-        break;
     case GLUT_KEY_RIGHT:
         movDir = true;
+        break;
+    case GLUT_KEY_LEFT:
+        movEsq = true;
         break;
     }
 }
@@ -80,15 +85,19 @@ void Spitfire::detectaMovimentoUp(int key, int x, int y)
     {
     case GLUT_KEY_UP:
         movCima = false;
+        //velY += 1;
         break;
     case GLUT_KEY_DOWN:
         movBaixo = false;
-        break;
-    case GLUT_KEY_LEFT:
-        movEsq = false;
+        //velY -= 1;
         break;
     case GLUT_KEY_RIGHT:
         movDir = false;
+        //velX += 1;
+        break;
+    case GLUT_KEY_LEFT:
+        movEsq = false;
+        //velX -= 1;
         break;
     }
 }

@@ -59,6 +59,7 @@ public:
 	void playBoomEffect();
 	void playTransitioningMenuEffect();
 	void playEnterMenuEffect();
+    void vickersShot();
 
 	void stopSong();
 
