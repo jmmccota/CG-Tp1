@@ -121,5 +121,6 @@ void Jogo::setProxFase(int p)
 void Jogo::fimJogo()
 {
 	//salvar score
+	//passar isso pro destrutor??
 	exit(0);
 }
