@@ -32,8 +32,14 @@ bool limitX = false;
 // mover aviao d opcoes
 GLfloat translacaoOpcoesY = 0.0f;
 GLfloat translacaoOpcoesX = 0.0f;
+//translacao tiro menu opcoes
 GLfloat translacaoTiro = 0.0f;
+// translacao tiro menu
+GLfloat translacaoTiro2 = 0.0f;
+// boolean para atirar do menu de opcoes
 boolean atirou = false;
+// boolean para atirar menu
+boolean atirou2 = false;
 
 //Desenha uma Linha - Parametro: posição em relação ao eixo Y
 void drawLine(float pos, char eixo) {
@@ -593,6 +599,8 @@ void Menu::desenha() {
 		drawOptionsMenu(options, 4, 450);
 		drawTitulo();
 		//Desenha Avião
+		TiroSimples *municao1 = new TiroSimples(200, 460, 0.002);
+		TiroSimples *municao2 = new TiroSimples(400, 460, 0.002);
 		Spitfire *spitfire = new Spitfire(300, 380, 0.025, nullptr);
 		glPushMatrix();
 
@@ -611,6 +619,11 @@ void Menu::desenha() {
 			}
 		}
 		glTranslatef(translacaoY, 0, 0);
+		glPushMatrix();
+		glTranslatef(0, translacaoTiro2, 0);
+		municao1->desenha();
+		municao2->desenha();
+		glPopMatrix();
 		spitfire->desenha();
 		glPopMatrix();
 	}
@@ -657,6 +670,16 @@ void Menu::atualiza(int value) {
 	// Move o quadrado
 	posX1 += xstep;
 	PosY1 += ystep;
+	if (translacaoY == 100 || translacaoY == 400){
+		atirou2 = true;
+	}
+	if (atirou2){
+		translacaoTiro2 += 20;
+		if (translacaoTiro2 == 600){
+			atirou2 = false;
+			translacaoTiro2 = 0;
+		}
+	}
 }
 
 void Menu::keyDown(unsigned char key, int x, int y)
