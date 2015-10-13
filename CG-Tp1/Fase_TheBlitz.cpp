@@ -59,7 +59,6 @@ void Fase_TheBlitz::desenha()
         inimigosAtivos[i]->desenha();
 
     principal->desenha();
-
     for (int i = 0; i < projeteis.size(); i++)
         projeteis[i]->desenha();
 
