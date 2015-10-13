@@ -5,10 +5,10 @@
 
 
 Spitfire::Spitfire(GLfloat pX, GLfloat pY, float esc, Fase *f)
-    : Personagem(pX, pY, 200 * esc, esc, f)
+    : Personagem(pX, pY, 250 * esc, esc, f)
 {
     this->carrega("modelos/spitfire.dat");
-    hp = 40;
+    hp = 400;
     municao[0] = 9999999;
     municao[1] = 2;
 }
@@ -20,13 +20,14 @@ Spitfire::~Spitfire()
 
 void Spitfire::acao()
 {
-    if (movCima)
+    pair<GLfloat, GLfloat> size = EfeitoVisual::getInstance().getOrtho2D();
+    if (movCima && posY + velocidade + tamY < size.second)
         posY += velocidade;
-    else if (movBaixo)
+    else if (movBaixo && posY - velocidade - tamY > 0)
         posY -= velocidade;
-    if (movDir)
+    if (movDir && posX + velocidade + tamX < size.first)
         posX += velocidade;
-    else if (movEsq)
+    else if (movEsq && posX - velocidade - tamX > 0)
         posX -= velocidade;
     //posY += velY;
     //posX += velX;
@@ -40,10 +41,10 @@ void Spitfire::atira(int tipo)
         if (!tipo)
         {
             EfeitoSonoro::getInstance().vickersShot();
-            fase->novoProjetil(new TiroSimples(posX, posY + tamY * escala, 0.2 * escala));
+            fase->novoProjetilAmigo(new TiroSimples(posX, posY + tamY * escala, 0.1 * escala));
         }
         else
-            fase->novoProjetil(new Bomba(posX, posY + tamY * escala, escala));
+            fase->novoProjetilAmigo(new Bomba(posX, posY + tamY * escala, escala));
     }
 }
 
@@ -107,7 +108,7 @@ void Spitfire::detectaMovimentoUp(int key, int x, int y)
 
 
 Bf109::Bf109(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f)
-    : Personagem(pX, pY, 0.01*esc, esc, f)
+    : Personagem(pX, pY, 150*esc, esc, f)
 {
     alvo = a;
     carrega("modelos/bf109.dat");
@@ -145,7 +146,7 @@ void Bf109::atira(int tipo)
     if (municao[tipo] > 0)
     {
         municao[tipo]--;
-        fase->novoProjetil(new TiroSimplesInimigo(posX, posY + tamY, escala));
+        fase->novoProjetilInimigo(new TiroSimplesInimigo(posX, posY + tamY, 0.1 * escala));
     }
 }
 
@@ -153,13 +154,15 @@ void Bf109::atira(int tipo)
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-Me163::Me163(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f) : Personagem(pX, pY, 0.025*esc, esc, f)
+Me163::Me163(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f) : Personagem(pX, pY, 400*esc, esc, f)
 {
     alvo = a;
     carrega("modelo/me163.dat");
     hp = 20;
     municao[0] = 0;
     municao[1] = 0;
+    velocidadeX = 400 * esc;
+    velocidadeY = 100 * esc;
 }
 
 
@@ -170,17 +173,8 @@ Me163::~Me163()
 
 void Me163::acao()
 {
-    //Se ainda esta "longe" do alvo
-    if (abs(alvo->getX() - posX) > (tamX + tamX + tamX))
-    {
-        posX += (alvo->getX() - posX > 0 ? velocidade / 5 : -velocidade / 5);
-    }
-    //Se esta perto do alvo
-    else
-    {
-        posX += (alvo->getX() - posX > 0 ? velocidade / 5 : -velocidade / 5);
-    }
-    posY -= velocidade;
+    posX += (alvo->getX() - posX > 0 ? velocidadeX : -velocidadeX);
+    posY -= velocidadeY;
 }
 
 
@@ -217,8 +211,8 @@ void Me264::atira(int tipo)
 	{
 		municao[tipo]--;
 		if (!tipo)
-			fase->novoProjetil(new TiroSimples(posX, posY + tamY, escala));
+			fase->novoProjetilInimigo(new TiroSimples(posX, posY + tamY, escala));
 		else
-			fase->novoProjetil(new Bomba(posX, posY + tamY, escala));
+			fase->novoProjetilInimigo(new Bomba(posX, posY + tamY, escala));
 	}
 }

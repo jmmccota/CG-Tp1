@@ -28,6 +28,7 @@ class Projetil : public Solido
         Projetil(GLfloat pX, GLfloat pY, GLfloat vel, float esc);
 
         void acao();
+        int getDano();
 };
 
 

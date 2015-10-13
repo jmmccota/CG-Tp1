@@ -11,7 +11,7 @@ class Fase;
 #include "Personagem.hpp"
 #include "Projetil.hpp"
 #include "Jogo.hpp"
-#include <queue>
+#include <list>
 #include <vector>
 
 
@@ -30,14 +30,12 @@ class Fase
 		//Personagem jogavel
         Spitfire *principal;
 
-		//Fila de inimigos que apareceram na tela
-		std::queue<Personagem*> inimigosInativos;
-
         //Lista de inimigos que apareceram na tela
-        std::vector<Personagem*> inimigosAtivos;
+        std::list<Personagem*> inimigosAtivos;
 
         //Lista de projeteis que apareceram na tela
-        std::vector<Projetil*> projeteis;
+        std::list<Projetil*> projeteisInimigos;
+        std::list<Projetil*> projeteisAmigos;
 
 	public:
         Fase();
@@ -85,7 +83,8 @@ class Fase
         virtual void inicializa() = 0;
 
         //Insere um novo projetil na fase
-        void novoProjetil(Projetil *p);
+        void novoProjetilInimigo(Projetil *p);
+        void novoProjetilAmigo(Projetil *p);
 };
 
 //Incluir todas as fases do jogo

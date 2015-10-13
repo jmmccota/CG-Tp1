@@ -32,6 +32,9 @@ class Poligono
         //    (x,y) usado como posicao do solido que contem o poligono
         void desenha(GLfloat x, GLfloat y);
 
+        //Inverte os pontos Y do poligono
+        //    Usado para avioes vindo na direcao oposta
+        void inverteY();
 
         //Getters
         GLfloat getPontoX(int indice);

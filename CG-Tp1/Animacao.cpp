@@ -182,5 +182,6 @@ void Animacao::specialKeyUp(int key, int x, int y)
 void Animacao::inicializa()
 {
 	//EfeitoSonoro::getInstance().playOpenTheme();
+    EfeitoSonoro::getInstance().spitfireFlyBy();
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }

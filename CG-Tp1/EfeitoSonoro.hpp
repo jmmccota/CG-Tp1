@@ -59,6 +59,11 @@ public:
 	void playTransitioningMenuEffect();
 	void playEnterMenuEffect();
     void vickersShot();
+    void airRaidSiren();
+    //Spitfire
+    void spitfireFlyBy();
+    void spitfireMotor();
+    void spitfireMotorAway();
 
 	void stopSong();
 

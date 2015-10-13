@@ -59,8 +59,8 @@ void Solido::carrega(std::string arquivo)
         }
 	}
 
-    this->tamX = tamX * escala;
-    this->tamY = ( (abs(tamY1) > abs(tamY2)) ? abs(tamY1) : abs(tamY2) ) * escala;
+    this->tamX = tamX;
+    this->tamY = (abs(tamY1) > abs(tamY2)) ? abs(tamY1) : abs(tamY2);
 }
 
 void Solido::desenha()

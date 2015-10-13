@@ -10,3 +10,7 @@ void Projetil::acao()
     posY += velocidade;
 }
  
+int Projetil::getDano()
+{
+    return dano;
+}

@@ -20,9 +20,9 @@ void EfeitoVisual::ortho2D()
 	gluOrtho2D(0.0f, FULLHD_ORTHO_X, 0.0f, FULLHD_ORTHO_Y);
 }
 
-pair<float, float> EfeitoVisual::getOrtho2D()
+pair<GLfloat, GLfloat> EfeitoVisual::getOrtho2D()
 {
-	return pair<float, float>(FULLHD_ORTHO_X, FULLHD_ORTHO_Y);
+    return pair<GLfloat, GLfloat>(FULLHD_ORTHO_X, FULLHD_ORTHO_Y);
 }
 
 bool EfeitoVisual::colisao(Solido *a, Solido *b)
@@ -54,9 +54,9 @@ bool EfeitoVisual::isFullScreen()
 	return fullscreen;
 }
 
-pair<int, int> EfeitoVisual::sizeScreen()
+pair<GLint, GLint> EfeitoVisual::sizeScreen()
 {
-	return pair<int, int>(sizeX, sizeY);
+    return pair<GLint, GLint>(sizeX, sizeY);
 }
 
 pair<double, double> EfeitoVisual::positionScreen(char * type)

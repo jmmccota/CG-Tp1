@@ -56,6 +56,7 @@ class Me163 : public Personagem
 {
     private:
         Personagem *alvo;
+        GLfloat velocidadeX, velocidadeY;
 
     public:
         Me163(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f);

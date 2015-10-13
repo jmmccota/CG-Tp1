@@ -18,4 +18,8 @@ bool Personagem::destruido()
 {
     return hp <= 0;
 }
- 
+void Personagem::inverteY()
+{
+    for (int i = 0; i < poligonos.size(); i++)
+        poligonos[i].inverteY();
+}

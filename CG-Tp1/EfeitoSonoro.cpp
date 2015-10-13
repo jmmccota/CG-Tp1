@@ -90,6 +90,22 @@ void EfeitoSonoro::vickersShot()
 {
     playSong("sfx/vickers.mp3", false);
 }
+void EfeitoSonoro::airRaidSiren()
+{
+    playSong("sfx/airRaid.mp3", false);
+}
+void EfeitoSonoro::spitfireFlyBy()
+{
+    playSong("sfx/spitfireFlyBy.mp3", false);
+}
+void EfeitoSonoro::spitfireMotor()
+{
+    playSong("sfx/spitfireMotor.mp3", false);
+}
+void EfeitoSonoro::spitfireMotorAway()
+{
+    playSong("sfx/spitfireMotorAway.mp3", false);
+}
 // ------------------------------------------------------------
 
 void EfeitoSonoro::stopSong() {

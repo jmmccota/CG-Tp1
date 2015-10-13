@@ -27,8 +27,13 @@ void Fase::desenha(){
 	desenhaBackground();
 }
 
-void Fase::novoProjetil(Projetil *p)
+void Fase::novoProjetilInimigo(Projetil *p)
 {
-    projeteis.push_back(p);
+    projeteisInimigos.push_back(p);
+}
+
+void Fase::novoProjetilAmigo(Projetil *p)
+{
+    projeteisAmigos.push_back(p);
 }
  

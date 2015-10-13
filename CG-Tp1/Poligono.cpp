@@ -73,4 +73,10 @@ int Poligono::getNPontos()
 {
     return pontosX.size();
 }
+void Poligono::inverteY()
+{
+    for (int i = 0; i < pontosY.size(); i++)
+        pontosY[i] = -pontosY[i];
+}
+
  
