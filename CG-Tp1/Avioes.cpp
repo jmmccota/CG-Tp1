@@ -222,3 +222,42 @@ void Me264::atira(int tipo)
 			fase->novoProjetil(new Bomba(posX, posY + tamY, escala));
 	}
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Me262::Me262(GLfloat pX, GLfloat pY, float esc, Fase *f)
+	: Personagem(pX, pY, 0.016 * esc, esc, f)
+{
+	this->carrega("modelos/me262.dat");
+	hp = 40;
+	municao[1] = 9999;
+	municao[2] = 150;
+}
+Me262::~Me262()
+{
+}
+
+void Me262::acao()
+{
+	if (movCima)
+		posY += velocidade;
+	else if (movBaixo)
+		posY -= velocidade;
+	if (movDir)
+		posX += velocidade;
+	else if (movEsq)
+		posX -= velocidade;
+}
+
+void Me262::atira(int tipo)
+{
+	if (municao[tipo] > 0)
+	{
+		municao[tipo]--;
+		if (!tipo)
+			fase->novoProjetil(new TiroSimples(posX, posY + tamY, escala));
+		else
+			fase->novoProjetil(new Bomba(posX, posY + tamY, escala));
+	}
+}

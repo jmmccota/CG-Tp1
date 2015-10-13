@@ -5,6 +5,7 @@ class Spitfire;
 class Bf109;
 class Me163;
 class Me264;
+class me262;
 
 #include "Personagem.hpp"
 #include "Armamentos.hpp"
@@ -77,8 +78,21 @@ public:
 	void atira(int tipo);
 };
 
+class Me262 : public Personagem
+{
+private:
+	bool movCima = false, movBaixo = false, movEsq = false, movDir = false;
+
+public:
+	Me262(GLfloat pX, GLfloat pY, float esc, Fase *f);
+	~Me262();
+	void acao();
+	void atira(int tipo);
+};
+
+#endif
+
 #endif
 
 
-#endif
  
