@@ -627,6 +627,6 @@ void Menu::inicializa()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	//-------------
-	//EfeitoSonoro::getInstance().playMainTheme();
+	EfeitoSonoro::getInstance().playMainTheme();
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
