@@ -90,8 +90,19 @@ public:
 	void atira(int tipo);
 };
 
-#endif
+class V2 : public Personagem
+{
+private:
+	bool movCima = false, movBaixo = false, movEsq = false, movDir = false;
 
+public:
+	V2(GLfloat pX, GLfloat pY, float esc, Fase *f);
+	~V2();
+	void acao();
+	void atira(int tipo);
+};
+
+#endif
 #endif
 
 
