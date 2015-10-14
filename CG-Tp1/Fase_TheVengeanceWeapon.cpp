@@ -1,5 +1,5 @@
 #include "Fase_TheVengeanceWeapon.hpp"
-GLfloat Pontos[16][2];
+GLfloat PontosCeu[16][2];
 float variacaoX = 0;
 bool variacao = false;
 Fase_TheVengeanceWeapon::Fase_TheVengeanceWeapon()
@@ -109,8 +109,8 @@ void desenha4(float translacaoX, float translacaoY, float escala){
 void Fase_TheVengeanceWeapon::desenhaBackground()
 {
 	for (int i = 0; i < 15; i = i + 2){
-		desenha3(Pontos[i][0], Pontos[i][1], 0.8);
-		desenha4(Pontos[i + 1][0], Pontos[i + 1][1], 0.8);
+		desenha3(PontosCeu[i][0], PontosCeu[i][1], 0.8);
+		desenha4(PontosCeu[i + 1][0], PontosCeu[i + 1][1], 0.8);
 	}
 }
 
@@ -132,11 +132,11 @@ void Fase_TheVengeanceWeapon::terminou()
 void Fase_TheVengeanceWeapon::atualiza(int value)
 {
 	for (int i = 0; i < 16; i++){
-		Pontos[i][1] -= 10;
+		PontosCeu[i][1] -= 10;
 	}
 	for (int i = 0; i < 16; i++){
-		if (Pontos[i][1] < -400){
-			Pontos[i][1] = 600;
+		if (PontosCeu[i][1] < -400){
+			PontosCeu[i][1] = 600;
 		}
 	}
 	if (variacao){
@@ -177,24 +177,24 @@ void Fase_TheVengeanceWeapon::inicializa()
 {
 	EfeitoSonoro::getInstance().playThirdLevelTheme();
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	Pontos[0][0] = -265;
-	Pontos[0][1] = 220;
-	Pontos[1][0] = 0;
-	Pontos[1][1] = 150;
-	Pontos[2][0] = 225;
-	Pontos[2][1] = 0;
-	Pontos[3][0] = 265;
-	Pontos[3][1] = 220;
-	Pontos[4][0] = -225;
-	Pontos[4][1] = 0;
-	Pontos[5][0] = -265;
-	Pontos[5][1] = -220;
-	Pontos[6][0] = 0;
-	Pontos[6][1] = -150;
-	Pontos[7][0] = 265;
-	Pontos[7][1] = -220;
+	PontosCeu[0][0] = -265;
+	PontosCeu[0][1] = 220;
+	PontosCeu[1][0] = 0;
+	PontosCeu[1][1] = 150;
+	PontosCeu[2][0] = 225;
+	PontosCeu[2][1] = 0;
+	PontosCeu[3][0] = 265;
+	PontosCeu[3][1] = 220;
+	PontosCeu[4][0] = -225;
+	PontosCeu[4][1] = 0;
+	PontosCeu[5][0] = -265;
+	PontosCeu[5][1] = -220;
+	PontosCeu[6][0] = 0;
+	PontosCeu[6][1] = -150;
+	PontosCeu[7][0] = 265;
+	PontosCeu[7][1] = -220;
 	for (int i = 8; i < 16; i++){
-		Pontos[i][0] = Pontos[i - 8][0];
-		Pontos[i][1] = Pontos[i - 8][1] + 570;
+		PontosCeu[i][0] = PontosCeu[i - 8][0];
+		PontosCeu[i][1] = PontosCeu[i - 8][1] + 570;
 	}
 }

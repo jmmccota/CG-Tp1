@@ -42,7 +42,7 @@ private:
 	//Verificação de erros
 	void ERRCHECK(FMOD_RESULT result);
 
-	//Execura o som
+	//Executa o som
 	void playSong(char *file, bool loop);
 
 public:
@@ -69,7 +69,8 @@ public:
     void vickersShot();
     void bombDrop();
 
-	void stopSong();
+	void stopSound();
+	void finishAllSounds();
 
 	FMOD::Sound getSound();
 

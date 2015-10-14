@@ -367,15 +367,15 @@ void Menu::desenha() {
 		options[3] = "SAIR";
 		drawOptionsMenu(options, 4, 450);
 		//Desenha Avião
-		TiroSimples *municao1 = new TiroSimples(200, 460, 0.002);
-		TiroSimples *municao2 = new TiroSimples(400, 460, 0.002);
-		Spitfire *spitfire = new Spitfire(300, 380, 0.025, nullptr);
+		TiroSimples *municao1 = new TiroSimples(360, 690, 0.002);
+		TiroSimples *municao2 = new TiroSimples(560, 690, 0.002);
+		Spitfire *spitfire = new Spitfire(460, 530, 0.045, nullptr);
 		glPushMatrix();
 
 		//Movendo aviao do menu
-		if (translacaoY < 500 && !limitX) {
+		if (translacaoY < 190 && !limitX) {
 			translacaoY += 4;
-			if (translacaoY >= 500) {
+			if (translacaoY >= 190) {
 				limitX = true;
 			}
 
@@ -408,7 +408,7 @@ void Menu::terminou()
 	}
 	else if (optIniciar)
 	{
-		EfeitoSonoro::getInstance().stopSong();
+		EfeitoSonoro::getInstance().finishAllSounds();
 		Jogo::getInstance().setProxFase(2);
 		Jogo::getInstance().proximaFase();
 	}

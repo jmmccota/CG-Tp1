@@ -17,7 +17,7 @@ void EfeitoSonoro::createObjectSystem() {
 		*/
 		result = FMOD::System_Create(&system);
 		result = system->getVersion(&version);
-		
+
 		if (version < FMOD_VERSION)
 		{
 			throw;
@@ -57,7 +57,7 @@ void EfeitoSonoro::playSong(char *file, bool loop) {
 
 // -------------------- Musics ------------------------
 void EfeitoSonoro::playMainTheme() {
-    playSong("music/MainTitles.mp3", true);
+	playSong("music/MainTitles.mp3", true);
 }
 void EfeitoSonoro::playFirstLevelTheme()
 {
@@ -88,39 +88,44 @@ void EfeitoSonoro::playEnterMenuEffect()
 }
 void EfeitoSonoro::airRaidSiren()
 {
-    playSong("sfx/airRaid.mp3", false);
+	playSong("sfx/airRaid.mp3", false);
 }
 void EfeitoSonoro::spitfireFlyBy()
 {
-    playSong("sfx/spitfireFlyBy.mp3", false);
+	playSong("sfx/spitfireFlyBy.mp3", false);
 }
 void EfeitoSonoro::spitfireMotor()
 {
-    playSong("sfx/spitfireMotor.mp3", false);
+	playSong("sfx/spitfireMotor.mp3", false);
 }
 void EfeitoSonoro::spitfireMotorAway()
 {
-    playSong("sfx/spitfireMotorAway.mp3", false);
+	playSong("sfx/spitfireMotorAway.mp3", false);
 }
 void EfeitoSonoro::bf109FlyBy()
 {
-    playSong("sfx/bf109FlyBy.mp3", false);
+	playSong("sfx/bf109FlyBy.mp3", false);
 }
 void EfeitoSonoro::vickersShot()
 {
-    playSong("sfx/vickers.mp3", false);
+	playSong("sfx/vickers.mp3", false);
 }
 void EfeitoSonoro::bombDrop()
 {
-    playSong("sfx/bombDrop.mp3", false);
+	playSong("sfx/bombDrop.mp3", false);
 }
 // ------------------------------------------------------------
 
-void EfeitoSonoro::stopSong() {
+void EfeitoSonoro::finishAllSounds()
+{
 	channel->stop();
 	sound->release();
 	system->release();
-	createObjectSystem();	
+	createObjectSystem();
+}
+
+void EfeitoSonoro::stopSound() {
+
 }
 
 FMOD::Sound EfeitoSonoro::getSound() {

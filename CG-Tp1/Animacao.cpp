@@ -13,14 +13,46 @@ void Animacao::definePersonagens()
 {
 }
 
+void drawLineAnimacao(float pos, char eixo) {
+
+	pair<int, int> size = EfeitoVisual::getInstance().getOrtho2D();
+
+	//glColor3f(0, 1.0, 0.9);
+	glColor3f(1, 0.27, 0);
+	glLineWidth(3.0f);
+	if (eixo == 'x') {
+		glBegin(GL_LINE_LOOP);
+		glVertex2f(pos, 0.0);
+		glVertex2f(pos, size.second);
+		glEnd();
+	}
+	else if (eixo == 'y') {
+		glBegin(GL_LINE_LOOP);
+		glVertex2f(0.0, pos);
+		glVertex2f(size.first, pos);
+		glEnd();
+	}
+}
+
 void Animacao::desenhaBackground()
 {
+	pair<int, int> sizeScreen = EfeitoVisual::getInstance().getOrtho2D();
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	//Desenha Linha Superior Y
+	drawLineAnimacao(sizeScreen.second - 40, 'y');
+	//Desenha Linha Inferior Y
+	drawLineAnimacao(40, 'y');
+
+	EfeitoVisual::getInstance().desenhaTitulo(600, -200);
+
 }
 
 void Animacao::desenha()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
-
+	desenhaBackground();
 	translacaoX += 2;
 	if (booldesenha) {
 
@@ -36,7 +68,7 @@ void Animacao::desenha()
 			booldesenha = false;
 		}
 	}
-	Spitfire *s = new Spitfire(-45, 0, (float)20 / 10000, nullptr);
+	Spitfire *s = new Spitfire(-45, 0 , (float)20 / 10000, nullptr);
 	Bf109 *b = new Bf109(50, 0, (float)20 / 10000, nullptr, nullptr);
 	TiroSimples *t1 = new TiroSimples(-39.5, 8, (float)2 / 10000);
 	TiroSimples *t2 = new TiroSimples(-39.5, -8, (float)2 / 10000);
@@ -82,11 +114,11 @@ void Animacao::desenha()
 	}
 	else if (explosao) {
 		// desenha a explosao
-        if (!comecouExplosao)
-        {
-            EfeitoSonoro::getInstance().playBoomEffect();
-            comecouExplosao = true;
-        }
+		if (!comecouExplosao)
+		{
+			EfeitoSonoro::getInstance().playBoomEffect();
+			comecouExplosao = true;
+		}
 		glPushMatrix();
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
@@ -137,8 +169,8 @@ void Animacao::desenha()
 void Animacao::terminou()
 {
 	if (pularAnimacao)
-    {
-        EfeitoSonoro::getInstance().stopSong();
+	{
+		EfeitoSonoro::getInstance().finishAllSounds();
 		Jogo::getInstance().setProxFase(1);
 		Jogo::getInstance().proximaFase();
 	}
@@ -146,7 +178,7 @@ void Animacao::terminou()
 
 void Animacao::atualiza(int value)
 {
-	if (value >= 300)
+	if (value >= 180)
 		pularAnimacao = true;
 	//Testa se a fase acabou
 	terminou();
@@ -164,11 +196,11 @@ void Animacao::keyUp(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
-	    case 13: //Tecla enter para pular animação
-		    pularAnimacao = true;
-            break;
-	    default:
-		    break;
+	case 13: //Tecla enter para pular animação
+		pularAnimacao = true;
+		break;
+	default:
+		break;
 	}
 }
 
@@ -182,7 +214,7 @@ void Animacao::specialKeyUp(int key, int x, int y)
 
 void Animacao::inicializa()
 {
-    EfeitoSonoro::getInstance().spitfireFlyBy();
-    EfeitoSonoro::getInstance().bf109FlyBy();
+	EfeitoSonoro::getInstance().spitfireFlyBy();
+	EfeitoSonoro::getInstance().bf109FlyBy();
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-} 
+}
