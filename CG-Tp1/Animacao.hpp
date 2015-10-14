@@ -30,6 +30,7 @@ public:
 	void definePersonagens();
 
 	void desenhaBackground();
+	void desenhaHUD();
 
 	// Função callback chamada para fazer o desenho
 	void desenha();

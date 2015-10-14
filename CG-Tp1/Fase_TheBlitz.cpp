@@ -50,12 +50,18 @@ void Fase_TheBlitz::terminou()
 
 void Fase_TheBlitz::atualiza(int value)
 {
-    if (value % 400 == 99)
+    if (value % 300 == 99)
     {
-        //Bf109 *aux = new Bf109(rand() % 1920, 1080, (float) 120 / 10000, principal, this);
-        Bf109 *aux = new Bf109(900, 1080, (float)100 / 10000, principal, this);
+		pair<GLint, GLint> size = EfeitoVisual::getInstance().getOrtho2D();
+        Bf109 *aux = new Bf109(rand() % size.first, size.second, (float) 100 / 10000, principal, this);
         aux->inverteY();
         inimigosAtivos.push_back(aux);
+		if (value % 700 == 99)
+		{
+			Me163 *aux2 = new Me163(rand() % size.first, size.second, (float)100 / 10000, principal, this);
+			aux2->inverteY();
+			inimigosAtivos.push_back(aux2);
+		}
     }
 
     for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end(); ++i)
@@ -69,14 +75,10 @@ void Fase_TheBlitz::atualiza(int value)
 
     principal->acao();
 
-    if (projeteisInimigos.size() > 0)
-    {
-        int a = 1 + 1;
-    }
-
-
+	//Bala aliada X Avioes inimigos
     for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end();)
     {
+		bool destruiu = false;
         for (std::list<Personagem*>::iterator j = inimigosAtivos.begin(); j != inimigosAtivos.end();)
         {
             //Se foi alvejado
@@ -84,6 +86,9 @@ void Fase_TheBlitz::atualiza(int value)
             {
                 (*j)->alvejado((*i)->getDano());
                 i = projeteisAmigos.erase(i);
+				Jogo::getInstance().score += (*j)->getScore();
+				destruiu = true;
+				break;
             }
             //Se foi destruido
             if ((*j)->destruido())
@@ -97,10 +102,14 @@ void Fase_TheBlitz::atualiza(int value)
                 j++;
             }
         }
+		if (!destruiu)
+		{
+			i++;
+		}
     }
 
 
-
+	//Bala dos inimigos X Aviao
     for (std::list<Projetil*>::iterator i = projeteisInimigos.begin(); i != projeteisInimigos.end();)
     {
         if (EfeitoVisual::getInstance().colisao((*i), principal))
@@ -108,18 +117,44 @@ void Fase_TheBlitz::atualiza(int value)
             principal->alvejado((*i)->getDano());
             i = projeteisInimigos.erase(i);
         }
+		else
+		{
+			++i;
+		}
 
         if (principal->destruido())
         {
             //Explosao
             //Perde uma vida
         }
-        else
-        {
-            ++i;
-        }
     }
-    
+
+	//Colisao avioes
+	for (std::list<Personagem*>::iterator i = inimigosAtivos.begin(); i != inimigosAtivos.end();)
+	{
+		if (EfeitoVisual::getInstance().colisao((*i), principal))
+		{
+			principal->alvejado((*i)->danoColisao());
+			(*i)->alvejado(principal->danoColisao());
+		}
+
+		if ((*i)->destruido())
+		{
+			Jogo::getInstance().score += (*i)->getScore();
+			i = inimigosAtivos.erase(i);
+		}
+		else
+		{
+			++i;
+		}
+
+		if (principal->destruido())
+		{
+			//Explosao
+			//Perde uma vida
+		}
+	}
+	
 }
 
 void Fase_TheBlitz::mouse(int button, int state, int x, int y)

@@ -48,6 +48,9 @@ class Fase
 
 		//Desenha o fundo da fase na tela
 		virtual void desenhaBackground() = 0;
+		
+		//Desenha a interface (hp, municao, tempo, score, ...)
+		virtual void desenhaHUD();
 
 		//Desenha todos os elementos da fase na tela
 		virtual void desenha() = 0;

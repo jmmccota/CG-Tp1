@@ -14,6 +14,10 @@ void Menu::definePersonagens() {
 void Menu::desenhaBackground() {
 }
 
+void Menu::desenhaHUD()
+{
+}
+
 #pragma region "Pack de Desenho do Menu"
 
 //-------------- Usado para pegar Dinamicamente a Posição dos Elementos do Menu ---------------
@@ -314,7 +318,7 @@ void drawOpcoesMenu() {
 	glPushMatrix();
 	TiroSimples *tiro = new TiroSimples(1300, 400, 0.002);
 	TiroSimples *tiro2 = new TiroSimples(1500, 400, 0.002);
-	Spitfire *spitfire = new Spitfire(1400, 360, 0.015, nullptr);
+	Spitfire *spitfire = new Spitfire(1400, 360, 0.010, nullptr);
 	glTranslatef(translacaoOpcoesX, translacaoOpcoesY, 0);
 	glPushMatrix();
 	glTranslatef(0, translacaoTiro, 0);

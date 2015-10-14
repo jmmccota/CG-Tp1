@@ -47,6 +47,15 @@ class Personagem : public Solido
         //Inverte os pontos Y do poligono
         //    Usado para avioes vindo na direcao oposta
         void inverteY();
+
+		//Retorna o dano ao outro aviao que colidiu com esse
+		virtual int danoColisao() = 0;
+
+		//Retorna o nome do aviao
+		virtual string getNome() = 0;
+
+		//Retorna o nome do aviao
+		virtual int getScore() = 0;
 };
 
 #include "Avioes.hpp"

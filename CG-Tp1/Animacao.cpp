@@ -49,6 +49,10 @@ void Animacao::desenhaBackground()
 
 }
 
+void Animacao::desenhaHUD()
+{
+}
+
 void Animacao::desenha()
 {
 	glClear(GL_COLOR_BUFFER_BIT);

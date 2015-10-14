@@ -61,12 +61,18 @@ void Jogo::keyUp(unsigned char key, int x, int y)
 	case 'f':
 		EfeitoVisual::getInstance().setFullScreen();
 		break;
+	case 'p':
+	case 'P':
+		Jogo::getInstance().pausado = !Jogo::getInstance().pausado;
+		break;
 	case 27: //Tecla ESC -> Sair do Jogo
 		exit(0);
 		break;
+	default:
+		Jogo::getInstance().fases[Jogo::getInstance().proxFase]->keyUp(key, x, y);
+		break;
 	}
 
-	Jogo::getInstance().fases[Jogo::getInstance().proxFase]->keyUp(key, x, y);
 }
 
 void Jogo::specialKeyDown(int key, int x, int y)
@@ -85,9 +91,11 @@ void Jogo::draw()
 }
 void Jogo::timer(int value)
 {
-    Jogo::getInstance().estado++;
-	Jogo::getInstance().fases[Jogo::getInstance().proxFase]->atualiza(value);
-	glutPostRedisplay();
+	if (!Jogo::getInstance().pausado || Jogo::getInstance().proxFase < 2) {
+		Jogo::getInstance().estado++;
+		Jogo::getInstance().fases[Jogo::getInstance().proxFase]->atualiza(value);
+		glutPostRedisplay();
+	}
     glutTimerFunc(TEMPOQUADRO, Jogo::timer, Jogo::getInstance().estado);
 }
 
