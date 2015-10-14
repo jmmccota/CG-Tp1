@@ -70,8 +70,8 @@ void Animacao::desenha()
 	}
 	Spitfire *s = new Spitfire(-45, 0 , (float)20 / 10000, nullptr);
 	Bf109 *b = new Bf109(50, 0, (float)20 / 10000, nullptr, nullptr);
-	TiroSimples *t1 = new TiroSimples(-39.5, 8, (float)2 / 10000);
-	TiroSimples *t2 = new TiroSimples(-39.5, -8, (float)2 / 10000);
+	TiroSimples *t1 = new TiroSimples(-38, 8, (float)2 / 10000);
+	TiroSimples *t2 = new TiroSimples(-38, -8, (float)2 / 10000);
 
 	// desenha o primeiro bloco atiraador
 	glPushMatrix();
@@ -99,7 +99,6 @@ void Animacao::desenha()
 		t1->desenha();
 		t2->desenha();
 		glPopMatrix();
-
 		// desenha o bloco q recebe o tiro
 		glPushMatrix();
 		glMatrixMode(GL_PROJECTION);
