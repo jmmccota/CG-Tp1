@@ -29,7 +29,7 @@ void EfeitoSonoro::createObjectSystem() {
 	{
 		printf("Error!  You are using an old version of FMOD %08x.  This program requires %08x\n", version, FMOD_VERSION);
 	}
-	channel = 0;
+	//channel = 0;
 }
 
 
@@ -46,13 +46,31 @@ EfeitoSonoro::~EfeitoSonoro()
 
 void EfeitoSonoro::playSong(char *file, bool loop) {
 
-	result = system->createSound(file, FMOD_HARDWARE, 0, &sound);
-	result = system->playSound(FMOD_CHANNEL_FREE, sound, false, &channel);
+	system->createSound(file, FMOD_HARDWARE, 0, &sound);
 
 	if (loop) {
-		channel->setMode(FMOD_LOOP_NORMAL);
+		sound->setMode(FMOD_LOOP_NORMAL);
 	}
 
+	system->playSound(FMOD_CHANNEL_FREE, sound, false, &channel);
+
+}
+
+
+void EfeitoSonoro::finishAllSounds()
+{
+	sound->release();
+	system->release();
+	createObjectSystem();
+}
+
+void EfeitoSonoro::setVolumeSound(FMOD::Channel *selectedChannel, float volume)
+{
+	selectedChannel->setVolume(volume / 100);
+}
+
+void EfeitoSonoro::setStateSound(FMOD::Channel *selectedChannel, bool state) {
+	selectedChannel->setPaused(state);
 }
 
 // -------------------- Musics ------------------------
@@ -115,22 +133,6 @@ void EfeitoSonoro::bombDrop()
 	playSong("sfx/bombDrop.mp3", false);
 }
 // ------------------------------------------------------------
-
-void EfeitoSonoro::finishAllSounds()
-{
-	channel->stop();
-	sound->release();
-	system->release();
-	createObjectSystem();
-}
-
-void EfeitoSonoro::stopSound() {
-
-}
-
-FMOD::Sound EfeitoSonoro::getSound() {
-	return *sound;
-}
 
 EfeitoSonoro& EfeitoSonoro::getInstance()
 {
