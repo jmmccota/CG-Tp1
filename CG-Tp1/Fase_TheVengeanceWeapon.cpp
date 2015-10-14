@@ -132,7 +132,7 @@ void Fase_TheVengeanceWeapon::terminou()
 void Fase_TheVengeanceWeapon::atualiza(int value)
 {
 	for (int i = 0; i < 16; i++){
-		PontosCeu[i][1] -= 10;
+		PontosCeu[i][1] --;
 	}
 	for (int i = 0; i < 16; i++){
 		if (PontosCeu[i][1] < -400){
@@ -140,10 +140,10 @@ void Fase_TheVengeanceWeapon::atualiza(int value)
 		}
 	}
 	if (variacao){
-		variacaoX++;
+		variacaoX+=0.5;
 	}
 	else{
-		variacaoX--;
+		variacaoX-=0.5;
 	}
 	if (variacaoX < -100){
 		variacao = true;
