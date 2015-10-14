@@ -18,6 +18,7 @@ public:
 
 	// Função callback chamada para fazer o desenho
 	void desenha();
+	void desenhaHUD(int hp);
 
 	void terminou();
 

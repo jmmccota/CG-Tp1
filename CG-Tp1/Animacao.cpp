@@ -211,6 +211,8 @@ void Animacao::specialKeyDown(int key, int x, int y)
 void Animacao::specialKeyUp(int key, int x, int y)
 {
 }
+void Animacao::desenhaHUD(int hp) {
+}
 
 void Animacao::inicializa()
 {

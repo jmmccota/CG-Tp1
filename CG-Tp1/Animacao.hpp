@@ -31,6 +31,8 @@ public:
 
 	void desenhaBackground();
 
+	void desenhaHUD(int hp);
+
 	// Função callback chamada para fazer o desenho
 	void desenha();
 

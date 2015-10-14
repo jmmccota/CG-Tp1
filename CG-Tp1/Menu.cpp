@@ -385,7 +385,7 @@ void Menu::desenha() {
 			if (translacaoY <= 0) {
 				limitX = false;
 			}
-		}
+		}		
 		glTranslatef(translacaoY, 0, 0);
 		glPushMatrix();
 		glTranslatef(0, translacaoTiro2, 0);
@@ -453,7 +453,9 @@ void Menu::atualiza(int value) {
 void Menu::keyDown(unsigned char key, int x, int y)
 {
 }
-
+void Menu::desenhaHUD(int hp)
+{
+}
 void Menu::keyUp(unsigned char key, int x, int y)
 {
 	if (optMelhores) {

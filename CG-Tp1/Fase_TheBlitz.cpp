@@ -297,11 +297,32 @@ void Fase_TheBlitz::desenha()
         (*i)->desenha();
 
     principal->desenha();
-
+	desenhaHUD(principal->getHP());
+	//desenhaVidas(principal->getNumeroVidas());
     // Executa os comandos OpenGL
     glutSwapBuffers();
 }
-
+void Fase_TheBlitz::desenhaHUD(int hp) {
+	glBegin(GL_LINE_LOOP);
+	hp = 100;
+	glColor3f(1, 1, 1);
+	glVertex2i(20, 1000);
+	glVertex2i(254, 1000);
+	glVertex2i(254, 970);
+	glVertex2i(20, 970);
+	glEnd();
+	double partes = 2.34;
+	glBegin(GL_QUADS);
+	glColor3f(1, 0, 0);
+	cout << "Partes: " << partes;
+	cout << "HP: " << hp;
+	cout << "Sangue: " << partes*hp+20;
+	glVertex2f(21, 999);
+	glVertex2f(partes*hp+20, 999);
+	glVertex2f(partes*hp+20, 971);
+	glVertex2f(21, 971);
+	glEnd();	
+}
 void Fase_TheBlitz::terminou()
 {
 }
