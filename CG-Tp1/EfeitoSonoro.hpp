@@ -63,6 +63,8 @@ public:
     void spitfireFlyBy();
     void spitfireMotor();
     void spitfireMotorAway();
+    //Bf109
+    void bf109FlyBy();
     //Armamentos
     void vickersShot();
     void bombDrop();

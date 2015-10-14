@@ -73,7 +73,7 @@ void EfeitoSonoro::playThirdLevelTheme()
 }
 // ------------------------------------------------------------
 
-// -------------------- Effects Sounds ------------------------
+// -------------------- Sound  Effects ------------------------
 void EfeitoSonoro::playBoomEffect()
 {
 	playSong("Sound/Boom_Effect.mp3", false);
@@ -101,6 +101,10 @@ void EfeitoSonoro::spitfireMotor()
 void EfeitoSonoro::spitfireMotorAway()
 {
     playSong("sfx/spitfireMotorAway.mp3", false);
+}
+void EfeitoSonoro::bf109FlyBy()
+{
+    playSong("sfx/bf109FlyBy.mp3", false);
 }
 void EfeitoSonoro::vickersShot()
 {

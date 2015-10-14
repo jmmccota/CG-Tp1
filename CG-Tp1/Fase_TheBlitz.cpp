@@ -13,17 +13,11 @@ Fase_TheBlitz::~Fase_TheBlitz()
 void Fase_TheBlitz::definePersonagens()
 {
     pair<float, float> size = EfeitoVisual::getInstance().getOrtho2D();
-    principal = new Spitfire(size.first / 2, size.second / 10, (float)100 / 10000, this);
-
-    //Fora da tela so pra nao comecar vazio
-    projeteisAmigos.push_back(new TiroSimples(-1000, -1000, 0));
-    projeteisInimigos.push_back(new TiroSimples(-1000, -1000, 0));
-    inimigosAtivos.push_back(new Bf109(-1000, -1000, 0, principal, this));
+    principal = new Spitfire(size.first / 2, size.second / 10, (float) 100 / 10000, this);
 }
 
 void Fase_TheBlitz::desenhaBackground()
 {
-    EfeitoVisual::getInstance().ortho2D();
 }
 
 void Fase_TheBlitz::desenha()
@@ -56,26 +50,41 @@ void Fase_TheBlitz::terminou()
 
 void Fase_TheBlitz::atualiza(int value)
 {
-    if (value % 400 == 0)
+    if (value % 400 == 99)
     {
-        inimigosAtivos.push_back(new Bf109(rand() % 1920, 1080, (float)100 / 10000, principal, this));
-        std::list<Personagem*>::iterator aux = inimigosAtivos.end();
-        (*aux)->inverteY();
+        //Bf109 *aux = new Bf109(rand() % 1920, 1080, (float) 120 / 10000, principal, this);
+        Bf109 *aux = new Bf109(900, 1080, (float)100 / 10000, principal, this);
+        aux->inverteY();
+        inimigosAtivos.push_back(aux);
+    }
+
+    for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end(); ++i)
+        (*i)->acao();
+
+    for (std::list<Projetil*>::iterator i = projeteisInimigos.begin(); i != projeteisInimigos.end(); ++i)
+        (*i)->acao();
+
+    for (std::list<Personagem*>::iterator i = inimigosAtivos.begin(); i != inimigosAtivos.end(); ++i)
+        (*i)->acao();
+
+    principal->acao();
+
+    if (projeteisInimigos.size() > 0)
+    {
+        int a = 1 + 1;
     }
 
 
-
-    for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end(); ++i)
+    for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end();)
     {
-        //Calcula os disparos dados
-        (*i)->acao();
-
-        //Atualiza situacao dos inimigos
         for (std::list<Personagem*>::iterator j = inimigosAtivos.begin(); j != inimigosAtivos.end();)
         {
             //Se foi alvejado
             if (EfeitoVisual::getInstance().colisao((*j), (*i)))
+            {
                 (*j)->alvejado((*i)->getDano());
+                i = projeteisAmigos.erase(i);
+            }
             //Se foi destruido
             if ((*j)->destruido())
             {
@@ -85,7 +94,6 @@ void Fase_TheBlitz::atualiza(int value)
             //Se ta de boa ainda
             else
             {
-                (*j)->acao();
                 j++;
             }
         }
@@ -93,12 +101,13 @@ void Fase_TheBlitz::atualiza(int value)
 
 
 
-    for (std::list<Projetil*>::iterator i = projeteisInimigos.begin(); i != projeteisInimigos.end(); ++i)
+    for (std::list<Projetil*>::iterator i = projeteisInimigos.begin(); i != projeteisInimigos.end();)
     {
-        (*i)->acao();
-
         if (EfeitoVisual::getInstance().colisao((*i), principal))
+        {
             principal->alvejado((*i)->getDano());
+            i = projeteisInimigos.erase(i);
+        }
 
         if (principal->destruido())
         {
@@ -107,7 +116,7 @@ void Fase_TheBlitz::atualiza(int value)
         }
         else
         {
-            principal->acao();
+            ++i;
         }
     }
     

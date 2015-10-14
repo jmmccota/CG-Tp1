@@ -8,7 +8,7 @@ Spitfire::Spitfire(GLfloat pX, GLfloat pY, float esc, Fase *f)
     : Personagem(pX, pY, 250 * esc, esc, f)
 {
     this->carrega("modelos/spitfire.dat");
-    hp = 400;
+    hp = 99999;
     municao[0] = 9999999;
     municao[1] = 10;
 }
@@ -111,7 +111,7 @@ void Spitfire::detectaMovimentoUp(int key, int x, int y)
 
 
 Bf109::Bf109(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f)
-    : Personagem(pX, pY, 150*esc, esc, f)
+    : Personagem(pX, pY, 100*esc, esc, f)
 {
     alvo = a;
     carrega("modelos/bf109.dat");
@@ -149,7 +149,7 @@ void Bf109::atira(int tipo)
     if (municao[tipo] > 0)
     {
         municao[tipo]--;
-        fase->novoProjetilInimigo(new TiroSimplesInimigo(posX, posY + tamY, 0.1 * escala));
+        fase->novoProjetilInimigo(new TiroSimplesInimigo(posX, posY, 0.1 * escala));
     }
 }
 

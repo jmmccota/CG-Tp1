@@ -44,6 +44,9 @@ class Jogo
         ~Jogo();
         static Jogo& getInstance();
 
+        //Armazena o valor do frame
+        int estado = 0;
+
         //Callbacks OpenGL
         static void mouse(int button, int state, int x, int y);
         static void keyDown(unsigned char key, int x, int y);

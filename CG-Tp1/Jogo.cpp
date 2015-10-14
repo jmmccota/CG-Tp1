@@ -25,7 +25,7 @@ void Jogo::run()
 
 	fases.push_back(new Animacao());
 	fases.push_back(new Menu());
-	//fases.push_back(new Fase_TheBlitz());
+	fases.push_back(new Fase_TheBlitz());
 	fases.push_back(new Fase_TheBattleOfBritain());
 	fases.push_back(new Fase_TheVengeanceWeapon());
 	proxFase = 0;
@@ -85,14 +85,16 @@ void Jogo::draw()
 }
 void Jogo::timer(int value)
 {
+    Jogo::getInstance().estado++;
 	Jogo::getInstance().fases[Jogo::getInstance().proxFase]->atualiza(value);
 	glutPostRedisplay();
-	glutTimerFunc(TEMPOQUADRO, Jogo::timer, value + 1);
+    glutTimerFunc(TEMPOQUADRO, Jogo::timer, Jogo::getInstance().estado);
 }
 
 void Jogo::inicializa(int fase)
 {
 	// Inicializa o sistema de coordenadas
+    estado = 0;
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glutMouseFunc(Jogo::mouse);
