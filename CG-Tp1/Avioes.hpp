@@ -17,15 +17,21 @@ class me262;
 class Spitfire : public Personagem
 {
     private:
-        bool movCima = false, movBaixo = false, movEsq = false, movDir = false;
+        //bool movCima = false, movBaixo = false, movEsq = false, movDir = false;
         GLfloat velX = 0, velY = 0;
 
     public:
+		// 0 = Tiro simples; 1 = Tiro duplo
+		int powerUp = 0;
+
         Spitfire(GLfloat pX, GLfloat pY, float esc, Fase *f);
         ~Spitfire();
 
         void acao();
         void atira(int tipo);
+		int danoColisao();
+		string getNome();
+		int getScore();
 
         //Funcao a ser passada para o opengl para detectar botoes de disparo
         void detectaTiro(unsigned char key, int x, int y);
@@ -50,6 +56,9 @@ public:
 
     void atira(int tipo);
     void acao();
+	int danoColisao();
+	string getNome();
+	int getScore();
 };
 
 
@@ -64,6 +73,10 @@ class Me163 : public Personagem
         ~Me163();
 
         void acao();
+		void atira(int tipo);
+		int danoColisao();
+		string getNome();
+		int getScore();
 };
 
 
@@ -77,6 +90,9 @@ public:
 	~Me264();
 	void acao();
 	void atira(int tipo);
+	int danoColisao();
+	string getNome();
+	int getScore();
 };
 
 class Me262 : public Personagem
@@ -89,6 +105,9 @@ public:
 	~Me262();
 	void acao();
 	void atira(int tipo);
+	int danoColisao();
+	string getNome();
+	int getScore();
 };
 
 class V2 : public Personagem
@@ -101,6 +120,9 @@ public:
 	~V2();
 	void acao();
 	void atira(int tipo);
+	int danoColisao();
+	string getNome();
+	int getScore();
 };
 
 #endif
