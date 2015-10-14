@@ -8,7 +8,7 @@ Spitfire::Spitfire(GLfloat pX, GLfloat pY, float esc, Fase *f)
     : Personagem(pX, pY, 250 * esc, esc, f)
 {
     this->carrega("modelos/spitfire.dat");
-    hp = 99999;
+    hp = 100;
     municao[0] = 9999999;
     municao[1] = 10;
 }
