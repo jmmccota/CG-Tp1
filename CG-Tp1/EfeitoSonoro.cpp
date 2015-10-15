@@ -65,6 +65,7 @@ void EfeitoSonoro::finishAllAudios()
 	}
 	system->release();
 	arrayAudios.clear();
+	createObjectSystem();
 }
 
 
