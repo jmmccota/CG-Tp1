@@ -81,60 +81,59 @@ Score Score::getBestScore() {
 		}
 	}
 	else {
-		Score::getInstance().criaArquivo();
+		Score::criaArquivo();
 		return Score("Unknown", 0);
 	}
 }
 
 vector<Score> Score::getBestScore(int qtScores)
 {
-	int totalScores = quantScores();
-	Score *scores[100];
+	vector<Score *> fileScores;
+	vector<Score> bestScores;
 
-	vector<Score> bestScores(qtScores);
 	string line;
-	int i = 0;
-	int maxScore = -1;
-
 	ifstream file(FILE_NAME);
-	while (file)
-	{
+
+	//Carregar arquivo em um vetor na memoria
+	while (file) {
 		getline(file, line);
 		if (line != "") {
 			vector<string> vecSplit = FuncoesAuxiliares::split(line, '\t');
-			Score *s = new Score(vecSplit[0], std::stoi(vecSplit[1]));
-			scores[i] = s;
+			Score *score = new Score(vecSplit[0], std::stoi(vecSplit[1]));
+			fileScores.push_back(score);
 			line = "";
-			i++;
 		}
 	}
 
-	Score *pointB;
-	int contBest = 0;
-	int posBest_inMoment;
+	int sizefileScores = fileScores.size();
+	//Pega os melhores Scores
+	while (qtScores && sizefileScores > 0) {
+		int maxScore = -1;
+		string maxPlayer = "";
+		int posBest = 0;
 
-	//Percorre o vetor de scores
-	while (contBest < totalScores && contBest < qtScores) {
-		for (int x = 0; x < i; x++) {
-			if (scores[x]->score >= maxScore) {
-				maxScore = scores[x]->score;
-				pointB = scores[x];
-				posBest_inMoment = x;
+		for (int i = 0; i < sizefileScores; i++) {
+			if (fileScores[i]->score >= maxScore) {
+				maxPlayer = fileScores[i]->player;
+				maxScore = fileScores[i]->score;
+				posBest = i;
 			}
 		}
-		bestScores[contBest] = *pointB;
+		Score tempBestScore;
+		tempBestScore.player = maxPlayer;
+		tempBestScore.score = maxScore;
+		bestScores.push_back(tempBestScore);
 
-		//Retirar o apontamento
-		free(scores[posBest_inMoment]);
-		scores[posBest_inMoment] = scores[i - 1];
-		i--;
-		contBest++;
-		maxScore = -1;
-	}
-
-	while (contBest < qtScores) {
-		bestScores[contBest] = Score("Unknown", 0);
-		contBest++;
+		Score temp;
+		temp.player = fileScores[sizefileScores - 1]->player;
+		temp.score = fileScores[sizefileScores - 1]->score;
+		free(fileScores[sizefileScores - 1]);
+		if ((sizefileScores - 1) != posBest) {
+			fileScores[posBest]->player = temp.player;
+			fileScores[posBest]->score = temp.score;
+		}
+		qtScores--;
+		sizefileScores--;
 	}
 
 	return bestScores;
@@ -147,14 +146,4 @@ int Score::getScore() {
 
 string Score::getPlayer() {
 	return player;
-}
-
-std::ostream& operator<<(std::ostream &strm, const Score &a) {
-	return strm << a.player << " -> " << a.score << endl;
-}
-
-Score& Score::getInstance()
-{
-	static Score singleton;
-	return singleton;
 }

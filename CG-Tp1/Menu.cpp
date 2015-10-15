@@ -14,8 +14,6 @@ void Menu::definePersonagens() {
 void Menu::desenhaBackground() {
 }
 
-
-
 #pragma region "Pack de Desenho do Menu"
 
 //-------------- Usado para pegar Dinamicamente a Posição dos Elementos do Menu ---------------
@@ -349,7 +347,7 @@ void Menu::desenha() {
 		// 5 Valores - Passar 80 por parametro
 		// 7 Valores - Passar 47 por parametro
 		// 10 Valores - Passar 30 por Parametro
-		drawBestScoresMenu(Score::getInstance().getBestScore(7), 47);
+		drawBestScoresMenu(Score::getBestScore(7), 47);
 	}
 	else if (optOpcoes) {//Tela de Opções
 		EfeitoVisual::getInstance().desenhaTitulo(600, 65);
