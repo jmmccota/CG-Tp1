@@ -31,6 +31,7 @@ public:
 
 	void desenhaBackground();
 	void desenhaHUD();
+	void desenhaNumeroVidas(int numeroVidas);
 
 	void desenhaHUD(int hp);
 

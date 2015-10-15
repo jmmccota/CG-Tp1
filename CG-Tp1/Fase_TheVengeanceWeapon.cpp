@@ -141,6 +141,9 @@ void Fase_TheVengeanceWeapon::desenhaHUD(int hp) {
 	glVertex2i(21, 971);
 	glEnd();	
 }
+void Fase_TheVengeanceWeapon::desenhaNumeroVidas(int numeroVidas) {
+
+}
 void Fase_TheVengeanceWeapon::terminou()
 {
 }

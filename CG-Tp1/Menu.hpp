@@ -49,6 +49,7 @@ public:
 	void desenhaBackground();
 
 	void desenhaHUD(int hp);
+	void desenhaNumeroVidas(int numeroVidas);
 
 
 

@@ -458,6 +458,9 @@ void Menu::keyDown(unsigned char key, int x, int y)
 void Menu::desenhaHUD(int hp)
 {
 }
+void Menu::desenhaNumeroVidas(int numeroVidas) {
+
+}
 void Menu::keyUp(unsigned char key, int x, int y)
 {
 	if (optMelhores) {

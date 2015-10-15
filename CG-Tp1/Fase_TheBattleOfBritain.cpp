@@ -90,6 +90,9 @@ void Fase_TheBattleOfBritain::desenhaHUD(int hp) {
 	glVertex2i(21, 971);
 	glEnd();	
 }
+void Fase_TheBattleOfBritain::desenhaNumeroVidas(int numeroVidas) {
+
+}
 void Fase_TheBattleOfBritain::terminou()
 {
 }

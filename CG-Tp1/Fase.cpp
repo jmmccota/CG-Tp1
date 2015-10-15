@@ -63,15 +63,17 @@ void Fase::desenhaHUD(int hp) {
 void Fase::desenhaBackground(){
 	//desenha2();
 }
+void Fase::desenhaNumeroVidas(int numeroVidas) {
 
+}
 void Fase::desenha(){
 	//desenhaBackground();
 }
 
-void Fase::desenhaHUD()
-{
-
-}
+//void Fase::desenhaHUD(int hp)
+//{
+//
+//}
 
 void Fase::novoProjetilInimigo(Projetil *p)
 {

@@ -20,6 +20,10 @@ void Fase_TheBlitz::definePersonagens()
 {
     pair<float, float> size = EfeitoVisual::getInstance().getOrtho2D();
     principal = new Spitfire(size.first / 2, size.second / 10, (float) 100 / 10000, this);
+	double xspit = 30;
+	for (int ii = 0; ii < 5; ii++) {
+		vidas[ii] = new Spitfire(xspit+50*ii, 1020, (float)20 / 10000, this);
+	}
 }
 
 // retangulo
@@ -296,9 +300,14 @@ void Fase_TheBlitz::desenha()
 
     principal->desenha();
 	desenhaHUD(principal->getHP());
-	//desenhaVidas(principal->getNumeroVidas());
+	desenhaNumeroVidas(principal->getNumeroVidas());
     // Executa os comandos OpenGL
     glutSwapBuffers();
+}
+void Fase_TheBlitz::desenhaNumeroVidas(int numeroVidas) {
+	for (int ii = 0; ii < numeroVidas; ii++) {
+		vidas[ii]->desenha();
+	}
 }
 void Fase_TheBlitz::desenhaHUD(int hp) {
 	glBegin(GL_LINE_LOOP);	
