@@ -123,7 +123,6 @@ void Fase_TheBlitz::desenhaBackground()
 	glPushMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	transladaCena2 -= 3;
 	for (int i = 0; i < 32; i++) {
 		if (i == 0) {
 			tX = -2880;
@@ -309,11 +308,10 @@ void Fase_TheBlitz::terminou()
 
 void Fase_TheBlitz::atualiza(int value)
 {
-	/*transladaCena2 -= 20;
+	transladaCena2 -= 3;
 	if (transladaCena2 <= -3240){
-		cout << "entra";
 		transladaCena2 = 0;
-	}*/
+	}
 	if (value % 300 == 99)
 	{
 		pair<GLint, GLint> size = EfeitoVisual::getInstance().getOrtho2D();
