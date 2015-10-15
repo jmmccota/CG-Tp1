@@ -249,12 +249,15 @@ void drawOpcoesMenu() {
 	FuncoesAuxiliares::writeWord_BITMAP("- Setas direcionais movimentam o Aviao.", FONT_DEFAULT);
 
 	glRasterPos2f(220, rasterY - 160);
-	FuncoesAuxiliares::writeWord_BITMAP("- Barra de espaco Atira.", FONT_DEFAULT);
+	FuncoesAuxiliares::writeWord_BITMAP("- Z(Tiro Simples) e X(Bomba Simples) atiram.", FONT_DEFAULT);
+
 
 	glColor3f(1, 0.27, 0);
 
-	glRasterPos2f(375, 210);
-	FuncoesAuxiliares::writeWord_BITMAP("Barra de Espaco", GLUT_BITMAP_TIMES_ROMAN_24);
+	glRasterPos2f(440, 210);
+	FuncoesAuxiliares::writeWord_BITMAP("Z", GLUT_BITMAP_TIMES_ROMAN_24);
+	glRasterPos2f(537, 210);
+	FuncoesAuxiliares::writeWord_BITMAP("X", GLUT_BITMAP_TIMES_ROMAN_24);
 
 	glRasterPos2f(765, 210);
 	FuncoesAuxiliares::writeWord_BITMAP("<-", GLUT_BITMAP_TIMES_ROMAN_24);
@@ -270,11 +273,23 @@ void drawOpcoesMenu() {
 
 	glColor3f(1, 0.27, 0);
 	/*--------------- BOXES COMANDOS -------------------*/
+	//glBegin(GL_LINE_LOOP);
+	//glVertex2i(220, 260); //Barra espaço
+	//glVertex2i(730, 260);
+	//glVertex2i(730, 180);
+	//glVertex2i(220, 180);
+	//glEnd();
 	glBegin(GL_LINE_LOOP);
-	glVertex2i(220, 260); //Barra espaço
-	glVertex2i(730, 260);
-	glVertex2i(730, 180);
-	glVertex2i(220, 180);
+	glVertex2i(410, 260); //Z
+	glVertex2i(490, 260);
+	glVertex2i(490, 180);
+	glVertex2i(410, 180);
+	glEnd();
+	glBegin(GL_LINE_LOOP);
+	glVertex2i(510, 260); //X
+	glVertex2i(590, 260);
+	glVertex2i(590, 180);
+	glVertex2i(510, 180);
 	glEnd();
 	glBegin(GL_LINE_LOOP); //Seta esquerda
 	glVertex2i(745, 260);

@@ -47,7 +47,7 @@ void Fase::desenhaHUD() {
 
 	string qtd = "x ";
 	qtd += std::to_string(principal->getQtdTiros());
-	//Jogo::getInstance().projetil->desenha();
+	Jogo::getInstance().projetil->desenha();
 	glRasterPos2f(50, 50);
 	FuncoesAuxiliares::writeWord_BITMAP(qtd, GLUT_BITMAP_TIMES_ROMAN_24);
 	//Score
@@ -59,8 +59,7 @@ void Fase::desenhaHUD() {
 	int contrSc = Jogo::getInstance().getControlaScore();
 	
 	if (sco>=contrSc) {
-		cout << "Sco: "<<sco;
-		cout << "Contr: "<<contrSc;	
+		
 		if (Jogo::getInstance().numeroVidas<5) {
 			Jogo::getInstance().numeroVidas++;
 		}
