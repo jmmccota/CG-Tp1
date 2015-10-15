@@ -90,7 +90,6 @@ void Fase::desenhaHUD() {
 
 	//Score
 	std::string s = std::to_string(Jogo::getInstance().score);
-	cout << "s: " << s;
 	glRasterPos2f(1600, 970);
 	FuncoesAuxiliares::writeWord_BITMAP(s, GLUT_BITMAP_TIMES_ROMAN_24);
 

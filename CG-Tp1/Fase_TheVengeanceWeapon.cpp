@@ -12,6 +12,8 @@ Fase_TheVengeanceWeapon::~Fase_TheVengeanceWeapon()
 
 void Fase_TheVengeanceWeapon::definePersonagens()
 {
+	pair<float, float> size = EfeitoVisual::getInstance().getOrtho2D();
+	principal = new Spitfire(size.first / 2, size.second / 10, (float)100 / 10000, this);
 }
 
 void desenha3(float translacaoX, float translacaoY, float escala){
@@ -197,6 +199,7 @@ void Fase_TheVengeanceWeapon::specialKeyUp(int key, int x, int y)
 
 void Fase_TheVengeanceWeapon::inicializa()
 {
+	definePersonagens();
 	EfeitoSonoro::getInstance().initAudios_TheVengeanceWeapon();
 	EfeitoSonoro::getInstance().playMainTheme();
 

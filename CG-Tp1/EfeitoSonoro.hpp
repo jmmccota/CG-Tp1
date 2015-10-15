@@ -81,8 +81,8 @@ public:
 	void stopV2Motor();
 
 	//Sons gerais
-	void playVickers();
-	void playMg42();
+	void playVickersShot();
+	void playMg42Shot();
 	void playBombDrop();
 	void stopVickers();
 	void stopMg42();
