@@ -19,10 +19,8 @@ public:
 	void desenhaBackground();
 
 	// Função callback chamada para fazer o desenho
-	void desenha();
-	void desenhaHUD(int hp);
-	void desenhaNumeroVidas(int numeroVidas);
-	void writeScore(int score);
+	void desenha();	
+	
 
 	void terminou();
 

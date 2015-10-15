@@ -82,18 +82,43 @@ void Fase::desenhaHUD() {
 		glVertex2f(21, 971);
 	}
 	glVertex2f(21, 971);
-
+	glEnd();
 	//Vidas
 	for (int ii = 0; ii < Jogo::getInstance().numeroVidas; ii++) {
 		Jogo::getInstance().vidas[ii]->desenha();
 	}
-
+	
+	string qtd = "x ";
+	qtd += std::to_string(principal->getQtdTiros());
+	//Jogo::getInstance().projetil->desenha();
+	glRasterPos2f(50, 50);
+	FuncoesAuxiliares::writeWord_BITMAP(qtd, GLUT_BITMAP_TIMES_ROMAN_24);
 	//Score
+	//string sc = "Score: ";
+	int sco = Jogo::getInstance().score;
 	std::string s = std::to_string(Jogo::getInstance().score);
-	glRasterPos2f(1600, 970);
-	FuncoesAuxiliares::writeWord_BITMAP(s, GLUT_BITMAP_TIMES_ROMAN_24);
+	//sc += s;
+	glRasterPos2f(1630, 1000);
+	int contrSc = Jogo::getInstance().getControlaScore();
+	
+	if (sco>=contrSc) {
+		cout << "Sco: "<<sco;
+		cout << "Contr: "<<contrSc;	
+		if (Jogo::getInstance().numeroVidas<5) {
+			Jogo::getInstance().numeroVidas++;
+		}
+		Jogo::getInstance().setControlaScore();
+		//glDisable(GL_LIGHTING);
+		
+		//FuncoesAuxiliares::writeWord_BITMAP(s, GLUT_BITMAP_TIMES_ROMAN_24);
+		//glEnable(GL_LIGHTING);
+		//Jogo::getInstance().setControlaScore();
+		
+	}
+	FuncoesAuxiliares::writeWord_BITMAP(s, GLUT_BITMAP_TIMES_ROMAN_24);	
+	
 
-	glEnd();
+	
 }
 
 void Fase::desenha(){

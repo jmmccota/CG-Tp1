@@ -25,18 +25,18 @@ void Jogo::run()
 
 	fases.push_back(new Animacao());
 	fases.push_back(new Menu());
-	//fases.push_back(new Fase_TheBlitz());
+	fases.push_back(new Fase_TheBlitz());
 	//fases.push_back(new Fase_TheBattleOfBritain());
-	fases.push_back(new Fase_TheVengeanceWeapon());
+	//fases.push_back(new Fase_TheVengeanceWeapon());
 	proxFase = 0;
 	proximaFase();
 
 
 	double xspit = 30;
 	for (int ii = 0; ii < 5; ii++) {
-		vidas[ii] = new Spitfire(xspit + 50 * ii, 1020, (float) 20 / 10000, nullptr);
+		vidas[ii] = new Spitfire(xspit + 50 * ii, 1030, (float) 20 / 10000, nullptr);
 	}
-
+	//projetil = new Bomba::Projetil(30.0, 50.0, 0,(float)300 / 10000); //desenhar a bomba versao teste
 	glutMainLoop();
 }
 
@@ -44,6 +44,15 @@ Jogo& Jogo::getInstance()
 {
 	static Jogo singleton;
 	return singleton;
+}
+void Jogo::setControlaScore() {
+	controlaScore += 1000;
+}
+void Jogo::zeraControlaScore() {
+	controlaScore = 0;
+}
+int Jogo::getControlaScore() {
+	return controlaScore;
 }
 
 void Jogo::mouse(int button, int state, int x, int y)
