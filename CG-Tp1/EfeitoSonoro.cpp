@@ -178,11 +178,11 @@ void EfeitoSonoro::stopV2Motor()
 {
 }
 
-void EfeitoSonoro::playVickers()
+void EfeitoSonoro::playVickersShot()
 {
 }
 
-void EfeitoSonoro::playMg42()
+void EfeitoSonoro::playMg42Shot()
 {
 }
 

@@ -124,6 +124,8 @@ void Fase_TheBlitz::desenhaBackground()
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	transladaCena2 -= 3;
+	if (transladaCena2 <= -3240)
+		transladaCena2 = 0;
 	for (int i = 0; i < 32; i++) {
 		if (i == 0) {
 			tX = -2880;
@@ -309,11 +311,6 @@ void Fase_TheBlitz::terminou()
 
 void Fase_TheBlitz::atualiza(int value)
 {
-	/*transladaCena2 -= 20;
-	if (transladaCena2 <= -3240){
-		cout << "entra";
-		transladaCena2 = 0;
-	}*/
 	if (value % 300 == 99)
 	{
 		pair<GLint, GLint> size = EfeitoVisual::getInstance().getOrtho2D();
@@ -357,6 +354,8 @@ void Fase_TheBlitz::atualiza(int value)
 			if ((*j)->destruido())
 			{
 				//Explode
+				if (rand() % 20 == 0)
+					principal->powerUp = 1;
 				Jogo::getInstance().score += (*j)->getScore();
 				j = inimigosAtivos.erase(j);
 			}
@@ -392,6 +391,8 @@ void Fase_TheBlitz::atualiza(int value)
 			//Perde uma vida
 			//Reinicia fase
 			Jogo::getInstance().score = 0;
+			principal->powerUp = 0;
+			Jogo::getInstance().numeroVidas--;
 			Jogo::getInstance().proximaFase();
 		}
 	}
@@ -407,6 +408,8 @@ void Fase_TheBlitz::atualiza(int value)
 
 		if ((*i)->destruido())
 		{
+			if (rand() % 20 == 0)
+				principal->powerUp = 1;
 			Jogo::getInstance().score += (*i)->getScore();
 			i = inimigosAtivos.erase(i);
 		}
@@ -417,6 +420,7 @@ void Fase_TheBlitz::atualiza(int value)
 
 		if (principal->destruido())
 		{
+			principal->powerUp = 0;
 			//Explosao
 			//Perde uma vida
 		}

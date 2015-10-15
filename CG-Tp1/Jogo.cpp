@@ -25,8 +25,8 @@ void Jogo::run()
 
 	fases.push_back(new Animacao());
 	fases.push_back(new Menu());
-	fases.push_back(new Fase_TheBlitz());
-	fases.push_back(new Fase_TheBattleOfBritain());
+	//fases.push_back(new Fase_TheBlitz());
+	//fases.push_back(new Fase_TheBattleOfBritain());
 	fases.push_back(new Fase_TheVengeanceWeapon());
 	proxFase = 0;
 	proximaFase();
@@ -107,18 +107,25 @@ void Jogo::timer(int value)
 
 void Jogo::inicializa(int fase)
 {
-	// Inicializa o sistema de coordenadas
-    estado = 0;
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glutMouseFunc(Jogo::mouse);
-	glutKeyboardFunc(Jogo::keyDown);
-	glutKeyboardUpFunc(Jogo::keyUp);
-	glutSpecialFunc(Jogo::specialKeyDown);
-	glutSpecialUpFunc(Jogo::specialKeyUp);
-	glutDisplayFunc(Jogo::draw);
-	glutTimerFunc(TEMPOQUADRO, Jogo::timer, 1);
-	Jogo::getInstance().fases[fase]->inicializa();
+	if(numeroVidas > 0)
+	{
+		estado = 0;
+		// Inicializa o sistema de coordenadas
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glutMouseFunc(Jogo::mouse);
+		glutKeyboardFunc(Jogo::keyDown);
+		glutKeyboardUpFunc(Jogo::keyUp);
+		glutSpecialFunc(Jogo::specialKeyDown);
+		glutSpecialUpFunc(Jogo::specialKeyUp);
+		glutDisplayFunc(Jogo::draw);
+		glutTimerFunc(TEMPOQUADRO, Jogo::timer, 1);
+		Jogo::getInstance().fases[fase]->inicializa();
+	}
+	else
+	{
+		//Game over
+	}
 }
 
 void Jogo::proximaFase()
