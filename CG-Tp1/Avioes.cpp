@@ -9,7 +9,7 @@ Spitfire::Spitfire(GLfloat pX, GLfloat pY, float esc, Fase *f)
 {
     this->carrega("modelos/spitfire.dat");
 
-	numeroVidas = 5;
+	numeroVidas = 3;
     hp = 1000;
     municao[0] = 9999999;
     municao[1] = 10;

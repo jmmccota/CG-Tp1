@@ -40,7 +40,6 @@ private:
 	Jogo();
 	Jogo(Jogo const&);
 	void operator=(Jogo const&);
-	
 
 public:
 
@@ -49,13 +48,16 @@ public:
 
 	//Armazena o valor do frame
 	int estado = 0;
-
+	int controlaScore = 10000;
+	void setControlaScore();
+	void zeraControlaScore();
+	int getControlaScore();
 	//Armazena a pontuacao do jogador
-	//int score = 0;
 	Score *score;
-	
+
 	//Armazena as vidas do jogador
 	Spitfire *vidas[5];
+	//Projetil *projetil;
 	int numeroVidas = 5;
 
 	//Callbacks OpenGL

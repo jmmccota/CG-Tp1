@@ -42,6 +42,8 @@ class Personagem : public Solido
         void alvejado(int dano);
 		int getHP();
 		int getNumeroVidas();
+		int getQtdTiros();
+		void setNumeroVidas();
         //Retorna true caso o personagem tenha sido destruido
         bool destruido();
 

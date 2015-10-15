@@ -70,32 +70,27 @@ void Fase_TheBattleOfBritain::desenha()
         (*i)->desenha();
 
     principal->desenha();
-	Fase::desenhaHUD();
+	desenhaHUD();
     // Executa os comandos OpenGL
     glutSwapBuffers();
 }
-void Fase_TheBattleOfBritain::desenhaHUD(int hp) {
-	glBegin(GL_LINE_LOOP);
-	glColor3f(1, 1, 1);
-	glVertex2i(20, 1000);
-	glVertex2i(254, 1000);
-	glVertex2i(254, 970);
-	glVertex2i(20, 970);
-	glEnd();
-	glBegin(GL_QUADS);
-	glColor3f(1, 0, 0);
-	glVertex2i(21, 999);
-	glVertex2i(253, 999);
-	glVertex2i(253, 971);
-	glVertex2i(21, 971);
-	glEnd();	
-}
-void Fase_TheBattleOfBritain::desenhaNumeroVidas(int numeroVidas) {
+//void Fase_TheBattleOfBritain::desenhaHUD(int hp) {
+//	glBegin(GL_LINE_LOOP);
+//	glColor3f(1, 1, 1);
+//	glVertex2i(20, 1000);
+//	glVertex2i(254, 1000);
+//	glVertex2i(254, 970);
+//	glVertex2i(20, 970);
+//	glEnd();
+//	glBegin(GL_QUADS);
+//	glColor3f(1, 0, 0);
+//	glVertex2i(21, 999);
+//	glVertex2i(253, 999);
+//	glVertex2i(253, 971);
+//	glVertex2i(21, 971);
+//	glEnd();	
+//}
 
-}
-void Fase_TheBattleOfBritain::writeScore(int score) {
-
-}
 void Fase_TheBattleOfBritain::terminou()
 {
 }

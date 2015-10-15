@@ -2,7 +2,7 @@
 #define THEVENGEANCEWEAPON_FASE
 
 #include "Fase.hpp"
-
+#include "FuncoesAuxiliares.hpp"
 #ifdef FASE
 
 class Fase_TheVengeanceWeapon : public Fase
@@ -18,9 +18,7 @@ public:
 
 	// Função callback chamada para fazer o desenho
 	void desenha();
-	void desenhaHUD(int hp);
-	void desenhaNumeroVidas(int numeroVidas);
-	void writeScore(int score);
+	
 
 	void terminou();
 
