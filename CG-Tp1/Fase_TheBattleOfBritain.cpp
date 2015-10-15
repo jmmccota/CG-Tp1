@@ -70,7 +70,7 @@ void Fase_TheBattleOfBritain::desenha()
         (*i)->desenha();
 
     principal->desenha();
-	Fase::desenhaHUD(principal->getHP());
+	Fase::desenhaHUD();
     // Executa os comandos OpenGL
     glutSwapBuffers();
 }

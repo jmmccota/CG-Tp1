@@ -60,6 +60,34 @@ public:
 	void playTransitioningMenu();
 	void playEnterMenu();
 
+	//Sons personagens
+	void playSpitfireMotor();
+	void playSpitfireFlyBy();
+	void playSpitfireAway();
+	void playBf109Motor();
+	void playBf109FlyBy();
+	void playMe163Motor();
+	void playMe264Motor();
+	void playMe262Motor();
+	void playV2Motor();
+	void stopSpitfireMotor();
+	void stopSpitfireFlyBy();
+	void stopSpitfireAway();
+	void stopBf109Motor();
+	void stopBf109FlyBy();
+	void stopMe163Motor();
+	void stopMe264Motor();
+	void stopMe262Motor();
+	void stopV2Motor();
+
+	//Sons gerais
+	void playVickersShot();
+	void playMg42Shot();
+	void playBombDrop();
+	void stopVickers();
+	void stopMg42();
+	void stopBombDrop();
+
 	//Tocar os sons uma vez sem carregar na memoria
 	void playStreamAudio(char *file);
 

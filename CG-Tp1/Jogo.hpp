@@ -51,6 +51,10 @@ class Jogo
 		//Armazena a pontuacao do jogador
 		int score = 0;
 
+		//Armazena as vidas do jogador
+		Spitfire *vidas[5];
+		int numeroVidas = 5;
+
         //Callbacks OpenGL
         static void mouse(int button, int state, int x, int y);
         static void keyDown(unsigned char key, int x, int y);

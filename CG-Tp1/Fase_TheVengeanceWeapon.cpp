@@ -12,6 +12,8 @@ Fase_TheVengeanceWeapon::~Fase_TheVengeanceWeapon()
 
 void Fase_TheVengeanceWeapon::definePersonagens()
 {
+	pair<float, float> size = EfeitoVisual::getInstance().getOrtho2D();
+	principal = new Spitfire(size.first / 2, size.second / 10, (float)100 / 10000, this);
 }
 
 void desenha3(float translacaoX, float translacaoY, float escala){
@@ -109,8 +111,8 @@ void desenha4(float translacaoX, float translacaoY, float escala){
 void Fase_TheVengeanceWeapon::desenhaBackground()
 {
 	for (int i = 0; i < 15; i = i + 2){
-		desenha3(PontosCeu[i][0], PontosCeu[i][1], 0.8);
-		desenha4(PontosCeu[i + 1][0], PontosCeu[i + 1][1], 0.8);
+		desenha3(PontosCeu[i][0], PontosCeu[i][1], 0.3);
+		desenha4(PontosCeu[i + 1][0], PontosCeu[i + 1][1], 0.2);
 	}
 }
 
@@ -161,18 +163,6 @@ void Fase_TheVengeanceWeapon::atualiza(int value)
 			PontosCeu[i][1] = 600;
 		}
 	}
-	if (variacao){
-		variacaoX+=0.5;
-	}
-	else{
-		variacaoX-=0.5;
-	}
-	if (variacaoX < -100){
-		variacao = true;
-	}
-	else if (variacaoX > 100){
-		variacao = false;
-	}
 }
 
 void Fase_TheVengeanceWeapon::mouse(int button, int state, int x, int y)
@@ -197,6 +187,7 @@ void Fase_TheVengeanceWeapon::specialKeyUp(int key, int x, int y)
 
 void Fase_TheVengeanceWeapon::inicializa()
 {
+	definePersonagens();
 	EfeitoSonoro::getInstance().initAudios_TheVengeanceWeapon();
 	EfeitoSonoro::getInstance().playMainTheme();
 
