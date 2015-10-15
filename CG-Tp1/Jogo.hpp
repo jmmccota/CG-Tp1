@@ -47,7 +47,7 @@ class Jogo
 
         //Armazena o valor do frame
         int estado = 0;
-		int controlaScore = 1000;
+		int controlaScore = 10000;
 		void setControlaScore();
 		void zeraControlaScore();
 		int getControlaScore();
@@ -57,7 +57,7 @@ class Jogo
 		//Armazena as vidas do jogador
 		Spitfire *vidas[5];
 		//Projetil *projetil;
-		int numeroVidas = 3;
+		int numeroVidas = 5;
 
         //Callbacks OpenGL
         static void mouse(int button, int state, int x, int y);

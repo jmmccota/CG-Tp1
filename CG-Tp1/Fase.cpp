@@ -108,11 +108,8 @@ void Fase::desenhaHUD() {
 			Jogo::getInstance().numeroVidas++;
 		}
 		Jogo::getInstance().setControlaScore();
-		//glDisable(GL_LIGHTING);
+		//mudar cor do score??
 		
-		//FuncoesAuxiliares::writeWord_BITMAP(s, GLUT_BITMAP_TIMES_ROMAN_24);
-		//glEnable(GL_LIGHTING);
-		//Jogo::getInstance().setControlaScore();
 		
 	}
 	FuncoesAuxiliares::writeWord_BITMAP(s, GLUT_BITMAP_TIMES_ROMAN_24);	

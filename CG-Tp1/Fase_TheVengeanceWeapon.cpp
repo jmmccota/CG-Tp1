@@ -1,4 +1,5 @@
 #include "Fase_TheVengeanceWeapon.hpp"
+#include "FuncoesAuxiliares.hpp"
 GLfloat PontosCeu[16][2];
 float variacaoX = 0;
 bool variacao = false;
@@ -16,103 +17,40 @@ void Fase_TheVengeanceWeapon::definePersonagens()
 	principal = new Spitfire(size.first / 2, size.second / 10, (float)100 / 10000, this);
 }
 
-void desenha3(float translacaoX, float translacaoY, float escala){
+void desenhaCirculo(GLfloat raio, GLfloat Px, GLfloat Py){
+	GLfloat x = 0;
+	GLfloat y = 0;
+	glBegin(GL_POLYGON);
+	for (float i = 0; i < 360; i += 0.2){
+		x = Px + raio * cos(i);
+		y = Py + raio * sin(i);
+		glVertex2f(x, y);
+	}
+	glEnd();
+}
+
+void Pedra(GLfloat X, GLfloat Y, GLfloat escala, float translacaoX, float translacaoY){
 	glPushMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluOrtho2D(-100, 100, -100, 100);
 	glScalef(escala, escala, 0);
 	glTranslatef(translacaoX + variacaoX, translacaoY, 0);
-	glColor3f(1.0, 1.0, 1.0);
-	// poligono 1
-	glBegin(GL_POLYGON);
-	glVertex2i(-40, 15);
-	glVertex2i(-30, 25);
-	glVertex2i(-20, 15);
-	glVertex2i(-20, -15);
-	glVertex2i(-30, -25);
-	glVertex2i(-40, -15);
-	glVertex2i(-40, 15);
-	glEnd();
-	// poligono 2
-	glBegin(GL_POLYGON);
-	glVertex2i(-20, 15);
-	glVertex2i(-10, 30);
-	glVertex2i(0, 15);
-	glVertex2i(0, -15);
-	glVertex2i(-10, -30);
-	glVertex2i(-20, -15);
-	glVertex2i(-20, 15);
-	glEnd();
-	// poligono 3
-	glBegin(GL_POLYGON);
-	glVertex2i(0, 15);
-	glVertex2i(10, 25);
-	glVertex2i(20, 15);
-	glVertex2i(20, -15);
-	glVertex2i(10, -25);
-	glVertex2i(0, -15);
-	glVertex2i(0, 15);
-	glEnd();
-	glPopMatrix();
-	glFlush();
-}
-
-void desenha4(float translacaoX, float translacaoY, float escala){
-	glPushMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluOrtho2D(-100, 100, -100, 100);
-	glScalef(escala, escala, 0);
-	glTranslatef(translacaoX - variacaoX, translacaoY, 0);
-	glColor3f(1.0, 1.0, 1.0);
-	// poligono 1
-	glBegin(GL_POLYGON);
-	glVertex2i(-40, 15);
-	glVertex2i(-30, 25);
-	glVertex2i(-20, 15);
-	glVertex2i(-30, -15);
-	glVertex2i(-35, -25);
-	glVertex2i(-40, -15);
-	glVertex2i(-40, 15);
-	glEnd();
-	// poligono 2
-	glBegin(GL_POLYGON);
-	glVertex2i(-20, 15);
-	glVertex2i(-15, -15);
-	glVertex2i(-20, -20);
-	glVertex2i(-30, -15);
-	glVertex2i(-20, 15);
-	glEnd();
-	// poligono 3
-	glBegin(GL_POLYGON);
-	glVertex2i(-20, 15);
-	glVertex2i(-10, 35);
-	glVertex2i(0, 15);
-	glVertex2i(0, -15);
-	glVertex2i(-5, -30);
-	glVertex2i(-15, -15);
-	glVertex2i(-20, 15);
-	glEnd();
-	// poligono 3
-	glBegin(GL_POLYGON);
-	glVertex2i(0, 15);
-	glVertex2i(10, 20);
-	glVertex2i(20, 15);
-	glVertex2i(20, -15);
-	glVertex2i(10, -20);
-	glVertex2i(0, -15);
-	glVertex2i(0, 15);
-	glEnd();
+	glColor3f(1, 1, 1);
+	desenhaCirculo(5, 8+X, 6+Y);
+	desenhaCirculo(5, 4+X, 4+Y);
+	desenhaCirculo(4, 9+X, 3+Y);
+	desenhaCirculo(3, 5+X, 0+Y);
+	desenhaCirculo(5, 5+X, 0+Y);
 	glPopMatrix();
 	glFlush();
 }
 
 void Fase_TheVengeanceWeapon::desenhaBackground()
 {
-	for (int i = 0; i < 15; i = i + 2){
-		desenha3(PontosCeu[i][0], PontosCeu[i][1], 0.3);
-		desenha4(PontosCeu[i + 1][0], PontosCeu[i + 1][1], 0.2);
+	for (int i = 0; i < 14; i = i + 2){
+		Pedra(0, 0, 2, PontosCeu[i][0], PontosCeu[i][1]);
+		Pedra(0, 0, 2.5, PontosCeu[i+1][0], PontosCeu[i+1][1]);
 	}
 }
 
@@ -150,12 +88,12 @@ void Fase_TheVengeanceWeapon::terminou()
 
 void Fase_TheVengeanceWeapon::atualiza(int value)
 {
-	for (int i = 0; i < 16; i++){
-		PontosCeu[i][1] --;
+	for (int i = 0; i < 14; i++){
+		PontosCeu[i][1] -= 0.3;
 	}
-	for (int i = 0; i < 16; i++){
-		if (PontosCeu[i][1] < -400){
-			PontosCeu[i][1] = 600;
+	for (int i = 0; i < 14; i++){
+		if (PontosCeu[i][1] < -100){
+			PontosCeu[i][1] = 100;
 		}
 	}
 }
@@ -187,24 +125,22 @@ void Fase_TheVengeanceWeapon::inicializa()
 	EfeitoSonoro::getInstance().playMainTheme();
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	PontosCeu[0][0] = -265;
-	PontosCeu[0][1] = 220;
-	PontosCeu[1][0] = 0;
-	PontosCeu[1][1] = 150;
-	PontosCeu[2][0] = 225;
-	PontosCeu[2][1] = 0;
-	PontosCeu[3][0] = 265;
-	PontosCeu[3][1] = 220;
-	PontosCeu[4][0] = -225;
-	PontosCeu[4][1] = 0;
-	PontosCeu[5][0] = -265;
-	PontosCeu[5][1] = -220;
-	PontosCeu[6][0] = 0;
-	PontosCeu[6][1] = -150;
-	PontosCeu[7][0] = 265;
-	PontosCeu[7][1] = -220;
-	for (int i = 8; i < 16; i++){
-		PontosCeu[i][0] = PontosCeu[i - 8][0];
-		PontosCeu[i][1] = PontosCeu[i - 8][1] + 570;
+	PontosCeu[0][0] = -35;
+	PontosCeu[0][1] = 30;
+	PontosCeu[1][0] = -5;
+	PontosCeu[1][1] = 15;
+	PontosCeu[2][0] = 25;
+	PontosCeu[2][1] = 30;
+	PontosCeu[4][0] = -5;
+	PontosCeu[4][1] = 20;
+	PontosCeu[5][0] = -40;
+	PontosCeu[5][1] = -25;
+	PontosCeu[6][0] = 35;
+	PontosCeu[6][1] = -30;
+	PontosCeu[7][0] = -5;
+	PontosCeu[7][1] = -45;
+	for (int i = 8; i < 14; i++){
+		PontosCeu[i][0] = PontosCeu[i - 7][0];
+		PontosCeu[i][1] = PontosCeu[i - 7][1] + 100;
 	}
 }
