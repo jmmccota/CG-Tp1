@@ -1,7 +1,5 @@
 #include "Score.hpp"
-
 #define FILE_NAME "PlayersScores.dat"
-
 
 Score::Score() {
 }
@@ -9,11 +7,16 @@ Score::Score() {
 Score::~Score() {
 }
 
-Score::Score(string jogador, int score) {
-	Score::player = jogador;
-	Score::score = score;
+Score::Score(string player, int score) {
+	this->player = player;
+	this->score = score;
 }
 
+Score::Score(string player)
+{
+	this->player = player;
+	this->score = 0;
+}
 
 void Score::criaArquivo() {
 	ofstream makefile;
@@ -21,23 +24,6 @@ void Score::criaArquivo() {
 	makefile.close();
 }
 
-const int Score::quantScores()
-{
-	int contScores = 0;
-	string line;
-	ifstream file(FILE_NAME);
-	if (file.is_open()) {
-		while (file)
-		{
-			getline(file, line);
-			if (line != "") {
-				contScores++;
-				line = "";
-			}
-		}
-	}
-	return contScores;
-}
 
 bool Score::saveScore(string jogador, int score) {
 	try
@@ -138,7 +124,6 @@ vector<Score> Score::getBestScore(int qtScores)
 
 	return bestScores;
 }
-
 
 int Score::getScore() {
 	return score;
