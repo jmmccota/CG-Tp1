@@ -84,11 +84,12 @@ void Fase::desenhaHUD() {
 	glVertex2f(21, 971);
 
 	//Vidas
-	for (int ii = 0; ii < Jogo::getInstance().numeroVidas; ii++) {
-		Jogo::getInstance().vidas[ii]->desenha();
+	for (int i = 0; i < Jogo::getInstance().numeroVidas; i++) {
+		Jogo::getInstance().vidas[i]->desenha();
 	}
-
+	
 	//Score
+	glColor3f(1, 0.27, 0);
 	glRasterPos2f(1600, 970);
 	FuncoesAuxiliares::writeWord_BITMAP(std::to_string(Jogo::getInstance().score->getScoreValue()), GLUT_BITMAP_TIMES_ROMAN_24);
 

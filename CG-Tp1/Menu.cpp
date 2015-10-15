@@ -46,7 +46,6 @@ void drawLine(float pos, char eixo) {
 
 	pair<int, int> size = EfeitoVisual::getInstance().getOrtho2D();
 
-	//glColor3f(0, 1.0, 0.9);
 	glColor3f(1, 0.27, 0);
 	glLineWidth(3.0f);
 	if (eixo == 'x') {
