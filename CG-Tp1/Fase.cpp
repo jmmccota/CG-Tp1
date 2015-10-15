@@ -108,7 +108,7 @@ void Fase::desenhaHUD() {
 			Jogo::getInstance().numeroVidas++;
 		}
 		Jogo::getInstance().setControlaScore();
-		//mudar cor do score??
+		//ADICIONAR SOM PARA MOSTRAR QUE GANHOU VIDA
 		
 		
 	}

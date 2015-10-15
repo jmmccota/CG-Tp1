@@ -47,7 +47,7 @@ class Jogo
 
         //Armazena o valor do frame
         int estado = 0;
-		int controlaScore = 10000;
+		int controlaScore = 500;
 		void setControlaScore();
 		void zeraControlaScore();
 		int getControlaScore();

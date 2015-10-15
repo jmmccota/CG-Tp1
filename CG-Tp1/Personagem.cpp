@@ -23,7 +23,7 @@ int Personagem::getNumeroVidas() {
 	return numeroVidas;
 }
 int Personagem::getQtdTiros() {
-	return municao[2];
+	return municao[1];
 }
 bool Personagem::destruido()
 {
