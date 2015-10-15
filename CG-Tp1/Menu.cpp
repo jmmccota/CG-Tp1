@@ -46,7 +46,6 @@ void drawLine(float pos, char eixo) {
 
 	pair<int, int> size = EfeitoVisual::getInstance().getOrtho2D();
 
-	//glColor3f(0, 1.0, 0.9);
 	glColor3f(1, 0.27, 0);
 	glLineWidth(3.0f);
 	if (eixo == 'x') {
@@ -210,7 +209,7 @@ void drawBestScoresMenu(vector<Score> bestScores, int decRasterY) {
 		glRasterPos2f(rasterX, rasterY);
 		FuncoesAuxiliares::writeWord_BITMAP(name, FONT_DEFAULT);
 
-		string score = std::to_string(bestScores[i].getScore());
+		string score = std::to_string(bestScores[i].getScoreValue());
 		if (EfeitoVisual::getInstance().isFullScreen()) {
 			glRasterPos2f(rasterX + (sizeScreen.first / 2) - (score.length() * 10) + 12, rasterY);
 		}
@@ -314,7 +313,7 @@ void drawOpcoesMenu() {
 	glPushMatrix();
 	TiroSimples *tiro = new TiroSimples(1300, 400, 0.002);
 	TiroSimples *tiro2 = new TiroSimples(1500, 400, 0.002);
-	Spitfire *spitfire = new Spitfire(1400, 360, 0.015, nullptr);
+	Spitfire *spitfire = new Spitfire(1400, 360, 0.010, nullptr);
 	glTranslatef(translacaoOpcoesX, translacaoOpcoesY, 0);
 	glPushMatrix();
 	glTranslatef(0, translacaoTiro, 0);
@@ -347,7 +346,7 @@ void Menu::desenha() {
 		// 5 Valores - Passar 80 por parametro
 		// 7 Valores - Passar 47 por parametro
 		// 10 Valores - Passar 30 por Parametro
-		drawBestScoresMenu(Score::getInstance().getBestScore(7), 47);
+		drawBestScoresMenu(Score::getBestScore(7), 47);
 	}
 	else if (optOpcoes) {//Tela de Opções
 		EfeitoVisual::getInstance().desenhaTitulo(600, 65);
@@ -367,15 +366,15 @@ void Menu::desenha() {
 		options[3] = "SAIR";
 		drawOptionsMenu(options, 4, 450);
 		//Desenha Avião
-		TiroSimples *municao1 = new TiroSimples(200, 460, 0.002);
-		TiroSimples *municao2 = new TiroSimples(400, 460, 0.002);
-		Spitfire *spitfire = new Spitfire(300, 380, 0.025, nullptr);
+		TiroSimples *municao1 = new TiroSimples(360, 690, 0.002);
+		TiroSimples *municao2 = new TiroSimples(560, 690, 0.002);
+		Spitfire *spitfire = new Spitfire(460, 530, 0.045, nullptr);
 		glPushMatrix();
 
 		//Movendo aviao do menu
-		if (translacaoY < 500 && !limitX) {
+		if (translacaoY < 190 && !limitX) {
 			translacaoY += 4;
-			if (translacaoY >= 500) {
+			if (translacaoY >= 190) {
 				limitX = true;
 			}
 
@@ -408,7 +407,7 @@ void Menu::terminou()
 	}
 	else if (optIniciar)
 	{
-		EfeitoSonoro::getInstance().stopSong();
+		EfeitoSonoro::getInstance().finishAllAudios();
 		Jogo::getInstance().setProxFase(2);
 		Jogo::getInstance().proximaFase();
 	}
@@ -453,7 +452,15 @@ void Menu::atualiza(int value) {
 void Menu::keyDown(unsigned char key, int x, int y)
 {
 }
+void Menu::desenhaHUD(int hp)
+{
+}
+void Menu::desenhaNumeroVidas(int numeroVidas) {
 
+}
+void Menu::writeScore(int score) {
+
+}
 void Menu::keyUp(unsigned char key, int x, int y)
 {
 	if (optMelhores) {
@@ -470,7 +477,7 @@ void Menu::keyUp(unsigned char key, int x, int y)
 		switch (key) {
 		case 'O'://Tela de Opções
 		case 'o':
-			EfeitoSonoro::getInstance().playEnterMenuEffect();
+			EfeitoSonoro::getInstance().playEnterMenu();
 			optOpcoes = true;
 			setaSelectOption = 2;
 			break;
@@ -479,17 +486,17 @@ void Menu::keyUp(unsigned char key, int x, int y)
 			switch (setaSelectOption)
 			{
 			case 1:
-				EfeitoSonoro::getInstance().playEnterMenuEffect();
+				EfeitoSonoro::getInstance().playEnterMenu();
 				optMelhores = true;
 				break;
 			case 2:
-				EfeitoSonoro::getInstance().playEnterMenuEffect();
+				EfeitoSonoro::getInstance().playEnterMenu();
 				optOpcoes = true;
 				break;
 			case 3:
 				optSair = true;
 			default:
-				EfeitoSonoro::getInstance().playEnterMenuEffect();
+				EfeitoSonoro::getInstance().playEnterMenu();
 				optIniciar = true;
 				break;
 			}
@@ -497,7 +504,7 @@ void Menu::keyUp(unsigned char key, int x, int y)
 
 		case 'm': //Tela de Melhores Pontuações
 		case 'M':
-			EfeitoSonoro::getInstance().playEnterMenuEffect();
+			EfeitoSonoro::getInstance().playEnterMenu();
 			optMelhores = true;
 			setaSelectOption = 1;
 			break;
@@ -560,14 +567,14 @@ void Menu::specialKeyUp(int key, int x, int y)
 		case GLUT_KEY_UP: //SETA CIMA
 			if (setaSelectOption > 0) {
 				setaSelectOption--;
-				EfeitoSonoro::getInstance().playTransitioningMenuEffect();
+				EfeitoSonoro::getInstance().playTransitioningMenu();
 			}
 			break;
 		case GLUT_KEY_DOWN: //SETA BAIXO
 			if (setaSelectOption < 3) {
 				setaSelectOption++;
 
-				EfeitoSonoro::getInstance().playTransitioningMenuEffect();
+				EfeitoSonoro::getInstance().playTransitioningMenu();
 			}
 			break;
 		default:
@@ -599,7 +606,7 @@ void Menu::mouse(int button, int state, int x, int y) {
 				float yEnd = vetPosMenuElements[i].posEnd_Y;
 				if ((x >= xInit && x <= xEnd) && (y >= yInit && y <= yEnd)) {
 					setaSelectOption = i;
-					EfeitoSonoro::getInstance().playEnterMenuEffect();
+					EfeitoSonoro::getInstance().playEnterMenu();
 					switch (i)
 					{
 					case 0:
@@ -627,6 +634,7 @@ void Menu::inicializa()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	//-------------
+	EfeitoSonoro::getInstance().initAudios_Menu();
 	EfeitoSonoro::getInstance().playMainTheme();
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }

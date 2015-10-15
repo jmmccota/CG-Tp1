@@ -1,7 +1,7 @@
 #include "Fase_TheBattleOfBritain.hpp"
 
 // pontos do efeito de agua
-GLfloat Pontos[16][2];
+GLfloat PontosAgua[16][2];
 
 Fase_TheBattleOfBritain::Fase_TheBattleOfBritain()
 {
@@ -46,7 +46,7 @@ void drawWaves(float translacaoX, float translacaoY, float escala){
 void Fase_TheBattleOfBritain::desenhaBackground()
 {
     for (int i = 0; i < 16; i++){
-        drawWaves(Pontos[i][0], Pontos[i][1], 0.25);
+        drawWaves(PontosAgua[i][0], PontosAgua[i][1], 0.25);
     }
     EfeitoVisual::getInstance().ortho2D();
 }
@@ -70,10 +70,26 @@ void Fase_TheBattleOfBritain::desenha()
         (*i)->desenha();
 
     principal->desenha();
-
+	desenhaHUD();
     // Executa os comandos OpenGL
     glutSwapBuffers();
 }
+//void Fase_TheBattleOfBritain::desenhaHUD(int hp) {
+//	glBegin(GL_LINE_LOOP);
+//	glColor3f(1, 1, 1);
+//	glVertex2i(20, 1000);
+//	glVertex2i(254, 1000);
+//	glVertex2i(254, 970);
+//	glVertex2i(20, 970);
+//	glEnd();
+//	glBegin(GL_QUADS);
+//	glColor3f(1, 0, 0);
+//	glVertex2i(21, 999);
+//	glVertex2i(253, 999);
+//	glVertex2i(253, 971);
+//	glVertex2i(21, 971);
+//	glEnd();	
+//}
 
 void Fase_TheBattleOfBritain::terminou()
 {
@@ -82,11 +98,11 @@ void Fase_TheBattleOfBritain::terminou()
 void Fase_TheBattleOfBritain::atualiza(int value)
 {
     for (int i = 0; i < 16; i++){
-        Pontos[i][1] -= 2;
+        PontosAgua[i][1] -= 2;
     }
     for (int i = 0; i < 16; i++){
-        if (Pontos[i][1] < -400){
-            Pontos[i][1] = 600;
+        if (PontosAgua[i][1] < -400){
+            PontosAgua[i][1] = 600;
         }
     }
 
@@ -165,26 +181,26 @@ void Fase_TheBattleOfBritain::specialKeyUp(int key, int x, int y)
 void Fase_TheBattleOfBritain::inicializa()
 {
     definePersonagens();
-    EfeitoSonoro::getInstance().playSecondLevelTheme();
-    EfeitoSonoro::getInstance().spitfireMotor();
-    Pontos[0][0] = -265;
-    Pontos[0][1] = 220;
-    Pontos[1][0] = 0;
-    Pontos[1][1] = 150;
-    Pontos[2][0] = 225;
-    Pontos[2][1] = 0;
-    Pontos[3][0] = 265;
-    Pontos[3][1] = 220;
-    Pontos[4][0] = -225;
-    Pontos[4][1] = 0;
-    Pontos[5][0] = -265;
-    Pontos[5][1] = -220;
-    Pontos[6][0] = 0;
-    Pontos[6][1] = -150;
-    Pontos[7][0] = 265;
-    Pontos[7][1] = -220;
+  //  EfeitoSonoro::getInstance().playSecondLevelTheme();
+//    EfeitoSonoro::getInstance().spitfireMotor();
+    PontosAgua[0][0] = -265;
+    PontosAgua[0][1] = 220;
+    PontosAgua[1][0] = 0;
+    PontosAgua[1][1] = 150;
+    PontosAgua[2][0] = 225;
+    PontosAgua[2][1] = 0;
+    PontosAgua[3][0] = 265;
+    PontosAgua[3][1] = 220;
+    PontosAgua[4][0] = -225;
+    PontosAgua[4][1] = 0;
+    PontosAgua[5][0] = -265;
+    PontosAgua[5][1] = -220;
+    PontosAgua[6][0] = 0;
+    PontosAgua[6][1] = -150;
+    PontosAgua[7][0] = 265;
+    PontosAgua[7][1] = -220;
     for (int i = 8; i < 16; i++){
-        Pontos[i][0] = Pontos[i - 8][0];
-        Pontos[i][1] = Pontos[i - 8][1] + 570;
+        PontosAgua[i][0] = PontosAgua[i - 8][0];
+        PontosAgua[i][1] = PontosAgua[i - 8][1] + 570;
     }
 }

@@ -7,6 +7,8 @@ class EfeitoSonoro;
 #include <fmod.hpp>
 #include <fmod_errors.h>
 #include <iostream>
+#include <vector>
+#include "FMOD_Audio.hpp"
 
 using namespace std;
 /*
@@ -27,51 +29,68 @@ using namespace std;
 class EfeitoSonoro
 {
 
-private:
+protected:
 	FMOD::System *system;
-	FMOD::Sound *sound;
-	FMOD::Channel *channel;
-	FMOD_RESULT result;
-	unsigned int version;
-	EfeitoSonoro();
-	EfeitoSonoro(EfeitoSonoro const&);
-	void operator=(EfeitoSonoro const&);
-	void createObjectSystem();
+	vector<FMOD_Audio *> arrayAudios;
 
 private:
 	//Verificação de erros
 	void ERRCHECK(FMOD_RESULT result);
 
-	//Execura o som
-	void playSong(char *file, bool loop);
-
 public:
+	EfeitoSonoro();
 	~EfeitoSonoro();
 
-	//Execução de Músicas
-    void playMainTheme();
-    void playFirstLevelTheme();
-    void playSecondLevelTheme();
-    void playThirdLevelTheme();
+	//Criar um objeto de sistema
+	void createObjectSystem();
 
-	//Execução de Sounds
-	void playBoomEffect();
-	void playTransitioningMenuEffect();
-	void playEnterMenuEffect();
-    void airRaidSiren();
-    //Spitfire
-    void spitfireFlyBy();
-    void spitfireMotor();
-    void spitfireMotorAway();
-    //Bf109
-    void bf109FlyBy();
-    //Armamentos
-    void vickersShot();
-    void bombDrop();
+	//Iniciar os sons da Fase
+	void initAudios_Menu();
+	void initAudios_TheBlitz();
+	void initAudios_TheBattleOfBritain();
+	void initAudios_TheVengeanceWeapon();
 
-	void stopSong();
+	//Finalisar todos os sons
+	void finishAllAudios();
 
-	FMOD::Sound getSound();
+	//Tocar a Musica principal
+	void playMainTheme();
+
+	//Sons do Menu
+	void playTransitioningMenu();
+	void playEnterMenu();
+
+	//Sons personagens
+	void playSpitfireMotor();
+	void playSpitfireFlyBy();
+	void playSpitfireAway();
+	void playBf109Motor();
+	void playBf109FlyBy();
+	void playMe163Motor();
+	void playMe264Motor();
+	void playMe262Motor();
+	void playV2Motor();
+	void stopSpitfireMotor();
+	void stopSpitfireFlyBy();
+	void stopSpitfireAway();
+	void stopBf109Motor();
+	void stopBf109FlyBy();
+	void stopMe163Motor();
+	void stopMe264Motor();
+	void stopMe262Motor();
+	void stopV2Motor();
+
+	//Sons gerais
+	void playVickersShot();
+	void playMg42Shot();
+	void playBombDrop();
+	void stopVickers();
+	void stopMg42();
+	void stopBombDrop();
+
+	//Tocar os sons uma vez sem carregar na memoria
+	void playStreamAudio(char *file);
+
 
 	static EfeitoSonoro& getInstance();
 };

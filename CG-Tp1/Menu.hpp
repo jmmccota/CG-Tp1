@@ -48,6 +48,13 @@ public:
 
 	void desenhaBackground();
 
+	void desenhaHUD(int hp);
+	void desenhaNumeroVidas(int numeroVidas);
+	void writeScore(int score);
+
+
+
+
 	// Função callback chamada para fazer o desenho
 	void desenha();
 

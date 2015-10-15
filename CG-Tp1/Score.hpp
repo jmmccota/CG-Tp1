@@ -7,6 +7,7 @@
 #include <iostream>
 #include <vector>
 #include "FuncoesAuxiliares.hpp"
+#include <list>
 
 using namespace std;
 
@@ -25,35 +26,35 @@ using namespace std;
 class Score {
 
 protected:
-	friend std::ostream& operator<<(std::ostream&, const Score&);
 	string player;
-	int score;
+	int scoreValue;
 public:
 	Score(string player, int score);
+	Score(string player);
 	Score();
 	~Score();
 
 	//Cria o arquivo score.txt
-	void criaArquivo();
-
-	//Retorna a quantidade de Scores no arquivo
-	const int quantScores();
+	void static criaArquivo();
 
 	//Salva a pontuação do jogador, retornando se foi salvo ou não
-	bool saveScore(string jogador, int score);
+	bool static saveScore(string player, int score);
 
 	//Pega o melhor Score e o nome do jogador 
 	Score static getBestScore();
 
 	//Pega as melhores pontuações de acordo com a quantidade desejada
-	vector<Score> getBestScore(int quant);
+	vector<Score> static getBestScore(int quant);
 
 	//Getters
-	int getScore();
+	int getScoreValue();
 	string getPlayer();
 
-	//Singleton
-	static Score& getInstance();
+	//Setters
+	void setScoreValue(int score);
+	void setPlayer(string player);
+
+	void incScoreValue(int score);
 };
 
 

@@ -1,19 +1,24 @@
 #include "Score.hpp"
-
 #define FILE_NAME "PlayersScores.dat"
 
-
 Score::Score() {
+	this->player = "Sem nome";
+	this->scoreValue = 0;
 }
 
 Score::~Score() {
 }
 
-Score::Score(string jogador, int score) {
-	Score::player = jogador;
-	Score::score = score;
+Score::Score(string player, int score) {
+	this->player = player;
+	this->scoreValue = score;
 }
 
+Score::Score(string player)
+{
+	this->player = player;
+	this->scoreValue = 0;
+}
 
 void Score::criaArquivo() {
 	ofstream makefile;
@@ -21,29 +26,12 @@ void Score::criaArquivo() {
 	makefile.close();
 }
 
-const int Score::quantScores()
-{
-	int contScores = 0;
-	string line;
-	ifstream file(FILE_NAME);
-	if (file.is_open()) {
-		while (file)
-		{
-			getline(file, line);
-			if (line != "") {
-				contScores++;
-				line = "";
-			}
-		}
-	}
-	return contScores;
-}
 
-bool Score::saveScore(string jogador, int score) {
+bool Score::saveScore(string player, int scoreValue) {
 	try
 	{
 		ofstream file(FILE_NAME, ios::app);
-		file << jogador << "\t" << score << "\n";
+		file << player << "\t" << scoreValue << "\n";
 		file.close();
 		return 1;
 	}
@@ -74,87 +62,90 @@ Score Score::getBestScore() {
 		}
 		file.close();
 		if (maxScore == -1) {
-			return Score("Unknown", 0);
+			return Score("Sem Nome", 0);
 		}
 		else {
 			return Score(bestPlayer, maxScore);
 		}
 	}
 	else {
-		Score::getInstance().criaArquivo();
-		return Score("Unknown", 0);
+		Score::criaArquivo();
+		return Score("Sem Nome", 0);
 	}
 }
 
 vector<Score> Score::getBestScore(int qtScores)
 {
-	int totalScores = quantScores();
-	Score *scores[100];
+	vector<Score *> fileScores;
+	vector<Score> bestScores;
 
-	vector<Score> bestScores(qtScores);
 	string line;
-	int i = 0;
-	int maxScore = -1;
-
 	ifstream file(FILE_NAME);
-	while (file)
-	{
+
+	//Carregar arquivo em um vetor na memoria
+	while (file) {
 		getline(file, line);
 		if (line != "") {
 			vector<string> vecSplit = FuncoesAuxiliares::split(line, '\t');
-			Score *s = new Score(vecSplit[0], std::stoi(vecSplit[1]));
-			scores[i] = s;
+			Score *score = new Score(vecSplit[0], std::stoi(vecSplit[1]));
+			fileScores.push_back(score);
 			line = "";
-			i++;
 		}
 	}
 
-	Score *pointB;
-	int contBest = 0;
-	int posBest_inMoment;
+	int sizefileScores = fileScores.size();
+	//Pega os melhores Scores
+	while (qtScores && sizefileScores > 0) {
+		int maxScore = -1;
+		string maxPlayer = "";
+		int posBest = 0;
 
-	//Percorre o vetor de scores
-	while (contBest < totalScores && contBest < qtScores) {
-		for (int x = 0; x < i; x++) {
-			if (scores[x]->score >= maxScore) {
-				maxScore = scores[x]->score;
-				pointB = scores[x];
-				posBest_inMoment = x;
+		for (int i = 0; i < sizefileScores; i++) {
+			if (fileScores[i]->scoreValue >= maxScore) {
+				maxPlayer = fileScores[i]->player;
+				maxScore = fileScores[i]->scoreValue;
+				posBest = i;
 			}
 		}
-		bestScores[contBest] = *pointB;
+		Score tempBestScore;
+		tempBestScore.player = maxPlayer;
+		tempBestScore.scoreValue = maxScore;
+		bestScores.push_back(tempBestScore);
 
-		//Retirar o apontamento
-		free(scores[posBest_inMoment]);
-		scores[posBest_inMoment] = scores[i - 1];
-		i--;
-		contBest++;
-		maxScore = -1;
-	}
-
-	while (contBest < qtScores) {
-		bestScores[contBest] = Score("Unknown", 0);
-		contBest++;
+		Score temp;
+		temp.player = fileScores[sizefileScores - 1]->player;
+		temp.scoreValue = fileScores[sizefileScores - 1]->scoreValue;
+		free(fileScores[sizefileScores - 1]);
+		if ((sizefileScores - 1) != posBest) {
+			fileScores[posBest]->player = temp.player;
+			fileScores[posBest]->scoreValue = temp.scoreValue;
+		}
+		qtScores--;
+		sizefileScores--;
 	}
 
 	return bestScores;
 }
 
-
-int Score::getScore() {
-	return score;
+int Score::getScoreValue() {
+	return scoreValue;
 }
 
 string Score::getPlayer() {
 	return player;
 }
 
-std::ostream& operator<<(std::ostream &strm, const Score &a) {
-	return strm << a.player << " -> " << a.score << endl;
+void Score::setScoreValue(int score)
+{
+	this->scoreValue = score;
 }
 
-Score& Score::getInstance()
+void Score::setPlayer(string player)
 {
-	static Score singleton;
-	return singleton;
+	this->player = player;
+}
+
+void Score::incScoreValue(int score)
+{
+	this->scoreValue += score;
 }

@@ -19,7 +19,8 @@ public:
 	void desenhaBackground();
 
 	// Função callback chamada para fazer o desenho
-	void desenha();
+	void desenha();	
+	
 
 	void terminou();
 

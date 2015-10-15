@@ -14,8 +14,8 @@ class FuncoesAuxiliares;
 using namespace std;
 
 /*
-Classe usada para guardar funcoes uteis mas que
-nao pertencem a uma classe em especifico
+	Classe usada para guardar funcoes uteis mas que
+	nao pertencem a uma classe em especifico
 */
 
 

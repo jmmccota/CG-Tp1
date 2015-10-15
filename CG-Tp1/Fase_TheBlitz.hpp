@@ -21,7 +21,6 @@ public:
 
 	// Função callback chamada para fazer o desenho
 	void desenha();
-
 	void terminou();
 
 	// Função callback chamada pela GLUT a cada intervalo de tempo

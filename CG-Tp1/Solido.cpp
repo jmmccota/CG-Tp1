@@ -64,7 +64,7 @@ void Solido::carrega(std::string arquivo)
 }
 
 void Solido::desenha()
-{
+{	
 	for (unsigned int i = 0; i < poligonos.size(); i++)
 	{
 		poligonos[i].desenha(posX, posY);
