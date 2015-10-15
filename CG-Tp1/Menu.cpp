@@ -46,7 +46,6 @@ void drawLine(float pos, char eixo) {
 
 	pair<int, int> size = EfeitoVisual::getInstance().getOrtho2D();
 
-	//glColor3f(0, 1.0, 0.9);
 	glColor3f(1, 0.27, 0);
 	glLineWidth(3.0f);
 	if (eixo == 'x') {
@@ -210,7 +209,7 @@ void drawBestScoresMenu(vector<Score> bestScores, int decRasterY) {
 		glRasterPos2f(rasterX, rasterY);
 		FuncoesAuxiliares::writeWord_BITMAP(name, FONT_DEFAULT);
 
-		string score = std::to_string(bestScores[i].getScore());
+		string score = std::to_string(bestScores[i].getScoreValue());
 		if (EfeitoVisual::getInstance().isFullScreen()) {
 			glRasterPos2f(rasterX + (sizeScreen.first / 2) - (score.length() * 10) + 12, rasterY);
 		}
