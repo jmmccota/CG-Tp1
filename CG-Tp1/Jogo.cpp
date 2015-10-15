@@ -25,8 +25,8 @@ void Jogo::run()
 
 	fases.push_back(new Animacao());
 	fases.push_back(new Menu());
-	//fases.push_back(new Fase_TheBlitz());
-	//fases.push_back(new Fase_TheBattleOfBritain());
+	/*fases.push_back(new Fase_TheBlitz());
+	fases.push_back(new Fase_TheBattleOfBritain());*/
 	fases.push_back(new Fase_TheVengeanceWeapon());
 	proxFase = 0;
 	proximaFase();

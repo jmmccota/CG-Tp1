@@ -2,7 +2,7 @@
 #define THEVENGEANCEWEAPON_FASE
 
 #include "Fase.hpp"
-
+#include "FuncoesAuxiliares.hpp"
 #ifdef FASE
 
 class Fase_TheVengeanceWeapon : public Fase
