@@ -14,6 +14,8 @@ void Menu::definePersonagens() {
 void Menu::desenhaBackground() {
 }
 
+
+
 #pragma region "Pack de Desenho do Menu"
 
 //-------------- Usado para pegar Dinamicamente a Posição dos Elementos do Menu ---------------
@@ -314,7 +316,7 @@ void drawOpcoesMenu() {
 	glPushMatrix();
 	TiroSimples *tiro = new TiroSimples(1300, 400, 0.002);
 	TiroSimples *tiro2 = new TiroSimples(1500, 400, 0.002);
-	Spitfire *spitfire = new Spitfire(1400, 360, 0.015, nullptr);
+	Spitfire *spitfire = new Spitfire(1400, 360, 0.010, nullptr);
 	glTranslatef(translacaoOpcoesX, translacaoOpcoesY, 0);
 	glPushMatrix();
 	glTranslatef(0, translacaoTiro, 0);
@@ -408,7 +410,7 @@ void Menu::terminou()
 	}
 	else if (optIniciar)
 	{
-	//	EfeitoSonoro::getInstance().finishAllSounds();
+		EfeitoSonoro::getInstance().finishAllAudios();
 		Jogo::getInstance().setProxFase(2);
 		Jogo::getInstance().proximaFase();
 	}
@@ -453,7 +455,15 @@ void Menu::atualiza(int value) {
 void Menu::keyDown(unsigned char key, int x, int y)
 {
 }
+void Menu::desenhaHUD(int hp)
+{
+}
+void Menu::desenhaNumeroVidas(int numeroVidas) {
 
+}
+void Menu::writeScore(int score) {
+
+}
 void Menu::keyUp(unsigned char key, int x, int y)
 {
 	if (optMelhores) {
@@ -483,7 +493,7 @@ void Menu::keyUp(unsigned char key, int x, int y)
 				optMelhores = true;
 				break;
 			case 2:
-			EfeitoSonoro::getInstance().playEnterMenu();
+				EfeitoSonoro::getInstance().playEnterMenu();
 				optOpcoes = true;
 				break;
 			case 3:

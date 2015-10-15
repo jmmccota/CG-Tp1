@@ -49,6 +49,10 @@ void Animacao::desenhaBackground()
 
 }
 
+void Animacao::desenhaHUD()
+{
+}
+
 void Animacao::desenha()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -68,7 +72,7 @@ void Animacao::desenha()
 			booldesenha = false;
 		}
 	}
-	Spitfire *s = new Spitfire(-45, 0 , (float)20 / 10000, nullptr);
+	Spitfire *s = new Spitfire(-45, 0, (float)20 / 10000, nullptr);
 	Bf109 *b = new Bf109(50, 0, (float)20 / 10000, nullptr, nullptr);
 	TiroSimples *t1 = new TiroSimples(-38, 8, (float)2 / 10000);
 	TiroSimples *t2 = new TiroSimples(-38, -8, (float)2 / 10000);
@@ -115,7 +119,7 @@ void Animacao::desenha()
 		// desenha a explosao
 		if (!comecouExplosao)
 		{
-//			EfeitoSonoro::getInstance().playBoomEffect();
+			EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/boom.mp3");
 			comecouExplosao = true;
 		}
 		glPushMatrix();
@@ -169,7 +173,7 @@ void Animacao::terminou()
 {
 	if (pularAnimacao)
 	{
-	//	EfeitoSonoro::getInstance().finishAllSounds();
+		EfeitoSonoro::getInstance().finishAllAudios();
 		Jogo::getInstance().setProxFase(1);
 		Jogo::getInstance().proximaFase();
 	}
@@ -210,10 +214,16 @@ void Animacao::specialKeyDown(int key, int x, int y)
 void Animacao::specialKeyUp(int key, int x, int y)
 {
 }
+void Animacao::desenhaHUD(int hp) {
+}
+void Animacao::desenhaNumeroVidas(int numeroVidas) {
+}
+void Animacao::writeScore(int score) {
 
+}
 void Animacao::inicializa()
 {
-//	EfeitoSonoro::getInstance().spitfireFlyBy();
-//	EfeitoSonoro::getInstance().bf109FlyBy();
+	EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/spitfireFlyBy.mp3");
+	EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/bf190FlyBy.mp3");
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }

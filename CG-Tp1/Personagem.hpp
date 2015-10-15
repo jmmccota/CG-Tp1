@@ -23,7 +23,7 @@ class Personagem : public Solido
 {
 	protected:
 		//Valores de vida e municoes do personagem
-		int hp, municao[2];
+		int hp, municao[2], numeroVidas;
 
         //Ponteiro para fase
         //  Utilizado para informar novos projeteis
@@ -40,13 +40,23 @@ class Personagem : public Solido
         virtual void atira(int tipo) = 0;
 
         void alvejado(int dano);
-
+		int getHP();
+		int getNumeroVidas();
         //Retorna true caso o personagem tenha sido destruido
         bool destruido();
 
         //Inverte os pontos Y do poligono
         //    Usado para avioes vindo na direcao oposta
         void inverteY();
+
+		//Retorna o dano ao outro aviao que colidiu com esse
+		virtual int danoColisao() = 0;
+
+		//Retorna o nome do aviao
+		virtual string getNome() = 0;
+
+		//Retorna o nome do aviao
+		virtual int getScore() = 0;
 };
 
 #include "Avioes.hpp"

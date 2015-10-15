@@ -34,6 +34,7 @@ class Jogo
 
         int proxFase;
         std::vector<Fase*> fases;
+		bool pausado = false;
 
         Jogo();
         Jogo(Jogo const&);
@@ -46,6 +47,9 @@ class Jogo
 
         //Armazena o valor do frame
         int estado = 0;
+
+		//Armazena a pontuacao do jogador
+		int score = 0;
 
         //Callbacks OpenGL
         static void mouse(int button, int state, int x, int y);

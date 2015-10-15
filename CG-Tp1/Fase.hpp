@@ -28,8 +28,8 @@ class Fase
 {
 	protected:
 		//Personagem jogavel
-        Spitfire *principal;
-
+        Spitfire *principal;		
+		Spitfire *vidas[5];
         //Lista de inimigos que apareceram na tela
         std::list<Personagem*> inimigosAtivos;
 
@@ -48,6 +48,16 @@ class Fase
 
 		//Desenha o fundo da fase na tela
 		virtual void desenhaBackground() = 0;
+		
+		//Desenha a interface (hp, municao, tempo, score, ...)
+		//virtual void desenhaHUD();
+
+		//Desenha HP do personagem principal
+		virtual void desenhaHUD(int hp) = 0;
+		virtual void desenhaNumeroVidas(int numeroVidas) = 0;
+		virtual void writeScore(int score) = 0;
+
+
 
 		//Desenha todos os elementos da fase na tela
 		virtual void desenha() = 0;

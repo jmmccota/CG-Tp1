@@ -121,10 +121,32 @@ void Fase_TheVengeanceWeapon::desenha()
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	desenhaBackground();
+	desenhaHUD(principal->getHP());
 	// Executa os comandos OpenGL
 	glutSwapBuffers();
 }
+void Fase_TheVengeanceWeapon::desenhaHUD(int hp) {
+	glBegin(GL_LINE_LOOP);
+	glColor3f(1, 1, 1);
+	glVertex2i(20, 1000);
+	glVertex2i(254, 1000);
+	glVertex2i(254, 970);
+	glVertex2i(20, 970);
+	glEnd();
+	glBegin(GL_QUADS);
+	glColor3f(1, 0, 0);
+	glVertex2i(21, 999);
+	glVertex2i(253, 999);
+	glVertex2i(253, 971);
+	glVertex2i(21, 971);
+	glEnd();	
+}
+void Fase_TheVengeanceWeapon::desenhaNumeroVidas(int numeroVidas) {
 
+}
+void Fase_TheVengeanceWeapon::writeScore(int score) {
+
+}
 void Fase_TheVengeanceWeapon::terminou()
 {
 }
@@ -175,7 +197,9 @@ void Fase_TheVengeanceWeapon::specialKeyUp(int key, int x, int y)
 
 void Fase_TheVengeanceWeapon::inicializa()
 {
-//	EfeitoSonoro::getInstance().playThirdLevelTheme();
+	EfeitoSonoro::getInstance().initAudios_TheVengeanceWeapon();
+	EfeitoSonoro::getInstance().playMainTheme();
+
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	PontosCeu[0][0] = -265;
 	PontosCeu[0][1] = 220;

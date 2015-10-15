@@ -13,7 +13,12 @@ void Personagem::alvejado(int dano)
 {
     hp -= dano;
 }
-
+int Personagem::getHP() {
+	return hp;
+}
+int Personagem::getNumeroVidas() {
+	return numeroVidas;
+}
 bool Personagem::destruido()
 {
     return hp <= 0;

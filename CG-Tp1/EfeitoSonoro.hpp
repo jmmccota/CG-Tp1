@@ -33,13 +33,25 @@ protected:
 	FMOD::System *system;
 	vector<FMOD_Audio *> arrayAudios;
 
+private:
+	//Verificação de erros
+	void ERRCHECK(FMOD_RESULT result);
+
 public:
 	EfeitoSonoro();
 	~EfeitoSonoro();
 
+	//Criar um objeto de sistema
+	void createObjectSystem();
+
+	//Iniciar os sons da Fase
 	void initAudios_Menu();
 	void initAudios_TheBlitz();
+	void initAudios_TheBattleOfBritain();
+	void initAudios_TheVengeanceWeapon();
 
+	//Finalisar todos os sons
+	void finishAllAudios();
 
 	//Tocar a Musica principal
 	void playMainTheme();
@@ -47,6 +59,10 @@ public:
 	//Sons do Menu
 	void playTransitioningMenu();
 	void playEnterMenu();
+
+	//Tocar os sons uma vez sem carregar na memoria
+	void playStreamAudio(char *file);
+
 
 	static EfeitoSonoro& getInstance();
 };
