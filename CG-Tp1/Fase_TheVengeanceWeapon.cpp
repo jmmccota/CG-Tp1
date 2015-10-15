@@ -111,8 +111,8 @@ void desenha4(float translacaoX, float translacaoY, float escala){
 void Fase_TheVengeanceWeapon::desenhaBackground()
 {
 	for (int i = 0; i < 15; i = i + 2){
-		desenha3(PontosCeu[i][0], PontosCeu[i][1], 0.8);
-		desenha4(PontosCeu[i + 1][0], PontosCeu[i + 1][1], 0.8);
+		desenha3(PontosCeu[i][0], PontosCeu[i][1], 0.3);
+		desenha4(PontosCeu[i + 1][0], PontosCeu[i + 1][1], 0.2);
 	}
 }
 
@@ -162,18 +162,6 @@ void Fase_TheVengeanceWeapon::atualiza(int value)
 		if (PontosCeu[i][1] < -400){
 			PontosCeu[i][1] = 600;
 		}
-	}
-	if (variacao){
-		variacaoX+=0.5;
-	}
-	else{
-		variacaoX-=0.5;
-	}
-	if (variacaoX < -100){
-		variacao = true;
-	}
-	else if (variacaoX > 100){
-		variacao = false;
 	}
 }
 
