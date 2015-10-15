@@ -115,7 +115,7 @@ void Animacao::desenha()
 		// desenha a explosao
 		if (!comecouExplosao)
 		{
-			EfeitoSonoro::getInstance().playBoomEffect();
+//			EfeitoSonoro::getInstance().playBoomEffect();
 			comecouExplosao = true;
 		}
 		glPushMatrix();
@@ -169,7 +169,7 @@ void Animacao::terminou()
 {
 	if (pularAnimacao)
 	{
-		EfeitoSonoro::getInstance().finishAllSounds();
+	//	EfeitoSonoro::getInstance().finishAllSounds();
 		Jogo::getInstance().setProxFase(1);
 		Jogo::getInstance().proximaFase();
 	}
@@ -213,7 +213,7 @@ void Animacao::specialKeyUp(int key, int x, int y)
 
 void Animacao::inicializa()
 {
-	EfeitoSonoro::getInstance().spitfireFlyBy();
-	EfeitoSonoro::getInstance().bf109FlyBy();
+//	EfeitoSonoro::getInstance().spitfireFlyBy();
+//	EfeitoSonoro::getInstance().bf109FlyBy();
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }

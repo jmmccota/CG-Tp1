@@ -40,12 +40,12 @@ void Spitfire::atira(int tipo)
         municao[tipo]--;
         if (!tipo)
         {
-            EfeitoSonoro::getInstance().vickersShot();
+//            EfeitoSonoro::getInstance().vickersShot();
             fase->novoProjetilAmigo(new TiroSimples(posX, posY + tamY * escala, 0.1 * escala));
         }
         else
         {
-            EfeitoSonoro::getInstance().bombDrop();
+          //  EfeitoSonoro::getInstance().bombDrop();
             fase->novoProjetilAmigo(new Bomba(posX, posY + tamY * escala, 0.2 * escala));
         }
     }

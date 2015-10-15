@@ -175,7 +175,7 @@ void Fase_TheVengeanceWeapon::specialKeyUp(int key, int x, int y)
 
 void Fase_TheVengeanceWeapon::inicializa()
 {
-	EfeitoSonoro::getInstance().playThirdLevelTheme();
+//	EfeitoSonoro::getInstance().playThirdLevelTheme();
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	PontosCeu[0][0] = -265;
 	PontosCeu[0][1] = 220;

@@ -409,7 +409,7 @@ void Fase_TheBlitz::specialKeyUp(int key, int x, int y)
 void Fase_TheBlitz::inicializa()
 {
     definePersonagens();
-	EfeitoSonoro::getInstance().playFirstLevelTheme();
-    EfeitoSonoro::getInstance().airRaidSiren();
-    EfeitoSonoro::getInstance().spitfireMotor();
+//	EfeitoSonoro::getInstance().playFirstLevelTheme();
+//    EfeitoSonoro::getInstance().airRaidSiren();
+ //   EfeitoSonoro::getInstance().spitfireMotor();
 }

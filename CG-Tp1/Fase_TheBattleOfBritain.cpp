@@ -165,8 +165,8 @@ void Fase_TheBattleOfBritain::specialKeyUp(int key, int x, int y)
 void Fase_TheBattleOfBritain::inicializa()
 {
     definePersonagens();
-    EfeitoSonoro::getInstance().playSecondLevelTheme();
-    EfeitoSonoro::getInstance().spitfireMotor();
+  //  EfeitoSonoro::getInstance().playSecondLevelTheme();
+//    EfeitoSonoro::getInstance().spitfireMotor();
     PontosAgua[0][0] = -265;
     PontosAgua[0][1] = 220;
     PontosAgua[1][0] = 0;

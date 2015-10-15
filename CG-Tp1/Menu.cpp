@@ -408,7 +408,7 @@ void Menu::terminou()
 	}
 	else if (optIniciar)
 	{
-		EfeitoSonoro::getInstance().finishAllSounds();
+	//	EfeitoSonoro::getInstance().finishAllSounds();
 		Jogo::getInstance().setProxFase(2);
 		Jogo::getInstance().proximaFase();
 	}
@@ -470,7 +470,7 @@ void Menu::keyUp(unsigned char key, int x, int y)
 		switch (key) {
 		case 'O'://Tela de Opções
 		case 'o':
-			EfeitoSonoro::getInstance().playEnterMenuEffect();
+			EfeitoSonoro::getInstance().playEnterMenu();
 			optOpcoes = true;
 			setaSelectOption = 2;
 			break;
@@ -479,17 +479,17 @@ void Menu::keyUp(unsigned char key, int x, int y)
 			switch (setaSelectOption)
 			{
 			case 1:
-				EfeitoSonoro::getInstance().playEnterMenuEffect();
+				EfeitoSonoro::getInstance().playEnterMenu();
 				optMelhores = true;
 				break;
 			case 2:
-				EfeitoSonoro::getInstance().playEnterMenuEffect();
+			EfeitoSonoro::getInstance().playEnterMenu();
 				optOpcoes = true;
 				break;
 			case 3:
 				optSair = true;
 			default:
-				EfeitoSonoro::getInstance().playEnterMenuEffect();
+				EfeitoSonoro::getInstance().playEnterMenu();
 				optIniciar = true;
 				break;
 			}
@@ -497,7 +497,7 @@ void Menu::keyUp(unsigned char key, int x, int y)
 
 		case 'm': //Tela de Melhores Pontuações
 		case 'M':
-			EfeitoSonoro::getInstance().playEnterMenuEffect();
+			EfeitoSonoro::getInstance().playEnterMenu();
 			optMelhores = true;
 			setaSelectOption = 1;
 			break;
@@ -560,14 +560,14 @@ void Menu::specialKeyUp(int key, int x, int y)
 		case GLUT_KEY_UP: //SETA CIMA
 			if (setaSelectOption > 0) {
 				setaSelectOption--;
-				EfeitoSonoro::getInstance().playTransitioningMenuEffect();
+				EfeitoSonoro::getInstance().playTransitioningMenu();
 			}
 			break;
 		case GLUT_KEY_DOWN: //SETA BAIXO
 			if (setaSelectOption < 3) {
 				setaSelectOption++;
 
-				EfeitoSonoro::getInstance().playTransitioningMenuEffect();
+				EfeitoSonoro::getInstance().playTransitioningMenu();
 			}
 			break;
 		default:
@@ -599,7 +599,7 @@ void Menu::mouse(int button, int state, int x, int y) {
 				float yEnd = vetPosMenuElements[i].posEnd_Y;
 				if ((x >= xInit && x <= xEnd) && (y >= yInit && y <= yEnd)) {
 					setaSelectOption = i;
-					EfeitoSonoro::getInstance().playEnterMenuEffect();
+					EfeitoSonoro::getInstance().playEnterMenu();
 					switch (i)
 					{
 					case 0:
@@ -627,6 +627,7 @@ void Menu::inicializa()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	//-------------
+	EfeitoSonoro::getInstance().initAudios_Menu();
 	EfeitoSonoro::getInstance().playMainTheme();
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }

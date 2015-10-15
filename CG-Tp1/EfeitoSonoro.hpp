@@ -8,6 +8,7 @@ class EfeitoSonoro;
 #include <fmod_errors.h>
 #include <iostream>
 #include <vector>
+#include "FMOD_Audio.hpp"
 
 using namespace std;
 /*
@@ -30,54 +31,22 @@ class EfeitoSonoro
 
 protected:
 	FMOD::System *system;
-	FMOD::Sound *sound;
-	FMOD::Channel *channel;
-	FMOD_RESULT result;
-	unsigned int version;
-
-private:
-	EfeitoSonoro();
-	EfeitoSonoro(EfeitoSonoro const&);
-
-	//Verificação de erros
-	void ERRCHECK(FMOD_RESULT result);
-
-	//Executa o som
-	void playSong(char *file, bool loop);
-
-	void operator=(EfeitoSonoro const&);
-	void createObjectSystem();
+	vector<FMOD_Audio *> arrayAudios;
 
 public:
+	EfeitoSonoro();
 	~EfeitoSonoro();
-	
-	//Altera o volume do canal virtual do som
-	void setVolumeSound(FMOD::Channel *selectedChannel, float volume);
-	//Altera o estato do canal virtual do som para pausado ou tocando
-	void setStateSound(FMOD::Channel *selectedChannel, bool state);
-	//Finalisa todos os som e cria um novo objeto sonoro
-	void finishAllSounds();
 
-	//Execução de Músicas
+	void initAudios_Menu();
+	void initAudios_TheBlitz();
+
+
+	//Tocar a Musica principal
 	void playMainTheme();
-	void playFirstLevelTheme();
-	void playSecondLevelTheme();
-	void playThirdLevelTheme();
 
-	//Execução de Sounds
-	void playBoomEffect();
-	void playTransitioningMenuEffect();
-	void playEnterMenuEffect();
-	void airRaidSiren();
-	//Spitfire
-	void spitfireFlyBy();
-	void spitfireMotor();
-	void spitfireMotorAway();
-	//Bf109
-	void bf109FlyBy();
-	//Armamentos
-	void vickersShot();
-	void bombDrop();
+	//Sons do Menu
+	void playTransitioningMenu();
+	void playEnterMenu();
 
 	static EfeitoSonoro& getInstance();
 };
