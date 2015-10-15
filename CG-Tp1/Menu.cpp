@@ -240,7 +240,7 @@ void drawOpcoesMenu() {
 	FuncoesAuxiliares::writeWord_BITMAP("O objetivo do jogo e terminar as 3 fases. Mate os 3 chefes e o maximo de inimigos possiveis!", FONT_DEFAULT);
 
 	glRasterPos2f(200, rasterY - 40);
-	FuncoesAuxiliares::writeWord_BITMAP("A cada 100 mil pontos voce ganha uma vida.Caso perca todas, GAME OVER!", FONT_DEFAULT);
+	FuncoesAuxiliares::writeWord_BITMAP("A cada 10 mil pontos voce ganha uma vida.Caso perca todas, GAME OVER!", FONT_DEFAULT);
 
 	glRasterPos2f(200, rasterY - 80);
 	FuncoesAuxiliares::writeWord_BITMAP("Comandos:", FONT_DEFAULT);
