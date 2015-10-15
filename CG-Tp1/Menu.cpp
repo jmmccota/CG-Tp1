@@ -210,7 +210,7 @@ void drawBestScoresMenu(vector<Score> bestScores, int decRasterY) {
 		glRasterPos2f(rasterX, rasterY);
 		FuncoesAuxiliares::writeWord_BITMAP(name, FONT_DEFAULT);
 
-		string score = std::to_string(bestScores[i].getScore());
+		string score = std::to_string(bestScores[i].getScoreValue());
 		if (EfeitoVisual::getInstance().isFullScreen()) {
 			glRasterPos2f(rasterX + (sizeScreen.first / 2) - (score.length() * 10) + 12, rasterY);
 		}

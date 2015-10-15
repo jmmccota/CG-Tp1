@@ -27,7 +27,7 @@ class Score {
 
 protected:
 	string player;
-	int score;
+	int scoreValue;
 public:
 	Score(string player, int score);
 	Score(string player);
@@ -38,7 +38,7 @@ public:
 	void static criaArquivo();
 
 	//Salva a pontuação do jogador, retornando se foi salvo ou não
-	bool static saveScore(string jogador, int score);
+	bool static saveScore(string player, int score);
 
 	//Pega o melhor Score e o nome do jogador 
 	Score static getBestScore();
@@ -47,8 +47,14 @@ public:
 	vector<Score> static getBestScore(int quant);
 
 	//Getters
-	int getScore();
+	int getScoreValue();
 	string getPlayer();
+
+	//Setters
+	void setScoreValue(int score);
+	void setPlayer(string player);
+
+	void incScoreValue(int score);
 };
 
 

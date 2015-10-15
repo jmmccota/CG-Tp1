@@ -7,11 +7,11 @@ Fase::Fase()
 
 Fase::~Fase()
 {
-    
+
 }
 
 
-void desenha2(){
+void desenha2() {
 	glClearColor(0, 0.5, 1, 1);
 	glPushMatrix();
 	glMatrixMode(GL_PROJECTION);
@@ -89,24 +89,22 @@ void Fase::desenhaHUD() {
 	}
 
 	//Score
-	std::string s = std::to_string(Jogo::getInstance().score);
 	glRasterPos2f(1600, 970);
-	FuncoesAuxiliares::writeWord_BITMAP(s, GLUT_BITMAP_TIMES_ROMAN_24);
+	FuncoesAuxiliares::writeWord_BITMAP(std::to_string(Jogo::getInstance().score->getScoreValue()), GLUT_BITMAP_TIMES_ROMAN_24);
 
 	glEnd();
 }
 
-void Fase::desenha(){
+void Fase::desenha() {
 	//desenhaBackground();
 }
 
 void Fase::novoProjetilInimigo(Projetil *p)
 {
-    projeteisInimigos.push_back(p);
+	projeteisInimigos.push_back(p);
 }
 
 void Fase::novoProjetilAmigo(Projetil *p)
 {
-    projeteisAmigos.push_back(p);
+	projeteisAmigos.push_back(p);
 }
- 
