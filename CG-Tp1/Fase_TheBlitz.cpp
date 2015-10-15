@@ -20,10 +20,6 @@ void Fase_TheBlitz::definePersonagens()
 {
 	pair<float, float> size = EfeitoVisual::getInstance().getOrtho2D();
 	principal = new Spitfire(size.first / 2, size.second / 10, (float)100 / 10000, this);
-	double xspit = 30;
-	for (int ii = 0; ii < 5; ii++) {
-		vidas[ii] = new Spitfire(xspit + 50 * ii, 1020, (float)20 / 10000, this);
-	}
 }
 
 // retangulo
@@ -122,8 +118,12 @@ void desenha3(float translacaoX, float translY, float escalaX, float escalaY, fl
 	glFlush();
 }
 
-void criaDesenho(float translaY) {
-	transladaCena2 += translaY;
+void Fase_TheBlitz::desenhaBackground()
+{
+	glPushMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	transladaCena2 -= 3;
 	for (int i = 0; i < 32; i++) {
 		if (i == 0) {
 			tX = -2880;
@@ -273,11 +273,7 @@ void criaDesenho(float translaY) {
 		desenha1(-585 + (tX), -80 + (tY / 0.3) + (transladaCena2 / 0.3), 1 * escalaGeral, 0.3*escalaGeral, rot, 0, 0, 0);
 		desenha1(-730 + (tX / 0.8), -115 + (tY / 0.2) + (transladaCena2 / 0.2), 0.8*escalaGeral, 0.2*escalaGeral, rot, 0.13, 0.07, 0.14);
 	}
-}
-
-void Fase_TheBlitz::desenhaBackground()
-{
-	criaDesenho(0);
+	glPopMatrix();
 }
 
 void Fase_TheBlitz::desenha()
@@ -289,6 +285,8 @@ void Fase_TheBlitz::desenha()
 
 	desenhaBackground();
 
+	EfeitoVisual::getInstance().ortho2D();
+
 	for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end(); ++i)
 		(*i)->desenha();
 
@@ -299,47 +297,12 @@ void Fase_TheBlitz::desenha()
 		(*i)->desenha();
 
 	principal->desenha();
-	desenhaHUD(principal->getHP());
-	desenhaNumeroVidas(principal->getNumeroVidas());
-	writeScore(1000);
+
+	desenhaHUD();
 	// Executa os comandos OpenGL
 	glutSwapBuffers();
 }
-void Fase_TheBlitz::desenhaNumeroVidas(int numeroVidas) {
-	for (int ii = 0; ii < numeroVidas; ii++) {
-		vidas[ii]->desenha();
-	}
-}
-void Fase_TheBlitz::writeScore(int score) {
-	//score = 1000;
-	std::string s = std::to_string(score);
-	cout << "s: " << s;
-	glRasterPos2f(1600, 970);
-	FuncoesAuxiliares::writeWord_BITMAP(s, GLUT_BITMAP_TIMES_ROMAN_24);
-}
-void Fase_TheBlitz::desenhaHUD(int hp) {
-	glBegin(GL_LINE_LOOP);
-	glColor3f(1, 1, 1);
-	glVertex2i(20, 1000);
-	glVertex2i(254, 1000);
-	glVertex2i(254, 970);
-	glVertex2i(20, 970);
-	glEnd();
-	double partes = 0.234;
-	glBegin(GL_QUADS);
-	glColor3f(1, 0, 0);
-	glVertex2f(21, 999);
-	if ((partes*hp + 20) > 21) {
-		glVertex2f(partes*hp + 20, 999);
-		glVertex2f(partes*hp + 20, 971);
-	}
-	else {
-		glVertex2f(21, 999);
-		glVertex2f(21, 971);
-	}
-	glVertex2f(21, 971);
-	glEnd();
-}
+
 void Fase_TheBlitz::terminou()
 {
 }
@@ -387,7 +350,6 @@ void Fase_TheBlitz::atualiza(int value)
 			{
 				(*j)->alvejado((*i)->getDano());
 				i = projeteisAmigos.erase(i);
-				Jogo::getInstance().score += (*j)->getScore();
 				destruiu = true;
 				break;
 			}
@@ -395,6 +357,7 @@ void Fase_TheBlitz::atualiza(int value)
 			if ((*j)->destruido())
 			{
 				//Explode
+				Jogo::getInstance().score += (*j)->getScore();
 				j = inimigosAtivos.erase(j);
 			}
 			//Se ta de boa ainda
@@ -427,6 +390,9 @@ void Fase_TheBlitz::atualiza(int value)
 		{
 			//Explosao
 			//Perde uma vida
+			//Reinicia fase
+			Jogo::getInstance().score = 0;
+			Jogo::getInstance().proximaFase();
 		}
 	}
 

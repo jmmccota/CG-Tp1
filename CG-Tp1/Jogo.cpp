@@ -31,6 +31,12 @@ void Jogo::run()
 	proxFase = 0;
 	proximaFase();
 
+
+	double xspit = 30;
+	for (int ii = 0; ii < 5; ii++) {
+		vidas[ii] = new Spitfire(xspit + 50 * ii, 1020, (float) 20 / 10000, nullptr);
+	}
+
 	glutMainLoop();
 }
 
