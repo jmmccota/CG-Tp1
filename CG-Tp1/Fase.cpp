@@ -69,6 +69,9 @@ void Fase::desenhaNumeroVidas(int numeroVidas) {
 void Fase::desenha(){
 	//desenhaBackground();
 }
+void Fase::writeScore(int score) {
+
+}
 
 //void Fase::desenhaHUD(int hp)
 //{

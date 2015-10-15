@@ -301,6 +301,7 @@ void Fase_TheBlitz::desenha()
     principal->desenha();
 	desenhaHUD(principal->getHP());
 	desenhaNumeroVidas(principal->getNumeroVidas());
+	writeScore(1000);
     // Executa os comandos OpenGL
     glutSwapBuffers();
 }
@@ -308,6 +309,13 @@ void Fase_TheBlitz::desenhaNumeroVidas(int numeroVidas) {
 	for (int ii = 0; ii < numeroVidas; ii++) {
 		vidas[ii]->desenha();
 	}
+}
+void Fase_TheBlitz::writeScore(int score) {
+	//score = 1000;
+	std::string s = std::to_string(score);
+	cout << "s: " << s;
+	glRasterPos2f(1600, 970);
+	FuncoesAuxiliares::writeWord_BITMAP(s, GLUT_BITMAP_TIMES_ROMAN_24);
 }
 void Fase_TheBlitz::desenhaHUD(int hp) {
 	glBegin(GL_LINE_LOOP);	

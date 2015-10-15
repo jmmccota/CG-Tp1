@@ -55,6 +55,7 @@ class Fase
 		//Desenha HP do personagem principal
 		virtual void desenhaHUD(int hp) = 0;
 		virtual void desenhaNumeroVidas(int numeroVidas) = 0;
+		virtual void writeScore(int score) = 0;
 
 
 

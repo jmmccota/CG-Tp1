@@ -218,7 +218,9 @@ void Animacao::desenhaHUD(int hp) {
 }
 void Animacao::desenhaNumeroVidas(int numeroVidas) {
 }
+void Animacao::writeScore(int score) {
 
+}
 void Animacao::inicializa()
 {
 	EfeitoSonoro::getInstance().spitfireFlyBy();

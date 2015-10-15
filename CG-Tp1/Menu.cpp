@@ -461,6 +461,9 @@ void Menu::desenhaHUD(int hp)
 void Menu::desenhaNumeroVidas(int numeroVidas) {
 
 }
+void Menu::writeScore(int score) {
+
+}
 void Menu::keyUp(unsigned char key, int x, int y)
 {
 	if (optMelhores) {

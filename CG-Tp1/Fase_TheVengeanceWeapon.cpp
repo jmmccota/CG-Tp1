@@ -144,6 +144,9 @@ void Fase_TheVengeanceWeapon::desenhaHUD(int hp) {
 void Fase_TheVengeanceWeapon::desenhaNumeroVidas(int numeroVidas) {
 
 }
+void Fase_TheVengeanceWeapon::writeScore(int score) {
+
+}
 void Fase_TheVengeanceWeapon::terminou()
 {
 }

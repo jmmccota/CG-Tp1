@@ -50,6 +50,7 @@ public:
 
 	void desenhaHUD(int hp);
 	void desenhaNumeroVidas(int numeroVidas);
+	void writeScore(int score);
 
 
 

@@ -93,6 +93,9 @@ void Fase_TheBattleOfBritain::desenhaHUD(int hp) {
 void Fase_TheBattleOfBritain::desenhaNumeroVidas(int numeroVidas) {
 
 }
+void Fase_TheBattleOfBritain::writeScore(int score) {
+
+}
 void Fase_TheBattleOfBritain::terminou()
 {
 }

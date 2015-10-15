@@ -20,6 +20,7 @@ public:
 	void desenha();
 	void desenhaHUD(int hp);
 	void desenhaNumeroVidas(int numeroVidas);
+	void writeScore(int score);
 
 	void terminou();
 
