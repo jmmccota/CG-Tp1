@@ -46,6 +46,7 @@ public:
 
 	//Iniciar os sons da Fase
 	void initAudios_Menu();
+	void initAudios_SFXGerais();
 	void initAudios_TheBlitz();
 	void initAudios_TheBattleOfBritain();
 	void initAudios_TheVengeanceWeapon();
@@ -81,8 +82,9 @@ public:
 	void stopV2Motor();
 
 	//Sons gerais
-	void playVickersShot();
-	void playMg42Shot();
+	void playAirRaid();
+	void playVickersShoot();
+	void playMg42Shoot();
 	void playBombDrop();
 	void stopVickers();
 	void stopMg42();

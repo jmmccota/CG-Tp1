@@ -85,7 +85,6 @@ void Animacao::desenha()
 		glTranslatef(translacaoX2, 0, 0);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		glRotatef(90, 0, 0, 1);
 		t1->desenha();
 		t2->desenha();
 		//desenha o bloco que recebe o tiro
@@ -100,7 +99,7 @@ void Animacao::desenha()
 		glPopMatrix();
 	}
 	else if (explosao) {
-		explosao = !EfeitoVisual::getInstance().desenhaExplosao(escala, translacaoX2, 0);
+		explosao = !EfeitoVisual::getInstance().desenhaExplosao(3, translacaoX2, 0);
 	}
 	glutSwapBuffers();
 }
@@ -173,7 +172,7 @@ void Animacao::desenhaNumeroVidas(int numeroVidas) {
 
 void Animacao::inicializa()
 {
+	EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/bf109FlyBy.mp3");
 	EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/spitfireFlyBy.mp3");
-	EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/bf190FlyBy.mp3");
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
