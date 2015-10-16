@@ -456,7 +456,7 @@ void Fase_TheBlitz::inicializa()
 	EfeitoSonoro::getInstance().initAudios_TheBlitz();
 	EfeitoSonoro::getInstance().playMainTheme();
 	definePersonagens();
-	//EfeitoSonoro::getInstance().airRaidSiren();
-	//EfeitoSonoro::getInstance().spitfireMotor();
+	EfeitoSonoro::getInstance().playAirRaid();
+	EfeitoSonoro::getInstance().playSpitfireMotor();
 }
 

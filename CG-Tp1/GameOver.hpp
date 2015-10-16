@@ -1,6 +1,6 @@
 #pragma once
 #include "Fase.hpp"
-#include <AntTweakBar.h>
+//#include <AntTweakBar.h>
 
 class GameOver :
 	public Fase

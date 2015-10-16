@@ -67,7 +67,7 @@ void Spitfire::atira(int tipo)
         municao[tipo]--;
         if (!tipo)
         {
-            EfeitoSonoro::getInstance().playVickersShot();
+            EfeitoSonoro::getInstance().playVickersShoot();
 			if (powerUp == 0)
 			{
 				fase->novoProjetilAmigo(new TiroSimples(posX, posY + tamY * escala, 0.1 * escala));
