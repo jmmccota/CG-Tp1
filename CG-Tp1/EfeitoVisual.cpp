@@ -344,6 +344,7 @@ bool EfeitoVisual::desenhaExplosao(float escalaFinal, float posX, float posY)
 		isFinish = true;
 	}
 	glScalef(this->escalaAnimacao, this->escalaAnimacao, this->escalaAnimacao);
+	/*glScalef(escalaFinal, escalaFinal, escalaFinal);*/
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glBegin(GL_POLYGON);
