@@ -95,6 +95,7 @@ class Fase
 #include "Fase_TheBlitz.hpp"
 #include "Fase_TheBattleOfBritain.hpp"
 #include "Fase_TheVengeanceWeapon.hpp"
+#include "GameOver.hpp"
 
 #endif
  
