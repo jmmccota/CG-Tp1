@@ -35,6 +35,7 @@ class EfeitoVisual
 		bool fullscreen;
 		int sizeX ;
 		int sizeY;
+	    float escalaAnimacao = 0;
 		EfeitoVisual();
 		EfeitoVisual(EfeitoVisual const&);
 		void operator=(EfeitoVisual const&);
@@ -73,10 +74,11 @@ class EfeitoVisual
         //Reajusta o tamanho da tela
         void static resize(GLsizei w, GLsizei h);
 
-		//Cria Estrelas
-		void desenhaEstrelas(int quantEstrelas);
-
 		void desenhaTitulo(int posX,int posY);
+
+		//Desenha a Explosao
+		bool desenhaExplosao(float escalaFinal, float posX, float posY);
+
 
 };
 #endif
