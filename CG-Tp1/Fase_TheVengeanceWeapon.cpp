@@ -17,6 +17,7 @@ void Fase_TheVengeanceWeapon::definePersonagens()
 	principal = new Spitfire(0, 0, 0.000015, this);
 }
 
+
 void desenhaCirculo(GLfloat raio, GLfloat Px, GLfloat Py){
 	GLfloat x = 0;
 	GLfloat y = 0;
