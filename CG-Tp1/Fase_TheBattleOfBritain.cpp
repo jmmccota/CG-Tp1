@@ -6,6 +6,9 @@ GLfloat transXIlha1 = 0;
 GLfloat transXIlha2 = 50;
 GLfloat transYIlha1 = 0;
 GLfloat transYIlha2 = 500;
+GLfloat escalaMe = 1;
+GLfloat meX = 0;
+Me163 *me163 = new Me163(0, -5, 0.0005, nullptr, nullptr);
 bool ilha1 = false;
 
 Fase_TheBattleOfBritain::Fase_TheBattleOfBritain()
@@ -74,6 +77,10 @@ void drawIsland2(float translacaoX, float translacaoY, float escala){
 	desenhaCirculo1(12, 8, 12);
 	desenhaCirculo1(8, 10, -13);
 	desenhaCirculo1(12, -15, 0);
+	glTranslatef(meX, 0, 0);
+	glRotatef(90, 0, 0, 1);
+	glScalef(escalaMe, escalaMe, 0);
+	me163->desenha();
 	glPopMatrix();
 	glFlush();
 }
@@ -168,55 +175,61 @@ void Fase_TheBattleOfBritain::atualiza(int value)
 	}
 	if (transYIlha2 < -700){
 		transYIlha2 = 400;
+		meX = 0;
+		escalaMe = 1;
 		transXIlha2 = -90 + (rand() % 200);
+	}
+	if (transYIlha2 < 100){
+		meX -= 0.5;
+		if (meX < -20){
+			escalaMe += 0.002;
+		}
+	}
+	for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end(); ++i)
+	{
+		//Calcula os disparos dados
+		(*i)->acao();
+
+		//Atualiza situacao dos inimigos
+		for (std::list<Personagem*>::iterator j = inimigosAtivos.begin(); j != inimigosAtivos.end();)
+		{
+			//Se foi alvejado
+			if (EfeitoVisual::getInstance().colisao((*j), (*i)))
+				(*j)->alvejado((*i)->getDano());
+			//Se foi destruido
+			if ((*j)->destruido())
+			{
+				//Explode
+				j = inimigosAtivos.erase(j);
+			}
+			//Se ta de boa ainda
+			else
+			{
+				(*j)->acao();
+				j++;
+			}
+		}
 	}
 
 
-    for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end(); ++i)
-    {
-        //Calcula os disparos dados
-        (*i)->acao();
 
-        //Atualiza situacao dos inimigos
-        for (std::list<Personagem*>::iterator j = inimigosAtivos.begin(); j != inimigosAtivos.end();)
-        {
-            //Se foi alvejado
-            if (EfeitoVisual::getInstance().colisao((*j), (*i)))
-                (*j)->alvejado((*i)->getDano());
-            //Se foi destruido
-            if ((*j)->destruido())
-            {
-                //Explode
-                j = inimigosAtivos.erase(j);
-            }
-            //Se ta de boa ainda
-            else
-            {
-                (*j)->acao();
-                j++;
-            }
-        }
-    }
+	for (std::list<Projetil*>::iterator i = projeteisInimigos.begin(); i != projeteisInimigos.end(); ++i)
+	{
+		(*i)->acao();
 
+		if (EfeitoVisual::getInstance().colisao((*i), principal))
+			principal->alvejado((*i)->getDano());
 
-
-    for (std::list<Projetil*>::iterator i = projeteisInimigos.begin(); i != projeteisInimigos.end(); ++i)
-    {
-        (*i)->acao();
-
-        if (EfeitoVisual::getInstance().colisao((*i), principal))
-            principal->alvejado((*i)->getDano());
-
-        if (principal->destruido())
-        {
-            //Explosao
-            //Perde uma vida
-        }
-        else
-        {
-            principal->acao();
-        }
-    }
+		if (principal->destruido())
+		{
+			//Explosao
+			//Perde uma vida
+		}
+		else
+		{
+			principal->acao();
+		}
+	}
 }
 
 void Fase_TheBattleOfBritain::mouse(int button, int state, int x, int y)

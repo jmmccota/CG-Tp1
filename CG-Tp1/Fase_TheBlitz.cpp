@@ -304,60 +304,11 @@ void Fase_TheBlitz::desenha()
 	if (this->expl.size() > 0) {
 		for (int cc = 0; cc < this->expl.size(); cc++) {
 			if (this->expl[cc]) {
-				if (this->esc[cc]<3) {
+				if (this->esc[cc]<50) {
 					cout << "escala: " << this->esc[cc];
-					/*EfeitoVisual::getInstance().desenhaExplosao(3, this->posX[cc], this->posY[cc]);*/
-					cout << "Ta entrando";
-					bool isFinish = false;
-					if (this->escalaAnimacao == 0) {
-						EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/boom.mp3");
-					}
-					glPushMatrix();
-					glMatrixMode(GL_PROJECTION);
-					glLoadIdentity();
-					gluOrtho2D(-100, 100, -100, 100);
-					glTranslatef(this->posX[cc], 0, 0);
-					if (this->escalaAnimacao < 3) {
-						this->escalaAnimacao += 0.3;
-					}
-					else {
-						this->escalaAnimacao = 0;
-						isFinish = true;
-					}
-					glScalef(this->escalaAnimacao, this->escalaAnimacao, this->escalaAnimacao);
-					/*glScalef(escalaFinal, escalaFinal, escalaFinal);*/
-					glMatrixMode(GL_MODELVIEW);
-					glLoadIdentity();
-					glBegin(GL_POLYGON);
-					glColor3f(1, 0, 0);
-					glVertex2f(-10, 10);
-					glVertex2f(10, 10);
-					glVertex2f(10, -10);
-					glVertex2f(-10, -10);
-					glEnd();
-					glBegin(GL_POLYGON);
-					glColor3f(1, 0, 0);
-					glVertex2f(15, 0);
-					glVertex2f(0, 15);
-					glVertex2f(-15, 0);
-					glVertex2f(0, -15);
-					glEnd();
-					glBegin(GL_POLYGON);
-					glColor3f(1, 1, 0);
-					glVertex2f(-5, 5);
-					glVertex2f(5, 5);
-					glVertex2f(5, -5);
-					glVertex2f(-5, -5);
-					glEnd();
-					glBegin(GL_POLYGON);
-					glColor3f(1, 1, 0);
-					glVertex2f(7.5, 0);
-					glVertex2f(0, 7.5);
-					glVertex2f(-7.5, 0);
-					glVertex2f(0, -7.5);
-					glEnd();
-					glPopMatrix();
-					this->esc[cc] += 0.3;
+					glColor3f(1,0,0);
+					FuncoesAuxiliares::bresenhamCircle(this->posX[cc], this->posY[cc], this->esc[cc]+1, this->esc[cc]+1);
+					this->esc[cc] += 1;
 				}
 				else {
 					this->expl[cc] = false;
