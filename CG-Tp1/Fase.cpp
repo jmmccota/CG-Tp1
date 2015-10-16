@@ -47,8 +47,10 @@ void Fase::desenhaHUD() {
 
 	string qtd = "x ";
 	qtd += std::to_string(principal->getQtdTiros());
+
 	Jogo::getInstance().projetil->desenha();
 	glRasterPos2f(50, 50);
+	glColor3f(1, 0.27, 0);
 	FuncoesAuxiliares::writeWord_BITMAP(qtd, GLUT_BITMAP_TIMES_ROMAN_24);
 	//Score
 	//string sc = "Score: ";

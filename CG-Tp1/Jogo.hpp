@@ -9,6 +9,7 @@ class Jogo;
 #include "EfeitoVisual.hpp"
 #include <vector>
 #include "Score.hpp"
+#include "Armamentos.hpp"
 
 
 #define JOGO
@@ -57,7 +58,7 @@ public:
 
 	//Armazena as vidas do jogador
 	Spitfire *vidas[5];
-	Projetil *projetil;
+	Bomba *projetil;
 	int numeroVidas = 5;
 
 	//Callbacks OpenGL

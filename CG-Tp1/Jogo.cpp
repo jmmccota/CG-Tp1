@@ -26,8 +26,8 @@ void Jogo::run()
 
 	fases.push_back(new Animacao());
 	fases.push_back(new Menu());
-	fases.push_back(new Fase_TheBlitz());
-	fases.push_back(new Fase_TheBattleOfBritain());
+	//fases.push_back(new Fase_TheBlitz());
+	//fases.push_back(new Fase_TheBattleOfBritain());
 	fases.push_back(new Fase_TheVengeanceWeapon());
 	proxFase = 0;
 	proximaFase();
@@ -37,7 +37,7 @@ void Jogo::run()
 	for (int ii = 0; ii < 5; ii++) {
 		vidas[ii] = new Spitfire(xspit + 50 * ii, 1030, (float) 20 / 10000, nullptr);
 	}
-	projetil = new Bomba::Projetil(30.0, 50.0, 0,(float)30 / 10000); //desenhar a bomba versao teste
+	projetil = new Bomba(30.0, 65.0,(float)20 / 10000); //desenhar a bomba versao teste
 	glutMainLoop();
 }
 
