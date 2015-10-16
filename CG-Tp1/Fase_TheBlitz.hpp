@@ -20,8 +20,9 @@ public:
 	void desenhaBackground();
 	std::vector<float> posX;
 	std::vector<float> posY;
-	std::vector<float> esc;
+	std::vector<int> esc;
 	std::vector<bool> expl;
+	std::vector<bool> cresce;
 	float escalaAnimacao = 0;
 	// Função callback chamada para fazer o desenho
 	void desenha();

@@ -304,20 +304,36 @@ void Fase_TheBlitz::desenha()
 	if (this->expl.size() > 0) {
 		for (int cc = 0; cc < this->expl.size(); cc++) {
 			if (this->expl[cc]) {
-				if (this->esc[cc]<50) {
+				if (this->esc[cc]<50 && this->cresce[cc]) {
 					cout << "escala: " << this->esc[cc];
-					glColor3f(1,0,0);
+					if (esc[cc]%2==0) {
+						glColor3f(1, 0, 0);
+					}
+					else {
+						glColor3f(1, 0, 1);
+					}
+					
 					FuncoesAuxiliares::bresenhamCircle(this->posX[cc], this->posY[cc], this->esc[cc]+1, this->esc[cc]+1);
-					this->esc[cc] += 1;
+					this->esc[cc] += 3;
 				}
-				else {
-					this->expl[cc] = false;
+				else if (this->esc[cc]>=50 && this->cresce[cc]) {
+					this->cresce[cc] = false;
+				}
+				else if (this->esc[cc]>0 && !this->cresce[cc]){					
+					if (esc[cc] % 2 == 0) {
+						glColor3f(1, 0, 0);
+					}
+					else {
+						glColor3f(1, 0, 1);
+					}
+					FuncoesAuxiliares::bresenhamCircle(this->posX[cc], this->posY[cc], this->esc[cc] + 1, this->esc[cc] + 1);
+					this->esc[cc] -= 3;
 				}				
 			}						
 		}
 				
 	}	
-	// Executa os comandos OpenGL
+	// Executa os comandos OpenGLhh
 	glutSwapBuffers();
 }
 
@@ -431,6 +447,7 @@ void Fase_TheBlitz::atualiza(int value)
 			if (rand() % 20 == 0)
 				principal->powerUp = 1;
 			Jogo::getInstance().score->incScoreValue((*i)->getScore());
+			chamaExplosao((*i)->getX(), (*i)->getY());
 			i = inimigosAtivos.erase(i);
 		}
 		else
@@ -473,8 +490,9 @@ void Fase_TheBlitz::specialKeyUp(int key, int x, int y)
 void Fase_TheBlitz::chamaExplosao(GLfloat posX,GLfloat posY) {
 	this->posX.push_back(posX); // salva posX da explosao
 	this->posY.push_back(posY); //salva Y da explosao
-	this->esc.push_back(0); //começa em 1 e vai até 3
+	this->esc.push_back(1); //começa em 1 e vai até 3
 	this->expl.push_back(true); //se for true ainda explode e incrementa escala,se for false pode apagar
+	this->cresce.push_back(true);
 }
 void Fase_TheBlitz::inicializa()
 {
