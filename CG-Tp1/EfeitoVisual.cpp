@@ -335,7 +335,7 @@ bool EfeitoVisual::desenhaExplosao(float escalaFinal, float posX, float posY)
 	glLoadIdentity();
 	gluOrtho2D(-100, 100, -100, 100);
 	glTranslatef(posX, 0, 0);
-	if (this->escalaAnimacao < 3) {
+	if (this->escalaAnimacao < escalaFinal) {
 		this->escalaAnimacao += 0.3;
 	}
 	else {
