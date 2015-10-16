@@ -185,52 +185,51 @@ void Fase_TheBattleOfBritain::atualiza(int value)
 			escalaMe += 0.002;
 		}
 	}
+	for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end(); ++i)
+	{
+		//Calcula os disparos dados
+		(*i)->acao();
 
-    for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end(); ++i)
-    {
-        //Calcula os disparos dados
-        (*i)->acao();
-
-        //Atualiza situacao dos inimigos
-        for (std::list<Personagem*>::iterator j = inimigosAtivos.begin(); j != inimigosAtivos.end();)
-        {
-            //Se foi alvejado
-            if (EfeitoVisual::getInstance().colisao((*j), (*i)))
-                (*j)->alvejado((*i)->getDano());
-            //Se foi destruido
-            if ((*j)->destruido())
-            {
-                //Explode
-                j = inimigosAtivos.erase(j);
-            }
-            //Se ta de boa ainda
-            else
-            {
-                (*j)->acao();
-                j++;
-            }
-        }
-    }
-
+		//Atualiza situacao dos inimigos
+		for (std::list<Personagem*>::iterator j = inimigosAtivos.begin(); j != inimigosAtivos.end();)
+		{
+			//Se foi alvejado
+			if (EfeitoVisual::getInstance().colisao((*j), (*i)))
+				(*j)->alvejado((*i)->getDano());
+			//Se foi destruido
+			if ((*j)->destruido())
+			{
+				//Explode
+				j = inimigosAtivos.erase(j);
+			}
+			//Se ta de boa ainda
+			else
+			{
+				(*j)->acao();
+				j++;
+			}
+		}
+	}
 
 
-    for (std::list<Projetil*>::iterator i = projeteisInimigos.begin(); i != projeteisInimigos.end(); ++i)
-    {
-        (*i)->acao();
 
-        if (EfeitoVisual::getInstance().colisao((*i), principal))
-            principal->alvejado((*i)->getDano());
+	for (std::list<Projetil*>::iterator i = projeteisInimigos.begin(); i != projeteisInimigos.end(); ++i)
+	{
+		(*i)->acao();
 
-        if (principal->destruido())
-        {
-            //Explosao
-            //Perde uma vida
-        }
-        else
-        {
-            principal->acao();
-        }
-    }
+		if (EfeitoVisual::getInstance().colisao((*i), principal))
+			principal->alvejado((*i)->getDano());
+
+		if (principal->destruido())
+		{
+			//Explosao
+			//Perde uma vida
+		}
+		else
+		{
+			principal->acao();
+		}
+	}
 }
 
 void Fase_TheBattleOfBritain::mouse(int button, int state, int x, int y)
