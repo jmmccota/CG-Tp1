@@ -14,11 +14,15 @@ protected:
 public:
 	Fase_TheBlitz();
 	~Fase_TheBlitz();
-
+	//bool explosao = false;	
 	void definePersonagens();
-
+	void chamaExplosao(GLfloat posX,GLfloat posY);
 	void desenhaBackground();
-
+	std::vector<float> posX;
+	std::vector<float> posY;
+	std::vector<float> esc;
+	std::vector<bool> expl;
+	float escalaAnimacao = 0;
 	// Função callback chamada para fazer o desenho
 	void desenha();
 	void terminou();
