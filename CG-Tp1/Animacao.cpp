@@ -40,6 +40,7 @@ void Animacao::desenhaBackground()
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
+
 	//Desenha Linha Superior Y
 	drawLineAnimacao(sizeScreen.second - 40, 'y');
 	//Desenha Linha Inferior Y
@@ -57,42 +58,26 @@ void Animacao::desenha()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	desenhaBackground();
-	translacaoX += 2;
-	if (booldesenha) {
 
-		if (translacaoX >= -20) {
-			translacaoX2 = translacaoX2 + 8;
-		}
-		else {
-			translacaoX2 += 2;
-		}
-		//momento em q as balas colidem com o bloco
-		if ((translacaoX2 - translacaoX) > 78) {
-			translacaoX2 = translacaoX2 - 30;
-			booldesenha = false;
-		}
-	}
 	Spitfire *s = new Spitfire(-45, 0, (float)20 / 10000, nullptr);
 	Bf109 *b = new Bf109(50, 0, (float)20 / 10000, nullptr, nullptr);
 	TiroSimples *t1 = new TiroSimples(-38, 8, (float)2 / 10000);
 	TiroSimples *t2 = new TiroSimples(-38, -8, (float)2 / 10000);
 
-	// desenha o primeiro bloco atiraador
-	glPushMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
+	//desenha o primeiro bloco atirador
 	gluOrtho2D(-100, 100, -100, 100);
 	glTranslatef(translacaoX - 45, translacaoY - 45, translacaoZ);
 	glRotatef(rotacaoX1, 1, 0, 0);
 	glRotatef(rotacaoY1, 0, 1, 0);
 	glRotatef(270.0f, 0.0f, 0.0f, 1.0f);
+	glPushMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	s->desenha();
 	glPopMatrix();
 
 	if (booldesenha == true) {
-		// desenha a muniçãoo
+		//desenha a muniçãoo
 		glPushMatrix();
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
@@ -102,9 +87,7 @@ void Animacao::desenha()
 		glLoadIdentity();
 		t1->desenha();
 		t2->desenha();
-		glPopMatrix();
-		// desenha o bloco q recebe o tiro
-		glPushMatrix();
+		//desenha o bloco que recebe o tiro
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		gluOrtho2D(-100, 100, -100, 100);
@@ -116,55 +99,7 @@ void Animacao::desenha()
 		glPopMatrix();
 	}
 	else if (explosao) {
-		// desenha a explosao
-		if (!comecouExplosao)
-		{
-			EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/boom.mp3");
-			comecouExplosao = true;
-		}
-		glPushMatrix();
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		gluOrtho2D(-100, 100, -100, 100);
-		glTranslatef(translacaoX2, 0, 0);
-		if (escala < 3) {
-			escala = escala + 0.3;
-		}
-		else {
-			explosao = false;
-		}
-		glScalef(escala, escala, escala);
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		glBegin(GL_POLYGON);
-		glColor3f(1, 0, 0);
-		glVertex2f(-10, 10);
-		glVertex2f(10, 10);
-		glVertex2f(10, -10);
-		glVertex2f(-10, -10);
-		glEnd();
-		glBegin(GL_POLYGON);
-		glColor3f(1, 0, 0);
-		glVertex2f(15, 0);
-		glVertex2f(0, 15);
-		glVertex2f(-15, 0);
-		glVertex2f(0, -15);
-		glEnd();
-		glBegin(GL_POLYGON);
-		glColor3f(1, 1, 0);
-		glVertex2f(-5, 5);
-		glVertex2f(5, 5);
-		glVertex2f(5, -5);
-		glVertex2f(-5, -5);
-		glEnd();
-		glBegin(GL_POLYGON);
-		glColor3f(1, 1, 0);
-		glVertex2f(7.5, 0);
-		glVertex2f(0, 7.5);
-		glVertex2f(-7.5, 0);
-		glVertex2f(0, -7.5);
-		glEnd();
-		glPopMatrix();
+		explosao = !EfeitoVisual::getInstance().desenhaExplosao(3, translacaoX2, 0);
 	}
 	glutSwapBuffers();
 }
@@ -185,6 +120,22 @@ void Animacao::atualiza(int value)
 		pularAnimacao = true;
 	//Testa se a fase acabou
 	terminou();
+
+	translacaoX += 2;
+	if (booldesenha) {
+
+		if (translacaoX >= -20) {
+			translacaoX2 = translacaoX2 + 8;
+		}
+		else {
+			translacaoX2 += 2;
+		}
+		//momento em q as balas colidem com o bloco
+		if ((translacaoX2 - translacaoX) > 78) {
+			translacaoX2 = translacaoX2 - 30;
+			booldesenha = false;
+		}
+	}
 }
 
 void Animacao::mouse(int button, int state, int x, int y)
@@ -221,7 +172,7 @@ void Animacao::desenhaNumeroVidas(int numeroVidas) {
 
 void Animacao::inicializa()
 {
+	EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/bf109FlyBy.mp3");
 	EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/spitfireFlyBy.mp3");
-	EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/bf190FlyBy.mp3");
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }

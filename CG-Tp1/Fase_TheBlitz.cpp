@@ -354,6 +354,9 @@ void Fase_TheBlitz::atualiza(int value)
 			if ((*j)->destruido())
 			{
 				//Explode
+				cout << "Entrou aq";
+				EfeitoVisual::getInstance().desenhaExplosao(3.0,(*j)->getX(), (*j)->getY());
+				cout << "Saiu aq";
 				if (rand() % 20 == 0)
 					principal->powerUp = 1;
 				Jogo::getInstance().score->incScoreValue((*j)->getScore());
@@ -456,7 +459,7 @@ void Fase_TheBlitz::inicializa()
 	EfeitoSonoro::getInstance().initAudios_TheBlitz();
 	EfeitoSonoro::getInstance().playMainTheme();
 	definePersonagens();
-	//EfeitoSonoro::getInstance().airRaidSiren();
-	//EfeitoSonoro::getInstance().spitfireMotor();
+	EfeitoSonoro::getInstance().playAirRaid();
+	EfeitoSonoro::getInstance().playSpitfireMotor();
 }
 

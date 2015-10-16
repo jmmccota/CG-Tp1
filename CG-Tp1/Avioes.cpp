@@ -9,7 +9,7 @@ Spitfire::Spitfire(GLfloat pX, GLfloat pY, float esc, Fase *f)
 {
     this->carrega("modelos/spitfire.dat");
 
-	numeroVidas = 7;
+	numeroVidas = 5;
     hp = 1000;
     municao[0] = 9999999;
     municao[1] = 10;
@@ -67,7 +67,7 @@ void Spitfire::atira(int tipo)
         municao[tipo]--;
         if (!tipo)
         {
-            EfeitoSonoro::getInstance().playVickersShot();
+            EfeitoSonoro::getInstance().playVickersShoot();
 			if (powerUp == 0)
 			{
 				fase->novoProjetilAmigo(new TiroSimples(posX, posY + tamY * escala, 0.1 * escala));
@@ -100,7 +100,12 @@ int Spitfire::getScore()
 {
 	return 0;
 }
-
+GLfloat Spitfire::getX() {
+	return posX;
+}
+GLfloat Spitfire::getY() {
+	return posY;
+}
 void Spitfire::detectaTiro(unsigned char key, int x, int y)
 {
     switch (key)

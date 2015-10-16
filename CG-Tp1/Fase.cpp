@@ -47,8 +47,10 @@ void Fase::desenhaHUD() {
 
 	string qtd = "x ";
 	qtd += std::to_string(principal->getQtdTiros());
+
 	Jogo::getInstance().projetil->desenha();
 	glRasterPos2f(50, 50);
+	glColor3f(1, 0.27, 0);
 	FuncoesAuxiliares::writeWord_BITMAP(qtd, GLUT_BITMAP_TIMES_ROMAN_24);
 	//Score
 	//string sc = "Score: ";
@@ -64,6 +66,7 @@ void Fase::desenhaHUD() {
 			Jogo::getInstance().numeroVidas++;
 		}
 		Jogo::getInstance().setControlaScore();
+		EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/ganhaVida.mp3");
 		//ADICIONAR SOM PARA MOSTRAR QUE GANHOU VIDA
 		
 		
@@ -86,3 +89,4 @@ void Fase::novoProjetilAmigo(Projetil *p)
 {
 	projeteisAmigos.push_back(p);
 }
+

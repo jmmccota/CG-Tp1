@@ -22,7 +22,7 @@ void EfeitoVisual::ortho2D()
 
 pair<GLfloat, GLfloat> EfeitoVisual::getOrtho2D()
 {
-    return pair<GLfloat, GLfloat>(FULLHD_ORTHO_X, FULLHD_ORTHO_Y);
+	return pair<GLfloat, GLfloat>(FULLHD_ORTHO_X, FULLHD_ORTHO_Y);
 }
 
 bool EfeitoVisual::colisao(Solido *a, Solido *b)
@@ -56,7 +56,7 @@ bool EfeitoVisual::isFullScreen()
 
 pair<GLint, GLint> EfeitoVisual::sizeScreen()
 {
-    return pair<GLint, GLint>(sizeX, sizeY);
+	return pair<GLint, GLint>(sizeX, sizeY);
 }
 
 pair<double, double> EfeitoVisual::positionScreen(char * type)
@@ -83,27 +83,6 @@ void EfeitoVisual::setFullScreen()
 		glutInitWindowPosition(position.first, position.second);
 	}
 	fullscreen = !fullscreen;
-}
-
-void EfeitoVisual::desenhaEstrelas(int quantEstrelas) {
-
-	srand((unsigned)time(NULL));
-	float posRand = 0, posRandY = 0;
-
-	glPointSize(5);
-	glColor4f(0.5, 0.5, 0.5, 0.15);
-
-
-	while (quantEstrelas > 0) {
-		posRand = rand() / 10;
-		posRandY = rand() / 10;
-		glBegin(GL_POINTS);
-		glVertex2f(posRand, posRandY);
-		glEnd();
-
-		quantEstrelas--;
-	}
-
 }
 
 void EfeitoVisual::desenhaTitulo(int posX, int posY)
@@ -344,6 +323,62 @@ void EfeitoVisual::desenhaTitulo(int posX, int posY)
 	glVertex2i(-18 + xk, yk + 552);
 	glEnd();
 }
+
+bool EfeitoVisual::desenhaExplosao(float escalaFinal, float posX, float posY)
+{
+	cout << "Ta entrando";
+	bool isFinish = false;
+	if (this->escalaAnimacao == 0) {
+		EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/boom.mp3");
+	}
+	glPushMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluOrtho2D(-100, 100, -100, 100);
+	glTranslatef(posX, 0, 0);
+	if (this->escalaAnimacao < escalaFinal) {
+		this->escalaAnimacao += 0.3;
+	}
+	else {
+		this->escalaAnimacao = 0;
+		isFinish = true;
+	}
+	glScalef(this->escalaAnimacao, this->escalaAnimacao, this->escalaAnimacao);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glBegin(GL_POLYGON);
+	glColor3f(1, 0, 0);
+	glVertex2f(-10, 10);
+	glVertex2f(10, 10);
+	glVertex2f(10, -10);
+	glVertex2f(-10, -10);
+	glEnd();
+	glBegin(GL_POLYGON);
+	glColor3f(1, 0, 0);
+	glVertex2f(15, 0);
+	glVertex2f(0, 15);
+	glVertex2f(-15, 0);
+	glVertex2f(0, -15);
+	glEnd();
+	glBegin(GL_POLYGON);
+	glColor3f(1, 1, 0);
+	glVertex2f(-5, 5);
+	glVertex2f(5, 5);
+	glVertex2f(5, -5);
+	glVertex2f(-5, -5);
+	glEnd();
+	glBegin(GL_POLYGON);
+	glColor3f(1, 1, 0);
+	glVertex2f(7.5, 0);
+	glVertex2f(0, 7.5);
+	glVertex2f(-7.5, 0);
+	glVertex2f(0, -7.5);
+	glEnd();
+	glPopMatrix();
+
+	return isFinish;
+}
+
 
 EfeitoVisual& EfeitoVisual::getInstance()
 {

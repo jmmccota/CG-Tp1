@@ -53,6 +53,19 @@ void FMOD_Audio::playMemoryAudio(FMOD::System *system)
 	}
 }
 
+void FMOD_Audio::stopAudio()
+{
+	channel->setPaused(true);
+}
+
+void FMOD_Audio::setVolume(float volume)
+{
+	if (volume >= 0 && volume <= 100) {
+		channel->setVolume(volume / 100);
+	}
+}
+
+
 
 FMOD_Audio::~FMOD_Audio()
 {
