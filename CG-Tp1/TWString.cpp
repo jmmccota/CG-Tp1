@@ -246,136 +246,136 @@ void OnSpecial(int glutKey, int mouseX, int mouseY)
 }
 
 
-// ---------------------------------------------------------------------------
-// Main function (application based on GLUT)
-// ---------------------------------------------------------------------------
-
-int main(int argc, char *argv[])
-{
-	// Initialize GLUT
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-	glutInitWindowSize(640, 480);
-	glutCreateWindow("AntTweakBar string example");
-	glutCreateMenu(NULL);
-
-	// Set GLUT callbacks
-	glutDisplayFunc(OnDisplay);
-	glutReshapeFunc(OnReshape);
-	atexit(OnTerminate);  // Called after glutMainLoop ends
-
-						  // Initialize AntTweakBar
-	TwInit(TW_OPENGL, NULL);
-
-	// Set GLUT event callbacks
-	// - Directly redirect GLUT mouse button events to AntTweakBar
-	glutMouseFunc(OnMouseButton);
-	// - Directly redirect GLUT mouse motion events to AntTweakBar
-	glutMotionFunc(OnMouseMotion);
-	// - Directly redirect GLUT mouse "passive" motion events to AntTweakBar (same as MouseMotion)
-	glutPassiveMotionFunc(OnMouseMotion);
-	// - Directly redirect GLUT key events to AntTweakBar
-	glutKeyboardFunc(OnKeyboard);
-	// - Directly redirect GLUT special key events to AntTweakBar
-	glutSpecialFunc(OnSpecial);
-	// - Send 'glutGetModifers' function pointer to AntTweakBar;
-	//   required because the GLUT key event functions do not report key modifiers states.
-	TwGLUTModifiersFunc(glutGetModifiers);
-
-
-	// Create a tweak bar
-	TwBar *bar = TwNewBar("Main");
-	TwDefine(" Main label='~ String variable examples ~' fontSize=3 position='180 16' size='270 440' valuesWidth=100 ");
-
-
-	//
-	// 1) C++ std::string variable example
-	//
-
-	TwAddButton(bar, "Info1.1", NULL, NULL, " label='1) This example uses' ");
-	TwAddButton(bar, "Info1.2", NULL, NULL, " label='std::string variables' ");
-
-	// Define the required callback function to copy a std::string (see TwCopyStdStringToClientFunc documentation)
-	TwCopyStdStringToClientFunc(CopyStdStringToClient);
-
-	// Adding a std::string variable
-	std::string newBarTitle = "a title";
-	TwAddVarRW(bar, "NewBarTitle", TW_TYPE_STDSTRING, &newBarTitle,
-		" label='Bar title' group=StdString help='Define a title for the new tweak bar.' ");
-
-	// Add a button to create a new bar using the title
-	TwAddButton(bar, "NewBarCreate", CreateBarCB, &newBarTitle,
-		" label='--> Create' group=StdString key=c help='Create a new tweak bar.' ");
-
-	// Set the group label & separator
-	TwDefine(" Main/StdString label='Create a new tweak bar' help='This example demonstates different use of std::string variables.' ");
-	TwAddSeparator(bar, "Sep1", "");
-	TwAddButton(bar, "Blank1", NULL, NULL, " label=' ' ");
-
-
-	//
-	// 2) C-Dynamic string variable example
-	//
-
-	TwAddButton(bar, "Info2.1", NULL, NULL, "label='2) This example uses' ");
-	TwAddButton(bar, "Info2.2", NULL, NULL, "label='C-Dynamic string variables' ");
-
-	// Define the required callback function to copy a CDString (see TwCopyCDStringToClientFunc documentation)
-	TwCopyCDStringToClientFunc(CopyCDStringToClient);
-
-	// Add a CDString variable
-	char *someText = NULL;
-	TwAddVarRW(bar, "Input", TW_TYPE_CDSTRING, &someText,
-		" label='Text input' group=CDString help=`The text to be copied to 'Text output'.` ");
-	TwAddVarRO(bar, "Output", TW_TYPE_CDSTRING, &someText,
-		" label='Text output' group=CDString help=`Carbon copy of the text entered in 'Text input'.` ");
-
-	// Add a line of text (we will use the label of a inactive button)
-#define TEXTLINE "a line of text"
-	TwAddButton(bar, "Echo", NULL, NULL,
-		" label=`" TEXTLINE "` group=CDString help='Echo of the text entered in the next field' ");
-
-	// Add a CDString variable accessed through callbacks
-	char *textLine = (char *)malloc(sizeof(TEXTLINE) + 1);
-	strncpy(textLine, TEXTLINE, sizeof(TEXTLINE));
-	TwAddVarCB(bar, "TextLine", TW_TYPE_CDSTRING, SetTextLineCB, GetTextLineCB, &textLine,
-		" label='Change text above' group=CDString help='The text to be echoed.' ");
-
-	// Set the group label & separator
-	TwDefine(" Main/CDString label='Echo some text' help='This example demonstates different use of C-Dynamic string variables.' ");
-	TwAddSeparator(bar, "Sep2", "");
-	TwAddButton(bar, "Blank2", NULL, NULL, " label=' ' ");
-
-
-	//
-	// 3) C-Static string variable example
-	//
-
-	TwAddButton(bar, "Info3.1", NULL, NULL, "label='3) This example uses' ");
-	TwAddButton(bar, "Info3.2", NULL, NULL, "label='C strings of fixed size' ");
-
-	// Add a CSString
-	char tenStr[] = "0123456789"; // 10 characters + null_termination_char -> size = 11
-	TwAddVarRW(bar, "Ten", TW_TYPE_CSSTRING(sizeof(tenStr)), tenStr,
-		" label='10 chars max' group=CSString help='A string with a length of 10 characters max.' ");
-
-	// Add a CSString accessed through callbacks. The callbacks will convert the string characters to upper or lower case
-	int capCase = 1; // O: lower-case, 1: upper-case
-	TwAddVarCB(bar, "Capitalize", TW_TYPE_CSSTRING(sizeof(g_CapStr)), SetCapStrCB, GetCapStrCB, &capCase,
-		" group=CSString help='A string of fixed size to be converted to upper or lower case.' ");
-
-	// Add a bool variable
-	TwAddVarRW(bar, "Case", TW_TYPE_BOOL32, &capCase,
-		" false=lower true=UPPER group=CSString key=Space help=`Changes the characters case of the 'Capitalize' string.` ");
-
-	// Set the group label & separator
-	TwDefine(" Main/CSString label='Character capitalization' help='This example demonstates different use of C-Static sized variables.' ");
-	TwAddSeparator(bar, "Sep3", "");
-
-
-	// Call the GLUT main loop
-	glutMainLoop();
-
-	return 0;
-}
-
+ /*---------------------------------------------------------------------------
+ Main function (application based on GLUT)
+ ---------------------------------------------------------------------------*/
+//
+//int main(int argc, char *argv[])
+//{
+//	// Initialize GLUT
+//	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+//	glutInitWindowSize(640, 480);
+//	glutCreateWindow("AntTweakBar string example");
+//	glutCreateMenu(NULL);
+//
+//	// Set GLUT callbacks
+//	glutDisplayFunc(OnDisplay);
+//	glutReshapeFunc(OnReshape);
+//	atexit(OnTerminate);  // Called after glutMainLoop ends
+//
+//						  // Initialize AntTweakBar
+//	TwInit(TW_OPENGL, NULL);
+//
+//	// Set GLUT event callbacks
+//	// - Directly redirect GLUT mouse button events to AntTweakBar
+//	glutMouseFunc(OnMouseButton);
+//	// - Directly redirect GLUT mouse motion events to AntTweakBar
+//	glutMotionFunc(OnMouseMotion);
+//	// - Directly redirect GLUT mouse "passive" motion events to AntTweakBar (same as MouseMotion)
+//	glutPassiveMotionFunc(OnMouseMotion);
+//	// - Directly redirect GLUT key events to AntTweakBar
+//	glutKeyboardFunc(OnKeyboard);
+//	// - Directly redirect GLUT special key events to AntTweakBar
+//	glutSpecialFunc(OnSpecial);
+//	// - Send 'glutGetModifers' function pointer to AntTweakBar;
+//	//   required because the GLUT key event functions do not report key modifiers states.
+//	TwGLUTModifiersFunc(glutGetModifiers);
+//
+//
+//	// Create a tweak bar
+//	TwBar *bar = TwNewBar("Main");
+//	TwDefine(" Main label='~ String variable examples ~' fontSize=3 position='180 16' size='270 440' valuesWidth=100 ");
+//
+//
+//	//
+//	// 1) C++ std::string variable example
+//	//
+//
+//	TwAddButton(bar, "Info1.1", NULL, NULL, " label='1) This example uses' ");
+//	TwAddButton(bar, "Info1.2", NULL, NULL, " label='std::string variables' ");
+//
+//	// Define the required callback function to copy a std::string (see TwCopyStdStringToClientFunc documentation)
+//	TwCopyStdStringToClientFunc(CopyStdStringToClient);
+//
+//	// Adding a std::string variable
+//	std::string newBarTitle = "a title";
+//	TwAddVarRW(bar, "NewBarTitle", TW_TYPE_STDSTRING, &newBarTitle,
+//		" label='Bar title' group=StdString help='Define a title for the new tweak bar.' ");
+//
+//	// Add a button to create a new bar using the title
+//	TwAddButton(bar, "NewBarCreate", CreateBarCB, &newBarTitle,
+//		" label='--> Create' group=StdString key=c help='Create a new tweak bar.' ");
+//
+//	// Set the group label & separator
+//	TwDefine(" Main/StdString label='Create a new tweak bar' help='This example demonstates different use of std::string variables.' ");
+//	TwAddSeparator(bar, "Sep1", "");
+//	TwAddButton(bar, "Blank1", NULL, NULL, " label=' ' ");
+//
+//
+//	//
+//	// 2) C-Dynamic string variable example
+//	//
+//
+//	TwAddButton(bar, "Info2.1", NULL, NULL, "label='2) This example uses' ");
+//	TwAddButton(bar, "Info2.2", NULL, NULL, "label='C-Dynamic string variables' ");
+//
+//	// Define the required callback function to copy a CDString (see TwCopyCDStringToClientFunc documentation)
+//	TwCopyCDStringToClientFunc(CopyCDStringToClient);
+//
+//	// Add a CDString variable
+//	char *someText = NULL;
+//	TwAddVarRW(bar, "Input", TW_TYPE_CDSTRING, &someText,
+//		" label='Text input' group=CDString help=`The text to be copied to 'Text output'.` ");
+//	TwAddVarRO(bar, "Output", TW_TYPE_CDSTRING, &someText,
+//		" label='Text output' group=CDString help=`Carbon copy of the text entered in 'Text input'.` ");
+//
+//	// Add a line of text (we will use the label of a inactive button)
+//#define TEXTLINE "a line of text"
+//	TwAddButton(bar, "Echo", NULL, NULL,
+//		" label=`" TEXTLINE "` group=CDString help='Echo of the text entered in the next field' ");
+//
+//	// Add a CDString variable accessed through callbacks
+//	char *textLine = (char *)malloc(sizeof(TEXTLINE) + 1);
+//	strncpy(textLine, TEXTLINE, sizeof(TEXTLINE));
+//	TwAddVarCB(bar, "TextLine", TW_TYPE_CDSTRING, SetTextLineCB, GetTextLineCB, &textLine,
+//		" label='Change text above' group=CDString help='The text to be echoed.' ");
+//
+//	// Set the group label & separator
+//	TwDefine(" Main/CDString label='Echo some text' help='This example demonstates different use of C-Dynamic string variables.' ");
+//	TwAddSeparator(bar, "Sep2", "");
+//	TwAddButton(bar, "Blank2", NULL, NULL, " label=' ' ");
+//
+//
+//	//
+//	// 3) C-Static string variable example
+//	//
+//
+//	TwAddButton(bar, "Info3.1", NULL, NULL, "label='3) This example uses' ");
+//	TwAddButton(bar, "Info3.2", NULL, NULL, "label='C strings of fixed size' ");
+//
+//	// Add a CSString
+//	char tenStr[] = "0123456789"; // 10 characters + null_termination_char -> size = 11
+//	TwAddVarRW(bar, "Ten", TW_TYPE_CSSTRING(sizeof(tenStr)), tenStr,
+//		" label='10 chars max' group=CSString help='A string with a length of 10 characters max.' ");
+//
+//	// Add a CSString accessed through callbacks. The callbacks will convert the string characters to upper or lower case
+//	int capCase = 1; // O: lower-case, 1: upper-case
+//	TwAddVarCB(bar, "Capitalize", TW_TYPE_CSSTRING(sizeof(g_CapStr)), SetCapStrCB, GetCapStrCB, &capCase,
+//		" group=CSString help='A string of fixed size to be converted to upper or lower case.' ");
+//
+//	// Add a bool variable
+//	TwAddVarRW(bar, "Case", TW_TYPE_BOOL32, &capCase,
+//		" false=lower true=UPPER group=CSString key=Space help=`Changes the characters case of the 'Capitalize' string.` ");
+//
+//	// Set the group label & separator
+//	TwDefine(" Main/CSString label='Character capitalization' help='This example demonstates different use of C-Static sized variables.' ");
+//	TwAddSeparator(bar, "Sep3", "");
+//
+//
+//	// Call the GLUT main loop
+//	glutMainLoop();
+//
+//	return 0;
+//}
+//
