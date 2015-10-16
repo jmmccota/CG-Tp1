@@ -326,6 +326,7 @@ void EfeitoVisual::desenhaTitulo(int posX, int posY)
 
 bool EfeitoVisual::desenhaExplosao(float escalaFinal, float posX, float posY)
 {
+	cout << "Ta entrando";
 	bool isFinish = false;
 	if (this->escalaAnimacao == 0) {
 		EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/boom.mp3");

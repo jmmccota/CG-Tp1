@@ -32,6 +32,8 @@ class Spitfire : public Personagem
 		int danoColisao();
 		string getNome();
 		int getScore();
+		GLfloat getX();
+		GLfloat getY();
 
         //Funcao a ser passada para o opengl para detectar botoes de disparo
         void detectaTiro(unsigned char key, int x, int y);

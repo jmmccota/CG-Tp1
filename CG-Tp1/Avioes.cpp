@@ -9,7 +9,7 @@ Spitfire::Spitfire(GLfloat pX, GLfloat pY, float esc, Fase *f)
 {
     this->carrega("modelos/spitfire.dat");
 
-	numeroVidas = 7;
+	numeroVidas = 5;
     hp = 1000;
     municao[0] = 9999999;
     municao[1] = 10;
@@ -100,7 +100,12 @@ int Spitfire::getScore()
 {
 	return 0;
 }
-
+GLfloat Spitfire::getX() {
+	return posX;
+}
+GLfloat Spitfire::getY() {
+	return posY;
+}
 void Spitfire::detectaTiro(unsigned char key, int x, int y)
 {
     switch (key)

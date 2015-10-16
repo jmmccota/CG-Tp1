@@ -29,6 +29,12 @@ bool Personagem::destruido()
 {
     return hp <= 0;
 }
+float Personagem::getX() {
+	return posX;
+}
+float Personagem::getY() {
+	return posY;
+}
 void Personagem::inverteY()
 {
     for (int i = 0; i < poligonos.size(); i++)
