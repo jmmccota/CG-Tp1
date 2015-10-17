@@ -314,6 +314,7 @@ void desenha2(float posX, float posY, float escala){
 	glVertex2f(-1.5, 0);
 	glVertex2f(0, -1.5);
 	glEnd();
+	glFlush();
 }
 void Fase_TheBlitz::desenha()
 {

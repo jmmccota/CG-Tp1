@@ -10,7 +10,6 @@ using namespace std;
 class Fase_TheBattleOfBritain : public Fase
 {
 public:
-
 	Fase_TheBattleOfBritain();
 	~Fase_TheBattleOfBritain();
 
