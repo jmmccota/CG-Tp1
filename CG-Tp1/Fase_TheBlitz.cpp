@@ -471,6 +471,7 @@ void Fase_TheBlitz::atualiza(int value)
 				principal->powerUp = 1;
 			Jogo::getInstance().score->incScoreValue((*i)->getScore());
 			chamaExplosao((*i)->getX(), (*i)->getY());
+			EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/boom.mp3");
 			i = inimigosAtivos.erase(i);
 		}
 		else
