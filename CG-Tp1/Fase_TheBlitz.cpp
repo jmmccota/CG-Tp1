@@ -280,6 +280,7 @@ void Fase_TheBlitz::desenhaBackground()
 }
 
 void desenha2(float posX, float posY, float escala){
+	EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/boom.mp3");
 	glTranslatef(posX, posY, 0);
 	glScalef(escala, escala, 0);
 	/*glScalef(escalaFinal, escalaFinal, escalaFinal);*/
