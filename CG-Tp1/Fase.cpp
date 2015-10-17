@@ -34,46 +34,38 @@ void Fase::desenhaHUD() {
 	}
 	glVertex2f(21, 971);
 	glEnd();
+
 	//Vidas
 	for (int i = 0; i < Jogo::getInstance().numeroVidas; i++) {
 		Jogo::getInstance().vidas[i]->desenha();
 	}
-	
 
 	//Score
-	glColor3f(1, 0.27, 0);
-	glRasterPos2f(1600, 970);
-	//FuncoesAuxiliares::writeWord_BITMAP(std::to_string(Jogo::getInstance().score->getScoreValue()), GLUT_BITMAP_TIMES_ROMAN_24);
-
-	string qtd = "x ";
-	qtd += std::to_string(principal->getQtdTiros());
-
-	Jogo::getInstance().projetil->desenha();
-	glRasterPos2f(50, 50);
-	glColor3f(1, 0.27, 0);
-	FuncoesAuxiliares::writeWord_BITMAP(qtd, GLUT_BITMAP_TIMES_ROMAN_24);
-	//Score
-	//string sc = "Score: ";
 	int sco = Jogo::getInstance().score->getScoreValue();
-	std::string s = std::to_string(Jogo::getInstance().score->getScoreValue());
-	//sc += s;
 	glRasterPos2f(1630, 1000);
 	int contrSc = Jogo::getInstance().getControlaScore();
-	
-	if (sco>=contrSc) {
-		
-		if (Jogo::getInstance().numeroVidas<5) {
+
+	if (sco >= contrSc) {
+
+		if (Jogo::getInstance().numeroVidas < 5) {
 			Jogo::getInstance().numeroVidas++;
 		}
 		Jogo::getInstance().setControlaScore();
 		EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/ganhaVida.mp3");
 		//ADICIONAR SOM PARA MOSTRAR QUE GANHOU VIDA
-		
-		
+
+
 	}
 	glColor3f(1, 0.27, 0);
-	FuncoesAuxiliares::writeWord_BITMAP(s, GLUT_BITMAP_TIMES_ROMAN_24);	
-	
+	glRasterPos2f(1600, 970);
+	FuncoesAuxiliares::writeWord_BITMAP(std::to_string(Jogo::getInstance().score->getScoreValue()), GLUT_BITMAP_TIMES_ROMAN_24);
+
+	//Armamento Bomba
+	Bomba *bomba = new Bomba(30.0, 65.0, (float)20 / 10000);
+	bomba->desenha();
+	glColor3f(1, 0.27, 0);
+	glRasterPos2f(50, 50);
+	FuncoesAuxiliares::writeWord_BITMAP("x " + std::to_string(principal->getQtdTiros()), GLUT_BITMAP_TIMES_ROMAN_24);
 }
 
 void Fase::desenha() {

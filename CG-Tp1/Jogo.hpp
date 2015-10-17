@@ -58,7 +58,6 @@ public:
 
 	//Armazena as vidas do jogador
 	Spitfire *vidas[5];
-	Bomba *projetil;
 	int numeroVidas = 5;
 
 	//Callbacks OpenGL
