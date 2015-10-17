@@ -306,20 +306,20 @@ void Fase_TheBlitz::desenha()
 			if (this->expl[cc]) {
 				if (this->esc[cc]<50 && this->cresce[cc]) {
 					cout << "escala: " << this->esc[cc];
-					if (esc[cc]%2==0) {
+					if (esc[cc] % 2 == 0) {
 						glColor3f(1, 0, 0);
 					}
 					else {
 						glColor3f(1, 0, 1);
 					}
-					
-					FuncoesAuxiliares::bresenhamCircle(this->posX[cc], this->posY[cc], this->esc[cc]+1, this->esc[cc]+1);
+
+					FuncoesAuxiliares::bresenhamCircle(this->posX[cc], this->posY[cc], this->esc[cc] + 1, this->esc[cc] + 1);
 					this->esc[cc] += 3;
 				}
-				else if (this->esc[cc]>=50 && this->cresce[cc]) {
+				else if (this->esc[cc] >= 50 && this->cresce[cc]) {
 					this->cresce[cc] = false;
 				}
-				else if (this->esc[cc]>0 && !this->cresce[cc]){					
+				else if (this->esc[cc]>0 && !this->cresce[cc]){
 					if (esc[cc] % 2 == 0) {
 						glColor3f(1, 0, 0);
 					}
@@ -328,8 +328,8 @@ void Fase_TheBlitz::desenha()
 					}
 					FuncoesAuxiliares::bresenhamCircle(this->posX[cc], this->posY[cc], this->esc[cc] + 1, this->esc[cc] + 1);
 					this->esc[cc] -= 3;
-				}				
-			}						
+				}
+			}
 		}
 				
 	}	
