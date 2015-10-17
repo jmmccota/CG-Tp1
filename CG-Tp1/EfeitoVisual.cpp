@@ -335,7 +335,7 @@ bool EfeitoVisual::desenhaExplosao(float escalaFinal, float posX, float posY)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluOrtho2D(-100, 100, -100, 100);
-	glTranslatef(posX, 0, 0);
+	glTranslatef(posX, posY, 0);
 	if (this->escalaAnimacao < escalaFinal) {
 		this->escalaAnimacao += 0.3;
 	}
@@ -379,7 +379,6 @@ bool EfeitoVisual::desenhaExplosao(float escalaFinal, float posX, float posY)
 
 	return isFinish;
 }
-
 
 EfeitoVisual& EfeitoVisual::getInstance()
 {

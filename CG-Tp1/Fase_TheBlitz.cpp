@@ -5,6 +5,7 @@ float tY = -1620;
 float rot = 0;
 float transladaCena2 = 0;
 float translY = 0;
+float escalaBomba = 0;
 
 Fase_TheBlitz::Fase_TheBlitz()
 {
@@ -278,6 +279,41 @@ void Fase_TheBlitz::desenhaBackground()
 	glPopMatrix();
 }
 
+void desenha2(float posX, float posY, float escala){
+	glTranslatef(posX, posY, 0);
+	glScalef(escala, escala, 0);
+	/*glScalef(escalaFinal, escalaFinal, escalaFinal);*/
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glBegin(GL_POLYGON);
+	glColor3f(1, 0, 0);
+	glVertex2f(-2, 2);
+	glVertex2f(2, 2);
+	glVertex2f(2, -2);
+	glVertex2f(-2, -2);
+	glEnd();
+	glBegin(GL_POLYGON);
+	glColor3f(1, 0, 0);
+	glVertex2f(3, 0);
+	glVertex2f(0, 3);
+	glVertex2f(-3, 0);
+	glVertex2f(0, -3);
+	glEnd();
+	glBegin(GL_POLYGON);
+	glColor3f(1, 1, 0);
+	glVertex2f(-1, 1);
+	glVertex2f(1, 1);
+	glVertex2f(1, -1);
+	glVertex2f(-1, -1);
+	glEnd();
+	glBegin(GL_POLYGON);
+	glColor3f(1, 1, 0);
+	glVertex2f(1.5, 0);
+	glVertex2f(0, 1.5);
+	glVertex2f(-1.5, 0);
+	glVertex2f(0, -1.5);
+	glEnd();
+}
 void Fase_TheBlitz::desenha()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -305,28 +341,14 @@ void Fase_TheBlitz::desenha()
 		for (int cc = 0; cc < this->expl.size(); cc++) {
 			if (this->expl[cc]) {
 				if (this->esc[cc]<50 && this->cresce[cc]) {
-					cout << "escala: " << this->esc[cc];
-					if (esc[cc] % 2 == 0) {
-						glColor3f(1, 0, 0);
-					}
-					else {
-						glColor3f(1, 0, 1);
-					}
-
-					FuncoesAuxiliares::bresenhamCircle(this->posX[cc], this->posY[cc], this->esc[cc] + 1, this->esc[cc] + 1);
+					desenha2(this->posX[cc], this->posY[cc], this->esc[cc]);
 					this->esc[cc] += 3;
 				}
 				else if (this->esc[cc] >= 50 && this->cresce[cc]) {
 					this->cresce[cc] = false;
 				}
 				else if (this->esc[cc]>0 && !this->cresce[cc]){
-					if (esc[cc] % 2 == 0) {
-						glColor3f(1, 0, 0);
-					}
-					else {
-						glColor3f(1, 0, 1);
-					}
-					FuncoesAuxiliares::bresenhamCircle(this->posX[cc], this->posY[cc], this->esc[cc] + 1, this->esc[cc] + 1);
+					desenha2(this->posX[cc], this->posY[cc], this->esc[cc]);
 					this->esc[cc] -= 3;
 				}
 			}

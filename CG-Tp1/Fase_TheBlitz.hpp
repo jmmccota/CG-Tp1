@@ -24,6 +24,7 @@ public:
 	std::vector<bool> expl;
 	std::vector<bool> cresce;
 	float escalaAnimacao = 0;
+	bool explode = true;
 	// Função callback chamada para fazer o desenho
 	void desenha();
 	void terminou();

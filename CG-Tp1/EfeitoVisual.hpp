@@ -39,6 +39,7 @@ class EfeitoVisual
 		EfeitoVisual();
 		EfeitoVisual(EfeitoVisual const&);
 		void operator=(EfeitoVisual const&);
+		bool isFinish = false;
 
 	public:
 		~EfeitoVisual();
