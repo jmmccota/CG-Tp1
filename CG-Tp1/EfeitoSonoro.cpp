@@ -193,20 +193,20 @@ void EfeitoSonoro::stopV2Motor()
 #pragma endregion
 
 #pragma region "SFX Gerais"
-void EfeitoSonoro::playVickersShot()
-{
-    arrayAudios[2]->playMemoryAudio(system);
-}
-
-void EfeitoSonoro::playMg42Shot()
-{
-    arrayAudios[3]->playMemoryAudio(system);
-}
-
-void EfeitoSonoro::playBombDrop()
-{
-    arrayAudios[4]->playMemoryAudio(system);
-}
+//void EfeitoSonoro::playVickersShot()
+//{
+//    arrayAudios[2]->playMemoryAudio(system);
+//}
+//
+//void EfeitoSonoro::playMg42Shot()
+//{
+//    arrayAudios[3]->playMemoryAudio(system);
+//}
+//
+//void EfeitoSonoro::playBombDrop()
+//{
+//    arrayAudios[4]->playMemoryAudio(system);
+//}
 
 void EfeitoSonoro::playExplosion()
 {

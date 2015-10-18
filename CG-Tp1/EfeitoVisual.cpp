@@ -94,20 +94,60 @@ void EfeitoVisual::chamaExplosao(GLfloat posX, GLfloat posY) {
     this->cresce.push_back(true);
 }
 
+
+void desenhaExplosaoInimigo(float posX, float posY, float escala){
+	EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/boom.mp3");
+	glTranslatef(posX, posY, 0);
+	glScalef(escala, escala, 0);
+	/*glScalef(escalaFinal, escalaFinal, escalaFinal);*/
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glBegin(GL_POLYGON);
+	glColor3f(1, 0, 0);
+	glVertex2f(-2, 2);
+	glVertex2f(2, 2);
+	glVertex2f(2, -2);
+	glVertex2f(-2, -2);
+	glEnd();
+	glBegin(GL_POLYGON);
+	glColor3f(1, 0, 0);
+	glVertex2f(3, 0);
+	glVertex2f(0, 3);
+	glVertex2f(-3, 0);
+	glVertex2f(0, -3);
+	glEnd();
+	glBegin(GL_POLYGON);
+	glColor3f(1, 1, 0);
+	glVertex2f(-1, 1);
+	glVertex2f(1, 1);
+	glVertex2f(1, -1);
+	glVertex2f(-1, -1);
+	glEnd();
+	glBegin(GL_POLYGON);
+	glColor3f(1, 1, 0);
+	glVertex2f(1.5, 0);
+	glVertex2f(0, 1.5);
+	glVertex2f(-1.5, 0);
+	glVertex2f(0, -1.5);
+	glEnd();
+	glFlush();
+}
+
+
 void EfeitoVisual::atualizaExplosao()
 {
     if (this->expl.size() > 0) {
         for (int cc = 0; cc < this->expl.size(); cc++) {
             if (this->expl[cc]) {
                 if (this->esc[cc]<50 && this->cresce[cc]) {
-                    desenhaExplosao(this->posX[cc], this->posY[cc], this->esc[cc]);
+                    desenhaExplosaoInimigo(this->posX[cc], this->posY[cc], this->esc[cc]);
                     this->esc[cc] += 3;
                 }
                 else if (this->esc[cc] >= 50 && this->cresce[cc]) {
                     this->cresce[cc] = false;
                 }
                 else if (this->esc[cc]>0 && !this->cresce[cc]){
-                    desenhaExplosao(this->posX[cc], this->posY[cc], this->esc[cc]);
+                    desenhaExplosaoInimigo(this->posX[cc], this->posY[cc], this->esc[cc]);
                     this->esc[cc] -= 3;
                 }
             }
