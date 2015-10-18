@@ -17,7 +17,7 @@ class me262;
 class Spitfire : public Personagem
 {
     private:
-        //bool movCima = false, movBaixo = false, movEsq = false, movDir = false;
+        bool movCima = false, movBaixo = false, movEsq = false, movDir = false;
         GLfloat velX = 0, velY = 0;
 
     public:
@@ -88,10 +88,15 @@ class Me163 : public Personagem
 class Me264 : public Personagem
 {
 private:
-	bool movCima = false, movBaixo = false, movEsq = false, movDir = false;
+    Personagem *alvo;
+    //variaveis usadas para controlar em quais frames deve atirar
+    int estadoTiro = 0;
+    int estrategia;
+    int ladoBomba = -1;
+    int tirosSegundo = 20;
 
 public:
-	Me264(GLfloat pX, GLfloat pY, float esc, Fase *f);
+    Me264(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f);
 	~Me264();
 	void acao();
 	void atira(int tipo);

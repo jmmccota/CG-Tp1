@@ -6,6 +6,7 @@ class TiroSimplesInimigo;
 class Bomba;
 
 #include "Projetil.hpp"
+#include <cmath>
 
 class TiroSimples : public Projetil
 {
@@ -28,6 +29,17 @@ class Bomba : public Projetil
 public:
     Bomba(GLfloat posX, GLfloat posY, float escala);
     ~Bomba();
+};
+
+
+class TiroEspecialInimigo : public Projetil
+{
+private:
+    GLfloat velX, velY;
+public:
+    TiroEspecialInimigo(GLfloat posX, GLfloat posY, GLfloat posXAlvo, GLfloat posYAlvo, float escala);
+    ~TiroEspecialInimigo();
+    void acao();
 };
 
 

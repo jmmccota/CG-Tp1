@@ -35,11 +35,19 @@ class EfeitoVisual
 		bool fullscreen;
 		int sizeX ;
 		int sizeY;
-	    float escalaAnimacao = 0;
 		EfeitoVisual();
 		EfeitoVisual(EfeitoVisual const&);
 		void operator=(EfeitoVisual const&);
 		bool isFinish = false;
+
+        //coisas de explosao
+        std::vector<float> posX;
+        std::vector<float> posY;
+        std::vector<int> esc;
+        std::vector<bool> expl;
+        std::vector<bool> cresce;
+        float escalaAnimacao = 0;
+        bool explode = true;
 
 	public:
 		~EfeitoVisual();
@@ -50,8 +58,15 @@ class EfeitoVisual
 		//Pegar os valores do ortho2D: First = Eixo X; Second = Eixo Y;
 		pair<float, float> getOrtho2D();
 
-		//COMO FAZER ANIMACAO EXPLOSAO?
-		//void static Explosao(GLfloat x, GLfloat y, GLfloat raio, int estagio);
+        //Coisas de explosao
+        void chamaExplosao(GLfloat posX, GLfloat posY);
+        void atualizaExplosao();
+        bool desenhaExplosao(float escalaFinal, float posX, float posY);
+
+        //Desenhos de cenario TheBlitz
+        void desenhaRetangulo(float translacaoX, float translY, float escalaX, float escalaY, float rot, float red, float green, float blue);
+        void desenhaQuarteirao(float translacaoX, float translY, float escalaX, float escalaY, float red, float green, float blue, int altura, int largura, int tX, int tY);
+        void desenhaLinhaAsfalto(float translacaoX, float translY, float escalaX, float escalaY, float red, float green, float blue, int altura, int largura, int tX, int tY);
 
 		//Retorna true caso objetos tenham colidido, false caso contrario
 		bool colisao(Solido *a, Solido *b);
@@ -70,17 +85,10 @@ class EfeitoVisual
 
         static EfeitoVisual& getInstance();
 
-        //Callbacks do OpenGL devem ser estaticos
-
         //Reajusta o tamanho da tela
         void static resize(GLsizei w, GLsizei h);
 
 		void desenhaTitulo(int posX,int posY);
-
-		//Desenha a Explosao
-		bool desenhaExplosao(float escalaFinal, float posX, float posY);
-
-
 };
 #endif
  
