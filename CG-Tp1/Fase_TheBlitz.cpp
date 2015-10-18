@@ -207,8 +207,10 @@ void Fase_TheBlitz::desenha()
 		(*i)->desenha();
 
 	principal->desenha();
+	
 
 	desenhaHUD();
+	EfeitoVisual::getInstance().atualizaExplosao();
 
 	// Executa os comandos OpenGLhh
 	glutSwapBuffers();
@@ -245,7 +247,7 @@ void Fase_TheBlitz::atualiza(int value)
     //    inimigosAtivos.push_back(aux);
     //    EfeitoSonoro::getInstance().playMe264Motor();
     //}
-
+		
 	for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end(); ++i)
 		(*i)->acao();
 
@@ -299,8 +301,8 @@ void Fase_TheBlitz::atualiza(int value)
 			if ((*j)->destruido())
 			{
 				//Explode
-				EfeitoVisual::getInstance().chamaExplosao((*j)->getX(), (*j)->getY());					
-				
+				EfeitoVisual::getInstance().chamaExplosao((*j)->getX(), (*j)->getY());	
+
 				Jogo::getInstance().score->incScoreValue((*j)->getScore());
 				j = inimigosAtivos.erase(j);
 			}
@@ -354,6 +356,7 @@ void Fase_TheBlitz::atualiza(int value)
 			if (rand() % 20 == 0)
 				principal->powerUp = 1;
 			Jogo::getInstance().score->incScoreValue((*i)->getScore());
+			EfeitoVisual::getInstance().chamaExplosao((*i)->getX(), (*i)->getY());
 			i = inimigosAtivos.erase(i);
 		}
 		else
@@ -365,6 +368,7 @@ void Fase_TheBlitz::atualiza(int value)
 		{
 			principal->powerUp = 0;
 			//Explosao
+			
 			//Perde uma vida
 		}
 	}

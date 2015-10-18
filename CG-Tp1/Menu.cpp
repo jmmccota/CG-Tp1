@@ -408,6 +408,7 @@ void Menu::desenha() {
 		glPopMatrix();
 		spitfire->desenha();
 		glPopMatrix();
+		
 	}
 
 	glutSwapBuffers();
