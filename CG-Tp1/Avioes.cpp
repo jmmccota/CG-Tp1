@@ -22,7 +22,7 @@ Spitfire::~Spitfire()
 
 void Spitfire::acao()
 {
-    /*pair<GLfloat, GLfloat> size = EfeitoVisual::getInstance().getOrtho2D();
+    pair<GLfloat, GLfloat> size = EfeitoVisual::getInstance().getOrtho2D();
     if (movCima && posY + velY + tamY < size.second)
 	{
         posY += velocidade;
@@ -38,25 +38,25 @@ void Spitfire::acao()
 	else if (movEsq && posX + velX - tamX > 0)
 	{
 		posX -= velocidade;
-	}*/
+	}
 
-	pair<GLfloat, GLfloat> size = EfeitoVisual::getInstance().getOrtho2D();
-	if (posY + velY + tamY < size.second && posY + velY - tamY > 0)
-	{
-		posY += velY;
-	}
-	else
-	{
-		velY = 0;
-	}
-	if (posX + velX + tamX < size.first && posX + velX - tamX > 0)
-	{
-		posX += velX;
-	}
-	else
-	{
-		velX = 0;
-	}
+	//pair<GLfloat, GLfloat> size = EfeitoVisual::getInstance().getOrtho2D();
+	//if (posY + velY + tamY < size.second && posY + velY - tamY > 0)
+	//{
+	//	posY += velY;
+	//}
+	//else
+	//{
+	//	velY = 0;
+	//}
+	//if (posX + velX + tamX < size.first && posX + velX - tamX > 0)
+	//{
+	//	posX += velX;
+	//}
+	//else
+	//{
+	//	velX = 0;
+	//}
 
 }
 
@@ -67,7 +67,7 @@ void Spitfire::atira(int tipo)
         municao[tipo]--;
         if (!tipo)
         {
-            EfeitoSonoro::getInstance().playVickersShoot();
+            EfeitoSonoro::getInstance().playVickersShot();
 			if (powerUp == 0)
 			{
 				fase->novoProjetilAmigo(new TiroSimples(posX, posY + tamY * escala, 0.1 * escala));
@@ -122,7 +122,7 @@ void Spitfire::detectaTiro(unsigned char key, int x, int y)
 }
 void Spitfire::detectaMovimentoDown(int key, int x, int y)
 {
-    /*switch (key)
+    switch (key)
     {
     case GLUT_KEY_UP:
         movCima = true;
@@ -136,27 +136,27 @@ void Spitfire::detectaMovimentoDown(int key, int x, int y)
     case GLUT_KEY_LEFT:
         movEsq = true;
         break;
-    }*/
+    }
 }
 void Spitfire::detectaMovimentoUp(int key, int x, int y)
 {
     switch (key)
     {
     case GLUT_KEY_UP:
-        //movCima = false;
-        velY += velocidade;
+        movCima = false;
+        //velY += velocidade;
         break;
     case GLUT_KEY_DOWN:
-        //movBaixo = false;
-        velY -= velocidade;
+        movBaixo = false;
+        //velY -= velocidade;
         break;
     case GLUT_KEY_RIGHT:
-        //movDir = false;
-        velX += velocidade;
+        movDir = false;
+        //velX += velocidade;
         break;
     case GLUT_KEY_LEFT:
-        //movEsq = false;
-        velX -= velocidade;
+        movEsq = false;
+        //velX -= velocidade;
         break;
     }
 }
@@ -199,11 +199,6 @@ void Bf109::acao()
     posY -= velocidade;
 }
 
-int Bf109::danoColisao()
-{
-	return 1;
-}
-
 void Bf109::atira(int tipo)
 {
     if (municao[tipo] > 0)
@@ -211,6 +206,11 @@ void Bf109::atira(int tipo)
         municao[tipo]--;
         fase->novoProjetilInimigo(new TiroSimplesInimigo(posX, posY, 0.1 * escala));
     }
+}
+
+int Bf109::danoColisao()
+{
+	return 1;
 }
 
 string Bf109::getNome()
@@ -273,11 +273,12 @@ int Me163::getScore()
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-Me264::Me264(GLfloat pX, GLfloat pY, float esc, Fase *f)
-	: Personagem(pX, pY, 0.016 * esc, esc, f)
+Me264::Me264(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f)
+	: Personagem(pX, pY, 50 * esc, esc, f)
 {
 	this->carrega("modelos/me264.dat");
-	hp = 40;
+    alvo = a;
+	hp = 1000;
 	municao[1] = 9999;
 	municao[2] = 150;
 }
@@ -287,26 +288,38 @@ Me264::~Me264()
 
 void Me264::acao()
 {
-	if (movCima)
-		posY += velocidade;
-	else if (movBaixo)
-		posY -= velocidade;
-	if (movDir)
-		posX += velocidade;
-	else if (movEsq)
-		posX -= velocidade;
+    if (posY + tamY < EfeitoVisual::getInstance().getOrtho2D().second)
+        posY -= velocidade;
+
+    if (!estadoTiro)
+        estrategia = rand() % 3;
+
+    atira(estrategia);
 }
 
 void Me264::atira(int tipo)
 {
-	if (municao[tipo] > 0)
-	{
-		municao[tipo]--;
-		if (!tipo)
-			fase->novoProjetilInimigo(new TiroSimples(posX, posY + tamY, escala));
-		else
-			fase->novoProjetilInimigo(new Bomba(posX, posY + tamY, escala));
-	}
+    //Solta bomba
+    if (tipo == 1 || tipo == 3)
+    {
+        estadoTiro = ++estadoTiro % (int)(1000 / (tirosSegundo * TEMPOQUADRO));
+        if (!estadoTiro)
+        {
+            EfeitoSonoro::getInstance().playBombDrop();
+            fase->novoProjetilInimigo(new Bomba(posX + ladoBomba * escala * 0.05, posY, 0.04 * escala));
+            ladoBomba = -ladoBomba;
+        }
+    }
+    //Atira
+    if (tipo == 2 || tipo == 3)
+    {
+        estadoTiro = ++estadoTiro % (int)(1000 / (tirosSegundo * TEMPOQUADRO));
+        if (!estadoTiro)
+        {
+            EfeitoSonoro::getInstance().playMg42Shot();
+            fase->novoProjetilInimigo(new TiroEspecialInimigo(posX, posY, alvo->getX(), alvo->getY(), 0.04 * escala));
+        }
+    }
 }
 
 int Me264::danoColisao()

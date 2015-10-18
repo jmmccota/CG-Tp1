@@ -60,6 +60,15 @@ void Poligono::desenha(GLfloat x, GLfloat y)
     glEnd();
 }
 
+void Poligono::rotaciona(double teta)
+{
+    double seno = sin(teta), cosseno = cos(teta);
+    for (int i = 0; i < pontosX.size(); i++)
+    {
+        pontosX[i] = pontosX[i] * cosseno - pontosY[i] * seno;
+        pontosY[i] = pontosX[i] * seno + pontosY[i] * cosseno;
+    }
+}
 
 GLfloat Poligono::getPontoX(int indice)
 {
