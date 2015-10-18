@@ -389,11 +389,8 @@ void Fase_TheBlitz::atualiza(int value)
 		{
 			//Explosao
 			//Perde uma vida
-			//Reinicia fase
-			//Jogo::getInstance().score->setScore(0);
 			principal->powerUp = 0;
 			Jogo::getInstance().numeroVidas--;
-			Jogo::getInstance().proximaFase();
 		}
 	}
 

@@ -27,8 +27,8 @@ pair<GLfloat, GLfloat> EfeitoVisual::getOrtho2D()
 
 bool EfeitoVisual::colisao(Solido *a, Solido *b)
 {
-	if ((abs(a->getX() - b->getX()) <= (a->getTamX() + b->getTamX()) / 2) &&
-		(abs(a->getY() - b->getY()) <= (a->getTamY() + b->getTamY()) / 2))
+	if ((abs(a->getX() - b->getX()) <= (a->getTamX() + b->getTamX())) &&
+		(abs(a->getY() - b->getY()) <= (a->getTamY() + b->getTamY())))
 		return true;
 	return false;
 }

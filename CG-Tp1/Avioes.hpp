@@ -54,6 +54,9 @@ public:
     Bf109(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f);
     ~Bf109();
 
+    //Quantidade de tiros a serem dados em um segundo
+    int tirosSegundo = 1;
+
     void atira(int tipo);
     void acao();
 	int danoColisao();

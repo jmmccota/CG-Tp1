@@ -188,7 +188,7 @@ void Bf109::acao()
         posX += (alvo->getX() - posX > 0 ? velocidade / 1.5 : -velocidade / 1.5);
 
         //Atira 2 vezes por segundo caso esteja em posicao
-        estadoTiro = ++estadoTiro % (int)(1000 / (1 * TEMPOQUADRO));
+        estadoTiro = ++estadoTiro % (int)(1000 / (tirosSegundo * TEMPOQUADRO));
         if (!estadoTiro) atira(0);
     }
     posY -= velocidade;
