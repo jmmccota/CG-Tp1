@@ -5,6 +5,7 @@ float tY = -1620;
 float rot = 0;
 float transladaCena2 = 0;
 float translY = 0;
+float escalaBomba = 0;
 
 Fase_TheBlitz::Fase_TheBlitz()
 {
@@ -278,6 +279,43 @@ void Fase_TheBlitz::desenhaBackground()
 	glPopMatrix();
 }
 
+void desenha2(float posX, float posY, float escala){
+	EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/boom.mp3");
+	glTranslatef(posX, posY, 0);
+	glScalef(escala, escala, 0);
+	/*glScalef(escalaFinal, escalaFinal, escalaFinal);*/
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glBegin(GL_POLYGON);
+	glColor3f(1, 0, 0);
+	glVertex2f(-2, 2);
+	glVertex2f(2, 2);
+	glVertex2f(2, -2);
+	glVertex2f(-2, -2);
+	glEnd();
+	glBegin(GL_POLYGON);
+	glColor3f(1, 0, 0);
+	glVertex2f(3, 0);
+	glVertex2f(0, 3);
+	glVertex2f(-3, 0);
+	glVertex2f(0, -3);
+	glEnd();
+	glBegin(GL_POLYGON);
+	glColor3f(1, 1, 0);
+	glVertex2f(-1, 1);
+	glVertex2f(1, 1);
+	glVertex2f(1, -1);
+	glVertex2f(-1, -1);
+	glEnd();
+	glBegin(GL_POLYGON);
+	glColor3f(1, 1, 0);
+	glVertex2f(1.5, 0);
+	glVertex2f(0, 1.5);
+	glVertex2f(-1.5, 0);
+	glVertex2f(0, -1.5);
+	glEnd();
+	glFlush();
+}
 void Fase_TheBlitz::desenha()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -301,7 +339,25 @@ void Fase_TheBlitz::desenha()
 	principal->desenha();
 
 	desenhaHUD();
-	// Executa os comandos OpenGL
+	if (this->expl.size() > 0) {
+		for (int cc = 0; cc < this->expl.size(); cc++) {
+			if (this->expl[cc]) {
+				if (this->esc[cc]<50 && this->cresce[cc]) {
+					desenha2(this->posX[cc], this->posY[cc], this->esc[cc]);
+					this->esc[cc] += 3;
+				}
+				else if (this->esc[cc] >= 50 && this->cresce[cc]) {
+					this->cresce[cc] = false;
+				}
+				else if (this->esc[cc]>0 && !this->cresce[cc]){
+					desenha2(this->posX[cc], this->posY[cc], this->esc[cc]);
+					this->esc[cc] -= 3;
+				}
+			}
+		}
+				
+	}	
+	// Executa os comandos OpenGLhh
 	glutSwapBuffers();
 }
 
@@ -353,7 +409,11 @@ void Fase_TheBlitz::atualiza(int value)
 			//Se foi destruido
 			if ((*j)->destruido())
 			{
-				//Explode
+				//Explode				
+				cout << "explodiu";
+				chamaExplosao((*j)->getX(), (*j)->getY());					
+				EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/boom.mp3");
+				
 				if (rand() % 20 == 0)
 					principal->powerUp = 1;
 				Jogo::getInstance().score->incScoreValue((*j)->getScore());
@@ -408,6 +468,8 @@ void Fase_TheBlitz::atualiza(int value)
 			if (rand() % 20 == 0)
 				principal->powerUp = 1;
 			Jogo::getInstance().score->incScoreValue((*i)->getScore());
+			chamaExplosao((*i)->getX(), (*i)->getY());
+			EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/boom.mp3");
 			i = inimigosAtivos.erase(i);
 		}
 		else
@@ -447,13 +509,19 @@ void Fase_TheBlitz::specialKeyUp(int key, int x, int y)
 {
 	principal->detectaMovimentoUp(key, x, y);
 }
-
+void Fase_TheBlitz::chamaExplosao(GLfloat posX,GLfloat posY) {
+	this->posX.push_back(posX); // salva posX da explosao
+	this->posY.push_back(posY); //salva Y da explosao
+	this->esc.push_back(1); //começa em 1 e vai até 3
+	this->expl.push_back(true); //se for true ainda explode e incrementa escala,se for false pode apagar
+	this->cresce.push_back(true);
+}
 void Fase_TheBlitz::inicializa()
 {
 	EfeitoSonoro::getInstance().initAudios_TheBlitz();
 	EfeitoSonoro::getInstance().playMainTheme();
 	definePersonagens();
-	//EfeitoSonoro::getInstance().airRaidSiren();
-	//EfeitoSonoro::getInstance().spitfireMotor();
+	EfeitoSonoro::getInstance().playAirRaid();
+	EfeitoSonoro::getInstance().playSpitfireMotor();
 }
 

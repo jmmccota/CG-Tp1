@@ -37,7 +37,6 @@ void Jogo::run()
 	for (int ii = 0; ii < 5; ii++) {
 		vidas[ii] = new Spitfire(xspit + 50 * ii, 1030, (float) 20 / 10000, nullptr);
 	}
-	//projetil = new Bomba::Projetil(30.0, 50.0, 0,(float)300 / 10000); //desenhar a bomba versao teste
 	glutMainLoop();
 }
 
@@ -47,7 +46,7 @@ Jogo& Jogo::getInstance()
 	return singleton;
 }
 void Jogo::setControlaScore() {
-	controlaScore += 1000;
+	controlaScore += 10000;
 }
 void Jogo::zeraControlaScore() {
 	controlaScore = 0;

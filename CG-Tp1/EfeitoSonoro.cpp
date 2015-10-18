@@ -28,7 +28,7 @@ void EfeitoSonoro::createObjectSystem()
 		Create a System object and initialize.
 		*/
 		FMOD::System_Create(&system);
-		
+
 		system->init(20, FMOD_INIT_NORMAL, 0);
 
 	}
@@ -45,39 +45,32 @@ void EfeitoSonoro::initAudios_Menu()
 	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/enterOptionMenu.mp3", false));
 }
 
-void EfeitoSonoro::initAudios_TheBlitz() {
-    arrayAudios.push_back(new FMOD_Audio(system, "audio/music/TheBlitz.mp3", true));
-	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/vickers.mp3", false));
+void EfeitoSonoro::initAudios_SFXGerais()
+{
+	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/spitfireMotor.mp3", false));
+	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/vickersShoot.mp3", false));
 	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/mg42.mp3", false));
 	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/bombDrop.mp3", false));
-	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/spitfireMotor.mp3", false));
     arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/bf109Motor.mp3", false));
-    arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/bf163Motor.mp3", false));
-    arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/me264Motor.mp3", false));
-    arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/airRaid.mp3", false));
-	//arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/me163Motor.mp3", false));
+    //arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/bf163Motor.mp3", false));
+}
+
+void EfeitoSonoro::initAudios_TheBlitz() {
+	arrayAudios.push_back(new FMOD_Audio(system, "audio/music/TheBlitz.mp3", true));
+	initAudios_SFXGerais();
+	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/airRaid.mp3", false));
 	//arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/me264Motor.mp3", false));
 }
 
 void EfeitoSonoro::initAudios_TheBattleOfBritain() {
-	arrayAudios.push_back(new FMOD_Audio(system, "audio/music/TheBlitz.mp3", true));
-	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/vickers.mp3", false));
-	//arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/mg42.mp3", false));
-	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/bombDrop.mp3", false));
-	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/spitfireMotor.mp3", false));
-	//arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/bf109Motor.mp3", false));
-	//arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/me163Motor.mp3", false));
-	//arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/bismarkMotor.mp3", false));
+	arrayAudios.push_back(new FMOD_Audio(system, "audio/music/TheBattleOfBritain.mp3", true));
+	initAudios_SFXGerais();
+	//arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/bismarckMotor.mp3", false));
 }
 
 void EfeitoSonoro::initAudios_TheVengeanceWeapon() {
-	arrayAudios.push_back(new FMOD_Audio(system, "audio/music/TheBlitz.mp3", true));
-	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/vickers.mp3", false));
-	//arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/mg42.mp3", false));
-	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/bombDrop.mp3", false));
-	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/spitfireMotor.mp3", false));
-	//arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/bf109Motor.mp3", false));
-	//arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/me163Motor.mp3", false));
+	arrayAudios.push_back(new FMOD_Audio(system, "audio/music/TheVengeanceWeapon.mp3", true));
+	initAudios_SFXGerais();
 	//arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/v2Motor.mp3", false));
 }
 
@@ -92,13 +85,12 @@ void EfeitoSonoro::finishAllAudios()
 	createObjectSystem();
 }
 
-
-
 void EfeitoSonoro::playMainTheme()
 {
 	arrayAudios[0]->playMemoryAudio(system);
 }
 
+#pragma region "Menu"
 void EfeitoSonoro::playTransitioningMenu()
 {
 	arrayAudios[1]->playMemoryAudio(system);
@@ -108,10 +100,13 @@ void EfeitoSonoro::playEnterMenu()
 {
 	arrayAudios[2]->playMemoryAudio(system);
 }
+#pragma endregion
 
+#pragma region "Personagens"
 void EfeitoSonoro::playSpitfireMotor()
 {
-    arrayAudios[4]->playMemoryAudio(system);
+	arrayAudios[1]->playMemoryAudio(system);
+	arrayAudios[2]->setVolume(40);
 }
 
 void EfeitoSonoro::playSpitfireFlyBy()
@@ -188,39 +183,51 @@ void EfeitoSonoro::stopBf109FlyBy()
 void EfeitoSonoro::stopMe163Motor()
 {
 }
+#pragma endregion
 
-void EfeitoSonoro::stopMe264Motor()
+#pragma region "SFX Gerais"
+void EfeitoSonoro::playAirRaid()
 {
+	arrayAudios[5]->playMemoryAudio(system);
+}
+void EfeitoSonoro::playVickersShoot()
+{
+	arrayAudios[2]->playMemoryAudio(system);
+	arrayAudios[2]->setVolume(50);
 }
 
-void EfeitoSonoro::stopMe262Motor()
+void EfeitoSonoro::playMg42Shoot()
 {
+	arrayAudios[3]->playMemoryAudio(system);
 }
 
 void EfeitoSonoro::stopV2Motor()
 {
+	arrayAudios[4]->playMemoryAudio(system);
 }
 
 void EfeitoSonoro::stopVickers()
 {
+	arrayAudios[2]->stopAudio();
 }
 
 void EfeitoSonoro::stopMg42()
 {
+	arrayAudios[3]->stopAudio();
 }
 
 void EfeitoSonoro::stopBombDrop()
 {
+	arrayAudios[4]->stopAudio();
 }
 
+#pragma endregion
 
 void EfeitoSonoro::playStreamAudio(char *file)
 {
 	FMOD_Audio *audio = new FMOD_Audio();
 	audio->playStreamAudio(system, file, false);
 }
-
-
 
 EfeitoSonoro& EfeitoSonoro::getInstance()
 {

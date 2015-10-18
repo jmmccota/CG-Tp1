@@ -22,5 +22,10 @@ public:
 	void playStreamAudio(FMOD::System *system, char *file, bool loop);
 	//Save in memory
 	void playMemoryAudio(FMOD::System *system);
+	//Stop som
+	void stopAudio();
+	//Set volume 0 to 100
+	void setVolume(float volume);
+
 };
 

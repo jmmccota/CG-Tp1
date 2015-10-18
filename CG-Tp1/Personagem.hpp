@@ -41,6 +41,8 @@ class Personagem : public Solido
 
         void alvejado(int dano);
 		int getHP();
+		float getX();
+		float getY();
 		int getNumeroVidas();
 		int getQtdTiros();
 		void setNumeroVidas();

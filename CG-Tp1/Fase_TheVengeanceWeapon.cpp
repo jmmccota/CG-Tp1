@@ -14,8 +14,9 @@ Fase_TheVengeanceWeapon::~Fase_TheVengeanceWeapon()
 void Fase_TheVengeanceWeapon::definePersonagens()
 {
 	pair<float, float> size = EfeitoVisual::getInstance().getOrtho2D();
-	principal = new Spitfire(size.first / 2, size.second / 10, (float)100 / 10000, this);
+	principal = new Spitfire(0, 0, 0.000015, this);
 }
+
 
 void desenhaCirculo(GLfloat raio, GLfloat Px, GLfloat Py){
 	GLfloat x = 0;
@@ -45,13 +46,20 @@ void Pedra(GLfloat X, GLfloat Y, GLfloat escala, float translacaoX, float transl
 	glPopMatrix();
 	glFlush();
 }
+void desenhaBackgroundAnterior(){
+	for (int i = 0; i < 14; i = i + 2){
+		Pedra(0, 0, 2, PontosCeu[i][0], PontosCeu[i][1]);
+	}
+}
+
+void desenhabackgroudPosterior(){
+	for (int i = 0; i < 14; i = i + 2){
+		Pedra(0, 0, 2.5, PontosCeu[i + 1][0], PontosCeu[i + 1][1]);
+	}
+}
 
 void Fase_TheVengeanceWeapon::desenhaBackground()
 {
-	for (int i = 0; i < 14; i = i + 2){
-		Pedra(0, 0, 2, PontosCeu[i][0], PontosCeu[i][1]);
-		Pedra(0, 0, 2.5, PontosCeu[i+1][0], PontosCeu[i+1][1]);
-	}
 }
 
 void Fase_TheVengeanceWeapon::desenha()
@@ -60,8 +68,10 @@ void Fase_TheVengeanceWeapon::desenha()
 	glClearColor(0.1137, 0.8627, 0.8902, 1.0);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	desenhaBackground();
+	desenhaBackgroundAnterior();
 	desenhaHUD();
+	principal->desenha();
+	desenhabackgroudPosterior();
 	// Executa os comandos OpenGL
 	glutSwapBuffers();
 }
