@@ -88,14 +88,12 @@ void EfeitoVisual::setFullScreen()
 void EfeitoVisual::desenhaExplosao(Explosao e)
 {
     glPushMatrix();
-    glMatrixMode(GL_PROJECTION);
+    glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     gluOrtho2D(-100, 100, -100, 100);
     glTranslatef(e.x, e.y, 0);
     GLfloat value = abs(10 - e.value);
-    glScalef(e.escala * value, e.escala * value, e.escala * value);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
+    glScalef(e.escala * value, e.escala * value, 0);
     glBegin(GL_POLYGON);
     glColor3f(1, 0, 0);
     glVertex2f(-10, 10);

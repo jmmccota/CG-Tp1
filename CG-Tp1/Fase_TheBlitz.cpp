@@ -300,7 +300,7 @@ void Fase_TheBlitz::atualiza(int value)
 			if ((*j)->destruido())
 			{
 				//Explode
-                explosoesAtivas.push_back(new Explosao((*j)->getX(), (*j)->getY(), 2));
+                explosoesAtivas.push_back(new Explosao((*j)->getX(), (*j)->getY(), 1));
 				
 				Jogo::getInstance().score->incScoreValue((*j)->getScore());
 				j = inimigosAtivos.erase(j);
