@@ -101,6 +101,7 @@ void Animacao::desenha()
 	else if (explosao) {
 		explosao = !EfeitoVisual::getInstance().desenhaExplosao(3, translacaoX2, 0);
 	}
+	
 	glutSwapBuffers();
 }
 

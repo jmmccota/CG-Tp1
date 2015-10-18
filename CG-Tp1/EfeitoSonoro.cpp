@@ -145,15 +145,15 @@ void EfeitoSonoro::playV2Motor()
 {
 }
 
-void EfeitoSonoro::playVickersShot()
-{
-    arrayAudios[1]->playMemoryAudio(system);
-}
-
-void EfeitoSonoro::playMg42Shot()
-{
-    arrayAudios[2]->playMemoryAudio(system);
-}
+//void EfeitoSonoro::playVickersShot()
+//{
+//    arrayAudios[1]->playMemoryAudio(system);
+//}
+//
+//void EfeitoSonoro::playMg42Shot()
+//{
+//    arrayAudios[2]->playMemoryAudio(system);
+//}
 
 void EfeitoSonoro::playBombDrop()
 {

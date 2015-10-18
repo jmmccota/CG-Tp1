@@ -337,6 +337,7 @@ void Fase_TheBlitz::desenha()
 		(*i)->desenha();
 
 	principal->desenha();
+	
 
 	desenhaHUD();
 	if (this->expl.size() > 0) {
