@@ -400,6 +400,7 @@ void Menu::desenha() {
 				limitX = false;
 			}
 		}
+		//comenta daki
 		glTranslatef(translacaoY, 0, 0);
 		glPushMatrix();
 		glTranslatef(0, translacaoTiro2, 0);
@@ -408,6 +409,12 @@ void Menu::desenha() {
 		glPopMatrix();
 		spitfire->desenha();
 		glPopMatrix();
+		//ate aqui
+		//descomente abaixo
+		/*glPushMatrix();
+		Navio *navio = new Navio(150, 600, 0.05, nullptr);
+		navio->desenha();
+		glPopMatrix();*/
 		
 	}
 

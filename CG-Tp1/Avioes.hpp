@@ -135,6 +135,21 @@ public:
 	int getScore();
 };
 
+class Navio : public Personagem
+{
+private:
+	bool movCima = false, movBaixo = false, movEsq = false, movDir = false;
+
+public:
+	Navio(GLfloat pX, GLfloat pY, float esc, Fase *f);
+	~Navio();
+	void acao();
+	void atira(int tipo);
+	int danoColisao();
+	string getNome();
+	int getScore();
+};
+
 #endif
 #endif
 

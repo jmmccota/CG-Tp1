@@ -426,3 +426,39 @@ int V2::getScore()
 {
 	return 10000;
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Navio::Navio(GLfloat pX, GLfloat pY, float esc, Fase *f)
+	: Personagem(pX, pY, 0 * esc, esc, f)
+{
+	this->carrega("modelos/navio.dat");
+	hp = 9999;
+}
+Navio::~Navio()
+{
+}
+
+void Navio::acao()
+{
+}
+
+void Navio::atira(int tipo)
+{
+}
+
+int Navio::danoColisao()
+{
+	return 3;
+}
+
+string Navio::getNome()
+{
+	return "V2";
+}
+
+int Navio::getScore()
+{
+	return 10000;
+}
