@@ -85,54 +85,15 @@ void EfeitoVisual::setFullScreen()
 	fullscreen = !fullscreen;
 }
 
-void EfeitoVisual::chamaExplosao(GLfloat posX, GLfloat posY) {
-    EfeitoSonoro::getInstance().playExplosion();
-    this->posX.push_back(posX); // salva posX da explosao
-    this->posY.push_back(posY); //salva Y da explosao
-    this->esc.push_back(1); //começa em 1 e vai até 3
-    this->expl.push_back(true); //se for true ainda explode e incrementa escala,se for false pode apagar
-    this->cresce.push_back(true);
-}
-
-void EfeitoVisual::atualizaExplosao()
+void EfeitoVisual::desenhaExplosao(Explosao e)
 {
-    if (this->expl.size() > 0) {
-        for (int cc = 0; cc < this->expl.size(); cc++) {
-            if (this->expl[cc]) {
-                if (this->esc[cc]<50 && this->cresce[cc]) {
-                    desenhaExplosao(this->posX[cc], this->posY[cc], this->esc[cc]);
-                    this->esc[cc] += 3;
-                }
-                else if (this->esc[cc] >= 50 && this->cresce[cc]) {
-                    this->cresce[cc] = false;
-                }
-                else if (this->esc[cc]>0 && !this->cresce[cc]){
-                    desenhaExplosao(this->posX[cc], this->posY[cc], this->esc[cc]);
-                    this->esc[cc] -= 3;
-                }
-            }
-        }
-
-    }
-}
-
-bool EfeitoVisual::desenhaExplosao(float escalaFinal, float posX, float posY)
-{
-    bool isFinish = false;
     glPushMatrix();
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluOrtho2D(-100, 100, -100, 100);
-    glTranslatef(posX, posY, 0);
-    if (this->escalaAnimacao < escalaFinal) {
-        this->escalaAnimacao += 0.3;
-    }
-    else {
-        this->escalaAnimacao = 0;
-        isFinish = true;
-    }
-    glScalef(this->escalaAnimacao, this->escalaAnimacao, this->escalaAnimacao);
-    /*glScalef(escalaFinal, escalaFinal, escalaFinal);*/
+    glTranslatef(e.x, e.y, 0);
+    GLfloat value = abs(10 - e.value);
+    glScalef(e.escala * value, e.escala * value, e.escala * value);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glBegin(GL_POLYGON);
@@ -164,8 +125,6 @@ bool EfeitoVisual::desenhaExplosao(float escalaFinal, float posX, float posY)
     glVertex2f(0, -7.5);
     glEnd();
     glPopMatrix();
-
-    return isFinish;
 }
 
 // retangulo

@@ -5,8 +5,9 @@
 #define TEMPOQUADRO 16
 class Jogo;
 
-#include "Fase.hpp"
 #include "EfeitoVisual.hpp"
+#include "EfeitoSonoro.hpp"
+#include "Fase.hpp"
 #include <vector>
 #include "Score.hpp"
 #include "Armamentos.hpp"

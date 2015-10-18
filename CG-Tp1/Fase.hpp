@@ -11,6 +11,7 @@ class Fase;
 #include "Personagem.hpp"
 #include "Projetil.hpp"
 #include "Jogo.hpp"
+#include "EfeitoVisual.hpp"
 #include <list>
 #include <vector>
 
@@ -36,6 +37,9 @@ class Fase
         std::list<Projetil*> projeteisInimigos;
         std::list<Projetil*> projeteisAmigos;
 
+        //Lista de explosoes na tela
+        std::list<Explosao*> explosoesAtivas;
+
 	public:
         Fase();
 
@@ -46,7 +50,10 @@ class Fase
 		virtual void definePersonagens() = 0;
 
 		//Desenha o fundo da fase na tela
-		virtual void desenhaBackground() = 0;
+        virtual void desenhaBackground() = 0;
+
+        //Desenha as explosoes e as atualiza
+        void desenhaExplosoes();
 		
 		//Desenha a interface (hp, municao, tempo, score, ...)
 		void desenhaHUD();

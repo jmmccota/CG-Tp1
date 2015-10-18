@@ -10,6 +10,23 @@ Fase::~Fase()
 
 }
 
+void Fase::desenhaExplosoes()
+{
+    for (std::list<Explosao*>::iterator i = explosoesAtivas.begin(); i != explosoesAtivas.end();)
+    {
+        if ((*i)->value < 20)
+        {
+            EfeitoVisual::getInstance().desenhaExplosao(*(*i));
+            (*i)->value++;
+            i++;
+        }
+        else
+        {
+            i = explosoesAtivas.erase(i);
+        }
+    }
+}
+
 void Fase::desenhaHUD() {
 	//HP
 	int hp = principal->getHP();

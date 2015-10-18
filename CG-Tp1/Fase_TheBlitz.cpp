@@ -206,7 +206,9 @@ void Fase_TheBlitz::desenha()
 	for (std::list<Personagem*>::iterator i = inimigosAtivos.begin(); i != inimigosAtivos.end(); ++i)
 		(*i)->desenha();
 
-	principal->desenha();
+    principal->desenha();
+
+    desenhaExplosoes();
 
 	desenhaHUD();
 
@@ -293,13 +295,12 @@ void Fase_TheBlitz::atualiza(int value)
 				(*j)->alvejado((*i)->getDano());
 				i = projeteisAmigos.erase(i);
 				destruiu = true;
-				break;
 			}
 			//Se foi destruido
 			if ((*j)->destruido())
 			{
 				//Explode
-				EfeitoVisual::getInstance().chamaExplosao((*j)->getX(), (*j)->getY());					
+                explosoesAtivas.push_back(new Explosao((*j)->getX(), (*j)->getY(), 2));
 				
 				Jogo::getInstance().score->incScoreValue((*j)->getScore());
 				j = inimigosAtivos.erase(j);
@@ -309,11 +310,12 @@ void Fase_TheBlitz::atualiza(int value)
 			{
 				j++;
 			}
+            if (destruiu)
+                break;
 		}
 		if (!destruiu)
-		{
 			i++;
-		}
+
 	}
 
 
@@ -334,6 +336,7 @@ void Fase_TheBlitz::atualiza(int value)
 		{
 			//Explosao
 			//Perde uma vida
+            explosoesAtivas.push_back(new Explosao(principal->getX(), principal->getY(), 1));
 			principal->powerUp = 0;
 			Jogo::getInstance().numeroVidas--;
 		}
@@ -367,6 +370,8 @@ void Fase_TheBlitz::atualiza(int value)
 			//Perde uma vida
 		}
 	}
+
+//    EfeitoVisual::getInstance().atualizaExplosao();
 
 }
 
