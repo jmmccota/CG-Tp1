@@ -23,102 +23,6 @@ void Fase_TheBlitz::definePersonagens()
 	principal = new Spitfire(size.first / 2, size.second / 10, (float)100 / 10000, this);
 }
 
-// retangulo
-void desenha1(float translacaoX, float translY, float escalaX, float escalaY, float rot, float red, float green, float blue) {
-	glPushMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluOrtho2D(-960, 960, -540, 540);
-	glScalef(escalaX, escalaY, 0);
-	glTranslatef(translacaoX, translY, 0);
-	glRotatef(rot, 1, 0, 0);
-	glColor3f(red, green, blue);
-	// poligono 1
-	glBegin(GL_POLYGON);
-	glVertex2i(-50, -50);
-	glVertex2i(-50, 50);
-	glVertex2i(50, 50);
-	glVertex2i(50, -50);
-	glVertex2i(-50, -50);
-	glEnd();
-	glPopMatrix();
-	glFlush();
-}
-
-// quarteirao
-void desenha2(float translacaoX, float translY, float escalaX, float escalaY, float red, float green, float blue, int altura, int largura) {
-	glPushMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluOrtho2D(-960, 960, -540, 540);
-	glScalef(escalaX, escalaY, 0);
-	glTranslatef(translacaoX + tX, translY + tY, 0);
-	glColor3f(red, green, blue);
-	glBegin(GL_LINES);
-	glVertex2i(-100, altura);
-	glVertex2i(-100, 56);
-	glVertex2i(-100, 56);
-	glVertex2i(-largura, 56);
-	glEnd();
-	glBegin(GL_LINES);
-	glVertex2i(-largura, -56);
-	glVertex2i(-100, -56);
-	glVertex2i(-100, -56);
-	glVertex2i(-100, -altura);
-	glEnd();
-	glBegin(GL_LINES);
-	glVertex2i(100, -altura);
-	glVertex2i(100, -56);
-	glVertex2i(100, -56);
-	glVertex2i(largura, -56);
-	glEnd();
-	glBegin(GL_LINES);
-	glVertex2i(100, altura);
-	glVertex2i(100, 56);
-	glVertex2i(100, 56);
-	glVertex2i(largura, 56);
-	glEnd();
-	glPopMatrix();
-	glFlush();
-}
-
-// linha asfalto
-void desenha3(float translacaoX, float translY, float escalaX, float escalaY, float red, float green, float blue, int altura, int largura) {
-	glPushMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluOrtho2D(-960, 960, -540, 540);
-	glScalef(escalaX, escalaY, 0);
-	glTranslatef(translacaoX + tX, translY + tY, 0);
-	glColor3f(red, green, blue);
-	glBegin(GL_LINES);
-	glVertex2f(-5, altura);
-	glVertex2f(-5, 2.8);
-	glVertex2f(-5, 2.8);
-	glVertex2f(-largura, 2.8);
-	glEnd();
-	glBegin(GL_LINES);
-	glVertex2f(-largura, -2.8);
-	glVertex2f(-5, -2.8);
-	glVertex2f(-5, -2.8);
-	glVertex2f(-5, -altura);
-	glEnd();
-	glBegin(GL_LINES);
-	glVertex2f(5, -altura);
-	glVertex2f(5, -2.8);
-	glVertex2f(5, -2.8);
-	glVertex2f(largura, -2.8);
-	glEnd();
-	glBegin(GL_LINES);
-	glVertex2f(5, altura);
-	glVertex2f(5, 2.8);
-	glVertex2f(5, 2.8);
-	glVertex2f(largura, 2.8);
-	glEnd();
-	glPopMatrix();
-	glFlush();
-}
-
 void Fase_TheBlitz::desenhaBackground()
 {
 	glPushMatrix();
@@ -128,192 +32,160 @@ void Fase_TheBlitz::desenhaBackground()
 	if (transladaCena2 <= -3240)
 		transladaCena2 = 0;
 	for (int i = 0; i < 32; i++) {
-		if (i == 0) {
-			tX = -2880;
-			tY = -1620;
-		}
-		else if (i == 1) {
-			tX = -960;
-			tY = -1620;
-		}
-		else if (i == 2) {
-			tX = 960;
-			tY = -1620;
-		}
-		else if (i == 3) {
-			tX = 2880;
-			tY = -1620;
-		}
-		else if (i == 4) {
-			tX = -2880;
-			tY = -540;
-		}
-		else if (i == 5) {
-			tX = -960;
-			tY = -540;
-		}
-		else if (i == 6) {
-			tX = 960;
-			tY = -540;
-		}
-		else if (i == 7) {
-			tX = 2880;
-			tY = -540;
-		}
-		else if (i == 8) {
-			tX = -2880;
-			tY = 540;
-		}
-		else if (i == 9) {
-			tX = -960;
-			tY = 540;
-		}
-		else if (i == 10) {
-			tX = 960;
-			tY = 540;
-		}
-		else if (i == 11) {
-			tX = 2880;
-			tY = 540;
-		}
-		else if (i == 12) {
-			tX = -2880;
-			tY = 1620;
-		}
-		else if (i == 13) {
-			tX = -960;
-			tY = 1620;
-		}
-		else if (i == 14) {
-			tX = 960;
-			tY = 1620;
-		}
-		else if (i == 15) {
-			tX = 2880;
-			tY = 1620;
-		}
-		if (i == 16) {
-			tX = -2880;
-			tY = -1620 + 3240;
-		}
-		else if (i == 17) {
-			tX = -960;
-			tY = -1620 + 3240;
-		}
-		else if (i == 18) {
-			tX = 960;
-			tY = -1620 + 3240;
-		}
-		else if (i == 19) {
-			tX = 2880;
-			tY = -1620 + 3240;
-		}
-		else if (i == 20) {
-			tX = -2880;
-			tY = -540 + 3240;
-		}
-		else if (i == 21) {
-			tX = -960;
-			tY = -540 + 3240;
-		}
-		else if (i == 22) {
-			tX = 960;
-			tY = -540 + 3240;
-		}
-		else if (i == 23) {
-			tX = 2880;
-			tY = -540 + 3240;
-		}
-		else if (i == 24) {
-			tX = -2880;
-			tY = 540 + 3240;
-		}
-		else if (i == 25) {
-			tX = -960;
-			tY = 540 + 3240;
-		}
-		else if (i == 26) {
-			tX = 960;
-			tY = 540 + 3240;
-		}
-		else if (i == 27) {
-			tX = 2880;
-			tY = 540 + 3240;
-		}
-		else if (i == 28) {
-			tX = -2880;
-			tY = 1620 + 3240;
-		}
-		else if (i == 29) {
-			tX = -960;
-			tY = 1620 + 3240;
-		}
-		else if (i == 30) {
-			tX = 960;
-			tY = 1620 + 3240;
-		}
-		else if (i == 31) {
-			tX = 2880;
-			tY = 1620 + 3240;
-		}
-		// desenha quarteirao
-		desenha2(1, 1 + transladaCena2, 1 * escalaGeral, 1 * escalaGeral, 0.098, 0.098, 0.098, 540, 960);
+
+        switch (i)
+        {
+            case 0:
+                tX = -2880;
+                tY = -1620;
+                break;
+            case 1:
+                tX = -960;
+                tY = -1620;
+                break;
+            case 2:
+                tX = 960;
+                tY = -1620;
+                break;
+            case 3:
+                tX = 2880;
+                tY = -1620;
+                break;
+            case 4:
+                tX = -2880;
+                tY = -540;
+                break;
+            case 5:
+                tX = -960;
+                tY = -540;
+                break;
+            case 6:
+                tX = 960;
+                tY = -540;
+                break;
+            case 7:
+                tX = 2880;
+                tY = -540;
+                break;
+            case 8:
+                tX = -2880;
+                tY = 540;
+                break;
+            case 9:
+                tX = -960;
+                tY = 540;
+                break;
+            case 10:
+                tX = 960;
+                tY = 540;
+                break;
+            case 11:
+                tX = 2880;
+                tY = 540;
+                break;
+            case 12:
+                tX = -2880;
+                tY = 1620;
+                break;
+            case 13:
+                tX = -960;
+                tY = 1620;
+                break;
+            case 14:
+                tX = 960;
+                tY = 1620;
+                break;
+            case 15:
+                tX = 2880;
+                tY = 1620;
+                break;
+            case 16:
+                tX = -2880;
+                tY = -1620 + 3240;
+                break;
+            case 17:
+                tX = -960;
+                tY = -1620 + 3240;
+                break;
+            case 18:
+                tX = 960;
+                tY = -1620 + 3240;
+                break;
+            case 19:
+                tX = 2880;
+                tY = -1620 + 3240;
+                break;
+            case 20:
+                tX = -2880;
+                tY = -540 + 3240;
+                break;
+            case 21:
+                tX = -960;
+                tY = -540 + 3240;
+                break;
+            case 22:
+                tX = 960;
+                tY = -540 + 3240;
+                break;
+            case 23:
+                tX = 2880;
+                tY = -540 + 3240;
+                break;
+            case 24:
+                tX = -2880;
+                tY = 540 + 3240;
+                break;
+            case 25:
+                tX = -960;
+                tY = 540 + 3240;
+                break;
+            case 26:
+                tX = 960;
+                tY = 540 + 3240;
+                break;
+            case 27:
+                tX = 2880;
+                tY = 540 + 3240;
+                break;
+            case 28:
+                tX = -2880;
+                tY = 1620 + 3240;
+                break;
+            case 29:
+                tX = -960;
+                tY = 1620 + 3240;
+                break;
+            case 30:
+                tX = 960;
+                tY = 1620 + 3240;
+                break;
+            case 31:
+                tX = 2880;
+                tY = 1620 + 3240;
+        }
+		
+        EfeitoVisual::getInstance().desenhaQuarteirao(1, 1 + transladaCena2, 1 * escalaGeral, 1 * escalaGeral, 0.098, 0.098, 0.098, 540, 960, tX, tY);
 		//desenha casas
-		desenha1(-100 + (tX / 3), 100 + (tY / 3) + (transladaCena2 / 3), 3 * escalaGeral, 3 * escalaGeral, rot, 0.098, 0.098, 0.098);
-		desenha1(-230 + (tX / 3), 100 + (tY / 2) + (transladaCena2 / 2), 3 * escalaGeral, 2 * escalaGeral, rot, 0.098, 0.098, 0.098);
-		desenha1(-450 + (tX / 1.6), -90 + (tY / 3) + (transladaCena2 / 3), 1.6*escalaGeral, 3 * escalaGeral, rot, 0.098, 0.098, 0.098);
-		desenha1(-120 + (tX / 2.3), -90 + (tY / 3) + (transladaCena2 / 3), 2.3*escalaGeral, 3 * escalaGeral, rot, 0.098, 0.098, 0.098);
-		desenha1(120 + (tX / 3), -400 + (tY)+(transladaCena2), 3 * escalaGeral, 1 * escalaGeral, rot, 0.098, 0.098, 0.098);
-		desenha1(90 + (tX / 5), -100 + (tY / 2) + (transladaCena2 / 2), 5 * escalaGeral, 2 * escalaGeral, rot, 0.098, 0.098, 0.098);
-		desenha1(100 + (tX / 5), 75 + (tY / 4) + (transladaCena2 / 4), 5 * escalaGeral, 4 * escalaGeral, rot, 0.098, 0.098, 0.098);
+		EfeitoVisual::getInstance().desenhaRetangulo(-100 + (tX / 3), 100 + (tY / 3) + (transladaCena2 / 3), 3 * escalaGeral, 3 * escalaGeral, rot, 0.098, 0.098, 0.098);
+		EfeitoVisual::getInstance().desenhaRetangulo(-230 + (tX / 3), 100 + (tY / 2) + (transladaCena2 / 2), 3 * escalaGeral, 2 * escalaGeral, rot, 0.098, 0.098, 0.098);
+		EfeitoVisual::getInstance().desenhaRetangulo(-450 + (tX / 1.6), -90 + (tY / 3) + (transladaCena2 / 3), 1.6*escalaGeral, 3 * escalaGeral, rot, 0.098, 0.098, 0.098);
+		EfeitoVisual::getInstance().desenhaRetangulo(-120 + (tX / 2.3), -90 + (tY / 3) + (transladaCena2 / 3), 2.3*escalaGeral, 3 * escalaGeral, rot, 0.098, 0.098, 0.098);
+		EfeitoVisual::getInstance().desenhaRetangulo(120 + (tX / 3), -400 + (tY)+(transladaCena2), 3 * escalaGeral, 1 * escalaGeral, rot, 0.098, 0.098, 0.098);
+		EfeitoVisual::getInstance().desenhaRetangulo(90 + (tX / 5), -100 + (tY / 2) + (transladaCena2 / 2), 5 * escalaGeral, 2 * escalaGeral, rot, 0.098, 0.098, 0.098);
+		EfeitoVisual::getInstance().desenhaRetangulo(100 + (tX / 5), 75 + (tY / 4) + (transladaCena2 / 4), 5 * escalaGeral, 4 * escalaGeral, rot, 0.098, 0.098, 0.098);
 		//desenha linha asfalto
-		desenha3(1, 1 + transladaCena2, 1 * escalaGeral, 1 * escalaGeral, 0.1, 0.1, 0.1, 540, 960);
+        EfeitoVisual::getInstance().desenhaLinhaAsfalto(1, 1 + transladaCena2, 1 * escalaGeral, 1 * escalaGeral, 0.1, 0.1, 0.1, 540, 960, tX, tY);
 		// desenha carros
-		desenha1(70 + (tX / 0.8), -200 + (tY)+(transladaCena2), 0.8*escalaGeral, 1 * escalaGeral, rot, 0.13, 0.07, 0.14);
-		desenha1(120 + (tX / 0.5), -250 + (tY / 0.8) + (transladaCena2 / 0.8), 0.5*escalaGeral, 0.8*escalaGeral, rot, 0, 0, 0);
-		desenha1(200 + (tX / 0.3), -400 + (tY / 0.5) + (transladaCena2 / 0.5), 0.3*escalaGeral, 0.5*escalaGeral, rot, 0.13, 0.07, 0.14);
-		desenha1(-400 + (tX / 1.45), -60 + (tY / 0.45) + (transladaCena2 / 0.45), 1.45*escalaGeral, 0.45*escalaGeral, rot, 0.13, 0.07, 0.14);
-		desenha1(-585 + (tX), -80 + (tY / 0.3) + (transladaCena2 / 0.3), 1 * escalaGeral, 0.3*escalaGeral, rot, 0, 0, 0);
-		desenha1(-730 + (tX / 0.8), -115 + (tY / 0.2) + (transladaCena2 / 0.2), 0.8*escalaGeral, 0.2*escalaGeral, rot, 0.13, 0.07, 0.14);
+		EfeitoVisual::getInstance().desenhaRetangulo(70 + (tX / 0.8), -200 + (tY)+(transladaCena2), 0.8*escalaGeral, 1 * escalaGeral, rot, 0.13, 0.07, 0.14);
+		EfeitoVisual::getInstance().desenhaRetangulo(120 + (tX / 0.5), -250 + (tY / 0.8) + (transladaCena2 / 0.8), 0.5*escalaGeral, 0.8*escalaGeral, rot, 0, 0, 0);
+		EfeitoVisual::getInstance().desenhaRetangulo(200 + (tX / 0.3), -400 + (tY / 0.5) + (transladaCena2 / 0.5), 0.3*escalaGeral, 0.5*escalaGeral, rot, 0.13, 0.07, 0.14);
+		EfeitoVisual::getInstance().desenhaRetangulo(-400 + (tX / 1.45), -60 + (tY / 0.45) + (transladaCena2 / 0.45), 1.45*escalaGeral, 0.45*escalaGeral, rot, 0.13, 0.07, 0.14);
+		EfeitoVisual::getInstance().desenhaRetangulo(-585 + (tX), -80 + (tY / 0.3) + (transladaCena2 / 0.3), 1 * escalaGeral, 0.3*escalaGeral, rot, 0, 0, 0);
+		EfeitoVisual::getInstance().desenhaRetangulo(-730 + (tX / 0.8), -115 + (tY / 0.2) + (transladaCena2 / 0.2), 0.8*escalaGeral, 0.2*escalaGeral, rot, 0.13, 0.07, 0.14);
 	}
 	glPopMatrix();
 }
 
-void desenha2(float posX, float posY, float escala){
-	glTranslatef(posX, posY, 0);
-	glScalef(escala, escala, 0);
-	/*glScalef(escalaFinal, escalaFinal, escalaFinal);*/
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glBegin(GL_POLYGON);
-	glColor3f(1, 0, 0);
-	glVertex2f(-2, 2);
-	glVertex2f(2, 2);
-	glVertex2f(2, -2);
-	glVertex2f(-2, -2);
-	glEnd();
-	glBegin(GL_POLYGON);
-	glColor3f(1, 0, 0);
-	glVertex2f(3, 0);
-	glVertex2f(0, 3);
-	glVertex2f(-3, 0);
-	glVertex2f(0, -3);
-	glEnd();
-	glBegin(GL_POLYGON);
-	glColor3f(1, 1, 0);
-	glVertex2f(-1, 1);
-	glVertex2f(1, 1);
-	glVertex2f(1, -1);
-	glVertex2f(-1, -1);
-	glEnd();
-	glBegin(GL_POLYGON);
-	glColor3f(1, 1, 0);
-	glVertex2f(1.5, 0);
-	glVertex2f(0, 1.5);
-	glVertex2f(-1.5, 0);
-	glVertex2f(0, -1.5);
-	glEnd();
-}
 void Fase_TheBlitz::desenha()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -337,24 +209,7 @@ void Fase_TheBlitz::desenha()
 	principal->desenha();
 
 	desenhaHUD();
-	if (this->expl.size() > 0) {
-		for (int cc = 0; cc < this->expl.size(); cc++) {
-			if (this->expl[cc]) {
-				if (this->esc[cc]<50 && this->cresce[cc]) {
-					desenha2(this->posX[cc], this->posY[cc], this->esc[cc]);
-					this->esc[cc] += 3;
-				}
-				else if (this->esc[cc] >= 50 && this->cresce[cc]) {
-					this->cresce[cc] = false;
-				}
-				else if (this->esc[cc]>0 && !this->cresce[cc]){
-					desenha2(this->posX[cc], this->posY[cc], this->esc[cc]);
-					this->esc[cc] -= 3;
-				}
-			}
-		}
-				
-	}	
+
 	// Executa os comandos OpenGLhh
 	glutSwapBuffers();
 }
@@ -365,19 +220,31 @@ void Fase_TheBlitz::terminou()
 
 void Fase_TheBlitz::atualiza(int value)
 {
-	if (value % 300 == 99)
+    //Inimigos normais
+    pair<GLint, GLint> size = EfeitoVisual::getInstance().getOrtho2D();
+	if (value % 300 == 99 && value < 7200)
 	{
-		pair<GLint, GLint> size = EfeitoVisual::getInstance().getOrtho2D();
 		Bf109 *aux = new Bf109(rand() % size.first, size.second, (float)100 / 10000, principal, this);
 		aux->inverteY();
 		inimigosAtivos.push_back(aux);
+        EfeitoSonoro::getInstance().playBf109Motor();
 		if (value % 700 == 99)
 		{
 			Me163 *aux2 = new Me163(rand() % size.first, size.second, (float)100 / 10000, principal, this);
 			aux2->inverteY();
 			inimigosAtivos.push_back(aux2);
+            EfeitoSonoro::getInstance().playMe163Motor();
 		}
 	}
+
+    //Chefao
+    //else if (value == 7300)
+    //{
+    //    cout << "chefao";
+    //    Me264 *aux = new Me264(size.first / 2, size.second + 300, (float)300 / 10000, principal, this);
+    //    inimigosAtivos.push_back(aux);
+    //    EfeitoSonoro::getInstance().playMe264Motor();
+    //}
 
 	for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end(); ++i)
 		(*i)->acao();
@@ -389,6 +256,30 @@ void Fase_TheBlitz::atualiza(int value)
 		(*i)->acao();
 
 	principal->acao();
+
+    //Para os sons dos avioes abatidos
+    if (inimigosAtivos.size() == 0)
+    {
+        EfeitoSonoro::getInstance().stopBf109Motor();
+        EfeitoSonoro::getInstance().stopMe163Motor();
+    }
+    else
+    {
+        bool bf109 = false, me163 = false;
+        for (std::list<Personagem*>::iterator i = inimigosAtivos.begin(); i != inimigosAtivos.end(); ++i)
+        {
+            if ((*i)->getNome() == "Bf109")
+                bf109 = true;
+            else if ((*i)->getNome() == "Me163")
+                me163 = true;
+            if (bf109 && me163)
+                break;
+        }
+        if (!me163)
+            EfeitoSonoro::getInstance().stopMe163Motor();
+        if (!bf109)
+            EfeitoSonoro::getInstance().stopBf109Motor();
+    }
 
 	//Bala aliada X Avioes inimigos
 	for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end();)
@@ -407,13 +298,9 @@ void Fase_TheBlitz::atualiza(int value)
 			//Se foi destruido
 			if ((*j)->destruido())
 			{
-				//Explode				
-				cout << "explodiu";
-				chamaExplosao((*j)->getX(), (*j)->getY());					
-				EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/boom.mp3");
+				//Explode
+				EfeitoVisual::getInstance().chamaExplosao((*j)->getX(), (*j)->getY());					
 				
-				if (rand() % 20 == 0)
-					principal->powerUp = 1;
 				Jogo::getInstance().score->incScoreValue((*j)->getScore());
 				j = inimigosAtivos.erase(j);
 			}
@@ -447,12 +334,9 @@ void Fase_TheBlitz::atualiza(int value)
 		{
 			//Explosao
 			//Perde uma vida
-			//Reinicia fase
-			//Jogo::getInstance().score->setScore(0);
 			principal->powerUp = 0;
 			//chamaExplosao(principal->getX(),principal->getY());
 			Jogo::getInstance().numeroVidas--;
-			Jogo::getInstance().proximaFase();
 		}
 	}
 
@@ -470,8 +354,6 @@ void Fase_TheBlitz::atualiza(int value)
 			if (rand() % 20 == 0)
 				principal->powerUp = 1;
 			Jogo::getInstance().score->incScoreValue((*i)->getScore());
-			chamaExplosao((*i)->getX(), (*i)->getY());
-			EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/boom.mp3");
 			i = inimigosAtivos.erase(i);
 		}
 		else
@@ -511,13 +393,7 @@ void Fase_TheBlitz::specialKeyUp(int key, int x, int y)
 {
 	principal->detectaMovimentoUp(key, x, y);
 }
-void Fase_TheBlitz::chamaExplosao(GLfloat posX,GLfloat posY) {
-	this->posX.push_back(posX); // salva posX da explosao
-	this->posY.push_back(posY); //salva Y da explosao
-	this->esc.push_back(1); //começa em 1 e vai até 3
-	this->expl.push_back(true); //se for true ainda explode e incrementa escala,se for false pode apagar
-	this->cresce.push_back(true);
-}
+
 void Fase_TheBlitz::inicializa()
 {
 	EfeitoSonoro::getInstance().initAudios_TheBlitz();

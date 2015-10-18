@@ -36,6 +36,9 @@ class Poligono
         //    Usado para avioes vindo na direcao oposta
         void inverteY();
 
+        //Rotaciona o poligono em teta graus
+        void rotaciona(double teta);
+
         //Getters
         GLfloat getPontoX(int indice);
         GLfloat getPontoY(int indice);

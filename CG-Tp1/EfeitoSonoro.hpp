@@ -83,9 +83,10 @@ public:
 
 	//Sons gerais
 	void playAirRaid();
-	void playVickersShoot();
-	void playMg42Shoot();
+	void playVickersShot();
+	void playMg42Shot();
 	void playBombDrop();
+    void playExplosion();
 	void stopVickers();
 	void stopMg42();
 	void stopBombDrop();

@@ -27,8 +27,8 @@ pair<GLfloat, GLfloat> EfeitoVisual::getOrtho2D()
 
 bool EfeitoVisual::colisao(Solido *a, Solido *b)
 {
-	if ((abs(a->getX() - b->getX()) <= (a->getTamX() + b->getTamX()) / 2) &&
-		(abs(a->getY() - b->getY()) <= (a->getTamY() + b->getTamY()) / 2))
+	if ((abs(a->getX() - b->getX()) <= (a->getTamX() + b->getTamX())) &&
+		(abs(a->getY() - b->getY()) <= (a->getTamY() + b->getTamY())))
 		return true;
 	return false;
 }
@@ -83,6 +83,184 @@ void EfeitoVisual::setFullScreen()
 		glutInitWindowPosition(position.first, position.second);
 	}
 	fullscreen = !fullscreen;
+}
+
+void EfeitoVisual::chamaExplosao(GLfloat posX, GLfloat posY) {
+    EfeitoSonoro::getInstance().playExplosion();
+    this->posX.push_back(posX); // salva posX da explosao
+    this->posY.push_back(posY); //salva Y da explosao
+    this->esc.push_back(1); //começa em 1 e vai até 3
+    this->expl.push_back(true); //se for true ainda explode e incrementa escala,se for false pode apagar
+    this->cresce.push_back(true);
+}
+
+void EfeitoVisual::atualizaExplosao()
+{
+    if (this->expl.size() > 0) {
+        for (int cc = 0; cc < this->expl.size(); cc++) {
+            if (this->expl[cc]) {
+                if (this->esc[cc]<50 && this->cresce[cc]) {
+                    desenhaExplosao(this->posX[cc], this->posY[cc], this->esc[cc]);
+                    this->esc[cc] += 3;
+                }
+                else if (this->esc[cc] >= 50 && this->cresce[cc]) {
+                    this->cresce[cc] = false;
+                }
+                else if (this->esc[cc]>0 && !this->cresce[cc]){
+                    desenhaExplosao(this->posX[cc], this->posY[cc], this->esc[cc]);
+                    this->esc[cc] -= 3;
+                }
+            }
+        }
+
+    }
+}
+
+bool EfeitoVisual::desenhaExplosao(float escalaFinal, float posX, float posY)
+{
+    bool isFinish = false;
+    glPushMatrix();
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(-100, 100, -100, 100);
+    glTranslatef(posX, posY, 0);
+    if (this->escalaAnimacao < escalaFinal) {
+        this->escalaAnimacao += 0.3;
+    }
+    else {
+        this->escalaAnimacao = 0;
+        isFinish = true;
+    }
+    glScalef(this->escalaAnimacao, this->escalaAnimacao, this->escalaAnimacao);
+    /*glScalef(escalaFinal, escalaFinal, escalaFinal);*/
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glBegin(GL_POLYGON);
+    glColor3f(1, 0, 0);
+    glVertex2f(-10, 10);
+    glVertex2f(10, 10);
+    glVertex2f(10, -10);
+    glVertex2f(-10, -10);
+    glEnd();
+    glBegin(GL_POLYGON);
+    glColor3f(1, 0, 0);
+    glVertex2f(15, 0);
+    glVertex2f(0, 15);
+    glVertex2f(-15, 0);
+    glVertex2f(0, -15);
+    glEnd();
+    glBegin(GL_POLYGON);
+    glColor3f(1, 1, 0);
+    glVertex2f(-5, 5);
+    glVertex2f(5, 5);
+    glVertex2f(5, -5);
+    glVertex2f(-5, -5);
+    glEnd();
+    glBegin(GL_POLYGON);
+    glColor3f(1, 1, 0);
+    glVertex2f(7.5, 0);
+    glVertex2f(0, 7.5);
+    glVertex2f(-7.5, 0);
+    glVertex2f(0, -7.5);
+    glEnd();
+    glPopMatrix();
+
+    return isFinish;
+}
+
+// retangulo
+void EfeitoVisual::desenhaRetangulo(float translacaoX, float translY, float escalaX, float escalaY, float rot, float red, float green, float blue) {
+    glPushMatrix();
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(-960, 960, -540, 540);
+    glScalef(escalaX, escalaY, 0);
+    glTranslatef(translacaoX, translY, 0);
+    glRotatef(rot, 1, 0, 0);
+    glColor3f(red, green, blue);
+    // poligono 1
+    glBegin(GL_POLYGON);
+    glVertex2i(-50, -50);
+    glVertex2i(-50, 50);
+    glVertex2i(50, 50);
+    glVertex2i(50, -50);
+    glVertex2i(-50, -50);
+    glEnd();
+    glPopMatrix();
+    glFlush();
+}
+
+// quarteirao
+void EfeitoVisual::desenhaQuarteirao(float translacaoX, float translY, float escalaX, float escalaY, float red, float green, float blue, int altura, int largura, int tX, int tY) {
+    glPushMatrix();
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(-960, 960, -540, 540);
+    glScalef(escalaX, escalaY, 0);
+    glTranslatef(translacaoX + tX, translY + tY, 0);
+    glColor3f(red, green, blue);
+    glBegin(GL_LINES);
+    glVertex2i(-100, altura);
+    glVertex2i(-100, 56);
+    glVertex2i(-100, 56);
+    glVertex2i(-largura, 56);
+    glEnd();
+    glBegin(GL_LINES);
+    glVertex2i(-largura, -56);
+    glVertex2i(-100, -56);
+    glVertex2i(-100, -56);
+    glVertex2i(-100, -altura);
+    glEnd();
+    glBegin(GL_LINES);
+    glVertex2i(100, -altura);
+    glVertex2i(100, -56);
+    glVertex2i(100, -56);
+    glVertex2i(largura, -56);
+    glEnd();
+    glBegin(GL_LINES);
+    glVertex2i(100, altura);
+    glVertex2i(100, 56);
+    glVertex2i(100, 56);
+    glVertex2i(largura, 56);
+    glEnd();
+    glPopMatrix();
+    glFlush();
+}
+
+void EfeitoVisual::desenhaLinhaAsfalto(float translacaoX, float translY, float escalaX, float escalaY, float red, float green, float blue, int altura, int largura, int tX, int tY) {
+    glPushMatrix();
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(-960, 960, -540, 540);
+    glScalef(escalaX, escalaY, 0);
+    glTranslatef(translacaoX + tX, translY + tY, 0);
+    glColor3f(red, green, blue);
+    glBegin(GL_LINES);
+    glVertex2f(-5, altura);
+    glVertex2f(-5, 2.8);
+    glVertex2f(-5, 2.8);
+    glVertex2f(-largura, 2.8);
+    glEnd();
+    glBegin(GL_LINES);
+    glVertex2f(-largura, -2.8);
+    glVertex2f(-5, -2.8);
+    glVertex2f(-5, -2.8);
+    glVertex2f(-5, -altura);
+    glEnd();
+    glBegin(GL_LINES);
+    glVertex2f(5, -altura);
+    glVertex2f(5, -2.8);
+    glVertex2f(5, -2.8);
+    glVertex2f(largura, -2.8);
+    glEnd();
+    glBegin(GL_LINES);
+    glVertex2f(5, altura);
+    glVertex2f(5, 2.8);
+    glVertex2f(5, 2.8);
+    glVertex2f(largura, 2.8);
+    glEnd();
+    glPopMatrix();
+    glFlush();
 }
 
 void EfeitoVisual::desenhaTitulo(int posX, int posY)
@@ -322,62 +500,6 @@ void EfeitoVisual::desenhaTitulo(int posX, int posY)
 	glVertex2i(-170 + xk, yk + 695);
 	glVertex2i(-18 + xk, yk + 552);
 	glEnd();
-}
-
-bool EfeitoVisual::desenhaExplosao(float escalaFinal, float posX, float posY)
-{
-	cout << "Ta entrando";
-	bool isFinish = false;
-	if (this->escalaAnimacao == 0) {
-		EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/boom.mp3");
-	}
-	glPushMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluOrtho2D(-100, 100, -100, 100);
-	glTranslatef(posX, posY, 0);
-	if (this->escalaAnimacao < escalaFinal) {
-		this->escalaAnimacao += 0.3;
-	}
-	else {
-		this->escalaAnimacao = 0;
-		isFinish = true;
-	}
-	glScalef(this->escalaAnimacao, this->escalaAnimacao, this->escalaAnimacao);
-	/*glScalef(escalaFinal, escalaFinal, escalaFinal);*/
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glBegin(GL_POLYGON);
-	glColor3f(1, 0, 0);
-	glVertex2f(-10, 10);
-	glVertex2f(10, 10);
-	glVertex2f(10, -10);
-	glVertex2f(-10, -10);
-	glEnd();
-	glBegin(GL_POLYGON);
-	glColor3f(1, 0, 0);
-	glVertex2f(15, 0);
-	glVertex2f(0, 15);
-	glVertex2f(-15, 0);
-	glVertex2f(0, -15);
-	glEnd();
-	glBegin(GL_POLYGON);
-	glColor3f(1, 1, 0);
-	glVertex2f(-5, 5);
-	glVertex2f(5, 5);
-	glVertex2f(5, -5);
-	glVertex2f(-5, -5);
-	glEnd();
-	glBegin(GL_POLYGON);
-	glColor3f(1, 1, 0);
-	glVertex2f(7.5, 0);
-	glVertex2f(0, 7.5);
-	glVertex2f(-7.5, 0);
-	glVertex2f(0, -7.5);
-	glEnd();
-	glPopMatrix();
-
-	return isFinish;
 }
 
 EfeitoVisual& EfeitoVisual::getInstance()
