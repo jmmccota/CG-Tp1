@@ -199,13 +199,16 @@ void drawBestScoresMenu(vector<Score> bestScores, int decRasterY) {
 	int rasterY = 460;
 	pair<int, int> sizeScreen = EfeitoVisual::getInstance().sizeScreen();
 	glColor3f(0.93, 0.57, 0.13);
-
+	string bestName;
 	for (int i = 0; i < bestScores.size(); i++) {
 		glRasterPos2f(rasterX - 50, rasterY);
 		string rank = std::to_string(i + 1) + " -  ";
 		FuncoesAuxiliares::writeWord_BITMAP(rank, FONT_DEFAULT);
 
 		string name = bestScores[i].getPlayer();
+		if (i==0) {
+			bestName=name;
+		}
 		glRasterPos2f(rasterX, rasterY);
 		FuncoesAuxiliares::writeWord_BITMAP(name, FONT_DEFAULT);
 
@@ -228,6 +231,13 @@ void drawBestScoresMenu(vector<Score> bestScores, int decRasterY) {
 
 		rasterY -= decRasterY;
 	}
+	glColor3f(0.93, 0.57, 0.13);
+	int x=1470, x1=1520, y=480, y1=280;
+	EfeitoVisual::getInstance().desenhaQuadrado(x,y,x1,y1);
+	EfeitoVisual::getInstance().desenhaQuadrado(x-30, y, x1, y-50);
+	EfeitoVisual::getInstance().desenhaQuadrado(x - 50, y1+20, x1+50, y1-20);
+	glRasterPos2f(x-40, y1-60);
+	FuncoesAuxiliares::writeWord_BITMAP(bestName, FONT_DEFAULT);
 }
 
 //Desenha a Opção do Menu 
