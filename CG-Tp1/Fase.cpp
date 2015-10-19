@@ -10,9 +10,26 @@ Fase::~Fase()
 
 }
 
+void Fase::desenhaExplosoes()
+{
+    for (std::list<Explosao*>::iterator i = explosoesAtivas.begin(); i != explosoesAtivas.end();)
+    {
+        if ((*i)->value < 60)
+        {
+            EfeitoVisual::getInstance().desenhaExplosao(*(*i));
+            (*i)->value++;
+            i++;
+        }
+        else
+        {
+            i = explosoesAtivas.erase(i);
+        }
+    }
+}
+
 void Fase::desenhaHUD() {
 	//HP
-	int hp = principal->getHP();
+    int hp = 1000 * principal->getHP() / VIDA_SPITFIRE;
 	glBegin(GL_LINE_LOOP);
 	glColor3f(1, 1, 1);
 	glVertex2i(20, 1000);

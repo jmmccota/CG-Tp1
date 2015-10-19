@@ -30,6 +30,7 @@ class Spitfire : public Personagem
         void acao();
         void atira(int tipo);
 		int danoColisao();
+        void morreu();
 		string getNome();
 		int getScore();
 		GLfloat getX();
@@ -93,7 +94,8 @@ private:
     int estadoTiro = 0;
     int estrategia;
     int ladoBomba = -1;
-    int tirosSegundo = 20;
+    int tirosSegundo = 3;
+    int contadorEst = -1;
 
 public:
     Me264(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f);

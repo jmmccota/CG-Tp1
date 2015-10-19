@@ -1,6 +1,7 @@
 #ifndef EFEITOVISUAL_H
 #define EFEITOVISUAL_H
 
+class Explosao;
 class EfeitoVisual;
 
 #ifdef _WIN32
@@ -27,6 +28,21 @@ class EfeitoVisual;
 		(deteccao de colisao, explosoes, ...)
 */
 
+class Explosao
+{
+    public:
+        GLfloat x;
+        GLfloat y;
+        int value;
+        GLfloat escala;
+        Explosao(GLfloat x, GLfloat y, GLfloat escala)
+        {
+            this->x = x;
+            this->y = y;
+            this->value = 1;
+            this->escala = escala;
+        }
+} ;
 
 class EfeitoVisual
 {
@@ -59,9 +75,7 @@ class EfeitoVisual
 		pair<float, float> getOrtho2D();
 
         //Coisas de explosao
-        void chamaExplosao(GLfloat posX, GLfloat posY);
-        void atualizaExplosao();
-        bool desenhaExplosao(float escalaFinal, float posX, float posY);
+        void desenhaExplosao(Explosao e);
 
         //Desenhos de cenario TheBlitz
         void desenhaRetangulo(float translacaoX, float translY, float escalaX, float escalaY, float rot, float red, float green, float blue);

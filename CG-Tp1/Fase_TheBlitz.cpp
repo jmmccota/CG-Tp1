@@ -206,11 +206,11 @@ void Fase_TheBlitz::desenha()
 	for (std::list<Personagem*>::iterator i = inimigosAtivos.begin(); i != inimigosAtivos.end(); ++i)
 		(*i)->desenha();
 
-	principal->desenha();
-	
+    principal->desenha();
+
+    desenhaExplosoes();
 
 	desenhaHUD();
-	EfeitoVisual::getInstance().atualizaExplosao();
 
 	// Executa os comandos OpenGLhh
 	glutSwapBuffers();
@@ -222,8 +222,8 @@ void Fase_TheBlitz::terminou()
 
 void Fase_TheBlitz::atualiza(int value)
 {
-    //Inimigos normais
-    pair<GLint, GLint> size = EfeitoVisual::getInstance().getOrtho2D();
+       pair<GLint, GLint> size = EfeitoVisual::getInstance().getOrtho2D();
+ //   //Inimigos normais
 	if (value % 300 == 99 && value < 7200)
 	{
 		Bf109 *aux = new Bf109(rand() % size.first, size.second, (float)100 / 10000, principal, this);
@@ -240,22 +240,40 @@ void Fase_TheBlitz::atualiza(int value)
 	}
 
     //Chefao
-    //else if (value == 7300)
+    ///*else*/ if (value == /*7300*/0)
     //{
     //    cout << "chefao";
-    //    Me264 *aux = new Me264(size.first / 2, size.second + 300, (float)300 / 10000, principal, this);
+    //    Me264 *aux = new Me264(size.first / 2, size.second + 299, (float) 600 / 10000, principal, this);
     //    inimigosAtivos.push_back(aux);
     //    EfeitoSonoro::getInstance().playMe264Motor();
     //}
-		
-	for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end(); ++i)
-		(*i)->acao();
 
-	for (std::list<Projetil*>::iterator i = projeteisInimigos.begin(); i != projeteisInimigos.end(); ++i)
-		(*i)->acao();
+    for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end();)
+    {
+        (*i)->acao();
+        if ((*i)->getX() < 0 || (*i)->getX() > size.first || (*i)->getY() < 0 || (*i)->getY() > size.second)
+            i = projeteisAmigos.erase(i);
+        else
+            i++;
+    }
 
-	for (std::list<Personagem*>::iterator i = inimigosAtivos.begin(); i != inimigosAtivos.end(); ++i)
-		(*i)->acao();
+    for (std::list<Projetil*>::iterator i = projeteisInimigos.begin(); i != projeteisInimigos.end();)
+    {
+        (*i)->acao();
+        if ((*i)->getX() < 0 || (*i)->getX() > size.first || (*i)->getY() < 0 || (*i)->getY() > size.second)
+            i = projeteisInimigos.erase(i);
+        else
+            i++;
+    }
+
+    for (std::list<Personagem*>::iterator i = inimigosAtivos.begin(); i != inimigosAtivos.end();)
+    {
+        (*i)->acao();
+        if ((*i)->getX() < -300 || (*i)->getX() > size.first + 300 || (*i)->getY() < -300 || (*i)->getY() > size.second + 300)
+            i = inimigosAtivos.erase(i);
+        else
+            i++;
+    }
 
 	principal->acao();
 
@@ -295,27 +313,24 @@ void Fase_TheBlitz::atualiza(int value)
 				(*j)->alvejado((*i)->getDano());
 				i = projeteisAmigos.erase(i);
 				destruiu = true;
-				break;
 			}
 			//Se foi destruido
 			if ((*j)->destruido())
 			{
-				//Explode
-				EfeitoVisual::getInstance().chamaExplosao((*j)->getX(), (*j)->getY());	
-
+                explosoesAtivas.push_back(new Explosao((*j)->getX(), (*j)->getY(), 1));
 				Jogo::getInstance().score->incScoreValue((*j)->getScore());
 				j = inimigosAtivos.erase(j);
 			}
 			//Se ta de boa ainda
 			else
-			{
 				j++;
-			}
+
+            if (destruiu)
+                break;
 		}
 		if (!destruiu)
-		{
 			i++;
-		}
+
 	}
 
 
@@ -328,17 +343,15 @@ void Fase_TheBlitz::atualiza(int value)
 			i = projeteisInimigos.erase(i);
 		}
 		else
-		{
 			++i;
-		}
 
 		if (principal->destruido())
-		{
-			//Explosao
-			//Perde uma vida
-			principal->powerUp = 0;
-			//chamaExplosao(principal->getX(),principal->getY());
-			Jogo::getInstance().numeroVidas--;
+        {
+            explosoesAtivas.push_back(new Explosao(principal->getX(), principal->getY(), 1));
+            principal->powerUp = 0;
+            Jogo::getInstance().numeroVidas--;
+            principal->morreu();
+
 		}
 	}
 
@@ -349,6 +362,8 @@ void Fase_TheBlitz::atualiza(int value)
 		{
 			principal->alvejado((*i)->danoColisao());
 			(*i)->alvejado(principal->danoColisao());
+            if ((*i)->getNome() == "Me163")
+                (*i)->alvejado(1000);
 		}
 
 		if ((*i)->destruido())
@@ -356,8 +371,8 @@ void Fase_TheBlitz::atualiza(int value)
 			if (rand() % 20 == 0)
 				principal->powerUp = 1;
 			Jogo::getInstance().score->incScoreValue((*i)->getScore());
-			EfeitoVisual::getInstance().chamaExplosao((*i)->getX(), (*i)->getY());
-			EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/boom.mp3");
+            explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 3));
+            EfeitoSonoro::getInstance().playExplosion();
 			i = inimigosAtivos.erase(i);
 		}
 		else
@@ -366,13 +381,15 @@ void Fase_TheBlitz::atualiza(int value)
 		}
 
 		if (principal->destruido())
-		{
-			principal->powerUp = 0;
-			//Explosao
-			
-			//Perde uma vida
+        {
+            explosoesAtivas.push_back(new Explosao(principal->getX(), principal->getY(), 1));
+            principal->powerUp = 0;
+            Jogo::getInstance().numeroVidas--;
+            principal->morreu();
 		}
 	}
+
+//    EfeitoVisual::getInstance().atualizaExplosao();
 
 }
 

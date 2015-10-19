@@ -99,7 +99,7 @@ void Animacao::desenha()
 		glPopMatrix();
 	}
 	else if (explosao) {
-		explosao = !EfeitoVisual::getInstance().desenhaExplosao(3, translacaoX2, 0);
+        //EfeitoVisual::getInstance().chamaExplosao(translacaoX2, 0);
 	}
 	
 	glutSwapBuffers();
