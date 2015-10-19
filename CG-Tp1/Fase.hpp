@@ -44,7 +44,11 @@ class Fase
 
 	public:
         Fase();
-
+		void desenhaGameOver();
+		void desenhaScore();
+		bool gameOver = false;
+		bool melhorScore = true;
+		bool fimDeJogo = true;
 		//Limpa memoria alocada dinamicamente
 		virtual ~Fase() = 0;
 

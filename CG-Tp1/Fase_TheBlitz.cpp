@@ -211,7 +211,9 @@ void Fase_TheBlitz::desenha()
     desenhaExplosoes();
 
 	desenhaHUD();
-
+	if (gameOver || fimDeJogo) {
+		desenhaGameOver();
+	}
 	// Executa os comandos OpenGLhh
 	glutSwapBuffers();
 }

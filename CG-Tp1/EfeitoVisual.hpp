@@ -103,6 +103,8 @@ class EfeitoVisual
         void static resize(GLsizei w, GLsizei h);
 
 		void desenhaTitulo(int posX,int posY);
+		void desenhaQuadrado(int x, int y, int x1, int y1);
+		void desenhaScore(string nome);
 };
 #endif
  

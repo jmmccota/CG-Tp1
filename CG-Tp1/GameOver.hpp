@@ -12,7 +12,7 @@ public:
 	bool melhorScore = true;
 	int contador = 0;
 	void definePersonagens();
-
+	string nome="";
 	void desenhaBackground();
 
 	void writeScore(int score);

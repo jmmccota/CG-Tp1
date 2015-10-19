@@ -15,6 +15,8 @@ void GameOver::definePersonagens()
 
 void GameOver::desenhaBackground()
 {
+	glClearColor(0, 0, 0, 1);
+	glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void GameOver::writeScore(int score)
@@ -23,9 +25,14 @@ void GameOver::writeScore(int score)
 
 void GameOver::desenha()
 {
+	glClear(GL_COLOR_BUFFER_BIT);
+	glClearColor(0.05, 0.05, 0.05, 1.0);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 
-	glClearColor(0, 0, 0, 1);
-	glClear(GL_COLOR_BUFFER_BIT);	
+	desenhaBackground();
+
+	EfeitoVisual::getInstance().ortho2D();	
 		//se gameOver true escreve grande na tela game over se fudeu etc
 	desenhaGameOver();
 		//se gameOver false escreve you win voce é fodão	
@@ -45,48 +52,167 @@ void GameOver::desenha()
 }
 
 void GameOver::terminou()
-{
-	TwTerminate();
+{	
 }
 
 void GameOver::atualiza(int value)
 {
+	desenha();
 }
 
 void GameOver::mouse(int button, int state, int x, int y)
 {	
 		// send event to AntTweakBar
-		if (TwEventMouseMotionGLUT(x, y))
-			glutPostRedisplay(); // request redraw if event has been handled
+		
 	
 }
 
 void GameOver::keyDown(unsigned char key, int x, int y)
 {
-	if (TwEventKeyboardGLUT(key, x, y))
-		glutPostRedisplay(); // request redraw if event has been handled
+	
+		
 }
 
 void GameOver::keyUp(unsigned char key, int x, int y)
 {
-	if (TwEventKeyboardGLUT(key, x, y))
-		glutPostRedisplay(); // request redraw if event has been handled
+	string aux;
+	switch (key) {
+	case 13:
+		//enter salvar
+
+	case 8:
+
+		if (nome.length() > 0) {
+			for (int i = 0; i < nome.length() - 1; i++) {
+				aux += nome[i];
+			}
+			nome = aux;
+		}
+		break;
+	}
+	if (nome.length()<20) {
+		switch (key) {
+		case 'a': //
+		case 'A':
+			nome += "A";
+			break;
+		case 'b': //
+		case 'B':
+			nome += "B";
+			break;
+		case 'c': //
+		case 'C':
+			nome += "C";
+			break;
+		case 'd': //
+		case 'D':
+			nome += "D";
+			break;
+		case 'e': //
+		case 'E':
+			nome += "E";
+			break;
+		case 'f': //
+		case 'F':
+			nome += "F";
+			break;
+		case 'g': //
+		case 'G':
+			nome += "G";
+			break;
+		case 'h': //
+		case 'H':
+			nome += "H";
+			break;
+		case 'i': //
+		case 'I':
+			nome += "I";
+			break;
+		case 'j': //
+		case 'J':
+			nome += "J";
+			break;
+		case 'k': //
+		case 'K':
+			nome += "K";
+			break;
+		case 'l': //
+		case 'L':
+			nome += "L";
+			break;
+		case 'M': //
+		case 'm':
+			nome += "M";
+			break;
+		case 'n': //
+		case 'N':
+			nome += "N";
+			break;
+		case 'o': //
+		case 'O':
+			nome += "O";
+			break;
+		case 'p': //
+		case 'P':
+			nome += "P";
+			break;
+		case 'q': //
+		case 'Q':
+			nome += "Q";
+			break;
+		case 'r': //
+		case 'R':
+			nome += "R";
+			break;
+		case 's': //
+		case 'S':
+			nome += "S";
+			break;
+		case 't': //
+		case 'T':
+			nome += "T";
+			break;
+		case 'u': //
+		case 'U':
+			nome += "U";
+			break;
+		case 'V': //
+		case 'v':
+			nome += "V";
+			break;
+		case 'x': //
+		case 'X':
+			nome += "X";
+			break;
+		case 'y': //
+		case 'Y':
+			nome += "Y";
+			break;
+		case 'w': //
+		case 'W':
+			nome += "W";
+			break;
+		case 'z': //
+		case 'Z':
+			nome += "Z";
+			break;
+		}
+	}
 }
 
 void GameOver::specialKeyDown(int key, int x, int y)
 {
-	if (TwEventSpecialGLUT(key, x, y))
-		glutPostRedisplay();
+	
 }
 
 void GameOver::specialKeyUp(int key, int x, int y)
 {
-	if (TwEventSpecialGLUT(key, x, y))
-		glutPostRedisplay();
+	
+
 }
 void GameOver::desenhaGameOver() {
 		
-	int x=500, y;
+	int x=500, y;	
 	if (melhorScore) {
 		y = 1000;
 	}
@@ -159,25 +285,28 @@ void GameOver::desenhaQuadrado(int x,int y,int x1,int y1) {
 }
 void GameOver::desenhaScore() {
 	glBegin(GL_LINE_LOOP);
-	glColor3f(1,0,0);
+	glColor3f(1,1,1);
 	glVertex2i(650,700);
 	glVertex2i(1240, 700);
 	glVertex2i(1240, 450);
 	glVertex2i(650, 450);
-	glEnd();
+	glEnd();	
 	int score = 1990;
 	string recorde = "NOVO RECORDE! SCORE: ";
 	recorde += score;
 	glRasterPos2f(660, 650);
 	FuncoesAuxiliares::writeWord_BITMAP(recorde,GLUT_BITMAP_TIMES_ROMAN_24);
 	glRasterPos2f(660, 565);
-	FuncoesAuxiliares::writeWord_BITMAP("Nome: ", GLUT_BITMAP_TIMES_ROMAN_24);
+	FuncoesAuxiliares::writeWord_BITMAP("Nome: ", GLUT_BITMAP_TIMES_ROMAN_24);	
 	glBegin(GL_LINE_LOOP);
 	glVertex2i(770, 600);
 	glVertex2i(1200, 600);
 	glVertex2i(1200, 550);
 	glVertex2i(770, 550);
 	glEnd();
+	glRasterPos2f(780, 565);	
+	cout << nome.length();
+	FuncoesAuxiliares::writeWord_BITMAP(nome, GLUT_BITMAP_HELVETICA_18);
 	glBegin(GL_LINE_LOOP);
 	glVertex2i(1080, 530);
 	glVertex2i(1200, 530);
@@ -189,5 +318,5 @@ void GameOver::desenhaScore() {
 }
 void GameOver::inicializa()
 {
-	
+	desenha();
 }
