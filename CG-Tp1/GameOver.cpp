@@ -91,8 +91,10 @@ void GameOver::keyUp(unsigned char key, int x, int y)
 	switch (key) {
 	case 13:
 		//enter salvar
-		Jogo::getInstance().score->saveScore(nome, Jogo::getInstance().score->getScoreValue());
-		Jogo::getInstance().setProxFase(1);		
+		if (Jogo::getInstance().score->getScoreValue()>0) {
+			Jogo::getInstance().score->saveScore(nome, Jogo::getInstance().score->getScoreValue());			
+		}
+		Jogo::getInstance().setProxFase(1);
 		Jogo::getInstance().proximaFase();
 	case 8:
 
