@@ -274,7 +274,7 @@ int Me163::getScore()
 
 
 Me264::Me264(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f)
-	: Personagem(pX, pY, 50 * esc, esc, f)
+	: Personagem(pX, pY, 5 * esc, esc, f)
 {
 	this->carrega("modelos/me264.dat");
     alvo = a;
@@ -288,11 +288,15 @@ Me264::~Me264()
 
 void Me264::acao()
 {
-    if (posY + tamY < EfeitoVisual::getInstance().getOrtho2D().second)
+    if (posY + tamY > EfeitoVisual::getInstance().getOrtho2D().second)
         posY -= velocidade;
 
     if (!estadoTiro)
-        estrategia = rand() % 3;
+        contadorEst = ++contadorEst % 10;
+    if (!contadorEst)
+        estrategia = rand() % 5;
+    if (estrategia > 3)
+        estrategia = 2;
 
     atira(estrategia);
 }
@@ -300,24 +304,33 @@ void Me264::acao()
 void Me264::atira(int tipo)
 {
     //Solta bomba
-    if (tipo == 1 || tipo == 3)
+    if (tipo == 1)
     {
         estadoTiro = ++estadoTiro % (int)(1000 / (tirosSegundo * TEMPOQUADRO));
         if (!estadoTiro)
         {
             EfeitoSonoro::getInstance().playBombDrop();
-            fase->novoProjetilInimigo(new Bomba(posX + ladoBomba * escala * 0.05, posY, 0.04 * escala));
+            fase->novoProjetilInimigo(new Bomba(posX + ladoBomba * escala * 300, posY, - 0.05 * escala));
             ladoBomba = -ladoBomba;
         }
     }
     //Atira
-    if (tipo == 2 || tipo == 3)
+    else if (tipo == 2)
     {
         estadoTiro = ++estadoTiro % (int)(1000 / (tirosSegundo * TEMPOQUADRO));
         if (!estadoTiro)
         {
             EfeitoSonoro::getInstance().playMg42Shot();
-            fase->novoProjetilInimigo(new TiroEspecialInimigo(posX, posY, alvo->getX(), alvo->getY(), 0.04 * escala));
+            fase->novoProjetilInimigo(new TiroEspecialInimigo(posX, posY, alvo->getX(), alvo->getY(), 0.02 * escala));
+        }
+    }
+    else if (tipo == 3)
+    {
+        estadoTiro = ++estadoTiro % (int)(1000 / (tirosSegundo * TEMPOQUADRO));
+        if (!estadoTiro)
+        {
+            EfeitoSonoro::getInstance().playMg42Shot();
+            fase->novoProjetilInimigo(new TiroEspecialInimigo(posX, posY, alvo->getX(), alvo->getY(), 0.02 * escala));
         }
     }
 }

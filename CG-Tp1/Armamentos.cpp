@@ -50,15 +50,22 @@ Bomba::~Bomba()
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-
+#include <iostream>
 
 TiroEspecialInimigo::TiroEspecialInimigo(GLfloat posX, GLfloat posY, GLfloat posXAlvo, GLfloat posYAlvo, float escala)
-    : Projetil(posX, posY, 30000 * escala, escala)
+    : Projetil(posX, posY, 10000 * escala, escala)
 {
-    double tan = (posY - posYAlvo) / (posX - posXAlvo);
+    this->carrega("modelos/tirosimples.dat");
+    double tan = (posYAlvo - posY) / (posXAlvo - posX);
     double teta = atan(tan);
+    if (posXAlvo < posX)
+        teta = teta + 3.14159;
+    velX = velocidade * cos(teta);
+    velY = velocidade * sin(teta);
+    teta = 1.57079 - teta;
     for (int i = 0; i < poligonos.size(); i++)
         poligonos[i].rotaciona(teta);
+    dano = 10;
 }
 
 TiroEspecialInimigo::~TiroEspecialInimigo()
@@ -68,5 +75,6 @@ TiroEspecialInimigo::~TiroEspecialInimigo()
 
 void TiroEspecialInimigo::acao()
 {
-
+    posX += velX;
+    posY += velY;
 }
