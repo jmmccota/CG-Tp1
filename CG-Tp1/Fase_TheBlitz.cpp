@@ -317,9 +317,7 @@ void Fase_TheBlitz::atualiza(int value)
 			//Se foi destruido
 			if ((*j)->destruido())
 			{
-				//Explode
                 explosoesAtivas.push_back(new Explosao((*j)->getX(), (*j)->getY(), 1));
-				
 				Jogo::getInstance().score->incScoreValue((*j)->getScore());
 				j = inimigosAtivos.erase(j);
 			}
@@ -370,6 +368,8 @@ void Fase_TheBlitz::atualiza(int value)
 			if (rand() % 20 == 0)
 				principal->powerUp = 1;
 			Jogo::getInstance().score->incScoreValue((*i)->getScore());
+            explosoesAtivas.push_back(new Explosao(((*i)->getX + principal->getX) / 2, ((*i)->getY + principal->getY) / 2, 3));
+            EfeitoSonoro::getInstance().playExplosion();
 			i = inimigosAtivos.erase(i);
 		}
 		else
@@ -381,6 +381,7 @@ void Fase_TheBlitz::atualiza(int value)
 		{
 			principal->powerUp = 0;
 			//Explosao
+			
 			//Perde uma vida
 		}
 	}
