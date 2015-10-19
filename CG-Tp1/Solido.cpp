@@ -14,6 +14,8 @@ Solido::~Solido()
 
 void Solido::carrega(std::string arquivo)
 {
+	poligonos.clear();
+
     //utilizado para descobrir o tamanho do solido
     GLfloat tamY1 = 0, tamY2 = 0, tamX = 0;
 

@@ -37,7 +37,6 @@ private:
 
 	int proxFase;
 	std::vector<Fase*> fases;
-	bool pausado = false;
 
 	Jogo();
 	Jogo(Jogo const&);
@@ -49,6 +48,7 @@ public:
 	static Jogo& getInstance();
 
 	//Armazena o valor do frame
+	bool pausado = false;
 	int estado = 0;
 	int controlaScore = 10000;
 	void setControlaScore();
@@ -60,7 +60,8 @@ public:
 	//Armazena as vidas do jogador
 	Spitfire *vidas[5];
 	int numeroVidas = 5;
-
+	bool gameOver = false;
+	bool bestScore = false;
 	//Callbacks OpenGL
 	static void mouse(int button, int state, int x, int y);
 	static void keyDown(unsigned char key, int x, int y);

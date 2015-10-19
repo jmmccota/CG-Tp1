@@ -87,16 +87,36 @@ void EfeitoVisual::setFullScreen()
 
 void EfeitoVisual::desenhaExplosao(Explosao e)
 {
-    glPushMatrix();
-    glLoadIdentity();
-    //glTranslatef(e.x, e.y, 0);
-    gluOrtho2D(-100, 100, -100, 100);
-    GLfloat value;
-    if (e.value < 30)
-        value = e.value;
-    else
-        value = 60 - e.value;
-    GLfloat escala = e.escala * value;
+	glPushMatrix();
+	glLoadIdentity();
+	gluOrtho2D(-100, 100, -100, 100);
+	GLfloat transladaX = 0;
+	GLfloat transladaY = 0;
+	//ajustando as coordenadas de 1920,1080 para -100, 100
+	if (e.x < 960) {
+		transladaX = 960 - e.x;
+		transladaX = -(100 * transladaX) / 960;
+	}
+	else {
+		transladaX = e.x - 960;
+		transladaX = (100 * transladaX) / 960;
+	}
+	if (e.y < 540) {
+		transladaY = 540 - e.y;
+		transladaY = -(100 * transladaY) / 540;
+	}
+	else {
+		transladaY = e.y - 540;
+		transladaY = (100 * transladaY) / 540;
+	}
+	glTranslatef(transladaX, transladaY, 0);
+	GLfloat value;
+	if (e.value < 10)
+		value = e.value;
+	else
+		value = 20 - e.value;
+	GLfloat escala = e.escala * value;
+
     glScalef(escala, escala, 0);
     /*glScalef(escalaFinal, escalaFinal, escalaFinal);*/
     glMatrixMode(GL_PROJECTION);
@@ -225,7 +245,56 @@ void EfeitoVisual::desenhaLinhaAsfalto(float translacaoX, float translY, float e
     glPopMatrix();
     glFlush();
 }
+void EfeitoVisual::desenhaQuadrado(int x, int y, int x1, int y1) {	
+	glColor3f(1,0.27,0);
+	glBegin(GL_QUADS);
+	glVertex2i(x, y);
+	glVertex2i(x1, y);
+	glVertex2i(x1, y1);
+	glVertex2i(x, y1);
+	glEnd();
+	glBegin(GL_LINE_LOOP);
+	glColor3f(1, 1, 1);
+	glVertex2i(x+1, y+1);
+	glVertex2i(x1+1, y+1);
+	glVertex2i(x1+1, y1+1);
+	glVertex2i(x+1, y1+1);
+	glEnd();
+}
 
+void EfeitoVisual::desenhaScore(string nome) {
+	glBegin(GL_LINE_LOOP);
+	glColor3f(1, 1, 1);
+	glVertex2i(650, 700);
+	glVertex2i(1240, 700);
+	glVertex2i(1240, 450);
+	glVertex2i(650, 450);
+	glEnd();
+	int score = 1990;
+	string recorde = "NOVO RECORDE! SCORE: ";
+	recorde += score;
+	glRasterPos2f(660, 650);
+	FuncoesAuxiliares::writeWord_BITMAP(recorde, GLUT_BITMAP_TIMES_ROMAN_24);
+	glRasterPos2f(660, 565);
+	FuncoesAuxiliares::writeWord_BITMAP("Nome: ", GLUT_BITMAP_TIMES_ROMAN_24);
+	glBegin(GL_LINE_LOOP);
+	glVertex2i(770, 600);
+	glVertex2i(1200, 600);
+	glVertex2i(1200, 550);
+	glVertex2i(770, 550);
+	glEnd();
+	glRasterPos2f(780, 565);
+	cout << nome.length();
+	FuncoesAuxiliares::writeWord_BITMAP(nome, GLUT_BITMAP_HELVETICA_18);
+	glBegin(GL_LINE_LOOP);
+	glVertex2i(1080, 530);
+	glVertex2i(1200, 530);
+	glVertex2i(1200, 480);
+	glVertex2i(1080, 480);
+	glEnd();
+	glRasterPos2f(1095, 490);
+	FuncoesAuxiliares::writeWord_BITMAP("Salvar", GLUT_BITMAP_TIMES_ROMAN_24);
+}
 void EfeitoVisual::desenhaTitulo(int posX, int posY)
 {
 
