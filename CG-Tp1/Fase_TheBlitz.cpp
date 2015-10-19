@@ -211,7 +211,9 @@ void Fase_TheBlitz::desenha()
     desenhaExplosoes();
 
 	desenhaHUD();
-
+	/*if (gameOver || fimDeJogo) {
+		desenhaGameOver();
+	}*/
 	// Executa os comandos OpenGLhh
 	glutSwapBuffers();
 }
@@ -354,7 +356,12 @@ void Fase_TheBlitz::atualiza(int value)
             explosoesAtivas.push_back(new Explosao(principal->getX(), principal->getY(), 1));
             principal->powerUp = 0;
             Jogo::getInstance().numeroVidas--;
+			if (Jogo::getInstance().numeroVidas==0) {				
+				Jogo::getInstance().setProxFase(5);				
+				Jogo::getInstance().proximaFase();
+			}
             principal->morreu();
+
 		}
 	}
 
@@ -393,6 +400,10 @@ void Fase_TheBlitz::atualiza(int value)
             explosoesAtivas.push_back(new Explosao(principal->getX(), principal->getY(), 1));
             principal->powerUp = 0;
             Jogo::getInstance().numeroVidas--;
+			if (Jogo::getInstance().numeroVidas == 0) {
+				Jogo::getInstance().setProxFase(5);				
+				Jogo::getInstance().proximaFase();
+			}
             principal->morreu();
 		}
 	}
@@ -407,6 +418,13 @@ void Fase_TheBlitz::mouse(int button, int state, int x, int y)
 
 void Fase_TheBlitz::keyDown(unsigned char key, int x, int y)
 {
+	switch (key) {
+	case 'F':
+	case 'f':
+		EfeitoVisual::getInstance().setFullScreen();
+		break;
+	}
+	
 }
 
 void Fase_TheBlitz::keyUp(unsigned char key, int x, int y)
