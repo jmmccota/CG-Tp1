@@ -333,14 +333,14 @@ int Me262::getScore()
 
 
 Me264::Me264(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f)
-	: Personagem(pX, pY, 5 * esc, esc, f)
+	: Personagem(pX, pY, 50 * esc, esc, f)
 {
 	this->carrega("modelos/me264.dat");
     alvo = a;
 	hp = 1000;
 	municao[1] = 9999;
 	municao[2] = 150;
-    velocidadeBala = 50 * escala;
+    velocidadeBala = 60 * escala;
 }
 Me264::~Me264()
 {
@@ -348,7 +348,7 @@ Me264::~Me264()
 
 void Me264::acao()
 {
-    if (posY + tamY > EfeitoVisual::getInstance().getOrtho2D().second)
+    if (posY + tamY - 100 > EfeitoVisual::getInstance().getOrtho2D().second)
     {
         posY -= velocidade;
         return;
@@ -393,7 +393,7 @@ void Me264::atira(int tipo)
         if (!estadoTiro)
         {
             EfeitoSonoro::getInstance().playMg42Shot();
-            fase->novoProjetilInimigo(new TiroEspecialInimigo(posX, posY, alvo->getX(), alvo->getY(), 0.03 * escala, 0.8 * velocidadeBala));
+            fase->novoProjetilInimigo(new TiroEspecialInimigo(posX, posY, alvo->getX(), alvo->getY(), 0.03 * escala, 0.6 * velocidadeBala));
         }
     }
 }

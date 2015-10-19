@@ -37,7 +37,6 @@ private:
 
 	int proxFase;
 	std::vector<Fase*> fases;
-	bool pausado = false;
 
 	Jogo();
 	Jogo(Jogo const&);
@@ -49,6 +48,7 @@ public:
 	static Jogo& getInstance();
 
 	//Armazena o valor do frame
+	bool pausado = false;
 	int estado = 0;
 	int controlaScore = 10000;
 	void setControlaScore();

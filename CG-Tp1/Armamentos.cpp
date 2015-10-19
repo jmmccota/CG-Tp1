@@ -62,9 +62,9 @@ TiroEspecialInimigo::TiroEspecialInimigo(GLfloat posX, GLfloat posY, GLfloat pos
         teta = teta + 3.14159;
     velX = velocidade * cos(teta);
     velY = velocidade * sin(teta);
-    teta = 1.57079 - teta;
+	teta = -(1.57079 + teta * 2);
     for (int i = 0; i < poligonos.size(); i++)
-        poligonos[i].rotaciona(teta);
+        poligonos[i].rotaciona(-teta);
     dano = 10;
 }
 

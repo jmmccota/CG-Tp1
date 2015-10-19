@@ -14,7 +14,7 @@ void Fase::desenhaExplosoes()
 {
     for (std::list<Explosao*>::iterator i = explosoesAtivas.begin(); i != explosoesAtivas.end();)
     {
-        if ((*i)->value < 60)
+        if ((*i)->value < 20)
         {
             EfeitoVisual::getInstance().desenhaExplosao(*(*i));
             (*i)->value++;

@@ -87,16 +87,36 @@ void EfeitoVisual::setFullScreen()
 
 void EfeitoVisual::desenhaExplosao(Explosao e)
 {
-    glPushMatrix();
-    glLoadIdentity();
-    //glTranslatef(e.x, e.y, 0);
-    gluOrtho2D(-100, 100, -100, 100);
-    GLfloat value;
-    if (e.value < 30)
-        value = e.value;
-    else
-        value = 60 - e.value;
-    GLfloat escala = e.escala * value;
+	glPushMatrix();
+	glLoadIdentity();
+	gluOrtho2D(-100, 100, -100, 100);
+	GLfloat transladaX = 0;
+	GLfloat transladaY = 0;
+	//ajustando as coordenadas de 1920,1080 para -100, 100
+	if (e.x < 960) {
+		transladaX = 960 - e.x;
+		transladaX = -(100 * transladaX) / 960;
+	}
+	else {
+		transladaX = e.x - 960;
+		transladaX = (100 * transladaX) / 960;
+	}
+	if (e.y < 540) {
+		transladaY = 540 - e.y;
+		transladaY = -(100 * transladaY) / 540;
+	}
+	else {
+		transladaY = e.y - 540;
+		transladaY = (100 * transladaY) / 540;
+	}
+	glTranslatef(transladaX, transladaY, 0);
+	GLfloat value;
+	if (e.value < 10)
+		value = e.value;
+	else
+		value = 20 - e.value;
+	GLfloat escala = e.escala * value;
+
     glScalef(escala, escala, 0);
     /*glScalef(escalaFinal, escalaFinal, escalaFinal);*/
     glMatrixMode(GL_PROJECTION);

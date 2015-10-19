@@ -379,7 +379,7 @@ void Fase_TheBlitz::atualiza(int value)
 			if (rand() % 20 == 0)
 				principal->powerUp = 1;
 			Jogo::getInstance().score->incScoreValue((*i)->getScore());
-            explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 3));
+            explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 2));
             EfeitoSonoro::getInstance().playExplosion();
 			i = inimigosAtivos.erase(i);
 		}
@@ -411,7 +411,19 @@ void Fase_TheBlitz::keyDown(unsigned char key, int x, int y)
 
 void Fase_TheBlitz::keyUp(unsigned char key, int x, int y)
 {
-	principal->detectaTiro(key, x, y);
+	switch (key)
+	{
+		case 'F':
+		case 'f':
+			EfeitoVisual::getInstance().setFullScreen();
+			break;
+		case 'p':
+		case 'P':
+			Jogo::getInstance().pausado = !Jogo::getInstance().pausado;
+			break;
+		default:
+			principal->detectaTiro(key, x, y);
+	}
 }
 
 void Fase_TheBlitz::specialKeyDown(int key, int x, int y)
