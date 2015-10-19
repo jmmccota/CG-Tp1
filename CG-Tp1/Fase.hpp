@@ -42,6 +42,9 @@ class Fase
         //Lista de explosoes na tela
         std::list<Explosao*> explosoesAtivas;
 
+		//Caixas de recompensa
+		std::list<Solido*> caixas;
+
 	public:
         Fase();
 
@@ -96,6 +99,8 @@ class Fase
         //Insere um novo projetil na fase
         void novoProjetilInimigo(Projetil *p);
         void novoProjetilAmigo(Projetil *p);
+
+		void reseta();
 };
 
 //Incluir todas as fases do jogo

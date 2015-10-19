@@ -500,3 +500,41 @@ void V2::finaliza()
 {
 
 }
+
+
+/////////////////////////////////
+
+
+class Bf109Rec1 : public Bf109
+{
+private:
+
+public:
+	Bf109Rec1(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f) : Bf109(pX, pY, esc, a, f)
+	{
+		this->carrega("modelos/bf109recurso1.dat");
+	}
+	~Bf109Rec1()
+	{
+
+	}
+};
+
+
+/////////////////////////////////
+
+
+class Bf109Rec2 : public Bf109
+{
+private:
+
+public:
+	Bf109Rec2(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f) : Bf109(pX, pY, esc, a, f)
+	{
+		this->carrega("modelos/bf109recurso2.dat");
+	}
+	~Bf109Rec2()
+	{
+
+	}
+};

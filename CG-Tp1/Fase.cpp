@@ -99,3 +99,12 @@ void Fase::novoProjetilAmigo(Projetil *p)
 	projeteisAmigos.push_back(p);
 }
 
+void Fase::reseta()
+{
+	inimigosAtivos.clear();
+	projeteisInimigos.clear();
+	projeteisAmigos.clear();
+	explosoesAtivas.clear();
+	caixas.clear();
+}
+
