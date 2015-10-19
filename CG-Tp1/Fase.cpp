@@ -29,7 +29,7 @@ void Fase::desenhaExplosoes()
 
 void Fase::desenhaHUD() {
 	//HP
-	int hp = principal->getHP();
+    int hp = 1000 * principal->getHP() / VIDA_SPITFIRE;
 	glBegin(GL_LINE_LOOP);
 	glColor3f(1, 1, 1);
 	glVertex2i(20, 1000);

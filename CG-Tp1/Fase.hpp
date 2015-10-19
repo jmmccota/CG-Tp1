@@ -24,6 +24,8 @@ class Fase;
 
 #define FASE
 
+#define VIDA_SPITFIRE 400
+
 
 class Fase
 {

@@ -10,7 +10,7 @@ Spitfire::Spitfire(GLfloat pX, GLfloat pY, float esc, Fase *f)
     this->carrega("modelos/spitfire.dat");
 
 	numeroVidas = 5;
-    hp = 1000;
+    hp = VIDA_SPITFIRE;
     municao[0] = 9999999;
     municao[1] = 10;
 }
@@ -89,6 +89,11 @@ void Spitfire::atira(int tipo)
 int Spitfire::danoColisao()
 {
 	return 1;
+}
+
+void Spitfire::morreu()
+{
+    hp = VIDA_SPITFIRE;
 }
 
 string Spitfire::getNome()
@@ -256,7 +261,7 @@ void Me163::atira(int tipo)
 
 int Me163::danoColisao()
 {
-	return 30;
+	return 1000;
 }
 
 string Me163::getNome()

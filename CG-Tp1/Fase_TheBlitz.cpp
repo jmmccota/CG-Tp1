@@ -346,11 +346,11 @@ void Fase_TheBlitz::atualiza(int value)
 			++i;
 
 		if (principal->destruido())
-		{
-			//Explosao
+        {
             explosoesAtivas.push_back(new Explosao(principal->getX(), principal->getY(), 1));
-			principal->powerUp = 0;
-			Jogo::getInstance().numeroVidas--;
+            principal->powerUp = 0;
+            Jogo::getInstance().numeroVidas--;
+            principal->morreu();
 		}
 	}
 
@@ -361,6 +361,8 @@ void Fase_TheBlitz::atualiza(int value)
 		{
 			principal->alvejado((*i)->danoColisao());
 			(*i)->alvejado(principal->danoColisao());
+            if ((*i)->getNome() == "Me163")
+                (*i)->alvejado(1000);
 		}
 
 		if ((*i)->destruido())
@@ -368,7 +370,7 @@ void Fase_TheBlitz::atualiza(int value)
 			if (rand() % 20 == 0)
 				principal->powerUp = 1;
 			Jogo::getInstance().score->incScoreValue((*i)->getScore());
-            explosoesAtivas.push_back(new Explosao(((*i)->getX + principal->getX) / 2, ((*i)->getY + principal->getY) / 2, 3));
+            explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 3));
             EfeitoSonoro::getInstance().playExplosion();
 			i = inimigosAtivos.erase(i);
 		}
@@ -378,11 +380,11 @@ void Fase_TheBlitz::atualiza(int value)
 		}
 
 		if (principal->destruido())
-		{
-			principal->powerUp = 0;
-			//Explosao
-			
-			//Perde uma vida
+        {
+            explosoesAtivas.push_back(new Explosao(principal->getX(), principal->getY(), 1));
+            principal->powerUp = 0;
+            Jogo::getInstance().numeroVidas--;
+            principal->morreu();
 		}
 	}
 
