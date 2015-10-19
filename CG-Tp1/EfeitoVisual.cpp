@@ -225,15 +225,23 @@ void EfeitoVisual::desenhaLinhaAsfalto(float translacaoX, float translY, float e
     glPopMatrix();
     glFlush();
 }
-void EfeitoVisual::desenhaQuadrado(int x, int y, int x1, int y1) {
-	glColor3f(1, 1, 1);
+void EfeitoVisual::desenhaQuadrado(int x, int y, int x1, int y1) {	
+	glColor3f(1,0.27,0);
 	glBegin(GL_QUADS);
 	glVertex2i(x, y);
 	glVertex2i(x1, y);
 	glVertex2i(x1, y1);
 	glVertex2i(x, y1);
 	glEnd();
+	glBegin(GL_LINE_LOOP);
+	glColor3f(1, 1, 1);
+	glVertex2i(x+1, y+1);
+	glVertex2i(x1+1, y+1);
+	glVertex2i(x1+1, y1+1);
+	glVertex2i(x+1, y1+1);
+	glEnd();
 }
+
 void EfeitoVisual::desenhaScore(string nome) {
 	glBegin(GL_LINE_LOOP);
 	glColor3f(1, 1, 1);

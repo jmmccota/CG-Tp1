@@ -431,8 +431,10 @@ void Menu::terminou()
 	else if (optIniciar)
 	{
 		EfeitoSonoro::getInstance().finishAllAudios();
+		optIniciar = false;
 		Jogo::getInstance().setProxFase(2);
 		Jogo::getInstance().proximaFase();
+		
 	}
 }
 
@@ -540,7 +542,10 @@ void Menu::keyUp(unsigned char key, int x, int y)
 		optMelhores = false;
 		optOpcoes = false;
 		break;
-
+	case 'F':
+	case 'f':
+		EfeitoVisual::getInstance().setFullScreen();
+		break;
 	default:
 		break;
 	}
@@ -659,5 +664,5 @@ void Menu::inicializa()
 	//-------------
 	EfeitoSonoro::getInstance().initAudios_Menu();
 	EfeitoSonoro::getInstance().playMainTheme();
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);	
 }

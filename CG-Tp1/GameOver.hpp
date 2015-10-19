@@ -10,19 +10,18 @@ public:
 	~GameOver();
 	bool gameOver = true;
 	bool melhorScore = true;
+	int bestScore = 0;
 	int contador = 0;
 	void definePersonagens();
 	string nome="";
 	void desenhaBackground();
 
-	void writeScore(int score);
-
+	void setScore(int score);	
 	void desenha();
 
 	void terminou();
 
-	void atualiza(int value);
-	void desenhaQuadrado(int x, int y, int x1, int y1);
+	void atualiza(int value);	
 	void mouse(int button, int state, int x, int y);
 	void keyDown(unsigned char key, int x, int y);
 	void keyUp(unsigned char key, int x, int y);

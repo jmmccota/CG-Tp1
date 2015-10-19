@@ -114,6 +114,12 @@ void Fase_TheVengeanceWeapon::mouse(int button, int state, int x, int y)
 
 void Fase_TheVengeanceWeapon::keyDown(unsigned char key, int x, int y)
 {
+	switch (key) {
+	case 'F':
+	case 'f':
+		EfeitoVisual::getInstance().setFullScreen();
+		break;
+	}
 }
 
 void Fase_TheVengeanceWeapon::keyUp(unsigned char key, int x, int y)
