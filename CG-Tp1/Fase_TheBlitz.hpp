@@ -2,6 +2,7 @@
 #define THEBLITZ_FASE
 
 #include "Fase.hpp"
+#include "Avioes.hpp"
 
 #ifdef FASE
 
@@ -10,6 +11,7 @@ using namespace std;
 class Fase_TheBlitz : public Fase
 {
 protected:
+    Me264 *boss;
 
 public:
 	Fase_TheBlitz();

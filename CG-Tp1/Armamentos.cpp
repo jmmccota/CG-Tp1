@@ -52,8 +52,8 @@ Bomba::~Bomba()
 ////////////////////////////////////////////////////////////////////////////////////////////////
 #include <iostream>
 
-TiroEspecialInimigo::TiroEspecialInimigo(GLfloat posX, GLfloat posY, GLfloat posXAlvo, GLfloat posYAlvo, float escala)
-    : Projetil(posX, posY, 10000 * escala, escala)
+TiroEspecialInimigo::TiroEspecialInimigo(GLfloat posX, GLfloat posY, GLfloat posXAlvo, GLfloat posYAlvo, float escala, float velocidade)
+    : Projetil(posX, posY, velocidade, escala)
 {
     this->carrega("modelos/tirosimples.dat");
     double tan = (posYAlvo - posY) / (posXAlvo - posX);

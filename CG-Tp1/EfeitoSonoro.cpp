@@ -149,17 +149,17 @@ void EfeitoSonoro::playV2Motor()
 
 void EfeitoSonoro::playVickersShot()
 {
-    arrayAudios[1]->playMemoryAudio(system);
+    arrayAudios[2]->playMemoryAudio(system);
 }
 
 void EfeitoSonoro::playMg42Shot()
 {
-    arrayAudios[2]->playMemoryAudio(system);
+    arrayAudios[3]->playMemoryAudio(system);
 }
 
 void EfeitoSonoro::playBombDrop()
 {
-    arrayAudios[3]->playMemoryAudio(system);
+    arrayAudios[4]->playMemoryAudio(system);
 }
 
 void EfeitoSonoro::stopSpitfireMotor()

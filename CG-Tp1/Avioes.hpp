@@ -5,7 +5,8 @@ class Spitfire;
 class Bf109;
 class Me163;
 class Me264;
-class me262;
+class Me262;
+class Bismarck;
 
 #include "Personagem.hpp"
 #include "Armamentos.hpp"
@@ -85,6 +86,21 @@ class Me163 : public Personagem
 		int getScore();
 };
 
+class Me262 : public Personagem
+{
+private:
+    bool movCima = false, movBaixo = false, movEsq = false, movDir = false;
+
+public:
+    Me262(GLfloat pX, GLfloat pY, float esc, Fase *f);
+    ~Me262();
+    void acao();
+    void atira(int tipo);
+    int danoColisao();
+    string getNome();
+    int getScore();
+};
+
 
 class Me264 : public Personagem
 {
@@ -96,6 +112,7 @@ private:
     int ladoBomba = -1;
     int tirosSegundo = 3;
     int contadorEst = -1;
+    float velocidadeBala;
 
 public:
     Me264(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f);
@@ -104,22 +121,8 @@ public:
 	void atira(int tipo);
 	int danoColisao();
 	string getNome();
-	int getScore();
-};
-
-class Me262 : public Personagem
-{
-private:
-	bool movCima = false, movBaixo = false, movEsq = false, movDir = false;
-
-public:
-	Me262(GLfloat pX, GLfloat pY, float esc, Fase *f);
-	~Me262();
-	void acao();
-	void atira(int tipo);
-	int danoColisao();
-	string getNome();
-	int getScore();
+    int getScore();
+    void finaliza();
 };
 
 class V2 : public Personagem
@@ -134,22 +137,24 @@ public:
 	void atira(int tipo);
 	int danoColisao();
 	string getNome();
-	int getScore();
+    int getScore();
+    void finaliza();
 };
 
-class Navio : public Personagem
+class Bismarck : public Personagem
 {
 private:
 	bool movCima = false, movBaixo = false, movEsq = false, movDir = false;
 
 public:
-	Navio(GLfloat pX, GLfloat pY, float esc, Fase *f);
-	~Navio();
+	Bismarck(GLfloat pX, GLfloat pY, float esc, Fase *f);
+	~Bismarck();
 	void acao();
 	void atira(int tipo);
 	int danoColisao();
 	string getNome();
-	int getScore();
+    int getScore();
+    void finaliza();
 };
 
 #endif
