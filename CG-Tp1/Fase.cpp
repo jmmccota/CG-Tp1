@@ -66,6 +66,7 @@ void Fase::desenhaHUD() {
 
 		if (Jogo::getInstance().numeroVidas < 5) {
 			Jogo::getInstance().numeroVidas++;
+			EfeitoSonoro::getInstance().playGanhaVida();
 		}
 		Jogo::getInstance().setControlaScore();
 		//EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/ganhaVida.mp3");

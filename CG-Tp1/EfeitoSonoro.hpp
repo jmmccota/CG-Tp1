@@ -50,6 +50,7 @@ public:
 	void initAudios_TheBlitz();
 	void initAudios_TheBattleOfBritain();
 	void initAudios_TheVengeanceWeapon();
+	void initAudios_GameOver();
 
 	//Finalisar todos os sons
 	void finishAllAudios();
@@ -90,6 +91,7 @@ public:
 	void stopVickers();
 	void stopMg42();
 	void stopBombDrop();
+	void playGanhaVida();
 
 	//Tocar os sons uma vez sem carregar na memoria
 	void playStreamAudio(char *file);

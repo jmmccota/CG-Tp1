@@ -1,6 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "GameOver.hpp"
-#include <AntTweakBar.h>
 GameOver::GameOver()
 {
 }
@@ -396,8 +395,8 @@ void GameOver::desenhaScore() {
 	glVertex2i(1240, 450);
 	glVertex2i(650, 450);
 	glEnd();		
-	string recorde = "NOVO RECORDE! SCORE: ";
-	recorde += std::to_string(Jogo::getInstance().score->getScoreValue());
+	string recorde = "SALVE SEU SCORE!";
+	
 	glRasterPos2f(660, 650);
 	FuncoesAuxiliares::writeWord_BITMAP(recorde,GLUT_BITMAP_TIMES_ROMAN_24);
 	//string sco = score;
@@ -409,6 +408,9 @@ void GameOver::desenhaScore() {
 	glVertex2i(1200, 550);
 	glVertex2i(770, 550);
 	glEnd();
+	string score = "Score: "+ std::to_string(Jogo::getInstance().score->getScoreValue());
+	glRasterPos2f(660,480);
+	FuncoesAuxiliares::writeWord_BITMAP(score, GLUT_BITMAP_TIMES_ROMAN_24);
 	glRasterPos2f(780, 565);	
 	//cout << nome.length();
 	FuncoesAuxiliares::writeWord_BITMAP(nome, GLUT_BITMAP_HELVETICA_18);
@@ -424,5 +426,7 @@ void GameOver::desenhaScore() {
 void GameOver::inicializa()
 {
 	// se game over true coloca musica de game over else musica de victory
+	EfeitoSonoro::getInstance().initAudios_GameOver();
+	//EfeitoSonoro::getInstance().playMainTheme();
 	desenha();
 }

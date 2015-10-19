@@ -74,8 +74,6 @@ void Jogo::keyUp(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
-<<<<<<< HEAD
-=======
 	/*case 'f':
 		EfeitoVisual::getInstance().setFullScreen();
 		break;*/
@@ -83,7 +81,6 @@ void Jogo::keyUp(unsigned char key, int x, int y)
 	case 'P':
 		Jogo::getInstance().pausado = !Jogo::getInstance().pausado;
 		break;
->>>>>>> d44b144c77b3cca711767c866678007f2cac674f
 	case 27: //Tecla ESC -> Sair do Jogo
 		exit(0);
 		break;
@@ -139,6 +136,7 @@ void Jogo::inicializa(int fase)
 				Jogo::getInstance().bestScore = true;
 			}
 		}
+		EfeitoSonoro::getInstance().finishAllAudios();
 		Jogo::getInstance().fases[fase]->inicializa();		
 	}
 	else
@@ -154,10 +152,12 @@ void Jogo::inicializa(int fase)
 		glutSpecialFunc(Jogo::specialKeyDown);
 		glutSpecialUpFunc(Jogo::specialKeyUp);
 		glutDisplayFunc(Jogo::draw);		
-		Jogo::getInstance().gameOver = true;		
+		Jogo::getInstance().gameOver = true;
+		//Jogo::getInstance().score->setScoreValue(100);
 		if (Jogo::getInstance().score->getScoreValue() > 0) {
 			Jogo::getInstance().bestScore = true;
 		}
+		EfeitoSonoro::getInstance().finishAllAudios();
 		Jogo::getInstance().fases[fase]->inicializa();
 	}
 }
