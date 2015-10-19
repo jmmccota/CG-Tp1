@@ -29,6 +29,7 @@ void Jogo::run()
 	fases.push_back(new Fase_TheBlitz());
 	fases.push_back(new Fase_TheBattleOfBritain());
 	fases.push_back(new Fase_TheVengeanceWeapon());
+	fases.push_back(new GameOver());
 	proxFase = 0;
 	proximaFase();
 
@@ -73,6 +74,16 @@ void Jogo::keyUp(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
+<<<<<<< HEAD
+=======
+	/*case 'f':
+		EfeitoVisual::getInstance().setFullScreen();
+		break;*/
+	case 'p':
+	case 'P':
+		Jogo::getInstance().pausado = !Jogo::getInstance().pausado;
+		break;
+>>>>>>> d44b144c77b3cca711767c866678007f2cac674f
 	case 27: //Tecla ESC -> Sair do Jogo
 		exit(0);
 		break;
@@ -122,11 +133,32 @@ void Jogo::inicializa(int fase)
 		glutSpecialUpFunc(Jogo::specialKeyUp);
 		glutDisplayFunc(Jogo::draw);
 		glutTimerFunc(TEMPOQUADRO, Jogo::timer, 1);
-		Jogo::getInstance().fases[fase]->inicializa();
+		if (fase == 5) {
+			Jogo::getInstance().gameOver = false;
+			if (Jogo::getInstance().score->getScoreValue() > 0) {
+				Jogo::getInstance().bestScore = true;
+			}
+		}
+		Jogo::getInstance().fases[fase]->inicializa();		
 	}
 	else
 	{
 		//Game over
+		estado = 0;
+		// Inicializa o sistema de coordenadas
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glutMouseFunc(Jogo::mouse);
+		glutKeyboardFunc(Jogo::keyDown);
+		glutKeyboardUpFunc(Jogo::keyUp);
+		glutSpecialFunc(Jogo::specialKeyDown);
+		glutSpecialUpFunc(Jogo::specialKeyUp);
+		glutDisplayFunc(Jogo::draw);		
+		Jogo::getInstance().gameOver = true;		
+		if (Jogo::getInstance().score->getScoreValue() > 0) {
+			Jogo::getInstance().bestScore = true;
+		}
+		Jogo::getInstance().fases[fase]->inicializa();
 	}
 }
 

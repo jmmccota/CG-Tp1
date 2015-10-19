@@ -238,6 +238,12 @@ void Fase_TheBattleOfBritain::mouse(int button, int state, int x, int y)
 
 void Fase_TheBattleOfBritain::keyDown(unsigned char key, int x, int y)
 {
+	switch (key) {
+	case 'F':
+	case 'f':
+		EfeitoVisual::getInstance().setFullScreen();
+		break;
+	}
 }
 
 void Fase_TheBattleOfBritain::keyUp(unsigned char key, int x, int y)

@@ -245,7 +245,56 @@ void EfeitoVisual::desenhaLinhaAsfalto(float translacaoX, float translY, float e
     glPopMatrix();
     glFlush();
 }
+void EfeitoVisual::desenhaQuadrado(int x, int y, int x1, int y1) {	
+	glColor3f(1,0.27,0);
+	glBegin(GL_QUADS);
+	glVertex2i(x, y);
+	glVertex2i(x1, y);
+	glVertex2i(x1, y1);
+	glVertex2i(x, y1);
+	glEnd();
+	glBegin(GL_LINE_LOOP);
+	glColor3f(1, 1, 1);
+	glVertex2i(x+1, y+1);
+	glVertex2i(x1+1, y+1);
+	glVertex2i(x1+1, y1+1);
+	glVertex2i(x+1, y1+1);
+	glEnd();
+}
 
+void EfeitoVisual::desenhaScore(string nome) {
+	glBegin(GL_LINE_LOOP);
+	glColor3f(1, 1, 1);
+	glVertex2i(650, 700);
+	glVertex2i(1240, 700);
+	glVertex2i(1240, 450);
+	glVertex2i(650, 450);
+	glEnd();
+	int score = 1990;
+	string recorde = "NOVO RECORDE! SCORE: ";
+	recorde += score;
+	glRasterPos2f(660, 650);
+	FuncoesAuxiliares::writeWord_BITMAP(recorde, GLUT_BITMAP_TIMES_ROMAN_24);
+	glRasterPos2f(660, 565);
+	FuncoesAuxiliares::writeWord_BITMAP("Nome: ", GLUT_BITMAP_TIMES_ROMAN_24);
+	glBegin(GL_LINE_LOOP);
+	glVertex2i(770, 600);
+	glVertex2i(1200, 600);
+	glVertex2i(1200, 550);
+	glVertex2i(770, 550);
+	glEnd();
+	glRasterPos2f(780, 565);
+	cout << nome.length();
+	FuncoesAuxiliares::writeWord_BITMAP(nome, GLUT_BITMAP_HELVETICA_18);
+	glBegin(GL_LINE_LOOP);
+	glVertex2i(1080, 530);
+	glVertex2i(1200, 530);
+	glVertex2i(1200, 480);
+	glVertex2i(1080, 480);
+	glEnd();
+	glRasterPos2f(1095, 490);
+	FuncoesAuxiliares::writeWord_BITMAP("Salvar", GLUT_BITMAP_TIMES_ROMAN_24);
+}
 void EfeitoVisual::desenhaTitulo(int posX, int posY)
 {
 
