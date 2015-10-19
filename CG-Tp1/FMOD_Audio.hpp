@@ -17,6 +17,8 @@ public:
 	//Getters
 	FMOD::Channel *getChannel();
 	FMOD::Sound *getSound();
+	//Get channel state
+	bool getChannelState();
 
 	//Play Once
 	void playStreamAudio(FMOD::System *system, char *file, bool loop);
