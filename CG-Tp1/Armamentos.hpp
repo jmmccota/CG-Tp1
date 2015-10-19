@@ -37,7 +37,7 @@ class TiroEspecialInimigo : public Projetil
 private:
     GLfloat velX, velY;
 public:
-    TiroEspecialInimigo(GLfloat posX, GLfloat posY, GLfloat posXAlvo, GLfloat posYAlvo, float escala);
+    TiroEspecialInimigo(GLfloat posX, GLfloat posY, GLfloat posXAlvo, GLfloat posYAlvo, float escala, float velocidade);
     ~TiroEspecialInimigo();
     void acao();
 };

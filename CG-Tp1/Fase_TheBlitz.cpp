@@ -201,12 +201,12 @@ void Fase_TheBlitz::desenha()
 		(*i)->desenha();
 
 	for (std::list<Projetil*>::iterator i = projeteisInimigos.begin(); i != projeteisInimigos.end(); ++i)
-		(*i)->desenha();
+        (*i)->desenha();
+
+    principal->desenha();
 
 	for (std::list<Personagem*>::iterator i = inimigosAtivos.begin(); i != inimigosAtivos.end(); ++i)
 		(*i)->desenha();
-
-    principal->desenha();
 
     desenhaExplosoes();
 
@@ -224,31 +224,35 @@ void Fase_TheBlitz::terminou()
 
 void Fase_TheBlitz::atualiza(int value)
 {
+    cout << value << "\n";
        pair<GLint, GLint> size = EfeitoVisual::getInstance().getOrtho2D();
- //   //Inimigos normais
-	if (value % 300 == 99 && value < 7200)
-	{
-		Bf109 *aux = new Bf109(rand() % size.first, size.second, (float)100 / 10000, principal, this);
-		aux->inverteY();
-		inimigosAtivos.push_back(aux);
-        EfeitoSonoro::getInstance().playBf109Motor();
-		if (value % 700 == 99)
-		{
-			Me163 *aux2 = new Me163(rand() % size.first, size.second, (float)100 / 10000, principal, this);
-			aux2->inverteY();
-			inimigosAtivos.push_back(aux2);
-            EfeitoSonoro::getInstance().playMe163Motor();
-		}
-	}
+    //Inimigos normais
+	//if (value % 300 == 99 && value < 10000)
+	//{
+	//	Bf109 *aux = new Bf109(rand() % size.first, size.second, (float)100 / 10000, principal, this);
+	//	aux->inverteY();
+	//	inimigosAtivos.push_back(aux);
+ //       EfeitoSonoro::getInstance().playBf109Motor();
+	//	if (value % 700 == 99)
+	//	{
+	//		Me163 *aux2 = new Me163(rand() % size.first, size.second, (float)100 / 10000, principal, this);
+	//		aux2->inverteY();
+	//		inimigosAtivos.push_back(aux2);
+ //           EfeitoSonoro::getInstance().playMe163Motor();
+	//	}
+	//}
 
     //Chefao
-    ///*else*/ if (value == /*7300*/0)
-    //{
-    //    cout << "chefao";
-    //    Me264 *aux = new Me264(size.first / 2, size.second + 299, (float) 600 / 10000, principal, this);
-    //    inimigosAtivos.push_back(aux);
-    //    EfeitoSonoro::getInstance().playMe264Motor();
-    //}
+    /*else*/ if (value == /*10300*/1)
+    {
+        boss = new Me264(size.first / 2, size.second + 299, (float) 600 / 10000, principal, this);
+        inimigosAtivos.push_back(boss);
+        EfeitoSonoro::getInstance().playMe264Motor();
+    }
+    else if (value == 17000)
+    {
+        boss->finaliza();
+    }
 
     for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end();)
     {
@@ -362,6 +366,11 @@ void Fase_TheBlitz::atualiza(int value)
 	{
 		if (EfeitoVisual::getInstance().colisao((*i), principal))
 		{
+            if ((*i)->getNome() == "Me264")
+            {
+                i++;
+                continue;
+            }
 			principal->alvejado((*i)->danoColisao());
 			(*i)->alvejado(principal->danoColisao());
             if ((*i)->getNome() == "Me163")

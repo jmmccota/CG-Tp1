@@ -274,6 +274,60 @@ int Me163::getScore()
 	return 150;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Me262::Me262(GLfloat pX, GLfloat pY, float esc, Fase *f)
+    : Personagem(pX, pY, 0.016 * esc, esc, f)
+{
+    this->carrega("modelos/me262.dat");
+    hp = 40;
+    municao[1] = 9999;
+    municao[2] = 150;
+}
+Me262::~Me262()
+{
+}
+
+void Me262::acao()
+{
+    if (movCima)
+        posY += velocidade;
+    else if (movBaixo)
+        posY -= velocidade;
+    if (movDir)
+        posX += velocidade;
+    else if (movEsq)
+        posX -= velocidade;
+}
+
+void Me262::atira(int tipo)
+{
+    if (municao[tipo] > 0)
+    {
+        municao[tipo]--;
+        if (!tipo)
+            fase->novoProjetilInimigo(new TiroSimples(posX, posY + tamY, escala));
+        else
+            fase->novoProjetilInimigo(new Bomba(posX, posY + tamY, escala));
+    }
+}
+
+int Me262::danoColisao()
+{
+    return 1;
+}
+
+string Me262::getNome()
+{
+    return "Me262";
+}
+
+int Me262::getScore()
+{
+    return 3000;
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -286,6 +340,7 @@ Me264::Me264(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f)
 	hp = 1000;
 	municao[1] = 9999;
 	municao[2] = 150;
+    velocidadeBala = 50 * escala;
 }
 Me264::~Me264()
 {
@@ -294,7 +349,10 @@ Me264::~Me264()
 void Me264::acao()
 {
     if (posY + tamY > EfeitoVisual::getInstance().getOrtho2D().second)
+    {
         posY -= velocidade;
+        return;
+    }
 
     if (!estadoTiro)
         contadorEst = ++contadorEst % 10;
@@ -326,16 +384,16 @@ void Me264::atira(int tipo)
         if (!estadoTiro)
         {
             EfeitoSonoro::getInstance().playMg42Shot();
-            fase->novoProjetilInimigo(new TiroEspecialInimigo(posX, posY, alvo->getX(), alvo->getY(), 0.02 * escala));
+            fase->novoProjetilInimigo(new TiroEspecialInimigo(posX, posY, alvo->getX(), alvo->getY(), 0.02 * escala, velocidadeBala));
         }
     }
     else if (tipo == 3)
     {
-        estadoTiro = ++estadoTiro % (int)(1000 / (tirosSegundo * TEMPOQUADRO));
+        estadoTiro = ++estadoTiro % (int)(1000 / (2 * tirosSegundo * TEMPOQUADRO));
         if (!estadoTiro)
         {
             EfeitoSonoro::getInstance().playMg42Shot();
-            fase->novoProjetilInimigo(new TiroEspecialInimigo(posX, posY, alvo->getX(), alvo->getY(), 0.02 * escala));
+            fase->novoProjetilInimigo(new TiroEspecialInimigo(posX, posY, alvo->getX(), alvo->getY(), 0.03 * escala, 0.8 * velocidadeBala));
         }
     }
 }
@@ -355,58 +413,51 @@ int Me264::getScore()
 	return 5000;
 }
 
+void Me264::finaliza()
+{
+    tirosSegundo *= 4;
+    velocidadeBala *= 2;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-Me262::Me262(GLfloat pX, GLfloat pY, float esc, Fase *f)
-	: Personagem(pX, pY, 0.016 * esc, esc, f)
+Bismarck::Bismarck(GLfloat pX, GLfloat pY, float esc, Fase *f)
+    : Personagem(pX, pY, 0 * esc, esc, f)
 {
-	this->carrega("modelos/me262.dat");
-	hp = 40;
-	municao[1] = 9999;
-	municao[2] = 150;
+    this->carrega("modelos/Bismarck.dat");
+    hp = 9999;
 }
-Me262::~Me262()
+Bismarck::~Bismarck()
 {
 }
 
-void Me262::acao()
+void Bismarck::acao()
 {
-	if (movCima)
-		posY += velocidade;
-	else if (movBaixo)
-		posY -= velocidade;
-	if (movDir)
-		posX += velocidade;
-	else if (movEsq)
-		posX -= velocidade;
 }
 
-void Me262::atira(int tipo)
+void Bismarck::atira(int tipo)
 {
-	if (municao[tipo] > 0)
-	{
-		municao[tipo]--;
-		if (!tipo)
-			fase->novoProjetilInimigo(new TiroSimples(posX, posY + tamY, escala));
-		else
-			fase->novoProjetilInimigo(new Bomba(posX, posY + tamY, escala));
-	}
 }
 
-int Me262::danoColisao()
+int Bismarck::danoColisao()
 {
-	return 1;
+    return 3;
 }
 
-string Me262::getNome()
+string Bismarck::getNome()
 {
-	return "Me262";
+    return "Bismarck";
 }
 
-int Me262::getScore()
+int Bismarck::getScore()
 {
-	return 3000;
+    return 10000;
+}
+
+void Bismarck::finaliza()
+{
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -445,38 +496,7 @@ int V2::getScore()
 	return 10000;
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-Navio::Navio(GLfloat pX, GLfloat pY, float esc, Fase *f)
-	: Personagem(pX, pY, 0 * esc, esc, f)
+void V2::finaliza()
 {
-	this->carrega("modelos/navio.dat");
-	hp = 9999;
-}
-Navio::~Navio()
-{
-}
 
-void Navio::acao()
-{
-}
-
-void Navio::atira(int tipo)
-{
-}
-
-int Navio::danoColisao()
-{
-	return 3;
-}
-
-string Navio::getNome()
-{
-	return "V2";
-}
-
-int Navio::getScore()
-{
-	return 10000;
 }
