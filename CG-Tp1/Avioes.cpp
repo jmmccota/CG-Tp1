@@ -333,13 +333,13 @@ int Me262::getScore()
 
 
 Me264::Me264(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f)
-	: Personagem(pX, pY, 50 * esc, esc, f)
+	: Personagem(pX, pY, 5 * esc, esc, f)
 {
 	this->carrega("modelos/me264.dat");
     alvo = a;
-	hp = 1000;
+	hp = 3000;
 	municao[1] = 9999;
-	municao[2] = 150;
+	municao[2] = 9999;
     velocidadeBala = 60 * escala;
 }
 Me264::~Me264()

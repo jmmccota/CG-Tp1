@@ -57,8 +57,6 @@ void GameOver::terminou()
 
 void GameOver::atualiza(int value)
 {	
-	pair<GLint, GLint> size = EfeitoVisual::getInstance().getOrtho2D();
-	desenha();
 }
 
 void GameOver::mouse(int button, int state, int x, int y)
@@ -423,5 +421,7 @@ void GameOver::desenhaScore() {
 void GameOver::inicializa()
 {
 	// se game over true coloca musica de game over else musica de victory
+    EfeitoSonoro::getInstance().initAudios_GameOver();
+    EfeitoSonoro::getInstance().playMainTheme();
 	desenha();
 }

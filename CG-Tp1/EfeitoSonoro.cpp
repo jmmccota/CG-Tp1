@@ -45,6 +45,17 @@ void EfeitoSonoro::initAudios_Menu()
 	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/enterOptionMenu.mp3", false));
 }
 
+void EfeitoSonoro::initAudios_GameOver()
+{
+    finishAllAudios();
+    arrayAudios.push_back(new FMOD_Audio(system, "audio/music/GameOver.mp3", true));
+}
+
+void EfeitoSonoro::initAudios_Ending()
+{
+    arrayAudios.push_back(new FMOD_Audio(system, "audio/music/Ending.mp3", true));
+}
+
 void EfeitoSonoro::initAudios_SFXGerais()
 {
 	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/spitfireMotor.mp3", false));

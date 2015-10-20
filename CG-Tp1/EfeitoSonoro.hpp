@@ -45,7 +45,9 @@ public:
 	void createObjectSystem();
 
 	//Iniciar os sons da Fase
-	void initAudios_Menu();
+    void initAudios_Menu();
+    void initAudios_GameOver();
+    void initAudios_Ending();
 	void initAudios_SFXGerais();
 	void initAudios_TheBlitz();
 	void initAudios_TheBattleOfBritain();
