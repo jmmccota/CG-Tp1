@@ -16,7 +16,6 @@ void GameOver::desenhaBackground()
 {
 	glClearColor(0, 0, 0, 1);
 	glClear(GL_COLOR_BUFFER_BIT);
-	//cout << "entra aqui BG \n";
 }
 
 void GameOver::desenha()
@@ -398,12 +397,13 @@ void GameOver::desenhaGameOver() {
 void GameOver::desenhaScore() {
 	//cout << "entra aqui SCORE\n";
 	glBegin(GL_LINE_LOOP);
-	glColor3f(1, 0.27, 0);
+	glColor3f(1, 1, 1);
 	glVertex2i(650, 700);
 	glVertex2i(1240, 700);
 	glVertex2i(1240, 450);
 	glVertex2i(650, 450);
 	glEnd();
+	glColor3f(1, 0.27, 0);
 	string recorde = "SALVE SEU SCORE!";
 
 	glRasterPos2f(660, 650);
