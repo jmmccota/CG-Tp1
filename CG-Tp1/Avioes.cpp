@@ -553,3 +553,44 @@ public:
 
 	}
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+AviaoCriado::AviaoCriado(GLfloat pX, GLfloat pY, float esc, Fase *f)
+	: Personagem(pX, pY, 0 * esc, esc, f)
+{
+	this->carrega("modelos/aviaocriado.dat");
+	hp = 9999;
+}
+AviaoCriado::~AviaoCriado()
+{
+}
+
+void AviaoCriado::acao()
+{
+}
+
+void AviaoCriado::atira(int tipo)
+{
+}
+
+int AviaoCriado::danoColisao()
+{
+	return 3;
+}
+
+string AviaoCriado::getNome()
+{
+	return "Bismarck";
+}
+
+int AviaoCriado::getScore()
+{
+	return 10000;
+}
+
+void AviaoCriado::finaliza()
+{
+
+}
