@@ -136,6 +136,7 @@ void Fase_TheVengeanceWeapon::specialKeyUp(int key, int x, int y)
 
 void Fase_TheVengeanceWeapon::inicializa()
 {
+    reseta();
 	definePersonagens();
 	EfeitoSonoro::getInstance().initAudios_TheVengeanceWeapon();
 	EfeitoSonoro::getInstance().playMainTheme();

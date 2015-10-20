@@ -464,6 +464,7 @@ void Fase_TheBlitz::specialKeyUp(int key, int x, int y)
 
 void Fase_TheBlitz::inicializa()
 {
+    reseta();
 	EfeitoSonoro::getInstance().initAudios_TheBlitz();
 	EfeitoSonoro::getInstance().playMainTheme();
 	definePersonagens();
