@@ -65,6 +65,7 @@ void EfeitoSonoro::initAudios_SFXGerais()
     arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/explosion.mp3", false));
     arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/bf109Motor.mp3", false));
     arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/bf163Motor.mp3", false));
+	//arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/ganhaVida.mp3", false));
 }
 
 void EfeitoSonoro::initAudios_TheBlitz() {
@@ -73,6 +74,13 @@ void EfeitoSonoro::initAudios_TheBlitz() {
 	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/airRaid.mp3", false));
 	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/me264Motor.mp3", false));
 }
+//void EfeitoSonoro::initAudios_GameOver() {
+//	arrayAudios.push_back(new FMOD_Audio(system, "audio/music/TheBlitz.mp3", true));
+//	initAudios_SFXGerais();
+//	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/airRaid.mp3", false));
+//	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/me264Motor.mp3", false));
+//}
+
 
 void EfeitoSonoro::initAudios_TheBattleOfBritain() {
 	arrayAudios.push_back(new FMOD_Audio(system, "audio/music/TheBattleOfBritain.mp3", true));
@@ -162,6 +170,12 @@ void EfeitoSonoro::playVickersShot()
 {
     arrayAudios[2]->playMemoryAudio(system);
 }
+//void EfeitoSonoro::playGanhaVida()
+//{
+//	arrayAudios[8]->playMemoryAudio(system);
+//}
+
+
 
 void EfeitoSonoro::playMg42Shot()
 {

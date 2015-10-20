@@ -220,6 +220,7 @@ void Fase_TheBlitz::desenha()
 
 void Fase_TheBlitz::terminou()
 {
+	EfeitoSonoro::getInstance().finishAllAudios();
 }
 
 void Fase_TheBlitz::atualiza(int value)
