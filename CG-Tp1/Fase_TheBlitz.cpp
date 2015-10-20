@@ -223,14 +223,12 @@ void Fase_TheBlitz::desenha()
 
 void Fase_TheBlitz::terminou()
 {
-
+	EfeitoSonoro::getInstance().finishAllAudios();
 	if (Jogo::getInstance().numeroVidas == 0)
-	{
-		EfeitoSonoro::getInstance().finishAllAudios();
 		Jogo::getInstance().setProxFase(5);
-		Jogo::getInstance().proximaFase();
-	}
-
+	else
+		Jogo::getInstance().setProxFase(3);
+	Jogo::getInstance().proximaFase();
 }
 
 void Fase_TheBlitz::atualiza(int value)
@@ -434,7 +432,7 @@ void Fase_TheBlitz::atualiza(int value)
 			}
 			if (nome == "Bf109Amarelo")
 			{
-				caixas.push_back(new Caixa((*i)->getX(), (*i)->getY(), 1));
+				caixas.push_back(new Caixa((*i)->getX(), (*i)->getY(), 2));
 			}
 			else
 				explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 2));
