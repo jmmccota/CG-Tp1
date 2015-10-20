@@ -32,6 +32,21 @@ TiroSimplesInimigo::~TiroSimplesInimigo()
 {
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+TiroEspecial::TiroEspecial(GLfloat posX, GLfloat posY, float escala)
+	: Projetil(posX, posY, -30000 * escala, escala)
+{
+	this->dano = 10;
+	this->carrega("modelos/tiroEspecial.dat");
+}
+
+
+TiroEspecial::~TiroEspecial()
+{
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
