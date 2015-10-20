@@ -80,7 +80,8 @@ public:
 	void stopBf109Motor();
 	void stopBf109FlyBy();
 	void stopMe163Motor();
-	void stopMe264Motor();	
+	void stopMe264Motor();
+	void stopMe262Motor();
 	void stopV2Motor();
 
 	//Sons gerais
