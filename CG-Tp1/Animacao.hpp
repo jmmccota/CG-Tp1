@@ -10,17 +10,12 @@ using namespace std;
 class Animacao : public Fase
 {
 protected:
-	GLfloat escala = 1;
-	GLfloat rotacaoX1 = 0;
-	GLfloat rotacaoY1 = 0;
-	GLfloat rotacaoX2 = 0;
-	GLfloat rotacaoY2 = 0;
-	GLfloat translacaoY = 0;
-	GLint translacaoX = -180;
-	GLint translacaoX2 = -180;
-	GLfloat translacaoZ = 0;
-	bool booldesenha = true;
-	bool explosao = true;
+	Spitfire *spitifire;
+	Bf109 *bf109_1;
+	Bf109 *bf109_2;
+	Bf109 *bf109_3;
+
+	GLfloat translacaoX = 0;
 	bool pularAnimacao = false;
 public:
 	Animacao();
