@@ -32,14 +32,19 @@ bool limitX = false;
 // mover aviao d opcoes
 GLfloat translacaoOpcoesY = 0.0f;
 GLfloat translacaoOpcoesX = 0.0f;
+//translacao bomba menu opcoes
+GLfloat translacaoBomba = 0.0f;
 //translacao tiro menu opcoes
 GLfloat translacaoTiro = 0.0f;
 // translacao tiro menu
 GLfloat translacaoTiro2 = 0.0f;
 // boolean para atirar do menu de opcoes
 boolean atirou = false;
+// boolean para bombardear do menu de opcoes
+boolean bombardeou = false;
 // boolean para atirar menu
 boolean atirou2 = false;
+float xFixo = 0;
 
 //Desenha uma Linha - Parametro: posição em relação ao eixo Y
 void drawLine(float pos, char eixo) {
@@ -329,22 +334,38 @@ void drawOpcoesMenu() {
 	/*-------------- END COMANDOS SETAS ------------------*/
 
 	if (atirou) {
-		translacaoTiro += 40;
+		translacaoTiro += 100;
 		if ((translacaoTiro > 700)) {
 			atirou = false;
 			translacaoTiro = 0;
+		}
+	}
+	if (bombardeou) {
+		translacaoBomba += 10;
+		if ((translacaoBomba > 700)) {
+			bombardeou = false;
+			translacaoBomba = 0;
 		}
 	}
 	glPushMatrix();
 	TiroSimples *tiro = new TiroSimples(1300, 400, 0.002);
 	TiroSimples *tiro2 = new TiroSimples(1500, 400, 0.002);
 	Spitfire *spitfire = new Spitfire(1400, 360, 0.015, nullptr);
+	Bomba *bomba = new Bomba(1400, 360, 0.003);
+	
+	glPushMatrix();
 	glTranslatef(translacaoOpcoesX, translacaoOpcoesY, 0);
 	glPushMatrix();
 	glTranslatef(0, translacaoTiro, 0);
 	tiro->desenha();
 	tiro2->desenha();
 	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0, translacaoBomba, 0);
+	bomba->desenha();
+	glPopMatrix();
+	glPopMatrix();
+	glTranslatef(translacaoOpcoesX, translacaoOpcoesY, 0);
 	spitfire->desenha();
 	glPopMatrix();
 }
@@ -498,8 +519,11 @@ void Menu::keyUp(unsigned char key, int x, int y)
 	}
 	else if (optOpcoes) {
 		switch (key) {
-		case 32:
+		case 'z':
 			atirou = true;
+			break;
+		case 'x':
+			bombardeou= true;
 			break;
 		}
 	}
