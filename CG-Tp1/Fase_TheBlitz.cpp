@@ -327,12 +327,14 @@ void Fase_TheBlitz::atualiza(int value)
 	}
 
 	//Bala aliada X Avioes inimigos
+	string nome;
 	for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end();)
 	{
 		bool destruiu = false;
 		for (std::list<Personagem*>::iterator j = inimigosAtivos.begin(); j != inimigosAtivos.end();)
 		{
 			//Se foi alvejado
+			nome = (*j)->getNome();
 			if (EfeitoVisual::getInstance().colisao((*j), (*i)))
 			{
 				(*j)->alvejado((*i)->getDano());
@@ -345,15 +347,15 @@ void Fase_TheBlitz::atualiza(int value)
 				explosoesAtivas.push_back(new Explosao((*j)->getX(), (*j)->getY(), 1));
 				Jogo::getInstance().score->incScoreValue((*j)->getScore());
 				j = inimigosAtivos.erase(j);
-				if ((*j)->getNome() == "Bf109Verde") 
+				if (nome == "Bf109Verde") 
 				{
 					caixas.push_back(new Caixa((*j)->getX(), (*j)->getY(), 1));
 				}
-				else if ((*j)->getNome() == "Bf109Amarelo")
+				else if (nome == "Bf109Amarelo")
 				{
 					caixas.push_back(new Caixa((*j)->getX(), (*j)->getY(), 2));
 				}
-				else if ((*j)->getNome() == "Me264")
+				else if (nome == "Me264")
 				{
 					passouFase = true;
 				}
@@ -398,7 +400,6 @@ void Fase_TheBlitz::atualiza(int value)
 		}
 	}
 
-	string nome;
 	//Colisao avioes
 	for (std::list<Personagem*>::iterator i = inimigosAtivos.begin(); i != inimigosAtivos.end();)
 	{
