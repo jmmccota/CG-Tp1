@@ -32,7 +32,7 @@ void GameOver::desenha()
 
 	desenhaBackground();
 	//cout << "entra aqui desenha \n";
-	EfeitoVisual::getInstance().ortho2D();	
+	/*EfeitoVisual::getInstance().ortho2D();	*/
 		//se gameOver true escreve grande na tela game over se fudeu etc
 	desenhaGameOver();
 		//se gameOver false escreve you win voce é fodão	
@@ -41,15 +41,17 @@ void GameOver::desenha()
 		desenhaScore();
 		//coloca no meio da tela o quadradim pra digitar
 	}
-	//if (contador>200) {
-	//	explosoesAtivas.push_back(new Explosao(rand() % 450, rand() % 1000, 1));
-	//	explosoesAtivas.push_back(new Explosao(rand() % 100 + 950, rand() % 1000, 1));
-	//	contador = 0;
-	//	desenhaExplosoes();
-	//}
-	//
-	//// Present frame buffer
-	//contador++;
+	if (contador>100) {		
+		explosoesAtivas.push_back(new Explosao(rand() % 450, rand() % 1000, 1));
+		explosoesAtivas.push_back(new Explosao(rand() % 100 + 1700, rand() % 1000, 1));
+		contador = 0;
+	}
+	contador++;
+	// Present frame buffer
+	if (contador % 3 == 0) {
+		desenhaExplosoes();
+	}
+	
 
 	glutSwapBuffers();
 }
@@ -60,6 +62,8 @@ void GameOver::terminou()
 
 void GameOver::atualiza(int value)
 {	
+	pair<GLint, GLint> size = EfeitoVisual::getInstance().getOrtho2D();
+	desenha();
 }
 
 void GameOver::mouse(int button, int state, int x, int y)
@@ -228,6 +232,10 @@ void GameOver::specialKeyUp(int key, int x, int y)
 }
 void GameOver::desenhaGameOver() {	
 	//cout << "entra aqui gameOVer\n";
+	glPushMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	EfeitoVisual::getInstance().ortho2D();
 	int x = 500, y;	
 	glColor3f(1,0.27,0);
 	if (Jogo::getInstance().bestScore) {
@@ -301,7 +309,7 @@ void GameOver::desenhaGameOver() {
 		glVertex2i(x + 895 + 1, y - 120);
 		glVertex2i(x + 865 + 1, y - 120);
 		glEnd();
-
+		
 	}
 	else {
 		//V
@@ -376,7 +384,7 @@ void GameOver::desenhaGameOver() {
 		glEnd();
 
 	}
-	
+	glPopMatrix();
 }
 //void GameOver::desenhaQuadrado(int x,int y,int x1,int y1) {
 //	glColor3f(1, 1, 1);
