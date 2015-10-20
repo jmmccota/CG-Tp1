@@ -12,7 +12,7 @@ Spitfire::Spitfire(GLfloat pX, GLfloat pY, float esc, Fase *f)
 	numeroVidas = 5;
     hp = VIDA_SPITFIRE;
     municao[0] = 9999999;
-    municao[1] = 10;
+    municao[1] = nBomba;
 }
 
 
@@ -64,6 +64,7 @@ void Spitfire::atira(int tipo)
 {
     if (municao[tipo] > 0)
     {
+		//if bomba=true && tipo==1 nao diminui
         municao[tipo]--;
         if (!tipo)
         {

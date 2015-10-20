@@ -27,7 +27,7 @@ class Spitfire : public Personagem
     public:
 		// 0 = Tiro simples; 1 = Tiro duplo
 		int powerUp = 0;
-
+		int nBomba = 10;
         Spitfire(GLfloat pX, GLfloat pY, float esc, Fase *f);
         ~Spitfire();
 
