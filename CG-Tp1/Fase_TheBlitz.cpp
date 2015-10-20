@@ -259,7 +259,7 @@ void Fase_TheBlitz::atualiza(int value)
 	}
 
 	//Chefao
-	else if (value == 10300)
+	else if (value == 10200)
 	{
 		boss = new Me264(size.first / 2, size.second + 299, (float)600 / 10000, principal, this);
 		inimigosAtivos.push_back(boss);
@@ -389,13 +389,6 @@ void Fase_TheBlitz::atualiza(int value)
 			explosoesAtivas.push_back(new Explosao(principal->getX(), principal->getY(), 1));
 			principal->powerUp = 0;
 			Jogo::getInstance().numeroVidas--;
-			if (Jogo::getInstance().numeroVidas == 0) {
-				EfeitoSonoro::getInstance().stopSpitfireMotor();
-				EfeitoSonoro::getInstance().stopBf109Motor();
-				EfeitoSonoro::getInstance().stopMe163Motor();
-				Jogo::getInstance().setProxFase(5);
-				Jogo::getInstance().proximaFase();
-			}
 			principal->morreu();
 		}
 	}
@@ -451,7 +444,6 @@ void Fase_TheBlitz::atualiza(int value)
 				explosoesAtivas.push_back(new Explosao(principal->getX(), principal->getY(), 1));
 			principal->powerUp = 0;
 			Jogo::getInstance().numeroVidas--;
-			terminou();
 			principal->morreu();
 		}
 	}
@@ -477,6 +469,11 @@ void Fase_TheBlitz::atualiza(int value)
 			i++;
 		}
 	}
+
+	if (Jogo::getInstance().numeroVidas == 0) {
+		terminou();
+	}
+
 }
 void Fase_TheBlitz::desenhaHPBoss() {
 	if (bossOn && boss->getHP() > 0) {
