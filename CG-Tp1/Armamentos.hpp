@@ -43,5 +43,16 @@ public:
 };
 
 
+
+
+class Caixa : public Solido
+{
+public:
+	Caixa(GLfloat x, GLfloat y) : Solido(x, y, 0.0f, 50.0f) {}
+	void acao() {}
+};
+
+
+
 #endif
  

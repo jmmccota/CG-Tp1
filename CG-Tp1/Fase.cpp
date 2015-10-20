@@ -14,7 +14,7 @@ void Fase::desenhaExplosoes()
 {
     for (std::list<Explosao*>::iterator i = explosoesAtivas.begin(); i != explosoesAtivas.end();)
     {
-        if ((*i)->value < 60)
+        if ((*i)->value < 20)
         {
             EfeitoVisual::getInstance().desenhaExplosao(*(*i));
             (*i)->value++;
@@ -68,7 +68,7 @@ void Fase::desenhaHUD() {
 			Jogo::getInstance().numeroVidas++;
 		}
 		Jogo::getInstance().setControlaScore();
-		EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/ganhaVida.mp3");
+		//EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/ganhaVida.mp3");
 		//ADICIONAR SOM PARA MOSTRAR QUE GANHOU VIDA
 
 
@@ -97,5 +97,14 @@ void Fase::novoProjetilInimigo(Projetil *p)
 void Fase::novoProjetilAmigo(Projetil *p)
 {
 	projeteisAmigos.push_back(p);
+}
+
+void Fase::reseta()
+{
+	inimigosAtivos.clear();
+	projeteisInimigos.clear();
+	projeteisAmigos.clear();
+	explosoesAtivas.clear();
+	caixas.clear();
 }
 
