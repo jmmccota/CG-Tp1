@@ -364,7 +364,6 @@ void Fase_TheBlitz::atualiza(int value)
 				Jogo::getInstance().proximaFase();
 			}
             principal->morreu();
-
 		}
 	}
 

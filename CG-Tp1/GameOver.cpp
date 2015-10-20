@@ -16,11 +16,6 @@ void GameOver::desenhaBackground()
 {
 	glClearColor(0, 0, 0, 1);
 	glClear(GL_COLOR_BUFFER_BIT);
-	//cout << "entra aqui BG \n";
-}
-
-void GameOver::setScore(int score)
-{
 }
 
 void GameOver::desenha()
@@ -32,12 +27,12 @@ void GameOver::desenha()
 
 	desenhaBackground();
 	//cout << "entra aqui desenha \n";
-	EfeitoVisual::getInstance().ortho2D();	
-		//se gameOver true escreve grande na tela game over se fudeu etc
+	EfeitoVisual::getInstance().ortho2D();
+	//se gameOver true escreve grande na tela game over se fudeu etc
 	desenhaGameOver();
-		//se gameOver false escreve you win voce é fodão	
-	
-	if (Jogo::getInstance().bestScore) {
+	//se gameOver false escreve you win voce é fodão	
+
+	if (Jogo::getInstance().score->getScoreValue() > 0) {
 		desenhaScore();
 		//coloca no meio da tela o quadradim pra digitar
 	}
@@ -55,34 +50,34 @@ void GameOver::desenha()
 }
 
 void GameOver::terminou()
-{	
+{
 }
 
 void GameOver::atualiza(int value)
-{	
+{
 }
 
 void GameOver::mouse(int button, int state, int x, int y)
-{	
-		// send event to AntTweakBar
+{
+	// send event to AntTweakBar
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-		cout << "Position: (" << x << "," << y << ")" << endl;		
+		cout << "Position: (" << x << "," << y << ")" << endl;
 		if (x > 1080 && x < 1200) {
-			if (y<530 && y>480) {
+			if (y < 530 && y>480) {
 				Jogo::getInstance().score->saveScore(nome, Jogo::getInstance().score->getScoreValue());
-				Jogo::getInstance().setProxFase(1);				
+				Jogo::getInstance().setProxFase(1);
 				Jogo::getInstance().proximaFase();
-				
+
 			}
 		}
 	}
-	
+
 }
 
 void GameOver::keyDown(unsigned char key, int x, int y)
 {
-	
-		
+
+
 }
 
 void GameOver::keyUp(unsigned char key, int x, int y)
@@ -91,8 +86,8 @@ void GameOver::keyUp(unsigned char key, int x, int y)
 	switch (key) {
 	case 13:
 		//enter salvar
-		if (Jogo::getInstance().score->getScoreValue()>0) {
-			Jogo::getInstance().score->saveScore(nome, Jogo::getInstance().score->getScoreValue());			
+		if (Jogo::getInstance().score->getScoreValue() > 0) {
+			Jogo::getInstance().score->saveScore(nome, Jogo::getInstance().score->getScoreValue());
 		}
 		Jogo::getInstance().setProxFase(1);
 		Jogo::getInstance().proximaFase();
@@ -106,7 +101,7 @@ void GameOver::keyUp(unsigned char key, int x, int y)
 		}
 		break;
 	}
-	if (nome.length()<20) {
+	if (nome.length() < 20) {
 		switch (key) {
 		case 'a': //
 		case 'A':
@@ -218,25 +213,25 @@ void GameOver::keyUp(unsigned char key, int x, int y)
 
 void GameOver::specialKeyDown(int key, int x, int y)
 {
-	
+
 }
 
 void GameOver::specialKeyUp(int key, int x, int y)
 {
-	
 
 }
-void GameOver::desenhaGameOver() {	
-	//cout << "entra aqui gameOVer\n";
-	int x = 500, y;	
-	glColor3f(1,0.27,0);
-	if (Jogo::getInstance().bestScore) {
+
+void GameOver::desenhaGameOver() {
+
+	int x = 500, y;
+	glColor3f(1, 0.27, 0);
+	if (Jogo::getInstance().score->getScoreValue() > 0) {
 		y = 1000;
 	}
 	else {
 		y = 600;
 	}
-	if (Jogo::getInstance().gameOver) {
+	if (Jogo::getInstance().numeroVidas == 0) {
 		x += 30;
 		//G
 		EfeitoVisual::getInstance().desenhaQuadrado(x - 10, y + 10, x + 60, y - 20);
@@ -288,7 +283,7 @@ void GameOver::desenhaGameOver() {
 		EfeitoVisual::getInstance().desenhaQuadrado(x + 875, y + 10, x + 895, y - 70);
 		EfeitoVisual::getInstance().desenhaQuadrado(x + 805, y - 50, x + 895, y - 70);
 		glBegin(GL_QUADS);
-		glColor3f(1,0.27,0);
+		glColor3f(1, 0.27, 0);
 		glVertex2i(x + 835, y - 70);
 		glVertex2i(x + 865, y - 70);
 		glVertex2i(x + 895, y - 120);
@@ -296,7 +291,7 @@ void GameOver::desenhaGameOver() {
 		glEnd();
 		glBegin(GL_LINE_LOOP);
 		glColor3f(1, 1, 1);
-		glVertex2i(x + 835+1, y - 70);
+		glVertex2i(x + 835 + 1, y - 70);
 		glVertex2i(x + 865 + 1, y - 70);
 		glVertex2i(x + 895 + 1, y - 120);
 		glVertex2i(x + 865 + 1, y - 120);
@@ -376,43 +371,35 @@ void GameOver::desenhaGameOver() {
 		glEnd();
 
 	}
-	
+
 }
-//void GameOver::desenhaQuadrado(int x,int y,int x1,int y1) {
-//	glColor3f(1, 1, 1);
-//	glBegin(GL_QUADS);
-//	glVertex2i(x, y);
-//	glVertex2i(x1, y);
-//	glVertex2i(x1, y1);
-//	glVertex2i(x, y1);
-//	glEnd();
-//}
+
 void GameOver::desenhaScore() {
-	//cout << "entra aqui SCORE\n";
+
 	glBegin(GL_LINE_LOOP);
 	glColor3f(1, 0.27, 0);
-	glVertex2i(650,700);
+	glVertex2i(650, 700);
 	glVertex2i(1240, 700);
 	glVertex2i(1240, 450);
 	glVertex2i(650, 450);
-	glEnd();		
+	glEnd();
 	string recorde = "SALVE SEU SCORE!";
-	
+
 	glRasterPos2f(660, 650);
-	FuncoesAuxiliares::writeWord_BITMAP(recorde,GLUT_BITMAP_TIMES_ROMAN_24);
+	FuncoesAuxiliares::writeWord_BITMAP(recorde, GLUT_BITMAP_TIMES_ROMAN_24);
 	//string sco = score;
 	glRasterPos2f(660, 565);
-	FuncoesAuxiliares::writeWord_BITMAP("Nome: ", GLUT_BITMAP_TIMES_ROMAN_24);	
+	FuncoesAuxiliares::writeWord_BITMAP("Nome: ", GLUT_BITMAP_TIMES_ROMAN_24);
 	glBegin(GL_LINE_LOOP);
 	glVertex2i(770, 600);
 	glVertex2i(1200, 600);
 	glVertex2i(1200, 550);
 	glVertex2i(770, 550);
 	glEnd();
-	string score = "Score: "+ std::to_string(Jogo::getInstance().score->getScoreValue());
-	glRasterPos2f(660,480);
+	string score = "Score: " + std::to_string(Jogo::getInstance().score->getScoreValue());
+	glRasterPos2f(660, 480);
 	FuncoesAuxiliares::writeWord_BITMAP(score, GLUT_BITMAP_TIMES_ROMAN_24);
-	glRasterPos2f(780, 565);	
+	glRasterPos2f(780, 565);
 	//cout << nome.length();
 	FuncoesAuxiliares::writeWord_BITMAP(nome, GLUT_BITMAP_HELVETICA_18);
 	glBegin(GL_LINE_LOOP);
@@ -424,11 +411,11 @@ void GameOver::desenhaScore() {
 	glRasterPos2f(1095, 490);
 	FuncoesAuxiliares::writeWord_BITMAP("Salvar", GLUT_BITMAP_TIMES_ROMAN_24);
 }
+
 void GameOver::inicializa()
 {
-	// se game over true coloca musica de game over else musica de victory
-    EfeitoSonoro::getInstance().initAudios_GameOver();
-    EfeitoSonoro::getInstance().playMainTheme();
+	EfeitoSonoro::getInstance().initAudios_GameOver();
+	EfeitoSonoro::getInstance().playMainTheme();
 
 	desenha();
 }
