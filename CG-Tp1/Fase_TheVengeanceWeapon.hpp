@@ -7,6 +7,9 @@
 
 class Fase_TheVengeanceWeapon : public Fase
 {
+protected:
+    V2 *boss;
+
 public:
 
 	Fase_TheVengeanceWeapon();
