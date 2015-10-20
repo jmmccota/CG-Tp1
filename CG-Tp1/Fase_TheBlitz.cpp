@@ -223,15 +223,14 @@ void Fase_TheBlitz::desenha()
 
 void Fase_TheBlitz::terminou()
 {
-	EfeitoSonoro::getInstance().finishAllAudios();
+
 	if (Jogo::getInstance().numeroVidas == 0)
 	{
+		EfeitoSonoro::getInstance().finishAllAudios();
 		Jogo::getInstance().setProxFase(5);
+		Jogo::getInstance().proximaFase();
 	}
-	else {
-		Jogo::getInstance().setProxFase(3);
-	}
-	Jogo::getInstance().proximaFase();
+
 }
 
 void Fase_TheBlitz::atualiza(int value)
@@ -345,16 +344,12 @@ void Fase_TheBlitz::atualiza(int value)
 			//Se foi destruido
 			if ((*j)->destruido())
 			{
-				if ((*j)->getNome() == "Me264") {
-					passouFase = true;
-				}
-
 				explosoesAtivas.push_back(new Explosao((*j)->getX(), (*j)->getY(), 1));
 				Jogo::getInstance().score->incScoreValue((*j)->getScore());
 				j = inimigosAtivos.erase(j);
-				if ((*j)->getNome() == "") 
+				if ((*j)->getNome() == "Me264")
 				{
-
+					passouFase = true;
 				}
 			}
 			//Se ta de boa ainda
