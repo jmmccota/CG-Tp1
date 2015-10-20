@@ -14,20 +14,25 @@ public:
 	FMOD_Audio();
 	~FMOD_Audio();
 
+	
 	//Getters
-	FMOD::Channel *getChannel();
 	FMOD::Sound *getSound();
-	//Get channel state
-	bool getChannelState();
+	
+	//Reset Channels
+	void resetAudio();
 
 	//Play Once
 	void playStreamAudio(FMOD::System *system, char *file, bool loop);
+
 	//Save in memory and play
 	void playMemoryAudio(FMOD::System *system);
+	
 	//Save in memory and play, give more channel to use
 	void playMemoryAudio(FMOD::System *system, bool giveMoreChannel);
+	
 	//Stop som
 	void stopAudio();
+	
 	//Set volume 0 to 100
 	void setVolume(float volume);
 
