@@ -48,7 +48,8 @@ public:
 class Caixa : public Solido
 {
 public:
-	Caixa(GLfloat x, GLfloat y) : Solido(x, y, 0.0f, 50.0f) {}
+	int tipo;
+	Caixa(GLfloat x, GLfloat y, int tipo) : Solido(x, y, 0.0f, 50.0f) { this->tipo = tipo; }
 	void acao() {}
 };
 
