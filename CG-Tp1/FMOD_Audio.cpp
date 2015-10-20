@@ -65,8 +65,15 @@ void FMOD_Audio::setVolume(float volume)
 	}
 }
 
-
+bool FMOD_Audio::getChannelState()
+{
+	bool isPlaying = false;
+	channel->isPlaying(&isPlaying);
+	return isPlaying;
+}
 
 FMOD_Audio::~FMOD_Audio()
 {
+	sound->release();
+	channel = 0;
 }

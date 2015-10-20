@@ -227,32 +227,32 @@ void Fase_TheBlitz::atualiza(int value)
 {
        pair<GLint, GLint> size = EfeitoVisual::getInstance().getOrtho2D();
     //Inimigos normais
-	//if (value % 300 == 99 && value < 10000)
-	//{
-	//	Bf109 *aux = new Bf109(rand() % size.first, size.second, (float)100 / 10000, principal, this);
-	//	aux->inverteY();
-	//	inimigosAtivos.push_back(aux);
- //       EfeitoSonoro::getInstance().playBf109Motor();
-	//	if (value % 700 == 99)
-	//	{
-	//		Me163 *aux2 = new Me163(rand() % size.first, size.second, (float)100 / 10000, principal, this);
-	//		aux2->inverteY();
-	//		inimigosAtivos.push_back(aux2);
- //           EfeitoSonoro::getInstance().playMe163Motor();
-	//	}
-	//}
+	if (value % 300 == 99 && value < 10000)
+	{
+		Bf109 *aux = new Bf109(rand() % size.first, size.second, (float)100 / 10000, principal, this);
+		aux->inverteY();
+		inimigosAtivos.push_back(aux);
+        EfeitoSonoro::getInstance().playBf109Motor();
+		if (value % 700 == 99)
+		{
+			Me163 *aux2 = new Me163(rand() % size.first, size.second, (float)100 / 10000, principal, this);
+			aux2->inverteY();
+			inimigosAtivos.push_back(aux2);
+            EfeitoSonoro::getInstance().playMe163Motor();
+		}
+	}
 
     //Chefao
-    /*else*/ if (value == /*10300*/1)
-    {
-        boss = new Me264(size.first / 2, size.second + 299, (float) 600 / 10000, principal, this);
-        inimigosAtivos.push_back(boss);
-        EfeitoSonoro::getInstance().playMe264Motor();
-    }
-    else if (value == 17000)
-    {
-        boss->finaliza();
-    }
+    ///*else*/ if (value == /*10300*/1)
+    //{
+    //    boss = new Me264(size.first / 2, size.second + 299, (float) 600 / 10000, principal, this);
+    //    inimigosAtivos.push_back(boss);
+    //    EfeitoSonoro::getInstance().playMe264Motor();
+    //}
+    //else if (value == 17000)
+    //{
+    //    boss->finaliza();
+    //}
 
     for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end();)
     {
@@ -326,7 +326,8 @@ void Fase_TheBlitz::atualiza(int value)
                 explosoesAtivas.push_back(new Explosao((*j)->getX(), (*j)->getY(), 1));
 				Jogo::getInstance().score->incScoreValue((*j)->getScore());
 				j = inimigosAtivos.erase(j);
-				//if((*j)->getNome() == "")
+
+				if((*j)->getNome() == ""){}
 			}
 			//Se ta de boa ainda
 			else
