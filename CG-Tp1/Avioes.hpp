@@ -72,6 +72,30 @@ public:
 	int getScore();
 };
 
+class Bf109Verde : public Bf109
+{
+	Bf109Verde(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f) :
+		Bf109(pX, pY, esc, a, f)
+	{
+		this->carrega("Bf109Verde.dat");
+	}
+	~Bf109Verde() {}
+
+	string getNome() { return "Bf109Verde"; }
+};
+
+class Bf109Amarelo : public Bf109
+{
+	Bf109Amarelo(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f) :
+		Bf109(pX, pY, esc, a, f)
+	{
+		this->carrega("Bf109Amarelo.dat");
+	}
+	~Bf109Amarelo() {}
+
+	string getNome() { return "Bf109Amarelo"; }
+};
+
 
 class Me163 : public Personagem
 {

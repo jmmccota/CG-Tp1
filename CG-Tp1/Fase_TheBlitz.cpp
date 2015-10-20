@@ -347,7 +347,15 @@ void Fase_TheBlitz::atualiza(int value)
 				explosoesAtivas.push_back(new Explosao((*j)->getX(), (*j)->getY(), 1));
 				Jogo::getInstance().score->incScoreValue((*j)->getScore());
 				j = inimigosAtivos.erase(j);
-				if ((*j)->getNome() == "Me264")
+				if ((*j)->getNome() == "Bf109Verde") 
+				{
+					caixas.push_back(new Caixa((*j)->getX(), (*j)->getY(), 1));
+				}
+				else if ((*j)->getNome() == "Bf109Amarelo")
+				{
+					caixas.push_back(new Caixa((*j)->getX(), (*j)->getY(), 2));
+				}
+				else if ((*j)->getNome() == "Me264")
 				{
 					passouFase = true;
 				}
@@ -420,6 +428,14 @@ void Fase_TheBlitz::atualiza(int value)
 				explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 5));
 				//EfeitoSonoro::getInstance().stopMe264Motor();
 			}
+			if (nome == "Bf109Verde")
+			{
+				caixas.push_back(new Caixa((*i)->getX(), (*i)->getY(), 1));
+			}
+			if (nome == "Bf109Amarelo")
+			{
+				caixas.push_back(new Caixa((*i)->getX(), (*i)->getY(), 1));
+			}
 			else
 				explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 2));
 			EfeitoSonoro::getInstance().playExplosion();
@@ -438,6 +454,28 @@ void Fase_TheBlitz::atualiza(int value)
 			Jogo::getInstance().numeroVidas--;
 			terminou();
 			principal->morreu();
+		}
+	}
+
+	for (std::list<Caixa*>::iterator i = caixas.begin(); i != caixas.end();)
+	{
+		if (EfeitoVisual::getInstance().colisao(*i, principal))
+		{
+			if ((*i)->tipo == 1)
+			{
+				principal->municao[1]++;
+				principal->powerUp = 1;
+			}
+			else if ((*i)->tipo == 2)
+			{
+				principal->morreu();
+				Jogo::getInstance().numeroVidas++;
+			}
+			i = caixas.erase(i);
+		}
+		else
+		{
+			i++;
 		}
 	}
 }
