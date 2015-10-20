@@ -84,6 +84,8 @@ void Fase::desenhaHUD() {
 	glColor3f(1, 0.27, 0);
 	glRasterPos2f(50, 50);
 	FuncoesAuxiliares::writeWord_BITMAP("x " + std::to_string(principal->getQtdTiros()), GLUT_BITMAP_TIMES_ROMAN_24);
+	
+	
 }
 
 void Fase::desenha() {

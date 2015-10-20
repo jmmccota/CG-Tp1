@@ -211,6 +211,9 @@ void Fase_TheBlitz::desenha()
     desenhaExplosoes();
 
 	desenhaHUD();
+	if (bossOn) {
+		desenhaHPBoss();
+	}
 	/*if (gameOver || fimDeJogo) {
 		desenhaGameOver();
 	}*/
@@ -248,10 +251,13 @@ void Fase_TheBlitz::atualiza(int value)
         boss = new Me264(size.first / 2, size.second + 299, (float) 600 / 10000, principal, this);
         inimigosAtivos.push_back(boss);
         EfeitoSonoro::getInstance().playMe264Motor();
+		bossOn = true;
+		
     }
     else if (value == 17000)
     {
         boss->finaliza();
+		
     }
 
     for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end();)
@@ -426,7 +432,33 @@ void Fase_TheBlitz::atualiza(int value)
 //    EfeitoVisual::getInstance().atualizaExplosao();
 
 }
-
+void Fase_TheBlitz::desenhaHPBoss() {
+	if (bossOn && boss->getHP()>0) {
+		//glRasterPos2f(1600, 970);
+		int hp = 1000 * boss->getHP() / 3000;
+		glBegin(GL_LINE_LOOP);
+		glColor3f(1, 1, 1);
+		glVertex2i(1450, 1050);
+		glVertex2i(1850, 1050);
+		glVertex2i(1850, 1020);
+		glVertex2i(1450, 1020);
+		glEnd();
+		double partes = 0.4;
+		glBegin(GL_QUADS);
+		glColor3f(1, 0, 0);
+		glVertex2f(1451, 1049);
+		if ((partes*hp + 1450) > 1451) {
+			glVertex2f(partes*hp + 1450, 1049);
+			glVertex2f(partes*hp + 1450, 1021);
+		}
+		else {
+			glVertex2f(1451, 1049);
+			glVertex2f(1451, 1021);
+		}
+		glVertex2f(1451, 1021);
+		glEnd();
+	}
+}
 void Fase_TheBlitz::mouse(int button, int state, int x, int y)
 {
 }
