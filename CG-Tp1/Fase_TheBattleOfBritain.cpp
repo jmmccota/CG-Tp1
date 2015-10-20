@@ -365,13 +365,13 @@ void Fase_TheBattleOfBritain::atualiza(int value)
 			}
 				if (nome == "Bf109Verde")
 				{
-					int x = (*j)->getX();
-					int y = (*j)->getY();
+					int x = (*i)->getX();
+					int y = (*i)->getY();
 					caixas.push_back(new Caixa(x, y, 1));
 				}
 				else if (nome == "Bf109Amarelo")
 				{
-					caixas.push_back(new Caixa((*j)->getX(), (*j)->getY(), 2));
+					caixas.push_back(new Caixa((*i)->getX(), (*i)->getY(), 2));
 				}
 			else
 				explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 2));

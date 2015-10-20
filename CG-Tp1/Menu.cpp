@@ -248,10 +248,10 @@ void drawBestScoresMenu(vector<Score> bestScores, int decRasterY) {
 //Desenha a Opção do Menu 
 void drawOpcoesMenu() {
 
-	int rasterY = 460;
+	int rasterY = 480;
 	glColor3f(1, 1, 1);
 
-	glRasterPos2f(200, 460);
+	glRasterPos2f(200, rasterY);
 	FuncoesAuxiliares::writeWord_BITMAP("O objetivo do jogo e terminar as 3 fases. Mate os 3 chefes e o maximo de inimigos possiveis!", FONT_DEFAULT);
 
 	glRasterPos2f(200, rasterY - 40);
@@ -264,26 +264,31 @@ void drawOpcoesMenu() {
 	FuncoesAuxiliares::writeWord_BITMAP("- Setas direcionais movimentam o Aviao.", FONT_DEFAULT);
 
 	glRasterPos2f(220, rasterY - 160);
-	FuncoesAuxiliares::writeWord_BITMAP("- Z(Tiro Simples) e X(Bomba Simples) atiram.", FONT_DEFAULT);
-
+	FuncoesAuxiliares::writeWord_BITMAP("- Z(tiro simples) e X(bomba) atiram.", FONT_DEFAULT);
+	glRasterPos2f(220, rasterY - 200);
+	FuncoesAuxiliares::writeWord_BITMAP("- F para modo FullScreen e P para pausar.", FONT_DEFAULT);
 
 	glColor3f(1, 0.27, 0);
 
-	glRasterPos2f(440, 210);
+	glRasterPos2f(280, 195);
 	FuncoesAuxiliares::writeWord_BITMAP("Z", GLUT_BITMAP_TIMES_ROMAN_24);
-	glRasterPos2f(537, 210);
+	glRasterPos2f(377.5, 195);
 	FuncoesAuxiliares::writeWord_BITMAP("X", GLUT_BITMAP_TIMES_ROMAN_24);
+	glRasterPos2f(480, 195);
+	FuncoesAuxiliares::writeWord_BITMAP("F", GLUT_BITMAP_TIMES_ROMAN_24);
+	glRasterPos2f(580, 195);
+	FuncoesAuxiliares::writeWord_BITMAP("P", GLUT_BITMAP_TIMES_ROMAN_24);
 
-	glRasterPos2f(765, 210);
+	glRasterPos2f(765, 195);
 	FuncoesAuxiliares::writeWord_BITMAP("<-", GLUT_BITMAP_TIMES_ROMAN_24);
 
-	glRasterPos2f(863, 210);
+	glRasterPos2f(863, 195);
 	FuncoesAuxiliares::writeWord_BITMAP("v", GLUT_BITMAP_TIMES_ROMAN_24);
 
-	glRasterPos2f(935, 210);
+	glRasterPos2f(935, 195);
 	FuncoesAuxiliares::writeWord_BITMAP("->", GLUT_BITMAP_TIMES_ROMAN_24);
 
-	glRasterPos2f(863, 287.5);
+	glRasterPos2f(863, 267.5);
 	FuncoesAuxiliares::writeWord_BITMAP("^", GLUT_BITMAP_TIMES_ROMAN_24);
 
 	glColor3f(1, 0.27, 0);
@@ -295,40 +300,53 @@ void drawOpcoesMenu() {
 	//glVertex2i(220, 180);
 	//glEnd();
 	glBegin(GL_LINE_LOOP);
-	glVertex2i(410, 260); //Z
-	glVertex2i(490, 260);
-	glVertex2i(490, 180);
-	glVertex2i(410, 180);
+	glVertex2i(250, 250); //Z
+	glVertex2i(330, 250);
+	glVertex2i(330, 170);
+	glVertex2i(250, 170);
 	glEnd();
 	glBegin(GL_LINE_LOOP);
-	glVertex2i(510, 260); //X
-	glVertex2i(590, 260);
-	glVertex2i(590, 180);
-	glVertex2i(510, 180);
+	glVertex2i(350, 250); //X
+	glVertex2i(430, 250);
+	glVertex2i(430, 170);
+	glVertex2i(350, 170);
 	glEnd();
+	glBegin(GL_LINE_LOOP);
+	glVertex2i(450, 250); //F
+	glVertex2i(530, 250);
+	glVertex2i(530, 170);
+	glVertex2i(450, 170);
+	glEnd();
+	glBegin(GL_LINE_LOOP);
+	glVertex2i(550, 250); //P
+	glVertex2i(630, 250);
+	glVertex2i(630, 170);
+	glVertex2i(550, 170);
+	glEnd();
+	
 	glBegin(GL_LINE_LOOP); //Seta esquerda
-	glVertex2i(745, 260);
-	glVertex2i(825, 260);
-	glVertex2i(825, 180);
-	glVertex2i(745, 180);
+	glVertex2i(745, 250);
+	glVertex2i(825, 250);
+	glVertex2i(825, 170);
+	glVertex2i(745, 170);
 	glEnd();
 	glBegin(GL_LINE_LOOP);
-	glVertex2i(830, 260); //Seta baixo
-	glVertex2i(910, 260);
-	glVertex2i(910, 180);
-	glVertex2i(830, 180);
+	glVertex2i(830, 250); //Seta baixo
+	glVertex2i(910, 250);
+	glVertex2i(910, 170);
+	glVertex2i(830, 170);
 	glEnd();
 	glBegin(GL_LINE_LOOP);
-	glVertex2i(915, 260); //Seta direita
-	glVertex2i(995, 260);
-	glVertex2i(995, 180);
-	glVertex2i(915, 180);
+	glVertex2i(915, 250); //Seta direita
+	glVertex2i(995, 250);
+	glVertex2i(995, 170);
+	glVertex2i(915, 170);
 	glEnd();
 	glBegin(GL_LINE_LOOP);
-	glVertex2i(830, 345); //Seta cima
-	glVertex2i(910, 345);
-	glVertex2i(910, 265);
-	glVertex2i(830, 265);
+	glVertex2i(830, 325); //Seta cima
+	glVertex2i(910, 325);
+	glVertex2i(910, 245);
+	glVertex2i(830, 245);
 	glEnd();
 
 	/*-------------- END COMANDOS SETAS ------------------*/
