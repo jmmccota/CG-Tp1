@@ -29,7 +29,7 @@ void EfeitoSonoro::createObjectSystem()
 		*/
 		FMOD::System_Create(&system);
 
-		system->init(20, FMOD_INIT_NORMAL, 0);
+		system->init(50, FMOD_INIT_NORMAL, 0);
 
 	}
 	catch (const std::exception&)
@@ -98,8 +98,7 @@ void EfeitoSonoro::initAudios_TheVengeanceWeapon() {
 void EfeitoSonoro::finishAllAudios()
 {
 	for (int i = 0; i < arrayAudios.size(); i++) {
-		arrayAudios[i]->getSound()->release();
-		arrayAudios[i]->getChannel()->stop();
+		arrayAudios[i]->resetAudio();
 	}
 	system->release();
 	arrayAudios.clear();
@@ -140,7 +139,7 @@ void EfeitoSonoro::playSpitfireAway()
 
 void EfeitoSonoro::playBf109Motor()
 {
-    arrayAudios[6]->playMemoryAudio(system);
+    arrayAudios[6]->playMemoryAudio(system, true);
 }
 
 void EfeitoSonoro::playBf109FlyBy()
@@ -184,7 +183,7 @@ void EfeitoSonoro::playMg42Shot()
 
 void EfeitoSonoro::playBombDrop()
 {
-    arrayAudios[4]->playMemoryAudio(system);
+    arrayAudios[4]->playMemoryAudio(system, true);
 }
 
 void EfeitoSonoro::stopSpitfireMotor()

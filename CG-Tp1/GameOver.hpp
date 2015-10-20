@@ -12,23 +12,31 @@ public:
 	bool melhorScore = true;
 	int bestScore = 0;
 	int contador = 0;
-	void definePersonagens();
+
 	string nome="";
+protected:
+
+	void definePersonagens();
 	void desenhaBackground();
-
-	void setScore(int score);	
+	// Função callback chamada para fazer o desenho
 	void desenha();
-
 	void terminou();
 
-	void atualiza(int value);	
+	// Função callback chamada pela GLUT a cada intervalo de tempo
+	// (a window não está sendo redimensionada ou movida)
+	void atualiza(int value);
+
+	//Clique do mouse
 	void mouse(int button, int state, int x, int y);
 	void keyDown(unsigned char key, int x, int y);
 	void keyUp(unsigned char key, int x, int y);
 	void specialKeyDown(int key, int x, int y);
 	void specialKeyUp(int key, int x, int y);
+
+	// Inicializa parâmetros de rendering
+	void inicializa();
+
 	void desenhaGameOver();
 	void desenhaScore();
-	void inicializa();
 };
 

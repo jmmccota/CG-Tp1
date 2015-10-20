@@ -10,7 +10,7 @@ EfeitoVisual::EfeitoVisual()
     sizeX = 1280;
     sizeY = 720;
 }
-
+//teste
 EfeitoVisual::~EfeitoVisual()
 {
 }
