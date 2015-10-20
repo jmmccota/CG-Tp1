@@ -136,6 +136,7 @@ void Jogo::inicializa(int fase)
 				Jogo::getInstance().bestScore = true;
 			}
 		}
+		EfeitoSonoro::getInstance().finishAllAudios();
 		Jogo::getInstance().fases[fase]->inicializa();		
 	}
 	else
@@ -151,18 +152,20 @@ void Jogo::inicializa(int fase)
 		glutSpecialFunc(Jogo::specialKeyDown);
 		glutSpecialUpFunc(Jogo::specialKeyUp);
 		glutDisplayFunc(Jogo::draw);		
-		Jogo::getInstance().gameOver = true;		
+		Jogo::getInstance().gameOver = true;
+		//Jogo::getInstance().score->setScoreValue(100);
 		if (Jogo::getInstance().score->getScoreValue() > 0) {
 			Jogo::getInstance().bestScore = true;
 		}
+		EfeitoSonoro::getInstance().finishAllAudios();
 		Jogo::getInstance().fases[fase]->inicializa();
 	}
 }
 
 void Jogo::proximaFase()
 {
-	if (proxFase != -1){
-		inicializa(proxFase);}
+	if (proxFase != -1)
+		inicializa(proxFase);
 	else
 		fimJogo();
 }
