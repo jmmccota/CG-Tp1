@@ -41,15 +41,15 @@ void GameOver::desenha()
 		desenhaScore();
 		//coloca no meio da tela o quadradim pra digitar
 	}
-	if (contador>200) {
-		explosoesAtivas.push_back(new Explosao(rand() % 450, rand() % 1000, 1));
-		explosoesAtivas.push_back(new Explosao(rand() % 100 + 950, rand() % 1000, 1));
-		contador = 0;
-		desenhaExplosoes();
-	}
-	
-	// Present frame buffer
-	contador++;
+	//if (contador>200) {
+	//	explosoesAtivas.push_back(new Explosao(rand() % 450, rand() % 1000, 1));
+	//	explosoesAtivas.push_back(new Explosao(rand() % 100 + 950, rand() % 1000, 1));
+	//	contador = 0;
+	//	desenhaExplosoes();
+	//}
+	//
+	//// Present frame buffer
+	//contador++;
 
 	glutSwapBuffers();
 }
@@ -60,8 +60,6 @@ void GameOver::terminou()
 
 void GameOver::atualiza(int value)
 {	
-	pair<GLint, GLint> size = EfeitoVisual::getInstance().getOrtho2D();
-	desenha();
 }
 
 void GameOver::mouse(int button, int state, int x, int y)
@@ -429,7 +427,8 @@ void GameOver::desenhaScore() {
 void GameOver::inicializa()
 {
 	// se game over true coloca musica de game over else musica de victory
-	EfeitoSonoro::getInstance().initAudios_GameOver();
-	//EfeitoSonoro::getInstance().playMainTheme();
+    EfeitoSonoro::getInstance().initAudios_GameOver();
+    EfeitoSonoro::getInstance().playMainTheme();
+
 	desenha();
 }

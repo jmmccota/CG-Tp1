@@ -243,16 +243,16 @@ void Fase_TheBlitz::atualiza(int value)
 	}
 
     //Chefao
-    ///*else*/ if (value == /*10300*/1)
-    //{
-    //    boss = new Me264(size.first / 2, size.second + 299, (float) 600 / 10000, principal, this);
-    //    inimigosAtivos.push_back(boss);
-    //    EfeitoSonoro::getInstance().playMe264Motor();
-    //}
-    //else if (value == 17000)
-    //{
-    //    boss->finaliza();
-    //}
+    else if (value == 10300)
+    {
+        boss = new Me264(size.first / 2, size.second + 299, (float) 600 / 10000, principal, this);
+        inimigosAtivos.push_back(boss);
+        EfeitoSonoro::getInstance().playMe264Motor();
+    }
+    else if (value == 17000)
+    {
+        boss->finaliza();
+    }
 
     for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end();)
     {
@@ -326,8 +326,6 @@ void Fase_TheBlitz::atualiza(int value)
                 explosoesAtivas.push_back(new Explosao((*j)->getX(), (*j)->getY(), 1));
 				Jogo::getInstance().score->incScoreValue((*j)->getScore());
 				j = inimigosAtivos.erase(j);
-
-				if((*j)->getNome() == ""){}
 			}
 			//Se ta de boa ainda
 			else
@@ -358,7 +356,10 @@ void Fase_TheBlitz::atualiza(int value)
             explosoesAtivas.push_back(new Explosao(principal->getX(), principal->getY(), 1));
             principal->powerUp = 0;
             Jogo::getInstance().numeroVidas--;
-			if (Jogo::getInstance().numeroVidas==0) {				
+            if (Jogo::getInstance().numeroVidas == 0) {
+                EfeitoSonoro::getInstance().stopSpitfireMotor();
+                EfeitoSonoro::getInstance().stopBf109Motor();
+                EfeitoSonoro::getInstance().stopMe163Motor();
 				Jogo::getInstance().setProxFase(5);				
 				Jogo::getInstance().proximaFase();
 			}
@@ -367,19 +368,21 @@ void Fase_TheBlitz::atualiza(int value)
 		}
 	}
 
+    string nome;
 	//Colisao avioes
 	for (std::list<Personagem*>::iterator i = inimigosAtivos.begin(); i != inimigosAtivos.end();)
 	{
 		if (EfeitoVisual::getInstance().colisao((*i), principal))
 		{
-            if ((*i)->getNome() == "Me264")
+            nome = (*i)->getNome();
+            if (nome == "Me264")
             {
                 i++;
                 continue;
             }
 			principal->alvejado((*i)->danoColisao());
 			(*i)->alvejado(principal->danoColisao());
-            if ((*i)->getNome() == "Me163")
+            if (nome == "Me163")
                 (*i)->alvejado(1000);
 		}
 
@@ -388,7 +391,13 @@ void Fase_TheBlitz::atualiza(int value)
 			if (rand() % 20 == 0)
 				principal->powerUp = 1;
 			Jogo::getInstance().score->incScoreValue((*i)->getScore());
-            explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 2));
+            if (nome == "Me264")
+            {
+                explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 5));
+                //EfeitoSonoro::getInstance().stopMe264Motor();
+            }
+            else
+                explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 2));
             EfeitoSonoro::getInstance().playExplosion();
 			i = inimigosAtivos.erase(i);
 		}
@@ -399,10 +408,14 @@ void Fase_TheBlitz::atualiza(int value)
 
 		if (principal->destruido())
         {
-            explosoesAtivas.push_back(new Explosao(principal->getX(), principal->getY(), 1));
+            if (nome != "Me163")
+                explosoesAtivas.push_back(new Explosao(principal->getX(), principal->getY(), 1));
             principal->powerUp = 0;
             Jogo::getInstance().numeroVidas--;
 			if (Jogo::getInstance().numeroVidas == 0) {
+                EfeitoSonoro::getInstance().stopSpitfireMotor();
+                EfeitoSonoro::getInstance().stopBf109Motor();
+                EfeitoSonoro::getInstance().stopMe163Motor();
 				Jogo::getInstance().setProxFase(5);				
 				Jogo::getInstance().proximaFase();
 			}
@@ -420,12 +433,6 @@ void Fase_TheBlitz::mouse(int button, int state, int x, int y)
 
 void Fase_TheBlitz::keyDown(unsigned char key, int x, int y)
 {
-	switch (key) {
-	case 'F':
-	case 'f':
-		EfeitoVisual::getInstance().setFullScreen();
-		break;
-	}
 	
 }
 

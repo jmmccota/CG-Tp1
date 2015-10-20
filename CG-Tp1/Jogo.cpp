@@ -164,8 +164,8 @@ void Jogo::inicializa(int fase)
 
 void Jogo::proximaFase()
 {
-	if (proxFase != -1){
-		inicializa(proxFase);}
+	if (proxFase != -1)
+		inicializa(proxFase);
 	else
 		fimJogo();
 }
