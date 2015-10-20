@@ -211,8 +211,8 @@ void drawBestScoresMenu(vector<Score> bestScores, int decRasterY) {
 		FuncoesAuxiliares::writeWord_BITMAP(rank, FONT_DEFAULT);
 
 		string name = bestScores[i].getPlayer();
-		if (i==0) {
-			bestName=name;
+		if (i == 0) {
+			bestName = name;
 		}
 		glRasterPos2f(rasterX, rasterY);
 		FuncoesAuxiliares::writeWord_BITMAP(name, FONT_DEFAULT);
@@ -237,11 +237,11 @@ void drawBestScoresMenu(vector<Score> bestScores, int decRasterY) {
 		rasterY -= decRasterY;
 	}
 	glColor3f(0.93, 0.57, 0.13);
-	int x=1470, x1=1520, y=480, y1=280;
-	EfeitoVisual::getInstance().desenhaQuadrado(x,y,x1,y1);
-	EfeitoVisual::getInstance().desenhaQuadrado(x-30, y, x1, y-50);
-	EfeitoVisual::getInstance().desenhaQuadrado(x - 50, y1+20, x1+50, y1-20);
-	glRasterPos2f(x-40, y1-60);
+	int x = 1470, x1 = 1520, y = 480, y1 = 280;
+	EfeitoVisual::getInstance().desenhaQuadrado(x, y, x1, y1);
+	EfeitoVisual::getInstance().desenhaQuadrado(x - 30, y, x1, y - 50);
+	EfeitoVisual::getInstance().desenhaQuadrado(x - 50, y1 + 20, x1 + 50, y1 - 20);
+	glRasterPos2f(x - 40, y1 - 60);
 	FuncoesAuxiliares::writeWord_BITMAP(bestName, FONT_DEFAULT);
 }
 
@@ -441,7 +441,7 @@ void Menu::desenha() {
 		spitfire->desenha();
 		glPopMatrix();
 		//ate aqui
-		
+
 	}
 
 	glutSwapBuffers();
@@ -460,7 +460,7 @@ void Menu::terminou()
 		optIniciar = false;
 		Jogo::getInstance().setProxFase(2);
 		Jogo::getInstance().proximaFase();
-		
+
 	}
 }
 
@@ -498,6 +498,20 @@ void Menu::atualiza(int value) {
 			translacaoTiro2 = 0;
 		}
 	}
+
+#pragma region "Código Desenha do Daniel *-*"
+	if (macete == "billgay") {
+		EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/owaw.mp3");
+		Jogo::getInstance().numeroVidas = 999999;
+		macete = "";
+	}
+	else if (macete == "daniball") {
+		EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/owaw.mp3");
+		Jogo::getInstance().score->setScoreValue(100000);
+		macete = "";
+	}
+
+#pragma endregion
 }
 
 void Menu::keyDown(unsigned char key, int x, int y)
@@ -576,6 +590,7 @@ void Menu::keyUp(unsigned char key, int x, int y)
 		EfeitoVisual::getInstance().setFullScreen();
 		break;
 	default:
+		macete += (char)key;
 		break;
 	}
 
@@ -693,5 +708,5 @@ void Menu::inicializa()
 	//-------------
 	EfeitoSonoro::getInstance().initAudios_Menu();
 	EfeitoSonoro::getInstance().playMainTheme();
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);	
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }

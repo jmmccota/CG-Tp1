@@ -12,7 +12,7 @@ Spitfire::Spitfire(GLfloat pX, GLfloat pY, float esc, Fase *f)
 	numeroVidas = 5;
     hp = VIDA_SPITFIRE;
     municao[0] = 9999999;
-    municao[1] = 10;
+    municao[1] = nBomba;
 }
 
 
@@ -64,6 +64,7 @@ void Spitfire::atira(int tipo)
 {
     if (municao[tipo] > 0)
     {
+		//if bomba=true && tipo==1 nao diminui
         municao[tipo]--;
         if (!tipo)
         {
@@ -348,8 +349,8 @@ Me264::Me264(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f)
 	this->carrega("modelos/me264.dat");
     alvo = a;
 	hp = 3000;
+	municao[0] = 9999;
 	municao[1] = 9999;
-	municao[2] = 9999;
     velocidadeBala = 60 * escala;
 }
 Me264::~Me264()
