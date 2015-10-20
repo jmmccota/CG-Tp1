@@ -65,7 +65,6 @@ Bomba::~Bomba()
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-#include <iostream>
 
 TiroEspecialInimigo::TiroEspecialInimigo(GLfloat posX, GLfloat posY, GLfloat posXAlvo, GLfloat posYAlvo, float escala, float velocidade)
 	: Projetil(posX, posY, velocidade, escala)

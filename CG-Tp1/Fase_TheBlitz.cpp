@@ -9,7 +9,8 @@ float escalaBomba = 0;
 
 Fase_TheBlitz::Fase_TheBlitz()
 {
-	srand(time(NULL));
+    srand(time(NULL));
+    boss = nullptr;
 }
 
 Fase_TheBlitz::~Fase_TheBlitz()
@@ -244,9 +245,9 @@ void Fase_TheBlitz::atualiza(int value)
 	}
 
 	//Inimigos normais
-	if (value < value < 10000)
+	if (value < 10000)
 	{
-		if (value % 300 == 99 && value < 10000)
+		if (value % 300 == 99)
 		{
 			Bf109 *aux = new Bf109(rand() % size.first, size.second, (float)100 / 10000, principal, this);
 			aux->inverteY();
@@ -419,19 +420,11 @@ void Fase_TheBlitz::atualiza(int value)
 			Jogo::getInstance().score->incScoreValue((*i)->getScore());
 			if (nome == "Me264")
 			{
-				explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 5));
-				//EfeitoSonoro::getInstance().stopMe264Motor();
+				explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 10));
+				EfeitoSonoro::getInstance().stopMe264Motor();
 			}
-			if (nome == "Bf109Verde")
-			{
-				caixas.push_back(new Caixa((*i)->getX(), (*i)->getY(), 1));
-			}
-			if (nome == "Bf109Amarelo")
-			{
-				caixas.push_back(new Caixa((*i)->getX(), (*i)->getY(), 2));
-			}
-			else
-				explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 2));
+            else
+			    explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 2));
 			EfeitoSonoro::getInstance().playExplosion();
 			i = inimigosAtivos.erase(i);
 		}

@@ -289,12 +289,15 @@ int Me163::getScore()
 
 
 Me262::Me262(GLfloat pX, GLfloat pY, float esc, Spitfire *a, Fase *f)
-    : Personagem(pX, pY, 0.016 * esc, esc, f)
+    : Personagem(pX, pY, 400 * esc, esc, f)
 {
     this->carrega("modelos/me262.dat");
     hp = 40;
     municao[1] = 9999;
     municao[2] = 150;
+    alvo = a;
+    alvoX = alvo->getX();
+    alvoY = alvo->getY();
 }
 Me262::~Me262()
 {
@@ -302,26 +305,11 @@ Me262::~Me262()
 
 void Me262::acao()
 {
-    if (movCima)
-        posY += velocidade;
-    else if (movBaixo)
-        posY -= velocidade;
-    if (movDir)
-        posX += velocidade;
-    else if (movEsq)
-        posX -= velocidade;
+
 }
 
 void Me262::atira(int tipo)
 {
-    if (municao[tipo] > 0)
-    {
-        municao[tipo]--;
-        if (!tipo)
-            fase->novoProjetilInimigo(new TiroSimples(posX, posY + tamY, escala));
-        else
-            fase->novoProjetilInimigo(new Bomba(posX, posY + tamY, escala));
-    }
 }
 
 int Me262::danoColisao()
@@ -570,7 +558,7 @@ V2::V2(GLfloat pX, GLfloat pY, float esc, Fase *f)
 	: Personagem(pX, pY, 5 * esc, esc, f)
 {
 	this->carrega("modelos/v2.dat");
-	hp = 9999;
+	hp = 10000;
 }
 V2::~V2()
 {
@@ -601,7 +589,7 @@ string V2::getNome()
 
 int V2::getScore()
 {
-	return 10000;
+	return 15000;
 }
 
 void V2::finaliza()

@@ -346,17 +346,16 @@ void Fase_TheBattleOfBritain::atualiza(int value)
 			Jogo::getInstance().score->incScoreValue((*i)->getScore());
 			if (nome == "bismarck")
 			{
-				explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 5));
+				explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 10));
 				//EfeitoSonoro::getInstance().stopMe264Motor();
-			}
-				if (nome == "Bf109Verde")
-				{
-					int x = (*i)->getX();
-					int y = (*i)->getY();
-					caixas.push_back(new Caixa(x, y, 1));
-				}
-			else
-				explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 2));
+            }
+            else
+            {
+                if (nome == "Bf109Verde")
+                    caixas.push_back(new Caixa((*i)->getX(), (*i)->getY(), 1));
+
+                explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 2));
+            }
 			EfeitoSonoro::getInstance().playExplosion();
 			i = inimigosAtivos.erase(i);
 		}
