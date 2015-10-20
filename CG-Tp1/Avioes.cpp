@@ -348,8 +348,8 @@ Me264::Me264(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f)
 	this->carrega("modelos/me264.dat");
     alvo = a;
 	hp = 3000;
+	municao[0] = 9999;
 	municao[1] = 9999;
-	municao[2] = 9999;
     velocidadeBala = 60 * escala;
 }
 Me264::~Me264()
