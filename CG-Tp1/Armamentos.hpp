@@ -24,6 +24,13 @@ public:
     ~TiroSimplesInimigo();
 };
 
+class TiroEspecial : public Projetil
+{
+public:
+	TiroEspecial(GLfloat posX, GLfloat posY, float escala);
+	~TiroEspecial();
+};
+
 
 class Bomba : public Projetil
 {
