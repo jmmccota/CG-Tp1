@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "GameOver.hpp"
-#include <AntTweakBar.h>
+
 GameOver::GameOver()
 {
 }
@@ -42,13 +42,7 @@ void GameOver::desenha()
 		desenhaScore();
 		//coloca no meio da tela o quadradim pra digitar
 	}
-	// App drawing here
-	// ...
 
-	// Draw tweak bars
-	
-
-	// Present frame buffer
 	glutSwapBuffers();
 }
 
