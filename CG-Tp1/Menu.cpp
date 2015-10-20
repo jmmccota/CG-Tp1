@@ -361,6 +361,7 @@ void drawOpcoesMenu() {
 	tiro2->desenha();
 	glPopMatrix();
 	glPushMatrix();
+	
 	glTranslatef(0, translacaoBomba, 0);
 	bomba->desenha();
 	glPopMatrix();
