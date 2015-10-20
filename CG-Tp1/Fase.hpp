@@ -31,6 +31,8 @@ class Fase;
 class Fase
 {
 	protected:
+		bool passouFase = false;
+
 		//Personagem jogavel
         Spitfire *principal;
         //Lista de inimigos que apareceram na tela

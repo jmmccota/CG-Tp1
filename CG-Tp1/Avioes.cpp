@@ -432,11 +432,12 @@ void Me264::finaliza()
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-Bismarck::Bismarck(GLfloat pX, GLfloat pY, float esc, Fase *f)
+Bismarck::Bismarck(GLfloat pX, GLfloat pY, float esc, Spitfire *a, Fase *f)
     : Personagem(pX, pY, 0 * esc, esc, f)
 {
     this->carrega("modelos/bismarck.dat");
-    hp = 9999;
+	alvo = a;
+    hp = 4000;
 }
 Bismarck::~Bismarck()
 {

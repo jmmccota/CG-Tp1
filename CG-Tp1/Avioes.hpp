@@ -74,10 +74,11 @@ public:
 
 class Bf109Verde : public Bf109
 {
+public:
 	Bf109Verde(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f) :
 		Bf109(pX, pY, esc, a, f)
 	{
-		this->carrega("Bf109Verde.dat");
+		this->carrega("modelos/bf109Verde.dat");
 	}
 	~Bf109Verde() {}
 
@@ -86,10 +87,11 @@ class Bf109Verde : public Bf109
 
 class Bf109Amarelo : public Bf109
 {
+public:
 	Bf109Amarelo(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f) :
 		Bf109(pX, pY, esc, a, f)
 	{
-		this->carrega("Bf109Amarelo.dat");
+		this->carrega("modelos/bf109Amarelo.dat");
 	}
 	~Bf109Amarelo() {}
 
@@ -172,10 +174,17 @@ public:
 class Bismarck : public Personagem
 {
 private:
+	Personagem *alvo;
+	//variaveis usadas para controlar em quais frames deve atirar
+	int estadoTiro = 0;
+	int estrategia;
+	int tirosSegundo = 3;
+	int contadorEst = -1;
+	float velocidadeBala;
 	bool movCima = false, movBaixo = false, movEsq = false, movDir = false;
 
 public:
-	Bismarck(GLfloat pX, GLfloat pY, float esc, Fase *f);
+	Bismarck(GLfloat pX, GLfloat pY, float esc, Spitfire *a, Fase *f);
 	~Bismarck();
 	void acao();
 	void atira(int tipo);
