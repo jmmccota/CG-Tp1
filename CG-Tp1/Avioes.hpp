@@ -119,7 +119,14 @@ class Me163 : public Personagem
 class Me262 : public Personagem
 {
 private:
+    Spitfire *alvo;
+
     bool movCima = false, movBaixo = false, movEsq = false, movDir = false;
+    int alvoX, alvoY;
+
+    int estadoTiro;
+    int contadorEst = -1;
+    int tirosSegundo = 3;
 
 public:
     Me262(GLfloat pX, GLfloat pY, float esc, Spitfire *a, Fase *f);

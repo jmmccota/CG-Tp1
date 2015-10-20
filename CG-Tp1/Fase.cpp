@@ -112,3 +112,31 @@ void Fase::reseta()
 	caixas.clear();
 }
 
+
+void Fase::desenhaHPBoss(int hp, int hpTotal) {
+    if (hp > 0) {
+        //glRasterPos2f(1600, 970);
+        hp = 1000 * hp / hpTotal;
+        glBegin(GL_LINE_LOOP);
+        glColor3f(1, 1, 1);
+        glVertex2i(1450, 1050);
+        glVertex2i(1850, 1050);
+        glVertex2i(1850, 1020);
+        glVertex2i(1450, 1020);
+        glEnd();
+        double partes = 0.4;
+        glBegin(GL_QUADS);
+        glColor3f(1, 0, 0);
+        glVertex2f(1451, 1049);
+        if ((partes*hp + 1450) > 1451) {
+            glVertex2f(partes*hp + 1450, 1049);
+            glVertex2f(partes*hp + 1450, 1021);
+        }
+        else {
+            glVertex2f(1451, 1049);
+            glVertex2f(1451, 1021);
+        }
+        glVertex2f(1451, 1021);
+        glEnd();
+    }
+}

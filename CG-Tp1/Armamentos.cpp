@@ -52,7 +52,7 @@ TiroEspecial::~TiroEspecial()
 
 
 Bomba::Bomba(GLfloat posX, GLfloat posY, float escala)
-    : Projetil(posX, posY, 300*escala, escala)
+    : Projetil(posX, posY, 900*escala, escala)
 {
     this->dano = 50;
     this->carrega("modelos/bombasimples.dat");	
@@ -65,7 +65,6 @@ Bomba::~Bomba()
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-#include <iostream>
 
 TiroEspecialInimigo::TiroEspecialInimigo(GLfloat posX, GLfloat posY, GLfloat posXAlvo, GLfloat posYAlvo, float escala, float velocidade)
 	: Projetil(posX, posY, velocidade, escala)
