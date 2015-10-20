@@ -12,6 +12,7 @@ class Fase;
 #include "Projetil.hpp"
 #include "Jogo.hpp"
 #include "EfeitoVisual.hpp"
+#include "Armamentos.hpp"
 #include <list>
 #include <vector>
 
@@ -43,7 +44,7 @@ class Fase
         std::list<Explosao*> explosoesAtivas;
 
 		//Caixas de recompensa
-		std::list<Solido*> caixas;
+		std::list<Caixa*> caixas;
 
 	public:
         Fase();

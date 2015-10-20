@@ -4,6 +4,7 @@
 class TiroSimples;
 class TiroSimplesInimigo;
 class Bomba;
+class Caixa;
 
 #include "Projetil.hpp"
 #include <cmath>
@@ -49,7 +50,11 @@ class Caixa : public Solido
 {
 public:
 	int tipo;
-	Caixa(GLfloat x, GLfloat y, int tipo) : Solido(x, y, 0.0f, 50.0f) { this->tipo = tipo; }
+	Caixa(GLfloat x, GLfloat y, int tipo) : Solido(x, y, 0.0f, 50.0f) 
+	{ 
+		this->tipo = tipo; 
+		this->carrega("modelos/caixa.dat");
+	}
 	void acao() {}
 };
 
