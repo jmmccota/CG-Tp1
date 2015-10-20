@@ -488,7 +488,7 @@ void Fase_TheBlitz::desenhaHPBoss() {
 		glEnd();
 		double partes = 0.4;
 		glBegin(GL_QUADS);
-		glColor3f(1, 0, 0);
+		glColor3f(0, 1, 0);
 		glVertex2f(1451, 1049);
 		if ((partes*hp + 1450) > 1451) {
 			glVertex2f(partes*hp + 1450, 1049);

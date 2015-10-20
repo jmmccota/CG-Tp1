@@ -62,14 +62,14 @@ void Fase::desenhaHUD() {
 	glRasterPos2f(1630, 1000);
 	int contrSc = Jogo::getInstance().getControlaScore();
 
-	if (sco >= contrSc) {
+	if (sco >= 100) {
 
 		if (Jogo::getInstance().numeroVidas < 5) {
 			Jogo::getInstance().numeroVidas++;
 			//EfeitoSonoro::getInstance().playGanhaVida();
 		}
 		Jogo::getInstance().setControlaScore();
-		//EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/ganhaVida.mp3");
+		EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/ganhaVida.mp3");
 		//ADICIONAR SOM PARA MOSTRAR QUE GANHOU VIDA
 
 
