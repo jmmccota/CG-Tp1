@@ -411,7 +411,7 @@ void Me264::atira(int tipo)
 
 int Me264::danoColisao()
 {
-	return 2;
+	return 0;
 }
 
 string Me264::getNome()
@@ -434,11 +434,14 @@ void Me264::finaliza()
 
 
 Bismarck::Bismarck(GLfloat pX, GLfloat pY, float esc, Spitfire *a, Fase *f)
-    : Personagem(pX, pY, 0 * esc, esc, f)
+    : Personagem(pX, pY, 3 * esc, esc, f)
 {
     this->carrega("modelos/bismarck.dat");
 	alvo = a;
-    hp = 4000;
+    hp = 6000;
+    municao[0] = 9999;
+    municao[1] = 9999;
+    velocidadeBala = 60 * escala;
 }
 Bismarck::~Bismarck()
 {
@@ -446,15 +449,102 @@ Bismarck::~Bismarck()
 
 void Bismarck::acao()
 {
+    if (posY + tamY - 100 > EfeitoVisual::getInstance().getOrtho2D().second)
+    {
+        posY -= velocidade;
+        return;
+    }
+
+    if (!estadoTiro)
+        contadorEst = ++contadorEst % 10;
+    if (!contadorEst)
+        estrategia = rand() % 5 + 1;
+
+    atira(estrategia);
 }
 
 void Bismarck::atira(int tipo)
 {
+    float escalaReal = escala * 10000;
+    //Solta bomba
+    if (tipo == 1)
+    {
+        estadoTiro = ++estadoTiro % (int)(1000 / (tirosSegundo * TEMPOQUADRO));
+        if (!estadoTiro)
+        {
+            EfeitoSonoro::getInstance().playBombDrop();
+            fase->novoProjetilInimigo(new Bomba(-0.36 * escalaReal + posX, -0.05 * escalaReal + posY, -0.03 * escala));
+            fase->novoProjetilInimigo(new Bomba(-0.39 * escalaReal + posX, -0.05 * escalaReal + posY, -0.03 * escala));
+            fase->novoProjetilInimigo(new Bomba(-0.49 * escalaReal + posX, -0.05 * escalaReal + posY, -0.03 * escala));
+            fase->novoProjetilInimigo(new Bomba(-0.52 * escalaReal + posX, -0.05 * escalaReal + posY, -0.03 * escala));
+            fase->novoProjetilInimigo(new Bomba(0.53 * escalaReal + posX, -0.05 * escalaReal + posY, -0.03 * escala));
+            fase->novoProjetilInimigo(new Bomba(0.49 * escalaReal + posX, -0.05 * escalaReal + posY, -0.03 * escala));
+            fase->novoProjetilInimigo(new Bomba(0.66 * escalaReal + posX, -0.05 * escalaReal + posY, -0.03 * escala));
+            fase->novoProjetilInimigo(new Bomba(0.63 * escalaReal + posX, -0.05 * escalaReal + posY, -0.03 * escala));
+        }
+    }
+    //Atira
+    else if (tipo == 2)
+    {
+        estadoTiro = ++estadoTiro % (int)(1000 / (tirosSegundo * TEMPOQUADRO));
+        if (!estadoTiro)
+        {
+            EfeitoSonoro::getInstance().playMg42Shot();
+            fase->novoProjetilInimigo(new TiroEspecialInimigo(-0.36 * escalaReal + posX, -0.05 * escalaReal + posY, alvo->getX(), alvo->getY(), 0.02 * escala, 0.7 * velocidadeBala));
+            fase->novoProjetilInimigo(new TiroEspecialInimigo(-0.39 * escalaReal + posX, -0.05 * escalaReal + posY, alvo->getX(), alvo->getY(), 0.02 * escala, 0.7 * velocidadeBala));
+            fase->novoProjetilInimigo(new TiroEspecialInimigo(-0.49 * escalaReal + posX, -0.05 * escalaReal + posY, alvo->getX(), alvo->getY(), 0.02 * escala, 0.7 * velocidadeBala));
+            fase->novoProjetilInimigo(new TiroEspecialInimigo(-0.52 * escalaReal + posX, -0.05 * escalaReal + posY, alvo->getX(), alvo->getY(), 0.02 * escala, 0.7 * velocidadeBala));
+        }
+    }
+    else if (tipo == 3)
+    {
+        estadoTiro = ++estadoTiro % (int)(1000 / (tirosSegundo * TEMPOQUADRO));
+        if (!estadoTiro)
+        {
+            EfeitoSonoro::getInstance().playMg42Shot();
+            fase->novoProjetilInimigo(new TiroEspecialInimigo(0.53 * escalaReal + posX, -0.05 * escalaReal + posY, alvo->getX(), alvo->getY(), 0.02 * escala, 0.7 * velocidadeBala));
+            fase->novoProjetilInimigo(new TiroEspecialInimigo(0.49 * escalaReal + posX, -0.05 * escalaReal + posY, alvo->getX(), alvo->getY(), 0.02 * escala, 0.7 * velocidadeBala));
+            fase->novoProjetilInimigo(new TiroEspecialInimigo(0.66 * escalaReal + posX, -0.05 * escalaReal + posY, alvo->getX(), alvo->getY(), 0.02 * escala, 0.7 * velocidadeBala));
+            fase->novoProjetilInimigo(new TiroEspecialInimigo(0.63 * escalaReal + posX, -0.05 * escalaReal + posY, alvo->getX(), alvo->getY(), 0.02 * escala, 0.7 * velocidadeBala));
+        }
+    }
+    else if (tipo == 4)
+    {
+        estadoTiro = ++estadoTiro % (int)(1000 / (tirosSegundo * TEMPOQUADRO));
+        if (!estadoTiro)
+        {
+            EfeitoSonoro::getInstance().playMg42Shot();
+            fase->novoProjetilInimigo(new TiroSimplesInimigo(-0.36 * escalaReal + posX, -0.05 * escalaReal + posY, -0.05 * escala));
+            fase->novoProjetilInimigo(new TiroSimplesInimigo(-0.39 * escalaReal + posX, -0.05 * escalaReal + posY, -0.05 * escala));
+            fase->novoProjetilInimigo(new TiroSimplesInimigo(-0.49 * escalaReal + posX, -0.05 * escalaReal + posY, -0.05 * escala));
+            fase->novoProjetilInimigo(new TiroSimplesInimigo(-0.52 * escalaReal + posX, -0.05 * escalaReal + posY, -0.05 * escala));
+            fase->novoProjetilInimigo(new TiroSimplesInimigo(0.53 * escalaReal + posX, -0.05 * escalaReal + posY, -0.05 * escala));
+            fase->novoProjetilInimigo(new TiroSimplesInimigo(0.49 * escalaReal + posX, -0.05 * escalaReal + posY, -0.05 * escala));
+            fase->novoProjetilInimigo(new TiroSimplesInimigo(0.66 * escalaReal + posX, -0.05 * escalaReal + posY, -0.05 * escala));
+            fase->novoProjetilInimigo(new TiroSimplesInimigo(0.63 * escalaReal + posX, -0.05 * escalaReal + posY, -0.05 * escala));
+        }
+    }
+    else if (tipo == 5)
+    {
+        estadoTiro = ++estadoTiro % (int)(1000 / (tirosSegundo * TEMPOQUADRO));
+        if (!estadoTiro)
+        {
+            EfeitoSonoro::getInstance().playMg42Shot();
+            fase->novoProjetilInimigo(new TiroEspecialInimigo(0.53 * escalaReal + posX, -0.05 * escalaReal + posY, alvo->getX(), alvo->getY(), 0.02 * escala, 0.7 * velocidadeBala));
+            fase->novoProjetilInimigo(new TiroEspecialInimigo(0.49 * escalaReal + posX, -0.05 * escalaReal + posY, alvo->getX(), alvo->getY(), 0.02 * escala, 0.7 * velocidadeBala));
+            fase->novoProjetilInimigo(new TiroEspecialInimigo(0.66 * escalaReal + posX, -0.05 * escalaReal + posY, alvo->getX(), alvo->getY(), 0.02 * escala, 0.7 * velocidadeBala));
+            fase->novoProjetilInimigo(new TiroEspecialInimigo(0.63 * escalaReal + posX, -0.05 * escalaReal + posY, alvo->getX(), alvo->getY(), 0.02 * escala, 0.7 * velocidadeBala));
+            fase->novoProjetilInimigo(new TiroEspecialInimigo(-0.36 * escalaReal + posX, -0.05 * escalaReal + posY, alvo->getX(), alvo->getY(), 0.02 * escala, 0.7 * velocidadeBala));
+            fase->novoProjetilInimigo(new TiroEspecialInimigo(-0.39 * escalaReal + posX, -0.05 * escalaReal + posY, alvo->getX(), alvo->getY(), 0.02 * escala, 0.7 * velocidadeBala));
+            fase->novoProjetilInimigo(new TiroEspecialInimigo(-0.49 * escalaReal + posX, -0.05 * escalaReal + posY, alvo->getX(), alvo->getY(), 0.02 * escala, 0.7 * velocidadeBala));
+            fase->novoProjetilInimigo(new TiroEspecialInimigo(-0.52 * escalaReal + posX, -0.05 * escalaReal + posY, alvo->getX(), alvo->getY(), 0.02 * escala, 0.7 * velocidadeBala));
+        }
+    }
 }
 
 int Bismarck::danoColisao()
 {
-    return 3;
+    return 0;
 }
 
 string Bismarck::getNome()
@@ -469,7 +559,8 @@ int Bismarck::getScore()
 
 void Bismarck::finaliza()
 {
-
+    tirosSegundo *= 4;
+    velocidadeBala *= 2;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -514,85 +605,6 @@ int V2::getScore()
 }
 
 void V2::finaliza()
-{
-
-}
-
-
-/////////////////////////////////
-
-
-class Bf109Rec1 : public Bf109
-{
-private:
-
-public:
-	Bf109Rec1(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f) : Bf109(pX, pY, esc, a, f)
-	{
-		this->carrega("modelos/bf109recurso1.dat");
-	}
-	~Bf109Rec1()
-	{
-
-	}
-};
-
-
-/////////////////////////////////
-
-
-class Bf109Rec2 : public Bf109
-{
-private:
-
-public:
-	Bf109Rec2(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f) : Bf109(pX, pY, esc, a, f)
-	{
-		this->carrega("modelos/bf109recurso2.dat");
-	}
-	~Bf109Rec2()
-	{
-
-	}
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-AviaoCriado::AviaoCriado(GLfloat pX, GLfloat pY, float esc, Fase *f)
-	: Personagem(pX, pY, 0 * esc, esc, f)
-{
-	this->carrega("modelos/aviaocriado.dat");
-	hp = 9999;
-}
-AviaoCriado::~AviaoCriado()
-{
-}
-
-void AviaoCriado::acao()
-{
-}
-
-void AviaoCriado::atira(int tipo)
-{
-}
-
-int AviaoCriado::danoColisao()
-{
-	return 3;
-}
-
-string AviaoCriado::getNome()
-{
-	return "Bismarck";
-}
-
-int AviaoCriado::getScore()
-{
-	return 10000;
-}
-
-void AviaoCriado::finaliza()
 {
 
 }

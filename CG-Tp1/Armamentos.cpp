@@ -37,7 +37,7 @@ TiroSimplesInimigo::~TiroSimplesInimigo()
 
 
 Bomba::Bomba(GLfloat posX, GLfloat posY, float escala)
-    : Projetil(posX, posY, 300*escala, escala)
+    : Projetil(posX, posY, 900*escala, escala)
 {
     this->dano = 50;
     this->carrega("modelos/bombasimples.dat");	

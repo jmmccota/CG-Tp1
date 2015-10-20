@@ -34,7 +34,6 @@ public:
 	void keyUp(unsigned char key, int x, int y);
 	void specialKeyDown(int key, int x, int y);
 	void specialKeyUp(int key, int x, int y);
-	void desenhaHPBoss();
 	// Inicializa parâmetros de rendering
 	void inicializa();
 };

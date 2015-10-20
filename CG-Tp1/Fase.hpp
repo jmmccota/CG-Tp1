@@ -103,7 +103,8 @@ class Fase
         void novoProjetilInimigo(Projetil *p);
         void novoProjetilAmigo(Projetil *p);
 		
-		void reseta();
+        void reseta();
+        void desenhaHPBoss(int hp, int hpTotal);
 };
 
 //Incluir todas as fases do jogo
