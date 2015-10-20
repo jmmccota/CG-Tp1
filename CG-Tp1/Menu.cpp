@@ -420,11 +420,6 @@ void Menu::desenha() {
 		spitfire->desenha();
 		glPopMatrix();
 		//ate aqui
-		//descomente abaixo
-		/*glPushMatrix();
-		Navio *navio = new Navio(150, 600, 0.05, nullptr);
-		navio->desenha();
-		glPopMatrix();*/
 		
 	}
 
