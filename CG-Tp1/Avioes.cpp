@@ -474,7 +474,7 @@ void Bismarck::finaliza()
 
 
 V2::V2(GLfloat pX, GLfloat pY, float esc, Fase *f)
-	: Personagem(pX, pY, 0 * esc, esc, f)
+	: Personagem(pX, pY, 5 * esc, esc, f)
 {
 	this->carrega("modelos/v2.dat");
 	hp = 9999;
@@ -485,6 +485,11 @@ V2::~V2()
 
 void V2::acao()
 {
+    if (posY + tamY - 100 > EfeitoVisual::getInstance().getOrtho2D().second)
+    {
+        posY -= velocidade;
+        return;
+    }
 }
 
 void V2::atira(int tipo)

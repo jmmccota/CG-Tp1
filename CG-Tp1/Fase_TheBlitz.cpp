@@ -224,12 +224,20 @@ void Fase_TheBlitz::desenha()
 void Fase_TheBlitz::terminou()
 {
 	EfeitoSonoro::getInstance().finishAllAudios();
+	if (Jogo::getInstance().numeroVidas == 0)
+	{
+		Jogo::getInstance().setProxFase(5);
+	}
+	else {
+		Jogo::getInstance().setProxFase(3);
+	}
+	Jogo::getInstance().proximaFase();
 }
 
 void Fase_TheBlitz::atualiza(int value)
 {
 	pair<GLint, GLint> size = EfeitoVisual::getInstance().getOrtho2D();
-	
+
 	//Passa de Fase
 	if (passouFase) {
 		if (principal->venceu()) {
@@ -429,19 +437,10 @@ void Fase_TheBlitz::atualiza(int value)
 				explosoesAtivas.push_back(new Explosao(principal->getX(), principal->getY(), 1));
 			principal->powerUp = 0;
 			Jogo::getInstance().numeroVidas--;
-			if (Jogo::getInstance().numeroVidas == 0) {
-				EfeitoSonoro::getInstance().stopSpitfireMotor();
-				EfeitoSonoro::getInstance().stopBf109Motor();
-				EfeitoSonoro::getInstance().stopMe163Motor();
-				Jogo::getInstance().setProxFase(5);
-				Jogo::getInstance().proximaFase();
-			}
+			terminou();
 			principal->morreu();
 		}
 	}
-
-	//    EfeitoVisual::getInstance().atualizaExplosao();
-
 }
 void Fase_TheBlitz::desenhaHPBoss() {
 	if (bossOn && boss->getHP() > 0) {
