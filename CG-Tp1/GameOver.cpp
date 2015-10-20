@@ -43,11 +43,18 @@ void GameOver::desenha()
 	}
 	// App drawing here
 	// ...
-
+	/*Explosao e =Explosao(200, 300, 2);
+	EfeitoVisual::getInstance().desenhaExplosao(e);*/
 	// Draw tweak bars
+	if (contador>200) {
+		explosoesAtivas.push_back(new Explosao(rand() % 450, rand() % 1000, 1));
+		explosoesAtivas.push_back(new Explosao(rand() % 100 + 950, rand() % 1000, 1));
+		contador = 0;
+		desenhaExplosoes();
+	}
 	
-
 	// Present frame buffer
+	contador++;
 	glutSwapBuffers();
 }
 

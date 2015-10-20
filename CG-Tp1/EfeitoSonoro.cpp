@@ -54,7 +54,7 @@ void EfeitoSonoro::initAudios_SFXGerais()
     arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/explosion.mp3", false));
     arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/bf109Motor.mp3", false));
     arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/bf163Motor.mp3", false));
-	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/ganhaVida.mp3", false));
+	//arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/ganhaVida.mp3", false));
 }
 
 void EfeitoSonoro::initAudios_TheBlitz() {
@@ -159,10 +159,12 @@ void EfeitoSonoro::playVickersShot()
 {
     arrayAudios[2]->playMemoryAudio(system);
 }
-void EfeitoSonoro::playGanhaVida()
-{
-	arrayAudios[2]->playMemoryAudio(system);
-}
+//void EfeitoSonoro::playGanhaVida()
+//{
+//	arrayAudios[8]->playMemoryAudio(system);
+//}
+
+
 
 void EfeitoSonoro::playMg42Shot()
 {
