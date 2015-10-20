@@ -10,7 +10,7 @@ EfeitoVisual::EfeitoVisual()
     sizeX = 1280;
     sizeY = 720;
 }
-
+//teste
 EfeitoVisual::~EfeitoVisual()
 {
 }
@@ -88,6 +88,7 @@ void EfeitoVisual::setFullScreen()
 void EfeitoVisual::desenhaExplosao(Explosao e)
 {
 	glPushMatrix();
+	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluOrtho2D(-100, 100, -100, 100);
 	GLfloat transladaX = 0;
@@ -119,7 +120,6 @@ void EfeitoVisual::desenhaExplosao(Explosao e)
 
     glScalef(escala, escala, 0);
     /*glScalef(escalaFinal, escalaFinal, escalaFinal);*/
-    glMatrixMode(GL_PROJECTION);
     glBegin(GL_QUADS);
     glColor3f(1, 0, 0);
     glVertex2f(-2, 2);
@@ -149,6 +149,7 @@ void EfeitoVisual::desenhaExplosao(Explosao e)
     glVertex2f(0, -1.5);
     glEnd();
     glPopMatrix();
+	glFlush();
 }
 
 // retangulo

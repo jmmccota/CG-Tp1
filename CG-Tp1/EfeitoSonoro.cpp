@@ -29,7 +29,7 @@ void EfeitoSonoro::createObjectSystem()
 		*/
 		FMOD::System_Create(&system);
 
-		system->init(20, FMOD_INIT_NORMAL, 0);
+		system->init(50, FMOD_INIT_NORMAL, 0);
 
 	}
 	catch (const std::exception&)
@@ -45,6 +45,17 @@ void EfeitoSonoro::initAudios_Menu()
 	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/enterOptionMenu.mp3", false));
 }
 
+void EfeitoSonoro::initAudios_GameOver()
+{
+    finishAllAudios();
+    arrayAudios.push_back(new FMOD_Audio(system, "audio/music/GameOver.mp3", true));
+}
+
+void EfeitoSonoro::initAudios_Ending()
+{
+    arrayAudios.push_back(new FMOD_Audio(system, "audio/music/Ending.mp3", true));
+}
+
 void EfeitoSonoro::initAudios_SFXGerais()
 {
 	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/spitfireMotor.mp3", false));
@@ -54,6 +65,7 @@ void EfeitoSonoro::initAudios_SFXGerais()
     arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/explosion.mp3", false));
     arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/bf109Motor.mp3", false));
     arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/bf163Motor.mp3", false));
+	//arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/ganhaVida.mp3", false));
 }
 
 void EfeitoSonoro::initAudios_TheBlitz() {
@@ -62,6 +74,13 @@ void EfeitoSonoro::initAudios_TheBlitz() {
 	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/airRaid.mp3", false));
 	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/me264Motor.mp3", false));
 }
+//void EfeitoSonoro::initAudios_GameOver() {
+//	arrayAudios.push_back(new FMOD_Audio(system, "audio/music/TheBlitz.mp3", true));
+//	initAudios_SFXGerais();
+//	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/airRaid.mp3", false));
+//	arrayAudios.push_back(new FMOD_Audio(system, "audio/sfx/me264Motor.mp3", false));
+//}
+
 
 void EfeitoSonoro::initAudios_TheBattleOfBritain() {
 	arrayAudios.push_back(new FMOD_Audio(system, "audio/music/TheBattleOfBritain.mp3", true));
@@ -79,8 +98,7 @@ void EfeitoSonoro::initAudios_TheVengeanceWeapon() {
 void EfeitoSonoro::finishAllAudios()
 {
 	for (int i = 0; i < arrayAudios.size(); i++) {
-		arrayAudios[i]->getSound()->release();
-		arrayAudios[i]->getChannel()->stop();
+		arrayAudios[i]->resetAudio();
 	}
 	system->release();
 	arrayAudios.clear();
@@ -121,7 +139,7 @@ void EfeitoSonoro::playSpitfireAway()
 
 void EfeitoSonoro::playBf109Motor()
 {
-    arrayAudios[6]->playMemoryAudio(system);
+    arrayAudios[6]->playMemoryAudio(system, true);
 }
 
 void EfeitoSonoro::playBf109FlyBy()
@@ -151,6 +169,12 @@ void EfeitoSonoro::playVickersShot()
 {
     arrayAudios[2]->playMemoryAudio(system);
 }
+//void EfeitoSonoro::playGanhaVida()
+//{
+//	arrayAudios[8]->playMemoryAudio(system);
+//}
+
+
 
 void EfeitoSonoro::playMg42Shot()
 {
@@ -159,7 +183,7 @@ void EfeitoSonoro::playMg42Shot()
 
 void EfeitoSonoro::playBombDrop()
 {
-    arrayAudios[4]->playMemoryAudio(system);
+    arrayAudios[4]->playMemoryAudio(system, true);
 }
 
 void EfeitoSonoro::stopSpitfireMotor()

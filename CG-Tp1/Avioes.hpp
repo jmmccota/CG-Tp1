@@ -3,10 +3,13 @@
 
 class Spitfire;
 class Bf109;
+class Bf109Verde;
+class Bf109Amarelo;
 class Me163;
 class Me264;
 class Me262;
 class Bismarck;
+class V2;
 
 #include "Personagem.hpp"
 #include "Armamentos.hpp"
@@ -32,6 +35,7 @@ class Spitfire : public Personagem
         void atira(int tipo);
 		int danoColisao();
         void morreu();
+		bool venceu();
 		string getNome();
 		int getScore();
 		GLfloat getX();
@@ -92,7 +96,7 @@ private:
     bool movCima = false, movBaixo = false, movEsq = false, movDir = false;
 
 public:
-    Me262(GLfloat pX, GLfloat pY, float esc, Fase *f);
+    Me262(GLfloat pX, GLfloat pY, float esc, Spitfire *a, Fase *f);
     ~Me262();
     void acao();
     void atira(int tipo);

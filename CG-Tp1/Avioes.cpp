@@ -5,7 +5,7 @@
 
 
 Spitfire::Spitfire(GLfloat pX, GLfloat pY, float esc, Fase *f)
-    : Personagem(pX, pY, 150 * esc, esc, f)
+    : Personagem(pX, pY, 250 * esc, esc, f)
 {
     this->carrega("modelos/spitfire.dat");
 
@@ -94,6 +94,16 @@ int Spitfire::danoColisao()
 void Spitfire::morreu()
 {
     hp = VIDA_SPITFIRE;
+}
+
+bool Spitfire::venceu()
+{
+	bool termina = false;
+	posY += velocidade;
+	if (posY >= 1080) {
+		termina = true;
+	}
+	return termina;
 }
 
 string Spitfire::getNome()
@@ -277,7 +287,7 @@ int Me163::getScore()
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-Me262::Me262(GLfloat pX, GLfloat pY, float esc, Fase *f)
+Me262::Me262(GLfloat pX, GLfloat pY, float esc, Spitfire *a, Fase *f)
     : Personagem(pX, pY, 0.016 * esc, esc, f)
 {
     this->carrega("modelos/me262.dat");
@@ -333,13 +343,13 @@ int Me262::getScore()
 
 
 Me264::Me264(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f)
-	: Personagem(pX, pY, 50 * esc, esc, f)
+	: Personagem(pX, pY, 5 * esc, esc, f)
 {
 	this->carrega("modelos/me264.dat");
     alvo = a;
-	hp = 1000;
+	hp = 3000;
 	municao[1] = 9999;
-	municao[2] = 150;
+	municao[2] = 9999;
     velocidadeBala = 60 * escala;
 }
 Me264::~Me264()
@@ -425,7 +435,7 @@ void Me264::finaliza()
 Bismarck::Bismarck(GLfloat pX, GLfloat pY, float esc, Fase *f)
     : Personagem(pX, pY, 0 * esc, esc, f)
 {
-    this->carrega("modelos/Bismarck.dat");
+    this->carrega("modelos/bismarck.dat");
     hp = 9999;
 }
 Bismarck::~Bismarck()
@@ -464,7 +474,7 @@ void Bismarck::finaliza()
 
 
 V2::V2(GLfloat pX, GLfloat pY, float esc, Fase *f)
-	: Personagem(pX, pY, 0 * esc, esc, f)
+	: Personagem(pX, pY, 5 * esc, esc, f)
 {
 	this->carrega("modelos/v2.dat");
 	hp = 9999;
@@ -475,6 +485,11 @@ V2::~V2()
 
 void V2::acao()
 {
+    if (posY + tamY - 100 > EfeitoVisual::getInstance().getOrtho2D().second)
+    {
+        posY -= velocidade;
+        return;
+    }
 }
 
 void V2::atira(int tipo)

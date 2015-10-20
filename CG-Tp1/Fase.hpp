@@ -47,15 +47,10 @@ class Fase
 
 	public:
         Fase();
-		/*bool gameOver;
-		bool melhorScore;*/
-		/*void desenhaGameOver();
-		void desenhaScore();		
-		bool melhorScore = true;
-		bool fimDeJogo = false;*/
+
 		//Limpa memoria alocada dinamicamente
 		virtual ~Fase() = 0;
-
+		bool bossOn = false;
 		//Inicializa o personagem principal e a fila de inimigos
 		virtual void definePersonagens() = 0;
 
@@ -104,7 +99,7 @@ class Fase
         //Insere um novo projetil na fase
         void novoProjetilInimigo(Projetil *p);
         void novoProjetilAmigo(Projetil *p);
-
+		
 		void reseta();
 };
 

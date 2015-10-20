@@ -12,6 +12,7 @@ class Fase_TheBlitz : public Fase
 {
 protected:
     Me264 *boss;
+	bool passouFase = false;
 
 public:
 	Fase_TheBlitz();
@@ -34,7 +35,7 @@ public:
 	void keyUp(unsigned char key, int x, int y);
 	void specialKeyDown(int key, int x, int y);
 	void specialKeyUp(int key, int x, int y);
-
+	void desenhaHPBoss();
 	// Inicializa parâmetros de rendering
 	void inicializa();
 };

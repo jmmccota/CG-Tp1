@@ -5,18 +5,23 @@ float variacaoX = 0;
 bool variacao = false;
 Fase_TheVengeanceWeapon::Fase_TheVengeanceWeapon()
 {
+    srand(time(NULL));
 }
 
 Fase_TheVengeanceWeapon::~Fase_TheVengeanceWeapon()
 {
+    delete principal;
 }
 
 void Fase_TheVengeanceWeapon::definePersonagens()
 {
-	pair<float, float> size = EfeitoVisual::getInstance().getOrtho2D();
-	principal = new Spitfire(0, 0, 0.000015, this);
+    pair<float, float> size = EfeitoVisual::getInstance().getOrtho2D();
+    principal = new Spitfire(size.first / 2, size.second / 10, (float)100 / 10000, this);
 }
 
+
+///////////////////////
+//MOVER PARA EFEITOS VISUAIS
 
 void desenhaCirculo(GLfloat raio, GLfloat Px, GLfloat Py){
 	GLfloat x = 0;
@@ -58,6 +63,8 @@ void desenhabackgroudPosterior(){
 	}
 }
 
+/////////
+
 void Fase_TheVengeanceWeapon::desenhaBackground()
 {
 }
@@ -68,11 +75,25 @@ void Fase_TheVengeanceWeapon::desenha()
 	glClearColor(0.1137, 0.8627, 0.8902, 1.0);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	desenhaBackgroundAnterior();
-	desenhaHUD();
-	principal->desenha();
+    desenhaBackgroundAnterior();
+
+    for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end(); ++i)
+        (*i)->desenha();
+
+    for (std::list<Projetil*>::iterator i = projeteisInimigos.begin(); i != projeteisInimigos.end(); ++i)
+        (*i)->desenha();
+
+    principal->desenha();
+
+    for (std::list<Personagem*>::iterator i = inimigosAtivos.begin(); i != inimigosAtivos.end(); ++i)
+        (*i)->desenha();
+
+    desenhaExplosoes();
+
+    desenhaHUD();
+
 	desenhabackgroudPosterior();
-	// Executa os comandos OpenGL
+
 	glutSwapBuffers();
 }
 //void Fase_TheVengeanceWeapon::desenhaHUD(int hp) {
@@ -106,6 +127,206 @@ void Fase_TheVengeanceWeapon::atualiza(int value)
 			PontosCeu[i][1] = 100;
 		}
 	}
+
+
+    pair<GLint, GLint> size = EfeitoVisual::getInstance().getOrtho2D();
+    //Inimigos normais
+    if (value % 200 == 99 && value < 10000)
+    {
+        Bf109 *aux = new Bf109(rand() % size.first, size.second, (float)100 / 10000, principal, this);
+        aux->inverteY();
+        inimigosAtivos.push_back(aux);
+        EfeitoSonoro::getInstance().playBf109Motor();
+    }
+    if (value % 500 == 99)
+    {
+        Me163 *aux2 = new Me163(rand() % size.first, size.second, (float)100 / 10000, principal, this);
+        aux2->inverteY();
+        inimigosAtivos.push_back(aux2);
+        EfeitoSonoro::getInstance().playMe163Motor();
+    }
+    if (value % 700 == 99)
+    {
+        Me262 *aux2 = new Me262(rand() % size.first, size.second, (float)100 / 10000, principal, this);
+        aux2->inverteY();
+        inimigosAtivos.push_back(aux2);
+        EfeitoSonoro::getInstance().playMe262Motor();
+    }
+
+    //Chefao
+    else if (value == 10300)
+    {
+        boss = new V2(size.first / 2, size.second + 299, (float)600 / 10000, this);
+        inimigosAtivos.push_back(boss);
+        EfeitoSonoro::getInstance().playMe264Motor();
+    }
+    else if (value == 17000)
+    {
+        boss->finaliza();
+    }
+
+    for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end();)
+    {
+        (*i)->acao();
+        if ((*i)->getX() < 0 || (*i)->getX() > size.first || (*i)->getY() < 0 || (*i)->getY() > size.second)
+            i = projeteisAmigos.erase(i);
+        else
+            i++;
+    }
+
+    for (std::list<Projetil*>::iterator i = projeteisInimigos.begin(); i != projeteisInimigos.end();)
+    {
+        (*i)->acao();
+        if ((*i)->getX() < 0 || (*i)->getX() > size.first || (*i)->getY() < 0 || (*i)->getY() > size.second)
+            i = projeteisInimigos.erase(i);
+        else
+            i++;
+    }
+
+    for (std::list<Personagem*>::iterator i = inimigosAtivos.begin(); i != inimigosAtivos.end();)
+    {
+        (*i)->acao();
+        if ((*i)->getX() < -300 || (*i)->getX() > size.first + 300 || (*i)->getY() < -300 || (*i)->getY() > size.second + 300)
+            i = inimigosAtivos.erase(i);
+        else
+            i++;
+    }
+
+    principal->acao();
+
+    //Para os sons dos avioes abatidos
+    if (inimigosAtivos.size() == 0)
+    {
+        EfeitoSonoro::getInstance().stopBf109Motor();
+        EfeitoSonoro::getInstance().stopMe163Motor();
+    }
+    else
+    {
+        bool bf109 = false, me163 = false;
+        for (std::list<Personagem*>::iterator i = inimigosAtivos.begin(); i != inimigosAtivos.end(); ++i)
+        {
+            if ((*i)->getNome() == "Bf109")
+                bf109 = true;
+            else if ((*i)->getNome() == "Me163")
+                me163 = true;
+            if (bf109 && me163)
+                break;
+        }
+        if (!me163)
+            EfeitoSonoro::getInstance().stopMe163Motor();
+        if (!bf109)
+            EfeitoSonoro::getInstance().stopBf109Motor();
+    }
+
+    //Bala aliada X Avioes inimigos
+    for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end();)
+    {
+        bool destruiu = false;
+        for (std::list<Personagem*>::iterator j = inimigosAtivos.begin(); j != inimigosAtivos.end();)
+        {
+            //Se foi alvejado
+            if (EfeitoVisual::getInstance().colisao((*j), (*i)))
+            {
+                (*j)->alvejado((*i)->getDano());
+                i = projeteisAmigos.erase(i);
+                destruiu = true;
+            }
+            //Se foi destruido
+            if ((*j)->destruido())
+            {
+                explosoesAtivas.push_back(new Explosao((*j)->getX(), (*j)->getY(), 1));
+                Jogo::getInstance().score->incScoreValue((*j)->getScore());
+                j = inimigosAtivos.erase(j);
+            }
+            //Se ta de boa ainda
+            else
+                j++;
+
+            if (destruiu)
+                break;
+        }
+        if (!destruiu)
+            i++;
+
+    }
+
+
+    //Bala dos inimigos X Aviao
+    for (std::list<Projetil*>::iterator i = projeteisInimigos.begin(); i != projeteisInimigos.end();)
+    {
+        if (EfeitoVisual::getInstance().colisao((*i), principal))
+        {
+            principal->alvejado((*i)->getDano());
+            i = projeteisInimigos.erase(i);
+        }
+        else
+            ++i;
+
+        if (principal->destruido())
+        {
+            explosoesAtivas.push_back(new Explosao(principal->getX(), principal->getY(), 1));
+            principal->powerUp = 0;
+            Jogo::getInstance().numeroVidas--;
+            if (Jogo::getInstance().numeroVidas == 0) {
+                EfeitoSonoro::getInstance().stopSpitfireMotor();
+                EfeitoSonoro::getInstance().stopBf109Motor();
+                EfeitoSonoro::getInstance().stopMe163Motor();
+                Jogo::getInstance().setProxFase(5);
+                Jogo::getInstance().proximaFase();
+            }
+            principal->morreu();
+
+        }
+    }
+
+    string nome;
+    //Colisao avioes
+    for (std::list<Personagem*>::iterator i = inimigosAtivos.begin(); i != inimigosAtivos.end();)
+    {
+        if (EfeitoVisual::getInstance().colisao((*i), principal))
+        {
+            nome = (*i)->getNome();
+            if (nome == "Me264")
+            {
+                i++;
+                continue;
+            }
+            principal->alvejado((*i)->danoColisao());
+            (*i)->alvejado(principal->danoColisao());
+            if (nome == "Me163")
+                (*i)->alvejado(1000);
+        }
+
+        if ((*i)->destruido())
+        {
+            if (rand() % 20 == 0)
+                principal->powerUp = 1;
+            Jogo::getInstance().score->incScoreValue((*i)->getScore());
+            if (nome == "Me264")
+            {
+                explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 5));
+                //EfeitoSonoro::getInstance().stopMe264Motor();
+            }
+            else
+                explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 2));
+            EfeitoSonoro::getInstance().playExplosion();
+            i = inimigosAtivos.erase(i);
+        }
+        else
+        {
+            ++i;
+        }
+
+        if (principal->destruido())
+        {
+            if (nome != "Me163")
+                explosoesAtivas.push_back(new Explosao(principal->getX(), principal->getY(), 1));
+            principal->powerUp = 0;
+            Jogo::getInstance().numeroVidas--;
+            terminou();
+            principal->morreu();
+        }
+    }
 }
 
 void Fase_TheVengeanceWeapon::mouse(int button, int state, int x, int y)
@@ -114,28 +335,38 @@ void Fase_TheVengeanceWeapon::mouse(int button, int state, int x, int y)
 
 void Fase_TheVengeanceWeapon::keyDown(unsigned char key, int x, int y)
 {
-	switch (key) {
-	case 'F':
-	case 'f':
-		EfeitoVisual::getInstance().setFullScreen();
-		break;
-	}
 }
 
 void Fase_TheVengeanceWeapon::keyUp(unsigned char key, int x, int y)
 {
+    switch (key)
+    {
+    case 'F':
+    case 'f':
+        EfeitoVisual::getInstance().setFullScreen();
+        break;
+    case 'p':
+    case 'P':
+        Jogo::getInstance().pausado = !Jogo::getInstance().pausado;
+        break;
+    default:
+        principal->detectaTiro(key, x, y);
+    }
 }
 
 void Fase_TheVengeanceWeapon::specialKeyDown(int key, int x, int y)
 {
+    principal->detectaMovimentoDown(key, x, y);
 }
 
 void Fase_TheVengeanceWeapon::specialKeyUp(int key, int x, int y)
 {
+    principal->detectaMovimentoUp(key, x, y);
 }
 
 void Fase_TheVengeanceWeapon::inicializa()
 {
+    reseta();
 	definePersonagens();
 	EfeitoSonoro::getInstance().initAudios_TheVengeanceWeapon();
 	EfeitoSonoro::getInstance().playMainTheme();

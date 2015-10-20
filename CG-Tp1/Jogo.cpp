@@ -36,7 +36,7 @@ void Jogo::run()
 
 	double xspit = 30;
 	for (int ii = 0; ii < 5; ii++) {
-		vidas[ii] = new Spitfire(xspit + 50 * ii, 1030, (float) 20 / 10000, nullptr);
+		vidas[ii] = new Spitfire(xspit + 50 * ii, 1030, (float)20 / 10000, nullptr);
 	}
 	glutMainLoop();
 }
@@ -74,16 +74,16 @@ void Jogo::keyUp(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
-	case 'p':
-	case 'P':
-		Jogo::getInstance().pausado = !Jogo::getInstance().pausado;
-		break;
-	case 27: //Tecla ESC -> Sair do Jogo
-		exit(0);
-		break;
-	default:
-		Jogo::getInstance().fases[Jogo::getInstance().proxFase]->keyUp(key, x, y);
-		break;
+		case 'p':
+		case 'P':
+			Jogo::getInstance().pausado = !Jogo::getInstance().pausado;
+			break;
+		case 27: //Tecla ESC -> Sair do Jogo
+			exit(0);
+			break;
+		default:
+			Jogo::getInstance().fases[Jogo::getInstance().proxFase]->keyUp(key, x, y);
+			break;
 	}
 
 }
@@ -109,57 +109,31 @@ void Jogo::timer(int value)
 		Jogo::getInstance().fases[Jogo::getInstance().proxFase]->atualiza(value);
 		glutPostRedisplay();
 	}
-    glutTimerFunc(TEMPOQUADRO, Jogo::timer, Jogo::getInstance().estado);
+	glutTimerFunc(TEMPOQUADRO, Jogo::timer, Jogo::getInstance().estado);
 }
 
 void Jogo::inicializa(int fase)
 {
-	if(numeroVidas > 0)
-	{
-		estado = 0;
-		// Inicializa o sistema de coordenadas
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glutMouseFunc(Jogo::mouse);
-		glutKeyboardFunc(Jogo::keyDown);
-		glutKeyboardUpFunc(Jogo::keyUp);
-		glutSpecialFunc(Jogo::specialKeyDown);
-		glutSpecialUpFunc(Jogo::specialKeyUp);
-		glutDisplayFunc(Jogo::draw);
-		glutTimerFunc(TEMPOQUADRO, Jogo::timer, 1);
-		if (fase == 5) {
-			Jogo::getInstance().gameOver = false;
-			if (Jogo::getInstance().score->getScoreValue() > 0) {
-				Jogo::getInstance().bestScore = true;
-			}
-		}
-		Jogo::getInstance().fases[fase]->inicializa();		
-	}
-	else
-	{
-		//Game over
-		estado = 0;
-		// Inicializa o sistema de coordenadas
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glutMouseFunc(Jogo::mouse);
-		glutKeyboardFunc(Jogo::keyDown);
-		glutKeyboardUpFunc(Jogo::keyUp);
-		glutSpecialFunc(Jogo::specialKeyDown);
-		glutSpecialUpFunc(Jogo::specialKeyUp);
-		glutDisplayFunc(Jogo::draw);		
-		Jogo::getInstance().gameOver = true;		
-		if (Jogo::getInstance().score->getScoreValue() > 0) {
-			Jogo::getInstance().bestScore = true;
-		}
-		Jogo::getInstance().fases[fase]->inicializa();
-	}
+	estado = 0;
+	// Inicializa o sistema de coordenadas
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glutMouseFunc(Jogo::mouse);
+	glutKeyboardFunc(Jogo::keyDown);
+	glutKeyboardUpFunc(Jogo::keyUp);
+	glutSpecialFunc(Jogo::specialKeyDown);
+	glutSpecialUpFunc(Jogo::specialKeyUp);
+	glutDisplayFunc(Jogo::draw);
+	glutTimerFunc(TEMPOQUADRO, Jogo::timer, 1);
+	EfeitoSonoro::getInstance().finishAllAudios();
+	Jogo::getInstance().fases[fase]->inicializa();
+
 }
 
 void Jogo::proximaFase()
 {
-	if (proxFase != -1){
-		inicializa(proxFase);}
+	if (proxFase != -1)
+		inicializa(proxFase);
 	else
 		fimJogo();
 }
@@ -171,7 +145,5 @@ void Jogo::setProxFase(int p)
 
 void Jogo::fimJogo()
 {
-	//salvar score
-	//passar isso pro destrutor??
 	exit(0);
 }

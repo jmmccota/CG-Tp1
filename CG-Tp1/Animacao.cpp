@@ -2,8 +2,11 @@
 
 Animacao::Animacao()
 {
+	spitifire = new Spitfire(0, -200, 0.002, nullptr);
+	bf109_1 = new Bf109(0, -100, 0.002, nullptr, nullptr);
+	bf109_2 = new Bf109(45, -120, 0.002, nullptr, nullptr);
+	bf109_3 = new Bf109(-45, -120, 0.002, nullptr, nullptr);
 }
-
 
 Animacao::~Animacao()
 {
@@ -56,52 +59,23 @@ void Animacao::desenhaHUD()
 
 void Animacao::desenha()
 {
+	TiroSimples *t1 = new TiroSimples(0, 50, (float)2 / 1000);
 	glClear(GL_COLOR_BUFFER_BIT);
 	desenhaBackground();
 
-	Spitfire *s = new Spitfire(-45, 0, (float)20 / 10000, nullptr);
-	Bf109 *b = new Bf109(50, 0, (float)20 / 10000, nullptr, nullptr);
-	TiroSimples *t1 = new TiroSimples(-38, 8, (float)2 / 10000);
-	TiroSimples *t2 = new TiroSimples(-38, -8, (float)2 / 10000);
-
-	//desenha o primeiro bloco atirador
 	gluOrtho2D(-100, 100, -100, 100);
-	glTranslatef(translacaoX - 45, translacaoY - 45, translacaoZ);
-	glRotatef(rotacaoX1, 1, 0, 0);
-	glRotatef(rotacaoY1, 0, 1, 0);
-	glRotatef(270.0f, 0.0f, 0.0f, 1.0f);
+	glTranslatef(translacaoX, 0, 0);
+	glRotatef(270.0f, 0, 0, 1);
 	glPushMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	s->desenha();
+	spitifire->desenha();
+
+	bf109_1->desenha();
+	bf109_2->desenha();
+	bf109_3->desenha();
 	glPopMatrix();
 
-	if (booldesenha == true) {
-		//desenha a muniçãoo
-		glPushMatrix();
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		gluOrtho2D(-100, 100, -100, 100);
-		glTranslatef(translacaoX2, 0, 0);
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		t1->desenha();
-		t2->desenha();
-		//desenha o bloco que recebe o tiro
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		gluOrtho2D(-100, 100, -100, 100);
-		glTranslatef(translacaoX + 45, 50, 0);
-		glRotatef(270.0f, 0.0f, 0.0f, 1.0f);
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		b->desenha();
-		glPopMatrix();
-	}
-	else if (explosao) {
-        //EfeitoVisual::getInstance().chamaExplosao(translacaoX2, 0);
-	}
-	
 	glutSwapBuffers();
 }
 
@@ -117,26 +91,12 @@ void Animacao::terminou()
 
 void Animacao::atualiza(int value)
 {
-	if (value >= 180)
+	if (value >= 450)
 		pularAnimacao = true;
 	//Testa se a fase acabou
 	terminou();
 
-	translacaoX += 2;
-	if (booldesenha) {
-
-		if (translacaoX >= -20) {
-			translacaoX2 = translacaoX2 + 8;
-		}
-		else {
-			translacaoX2 += 2;
-		}
-		//momento em q as balas colidem com o bloco
-		if ((translacaoX2 - translacaoX) > 78) {
-			translacaoX2 = translacaoX2 - 30;
-			booldesenha = false;
-		}
-	}
+	translacaoX += 0.8;
 }
 
 void Animacao::mouse(int button, int state, int x, int y)
@@ -151,6 +111,9 @@ void Animacao::keyUp(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
+	case 'f':
+		EfeitoVisual::getInstance().setFullScreen();
+		break;
 	case 13: //Tecla enter para pular animação
 		pularAnimacao = true;
 		break;

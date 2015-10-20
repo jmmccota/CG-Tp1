@@ -3,10 +3,14 @@
 
 #include "Fase.hpp"
 #include "FuncoesAuxiliares.hpp"
+#include "Avioes.hpp"
 #ifdef FASE
 
 class Fase_TheVengeanceWeapon : public Fase
 {
+protected:
+    V2 *boss;
+
 public:
 
 	Fase_TheVengeanceWeapon();

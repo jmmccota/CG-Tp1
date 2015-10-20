@@ -66,6 +66,7 @@ void Fase::desenhaHUD() {
 
 		if (Jogo::getInstance().numeroVidas < 5) {
 			Jogo::getInstance().numeroVidas++;
+			//EfeitoSonoro::getInstance().playGanhaVida();
 		}
 		Jogo::getInstance().setControlaScore();
 		//EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/ganhaVida.mp3");
@@ -83,6 +84,8 @@ void Fase::desenhaHUD() {
 	glColor3f(1, 0.27, 0);
 	glRasterPos2f(50, 50);
 	FuncoesAuxiliares::writeWord_BITMAP("x " + std::to_string(principal->getQtdTiros()), GLUT_BITMAP_TIMES_ROMAN_24);
+	
+	
 }
 
 void Fase::desenha() {
@@ -101,6 +104,7 @@ void Fase::novoProjetilAmigo(Projetil *p)
 
 void Fase::reseta()
 {
+	
 	inimigosAtivos.clear();
 	projeteisInimigos.clear();
 	projeteisAmigos.clear();

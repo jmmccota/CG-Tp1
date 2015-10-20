@@ -24,11 +24,6 @@ void Fase_TheBattleOfBritain::definePersonagens()
 {
     pair<float, float> size = EfeitoVisual::getInstance().getOrtho2D();
     principal = new Spitfire(size.first / 2, size.second / 10, (float)100 / 10000, this);
-
-    //Fora da tela so pra nao comecar vazio
-    projeteisAmigos.push_back(new TiroSimples(-1000, -1000, 0));
-    projeteisInimigos.push_back(new TiroSimples(-1000, -1000, 0));
-    inimigosAtivos.push_back(new Bf109(-1000, -1000, 0, principal, this));
 }
 
 void drawWaves(float translacaoX, float translacaoY, float escala){
@@ -263,6 +258,7 @@ void Fase_TheBattleOfBritain::specialKeyUp(int key, int x, int y)
 
 void Fase_TheBattleOfBritain::inicializa()
 {
+    reseta();
     definePersonagens();
   //  EfeitoSonoro::getInstance().playSecondLevelTheme();
 //    EfeitoSonoro::getInstance().spitfireMotor();

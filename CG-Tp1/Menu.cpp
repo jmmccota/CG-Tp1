@@ -338,7 +338,7 @@ void drawOpcoesMenu() {
 	glPushMatrix();
 	TiroSimples *tiro = new TiroSimples(1300, 400, 0.002);
 	TiroSimples *tiro2 = new TiroSimples(1500, 400, 0.002);
-	Spitfire *spitfire = new Spitfire(1400, 360, 0.010, nullptr);
+	Spitfire *spitfire = new Spitfire(1400, 360, 0.015, nullptr);
 	glTranslatef(translacaoOpcoesX, translacaoOpcoesY, 0);
 	glPushMatrix();
 	glTranslatef(0, translacaoTiro, 0);
@@ -420,11 +420,6 @@ void Menu::desenha() {
 		spitfire->desenha();
 		glPopMatrix();
 		//ate aqui
-		//descomente abaixo
-		/*glPushMatrix();
-		Navio *navio = new Navio(150, 600, 0.05, nullptr);
-		navio->desenha();
-		glPopMatrix();*/
 		
 	}
 

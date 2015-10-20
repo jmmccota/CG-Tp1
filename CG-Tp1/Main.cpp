@@ -2,6 +2,12 @@
 #include "Jogo.hpp"
 
 int main(int argc, char **argv) {
+
+    #ifdef _WIN32
+    #include <Windows.h>
+        FreeConsole();
+    #endif
+
 	Jogo::getInstance().run();
 	return 0;
 }
