@@ -9,6 +9,10 @@ using namespace std;
 
 class Fase_TheBattleOfBritain : public Fase
 {
+protected:
+	Bismarck *boss;
+	bool passouFase = false;
+
 public:
 	Fase_TheBattleOfBritain();
 	~Fase_TheBattleOfBritain();

@@ -13,6 +13,7 @@ bool ilha1 = false;
 
 Fase_TheBattleOfBritain::Fase_TheBattleOfBritain()
 {
+	srand(time(NULL));
 }
 
 Fase_TheBattleOfBritain::~Fase_TheBattleOfBritain()
@@ -126,6 +127,9 @@ void Fase_TheBattleOfBritain::desenha()
     for (std::list<Personagem*>::iterator i = inimigosAtivos.begin(); i != inimigosAtivos.end(); ++i)
         (*i)->desenha();
 
+	for (std::list<Caixa*>::iterator i = caixas.begin(); i != caixas.end(); ++i)
+		(*i)->desenha();
+
     principal->desenha();
 	desenhaHUD();
     // Executa os comandos OpenGL
@@ -150,10 +154,271 @@ void Fase_TheBattleOfBritain::desenha()
 
 void Fase_TheBattleOfBritain::terminou()
 {
+	EfeitoSonoro::getInstance().finishAllAudios();
+	if (Jogo::getInstance().numeroVidas == 0)
+		Jogo::getInstance().setProxFase(5);
+	else
+		Jogo::getInstance().setProxFase(4);
+	Jogo::getInstance().proximaFase();
 }
 
 void Fase_TheBattleOfBritain::atualiza(int value)
 {
+	pair<GLint, GLint> size = EfeitoVisual::getInstance().getOrtho2D();
+
+	//Passa de Fase
+	if (passouFase) {
+		if (principal->venceu()) {
+			terminou();
+		}
+	}
+
+	//Inimigos normais
+	if (value < value < 10000) 
+	{
+		if (value % 255 == 99)
+		{
+			Bf109 *aux = new Bf109(rand() % size.first, size.second, (float)100 / 10000, principal, this);
+			aux->inverteY();
+			inimigosAtivos.push_back(aux);
+			EfeitoSonoro::getInstance().playBf109Motor();
+		}
+		if (value % 600 == 99)
+		{
+			Me163 *aux2 = new Me163(rand() % size.first, size.second, (float)100 / 10000, principal, this);
+			aux2->inverteY();
+			inimigosAtivos.push_back(aux2);
+			EfeitoSonoro::getInstance().playMe163Motor();
+		}
+		if (value % 5000 == 9)
+		{
+			Bf109Verde *aux2 = new Bf109Verde(rand() % size.first, size.second, (float)100 / 10000, principal, this);
+			aux2->inverteY();
+			inimigosAtivos.push_back(aux2);
+		}
+	}
+	
+
+	//Chefao
+	else if (value == 10200)
+	{
+		boss = new Bismarck(size.first / 2, size.second + 299, (float)600 / 10000, principal, this);
+		inimigosAtivos.push_back(boss);
+		EfeitoSonoro::getInstance().playMe264Motor();
+		bossOn = true;
+
+	}
+	else if (value == 17000)
+	{
+		boss->finaliza();
+
+	}
+
+	for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end();)
+	{
+		(*i)->acao();
+		if ((*i)->getX() < 0 || (*i)->getX() > size.first || (*i)->getY() < 0 || (*i)->getY() > size.second)
+			i = projeteisAmigos.erase(i);
+		else
+			i++;
+	}
+
+	for (std::list<Projetil*>::iterator i = projeteisInimigos.begin(); i != projeteisInimigos.end();)
+	{
+		(*i)->acao();
+		if ((*i)->getX() < 0 || (*i)->getX() > size.first || (*i)->getY() < 0 || (*i)->getY() > size.second)
+			i = projeteisInimigos.erase(i);
+		else
+			i++;
+	}
+
+	for (std::list<Personagem*>::iterator i = inimigosAtivos.begin(); i != inimigosAtivos.end();)
+	{
+		(*i)->acao();
+		if ((*i)->getX() < -300 || (*i)->getX() > size.first + 300 || (*i)->getY() < -300 || (*i)->getY() > size.second + 300)
+			i = inimigosAtivos.erase(i);
+		else
+			i++;
+	}
+
+	principal->acao();
+
+	//Para os sons dos avioes abatidos
+	if (inimigosAtivos.size() == 0)
+	{
+		EfeitoSonoro::getInstance().stopBf109Motor();
+		EfeitoSonoro::getInstance().stopMe163Motor();
+	}
+	else
+	{
+		bool bf109 = false, me163 = false;
+		for (std::list<Personagem*>::iterator i = inimigosAtivos.begin(); i != inimigosAtivos.end(); ++i)
+		{
+			if ((*i)->getNome() == "Bf109")
+				bf109 = true;
+			else if ((*i)->getNome() == "Me163")
+				me163 = true;
+			if (bf109 && me163)
+				break;
+		}
+		if (!me163)
+			EfeitoSonoro::getInstance().stopMe163Motor();
+		if (!bf109)
+			EfeitoSonoro::getInstance().stopBf109Motor();
+	}
+
+	//Bala aliada X Avioes inimigos
+	string nome;
+	for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end();)
+	{
+		bool destruiu = false;
+		for (std::list<Personagem*>::iterator j = inimigosAtivos.begin(); j != inimigosAtivos.end();)
+		{
+			//Se foi alvejado
+			nome = (*j)->getNome();
+			if (EfeitoVisual::getInstance().colisao((*j), (*i)))
+			{
+				(*j)->alvejado((*i)->getDano());
+				i = projeteisAmigos.erase(i);
+				destruiu = true;
+			}
+			//Se foi destruido
+			if ((*j)->destruido())
+			{
+				explosoesAtivas.push_back(new Explosao((*j)->getX(), (*j)->getY(), 1));
+				Jogo::getInstance().score->incScoreValue((*j)->getScore());
+				j = inimigosAtivos.erase(j);
+				if (nome == "Bf109Verde")
+				{
+					int x = (*j)->getX();
+					int y = (*j)->getY();
+					caixas.push_back(new Caixa(x, y, 1));
+				}
+				else if (nome == "Bf109Amarelo")
+				{
+					caixas.push_back(new Caixa((*j)->getX(), (*j)->getY(), 2));
+				}
+				else if (nome == "Bismarck")
+				{
+					passouFase = true;
+				}
+			}
+			//Se ta de boa ainda
+			else
+				j++;
+
+			if (destruiu)
+				break;
+		}
+		if (!destruiu)
+			i++;
+
+	}
+
+
+	//Bala dos inimigos X Aviao
+	for (std::list<Projetil*>::iterator i = projeteisInimigos.begin(); i != projeteisInimigos.end();)
+	{
+		if (EfeitoVisual::getInstance().colisao((*i), principal))
+		{
+			principal->alvejado((*i)->getDano());
+			i = projeteisInimigos.erase(i);
+		}
+		else
+			++i;
+
+		if (principal->destruido())
+		{
+			explosoesAtivas.push_back(new Explosao(principal->getX(), principal->getY(), 1));
+			principal->powerUp = 0;
+			Jogo::getInstance().numeroVidas--;
+			principal->morreu();
+		}
+	}
+
+	//Colisao avioes
+	for (std::list<Personagem*>::iterator i = inimigosAtivos.begin(); i != inimigosAtivos.end();)
+	{
+		if (EfeitoVisual::getInstance().colisao((*i), principal))
+		{
+			nome = (*i)->getNome();
+			if (nome == "Me264")
+			{
+				i++;
+				continue;
+			}
+			principal->alvejado((*i)->danoColisao());
+			(*i)->alvejado(principal->danoColisao());
+			if (nome == "Me163")
+				(*i)->alvejado(1000);
+		}
+
+		if ((*i)->destruido())
+		{
+			if (rand() % 20 == 0)
+				principal->powerUp = 1;
+			Jogo::getInstance().score->incScoreValue((*i)->getScore());
+			if (nome == "bismarck")
+			{
+				explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 5));
+				//EfeitoSonoro::getInstance().stopMe264Motor();
+			}
+				if (nome == "Bf109Verde")
+				{
+					int x = (*j)->getX();
+					int y = (*j)->getY();
+					caixas.push_back(new Caixa(x, y, 1));
+				}
+				else if (nome == "Bf109Amarelo")
+				{
+					caixas.push_back(new Caixa((*j)->getX(), (*j)->getY(), 2));
+				}
+			else
+				explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 2));
+			EfeitoSonoro::getInstance().playExplosion();
+			i = inimigosAtivos.erase(i);
+		}
+		else
+		{
+			++i;
+		}
+
+		if (principal->destruido())
+		{
+			if (nome != "Me163")
+				explosoesAtivas.push_back(new Explosao(principal->getX(), principal->getY(), 1));
+			principal->powerUp = 0;
+			Jogo::getInstance().numeroVidas--;
+			principal->morreu();
+		}
+	}
+
+	for (std::list<Caixa*>::iterator i = caixas.begin(); i != caixas.end();)
+	{
+		if (EfeitoVisual::getInstance().colisao(*i, principal))
+		{
+			if ((*i)->tipo == 1)
+			{
+				principal->municao[1]++;
+				principal->powerUp = 1;
+			}
+			else if ((*i)->tipo == 2)
+			{
+				principal->morreu();
+				Jogo::getInstance().numeroVidas++;
+			}
+			i = caixas.erase(i);
+		}
+		else
+		{
+			i++;
+		}
+	}
+
+	if (Jogo::getInstance().numeroVidas == 0) {
+		terminou();
+	}
+
     for (int i = 0; i < 16; i++){
         PontosAgua[i][1] -= 2;
     }
@@ -233,22 +498,28 @@ void Fase_TheBattleOfBritain::mouse(int button, int state, int x, int y)
 
 void Fase_TheBattleOfBritain::keyDown(unsigned char key, int x, int y)
 {
-	switch (key) {
-	case 'F':
-	case 'f':
-		EfeitoVisual::getInstance().setFullScreen();
-		break;
-	}
 }
 
 void Fase_TheBattleOfBritain::keyUp(unsigned char key, int x, int y)
 {
-    principal->detectaTiro(key, x, y);
+	switch (key)
+	{
+	case 'F':
+	case 'f':
+		EfeitoVisual::getInstance().setFullScreen();
+		break;
+	case 'p':
+	case 'P':
+		Jogo::getInstance().pausado = !Jogo::getInstance().pausado;
+		break;
+	default:
+		principal->detectaTiro(key, x, y);
+	}
 }
 
 void Fase_TheBattleOfBritain::specialKeyDown(int key, int x, int y)
 {
-    principal->detectaMovimentoDown(key, x, y);
+	principal->detectaMovimentoDown(key, x, y);
 }
 
 void Fase_TheBattleOfBritain::specialKeyUp(int key, int x, int y)
@@ -259,6 +530,7 @@ void Fase_TheBattleOfBritain::specialKeyUp(int key, int x, int y)
 void Fase_TheBattleOfBritain::inicializa()
 {
     reseta();
+	EfeitoSonoro::getInstance().initAudios_TheBattleOfBritain();
     definePersonagens();
   //  EfeitoSonoro::getInstance().playSecondLevelTheme();
 //    EfeitoSonoro::getInstance().spitfireMotor();

@@ -243,12 +243,15 @@ void Fase_TheBlitz::atualiza(int value)
 	}
 
 	//Inimigos normais
-	if (value % 300 == 99 && value < 10000)
+	if (value < value < 10000)
 	{
-		Bf109 *aux = new Bf109(rand() % size.first, size.second, (float)100 / 10000, principal, this);
-		aux->inverteY();
-		inimigosAtivos.push_back(aux);
-		EfeitoSonoro::getInstance().playBf109Motor();
+		if (value % 300 == 99 && value < 10000)
+		{
+			Bf109 *aux = new Bf109(rand() % size.first, size.second, (float)100 / 10000, principal, this);
+			aux->inverteY();
+			inimigosAtivos.push_back(aux);
+			EfeitoSonoro::getInstance().playBf109Motor();
+		}
 		if (value % 700 == 99)
 		{
 			Me163 *aux2 = new Me163(rand() % size.first, size.second, (float)100 / 10000, principal, this);
@@ -270,7 +273,6 @@ void Fase_TheBlitz::atualiza(int value)
 	else if (value == 17000)
 	{
 		boss->finaliza();
-
 	}
 
 	for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end();)

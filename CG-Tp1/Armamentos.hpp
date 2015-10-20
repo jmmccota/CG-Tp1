@@ -50,7 +50,7 @@ class Caixa : public Solido
 {
 public:
 	int tipo;
-	Caixa(GLfloat x, GLfloat y, int tipo) : Solido(x, y, 0.0f, 50.0f) 
+	Caixa(GLfloat x, GLfloat y, int tipo) : Solido(x, y, 0.0f, 20.0f) 
 	{ 
 		this->tipo = tipo; 
 		this->carrega("modelos/caixa.dat");
