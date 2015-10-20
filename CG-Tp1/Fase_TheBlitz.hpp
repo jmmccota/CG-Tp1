@@ -12,6 +12,7 @@ class Fase_TheBlitz : public Fase
 {
 protected:
     Me264 *boss;
+	bool passouFase = false;
 
 public:
 	Fase_TheBlitz();

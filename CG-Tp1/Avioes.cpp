@@ -5,7 +5,7 @@
 
 
 Spitfire::Spitfire(GLfloat pX, GLfloat pY, float esc, Fase *f)
-    : Personagem(pX, pY, 150 * esc, esc, f)
+    : Personagem(pX, pY, 250 * esc, esc, f)
 {
     this->carrega("modelos/spitfire.dat");
 
@@ -94,6 +94,16 @@ int Spitfire::danoColisao()
 void Spitfire::morreu()
 {
     hp = VIDA_SPITFIRE;
+}
+
+bool Spitfire::venceu()
+{
+	bool termina = false;
+	posY += velocidade;
+	if (posY >= 1080) {
+		termina = true;
+	}
+	return termina;
 }
 
 string Spitfire::getNome()

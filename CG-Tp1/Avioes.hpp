@@ -32,6 +32,7 @@ class Spitfire : public Personagem
         void atira(int tipo);
 		int danoColisao();
         void morreu();
+		bool venceu();
 		string getNome();
 		int getScore();
 		GLfloat getX();

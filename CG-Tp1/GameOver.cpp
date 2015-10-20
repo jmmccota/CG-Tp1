@@ -27,8 +27,6 @@ void GameOver::desenha()
 	glLoadIdentity();
 
 	desenhaBackground();
-	//cout << "entra aqui desenha \n";
-	/*EfeitoVisual::getInstance().ortho2D();	*/
 	//se gameOver true escreve grande na tela game over se fudeu etc
 	desenhaGameOver();
 	//se gameOver false escreve you win voce ? fod?o	
@@ -54,6 +52,16 @@ void GameOver::desenha()
 
 void GameOver::terminou()
 {
+	EfeitoSonoro::getInstance().finishAllAudios();
+	if (Jogo::getInstance().score->getScoreValue() > 0) {
+		Jogo::getInstance().score->saveScore(nome, Jogo::getInstance().score->getScoreValue());
+	}
+	Jogo::getInstance().numeroVidas = 5;
+	Jogo::getInstance().score->setScoreValue(0);
+	Jogo::getInstance().setProxFase(1);
+	Jogo::getInstance().proximaFase();
+
+
 }
 
 void GameOver::atualiza(int value)
@@ -91,11 +99,8 @@ void GameOver::keyUp(unsigned char key, int x, int y)
 	switch (key) {
 	case 13:
 		//enter salvar
-		if (Jogo::getInstance().score->getScoreValue() > 0) {
-			Jogo::getInstance().score->saveScore(nome, Jogo::getInstance().score->getScoreValue());
-		}
-		Jogo::getInstance().setProxFase(1);
-		Jogo::getInstance().proximaFase();
+		terminou();
+
 	case 8:
 
 		if (nome.length() > 0) {
@@ -305,7 +310,6 @@ void GameOver::desenhaGameOver() {
 		glVertex2i(x + 895 + 1, y - 120);
 		glVertex2i(x + 865 + 1, y - 120);
 		glEnd();
-
 	}
 	else {
 		//V
@@ -435,4 +439,5 @@ void GameOver::inicializa()
 	EfeitoSonoro::getInstance().playMainTheme();
 
 	desenha();
+
 }
