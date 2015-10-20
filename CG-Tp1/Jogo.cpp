@@ -74,19 +74,16 @@ void Jogo::keyUp(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
-		/*case 'f':
-			EfeitoVisual::getInstance().setFullScreen();
-			break;*/
-	case 'p':
-	case 'P':
-		Jogo::getInstance().pausado = !Jogo::getInstance().pausado;
-		break;
-	case 27: //Tecla ESC -> Sair do Jogo
-		exit(0);
-		break;
-	default:
-		Jogo::getInstance().fases[Jogo::getInstance().proxFase]->keyUp(key, x, y);
-		break;
+		case 'p':
+		case 'P':
+			Jogo::getInstance().pausado = !Jogo::getInstance().pausado;
+			break;
+		case 27: //Tecla ESC -> Sair do Jogo
+			exit(0);
+			break;
+		default:
+			Jogo::getInstance().fases[Jogo::getInstance().proxFase]->keyUp(key, x, y);
+			break;
 	}
 
 }

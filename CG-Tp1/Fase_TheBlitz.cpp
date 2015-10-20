@@ -352,6 +352,10 @@ void Fase_TheBlitz::atualiza(int value)
 				explosoesAtivas.push_back(new Explosao((*j)->getX(), (*j)->getY(), 1));
 				Jogo::getInstance().score->incScoreValue((*j)->getScore());
 				j = inimigosAtivos.erase(j);
+				if ((*j)->getNome() == "") 
+				{
+
+				}
 			}
 			//Se ta de boa ainda
 			else

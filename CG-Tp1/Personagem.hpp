@@ -23,13 +23,16 @@ class Personagem : public Solido
 {
 	protected:
 		//Valores de vida e municoes do personagem
-		int hp, municao[2], numeroVidas;
+		int hp, numeroVidas;
 
         //Ponteiro para fase
         //  Utilizado para informar novos projeteis
         Fase *fase;
 
 	public:
+
+		int municao[2];
+
         //Inicia o personagem
         Personagem(GLfloat pX, GLfloat pY, GLfloat vel, float esc, Fase* f);
 

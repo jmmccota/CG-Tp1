@@ -3,10 +3,13 @@
 
 class Spitfire;
 class Bf109;
+class Bf109Verde;
+class Bf109Amarelo;
 class Me163;
 class Me264;
 class Me262;
 class Bismarck;
+class V2;
 
 #include "Personagem.hpp"
 #include "Armamentos.hpp"
@@ -93,7 +96,11 @@ private:
     bool movCima = false, movBaixo = false, movEsq = false, movDir = false;
 
 public:
+<<<<<<< HEAD
     Me262(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f);
+=======
+    Me262(GLfloat pX, GLfloat pY, float esc, Spitfire *a, Fase *f);
+>>>>>>> 6c5e27e996d85e4784a416bbac595e0f79785946
     ~Me262();
     void acao();
     void atira(int tipo);

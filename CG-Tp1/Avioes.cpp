@@ -287,7 +287,7 @@ int Me163::getScore()
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-Me262::Me262(GLfloat pX, GLfloat pY, float esc, Fase *f)
+Me262::Me262(GLfloat pX, GLfloat pY, float esc, Spitfire *a, Fase *f)
     : Personagem(pX, pY, 0.016 * esc, esc, f)
 {
     this->carrega("modelos/me262.dat");
