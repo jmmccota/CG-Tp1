@@ -161,6 +161,22 @@ public:
     void finaliza();
 };
 
+class AviaoCriado : public Personagem
+{
+private:
+	bool movCima = false, movBaixo = false, movEsq = false, movDir = false;
+
+public:
+	AviaoCriado(GLfloat pX, GLfloat pY, float esc, Fase *f);
+	~AviaoCriado();
+	void acao();
+	void atira(int tipo);
+	int danoColisao();
+	string getNome();
+	int getScore();
+	void finaliza();
+};
+
 #endif
 #endif
 
