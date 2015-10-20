@@ -38,6 +38,7 @@ protected:
 	bool optMelhores = false;
 	bool optOpcoes = false;
 	bool optSair = false;
+	string macete = "";
 
 
 public:
