@@ -92,7 +92,7 @@ private:
     bool movCima = false, movBaixo = false, movEsq = false, movDir = false;
 
 public:
-    Me262(GLfloat pX, GLfloat pY, float esc, Fase *f);
+    Me262(GLfloat pX, GLfloat pY, float esc, Personagem *a, Fase *f);
     ~Me262();
     void acao();
     void atira(int tipo);
