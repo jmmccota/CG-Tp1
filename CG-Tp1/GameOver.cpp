@@ -16,6 +16,7 @@ void GameOver::desenhaBackground()
 {
 	glClearColor(0, 0, 0, 1);
 	glClear(GL_COLOR_BUFFER_BIT);
+	//cout << "entra aqui BG \n";
 }
 
 void GameOver::desenha()
@@ -27,24 +28,26 @@ void GameOver::desenha()
 
 	desenhaBackground();
 	//cout << "entra aqui desenha \n";
-	EfeitoVisual::getInstance().ortho2D();
+	/*EfeitoVisual::getInstance().ortho2D();	*/
 	//se gameOver true escreve grande na tela game over se fudeu etc
 	desenhaGameOver();
-	//se gameOver false escreve you win voce é fodão	
+	//se gameOver false escreve you win voce ? fod?o	
 
 	if (Jogo::getInstance().score->getScoreValue() > 0) {
 		desenhaScore();
 		//coloca no meio da tela o quadradim pra digitar
 	}
-	//if (contador>200) {
-	//	explosoesAtivas.push_back(new Explosao(rand() % 450, rand() % 1000, 1));
-	//	explosoesAtivas.push_back(new Explosao(rand() % 100 + 950, rand() % 1000, 1));
-	//	contador = 0;
-	//	desenhaExplosoes();
-	//}
-	//
-	//// Present frame buffer
-	//contador++;
+	if (contador > 100) {
+		explosoesAtivas.push_back(new Explosao(rand() % 450, rand() % 1000, 1));
+		explosoesAtivas.push_back(new Explosao(rand() % 100 + 1700, rand() % 1000, 1));
+		contador = 0;
+	}
+	contador++;
+	// Present frame buffer
+	if (contador % 3 == 0) {
+		desenhaExplosoes();
+	}
+
 
 	glutSwapBuffers();
 }
@@ -55,6 +58,8 @@ void GameOver::terminou()
 
 void GameOver::atualiza(int value)
 {
+	pair<GLint, GLint> size = EfeitoVisual::getInstance().getOrtho2D();
+	desenha();
 }
 
 void GameOver::mouse(int button, int state, int x, int y)
@@ -219,10 +224,14 @@ void GameOver::specialKeyDown(int key, int x, int y)
 void GameOver::specialKeyUp(int key, int x, int y)
 {
 
+
 }
-
 void GameOver::desenhaGameOver() {
-
+	//cout << "entra aqui gameOVer\n";
+	glPushMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	EfeitoVisual::getInstance().ortho2D();
 	int x = 500, y;
 	glColor3f(1, 0.27, 0);
 	if (Jogo::getInstance().score->getScoreValue() > 0) {
@@ -371,11 +380,19 @@ void GameOver::desenhaGameOver() {
 		glEnd();
 
 	}
-
+	glPopMatrix();
 }
-
+//void GameOver::desenhaQuadrado(int x,int y,int x1,int y1) {
+//	glColor3f(1, 1, 1);
+//	glBegin(GL_QUADS);
+//	glVertex2i(x, y);
+//	glVertex2i(x1, y);
+//	glVertex2i(x1, y1);
+//	glVertex2i(x, y1);
+//	glEnd();
+//}
 void GameOver::desenhaScore() {
-
+	//cout << "entra aqui SCORE\n";
 	glBegin(GL_LINE_LOOP);
 	glColor3f(1, 0.27, 0);
 	glVertex2i(650, 700);
@@ -411,9 +428,9 @@ void GameOver::desenhaScore() {
 	glRasterPos2f(1095, 490);
 	FuncoesAuxiliares::writeWord_BITMAP("Salvar", GLUT_BITMAP_TIMES_ROMAN_24);
 }
-
 void GameOver::inicializa()
 {
+	// se game over true coloca musica de game over else musica de victory
 	EfeitoSonoro::getInstance().initAudios_GameOver();
 	EfeitoSonoro::getInstance().playMainTheme();
 
