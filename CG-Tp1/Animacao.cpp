@@ -59,7 +59,6 @@ void Animacao::desenhaHUD()
 
 void Animacao::desenha()
 {
-	TiroSimples *t1 = new TiroSimples(0, 50, (float)2 / 1000);
 	glClear(GL_COLOR_BUFFER_BIT);
 	desenhaBackground();
 
