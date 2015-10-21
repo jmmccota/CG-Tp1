@@ -99,12 +99,8 @@ void Spitfire::morreu()
 
 bool Spitfire::venceu()
 {
-	bool termina = false;
-	posY += velocidade;
-	if (posY >= 1080) {
-		termina = true;
-	}
-	return termina;
+	posY += velocidade*2;
+    return posY >= 1080;
 }
 
 string Spitfire::getNome()
