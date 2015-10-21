@@ -436,7 +436,10 @@ void GameOver::inicializa()
 {
 	// se game over true coloca musica de game over else musica de victory
 	EfeitoSonoro::getInstance().initAudios_GameOver();
-	EfeitoSonoro::getInstance().playMainTheme();
+    if (Jogo::getInstance().numeroVidas == 0)
+	    EfeitoSonoro::getInstance().playMainTheme();
+    else
+        EfeitoSonoro::getInstance().playSpitfireMotor();
 
 	desenha();
 

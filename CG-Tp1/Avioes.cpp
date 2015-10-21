@@ -289,7 +289,7 @@ int Me163::getScore()
 
 
 Me262::Me262(GLfloat pX, GLfloat pY, float esc, Spitfire *a, Fase *f)
-    : Personagem(pX, pY, 400 * esc, esc, f)
+    : Personagem(pX, pY, 350 * esc, esc, f)
 {
     this->carrega("modelos/me262.dat");
     hp = 40;
@@ -316,7 +316,9 @@ void Me262::acao()
     if (!estadoTiro)
         contadorEst = ++contadorEst % 10;
     if (!contadorEst)
-        estrategia = rand() % 2;
+        estrategia = rand() % 10;
+    if (estrategia)
+        estrategia = 1;
 
     atira(estrategia);
 }
@@ -332,23 +334,29 @@ void Me262::atira(int tipo)
             EfeitoSonoro::getInstance().playBombDrop();
             Bomba *b = new Bomba(posX, posY, 0.25
                 * escala);
+            if (girou)
+                b->gira();
             if (inverteuY)
                 b->inverteY();
             if (inverteuX)
                 b->inverteX();
-            if (girou)
-                b->gira();
             fase->novoProjetilInimigo(b);
         }
     }
     //Atira
     else if (tipo == 1)
     {
+        float x = alvo->getX();
+        float y = alvo->getY();
         estadoTiro = ++estadoTiro % (int)(1000 / (tirosSegundo * TEMPOQUADRO));
-        if (!estadoTiro)
+        if (!estadoTiro &&
+            (  (!girou && inverteuY && y < posY)  ||
+               (!girou && !inverteuY && y > posY) ||
+               (girou && inverteuX && x < posX)   ||
+               (girou && !inverteuX && x > posX)))
         {
             EfeitoSonoro::getInstance().playMg42Shot();
-            fase->novoProjetilInimigo(new TiroEspecialInimigo(posX, posY, alvo->getX(), alvo->getY(), 0.1 * escala, 30000 * escala));
+            fase->novoProjetilInimigo(new TiroEspecialInimigo(posX, posY, alvo->getX(), alvo->getY(), 0.25 * escala, 1000 * escala));
         }
     }
 }
@@ -599,7 +607,7 @@ V2::V2(GLfloat pX, GLfloat pY, float esc, Fase *f)
 	: Personagem(pX, pY, 5 * esc, esc, f)
 {
 	this->carrega("modelos/v2.dat");
-	hp = 10000;
+	hp = 1800;
 }
 V2::~V2()
 {

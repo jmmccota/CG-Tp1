@@ -127,7 +127,7 @@ private:
 
     int estadoTiro;
     int contadorEst = -1;
-    int tirosSegundo = 3;
+    int tirosSegundo = 1;
     int estrategia;
 
 public:

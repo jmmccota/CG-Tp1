@@ -101,7 +101,7 @@ void Fase_TheVengeanceWeapon::desenha()
     desenhabackgroudPosterior();
 
     if (boss != nullptr)
-        desenhaHPBoss(boss->getHP(), 10000);
+        desenhaHPBoss(boss->getHP(), 1800);
 
 	glutSwapBuffers();
 }
@@ -165,25 +165,27 @@ void Fase_TheVengeanceWeapon::atualiza(int value)
             Me163 *aux2 = new Me163(rand() % size.first, size.second, (float)100 / 10000, principal, this);
             aux2->inverteY();
             inimigosAtivos.push_back(aux2);
-            EfeitoSonoro::getInstance().playMe163Motor();
         }
         if (value % 3000 == 2999)
         {
             Bf109Amarelo *aux2 = new Bf109Amarelo(rand() % size.first, size.second, (float)100 / 10000, principal, this);
             aux2->inverteY();
             inimigosAtivos.push_back(aux2);
+            EfeitoSonoro::getInstance().playBf109Motor();
         }
         if (value % 2000 == 1999)
         {
             Bf109Verde *aux2 = new Bf109Verde(rand() % size.first, size.second, (float)100 / 10000, principal, this);
             aux2->inverteY();
             inimigosAtivos.push_back(aux2);
+            EfeitoSonoro::getInstance().playBf109Motor();
         }
         if (value % 3000 == 2999)
         {
             Me262 *aux2 = new Me262(rand() % size.first, size.second, (float)100 / 10000, principal, this);
             aux2->inverteY();
             inimigosAtivos.push_back(aux2);
+            EfeitoSonoro::getInstance().playMe262Motor();
         }
     }
     //Chefao
@@ -196,29 +198,33 @@ void Fase_TheVengeanceWeapon::atualiza(int value)
     {
         //Boss ativo
 
-        if (value % 300 == 299)
+        if (value % 500 == 299)
         {
             Me262 *aux = new Me262(rand() % size.first, size.second, (float)100 / 10000, principal, this);
             aux->inverteY();
             inimigosAtivos.push_back(aux);
+            EfeitoSonoro::getInstance().playMe262Motor();
         }
-        if (value % 450 == 449)
+        if (value % 750 == 449)
         {
             Me262 *aux = new Me262(size.first, rand() % size.second, (float)100 / 10000, principal, this);
             aux->gira();
             aux->inverteX();
             inimigosAtivos.push_back(aux);
+            EfeitoSonoro::getInstance().playMe262Motor();
         }
-        if (value % 650 == 649)
+        if (value % 950 == 649)
         {
             Me262 *aux = new Me262(0, rand() % size.second, (float)100 / 10000, principal, this);
             aux->gira();
             inimigosAtivos.push_back(aux);
+            EfeitoSonoro::getInstance().playMe262Motor();
         }
-        if (value % 950 == 949)
+        if (value % 1250 == 949)
         {
             Me262 *aux = new Me262(rand() % size.first, 0, (float)100 / 10000, principal, this);
             inimigosAtivos.push_back(aux);
+            EfeitoSonoro::getInstance().playMe262Motor();
         }
     }
 
@@ -257,23 +263,23 @@ void Fase_TheVengeanceWeapon::atualiza(int value)
         EfeitoSonoro::getInstance().stopBf109Motor();
         EfeitoSonoro::getInstance().stopMe163Motor();
     }
-    else
-    {
-        bool bf109 = false, me163 = false;
-        for (std::list<Personagem*>::iterator i = inimigosAtivos.begin(); i != inimigosAtivos.end(); ++i)
-        {
-            if ((*i)->getNome() == "Bf109")
-                bf109 = true;
-            else if ((*i)->getNome() == "Me163")
-                me163 = true;
-            if (bf109 && me163)
-                break;
-        }
-        if (!me163)
-            EfeitoSonoro::getInstance().stopMe163Motor();
-        if (!bf109)
-            EfeitoSonoro::getInstance().stopBf109Motor();
-    }
+    //else
+    //{
+    //    bool bf109 = false, me163 = false;
+    //    for (std::list<Personagem*>::iterator i = inimigosAtivos.begin(); i != inimigosAtivos.end(); ++i)
+    //    {
+    //        if ((*i)->getNome() == "Bf109")
+    //            bf109 = true;
+    //        else if ((*i)->getNome() == "Me163")
+    //            me163 = true;
+    //        if (bf109 && me163)
+    //            break;
+    //    }
+    //    if (!me163)
+    //        EfeitoSonoro::getInstance().stopMe163Motor();
+    //    if (!bf109)
+    //        EfeitoSonoro::getInstance().stopBf109Motor();
+    //}
 
     //Bala aliada X Avioes inimigos
     string nome;
@@ -294,15 +300,16 @@ void Fase_TheVengeanceWeapon::atualiza(int value)
             if ((*j)->destruido())
             {
                 explosoesAtivas.push_back(new Explosao((*j)->getX(), (*j)->getY(), 1));
+                EfeitoSonoro::getInstance().playExplosion();
                 Jogo::getInstance().score->incScoreValue((*j)->getScore());
+
                 if (nome == "Bf109Verde")
-                {
                     caixas.push_back(new Caixa((*j)->getX(), (*j)->getY(), 1));
-                }
+                else if (nome == "Bf109Amarelo")
+                    caixas.push_back(new Caixa((*j)->getX(), (*j)->getY(), 2));
                 else if (nome == "V2")
-                {
                     passouFase = true;
-                }
+
                 j = inimigosAtivos.erase(j);
             }
             //Se ta de boa ainda

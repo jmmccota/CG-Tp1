@@ -49,10 +49,6 @@ void EfeitoSonoro::initAudios_GameOver()
 {
 	finishAllAudios();
 	arrayAudios.push_back(new FMOD_Audio(system, "audio/music/GameOver.mp3", true));
-}
-
-void EfeitoSonoro::initAudios_Ending()
-{
 	arrayAudios.push_back(new FMOD_Audio(system, "audio/music/Ending.mp3", true));
 }
 
@@ -230,7 +226,7 @@ void EfeitoSonoro::playExplosion()
 
 void EfeitoSonoro::playAirRaid()
 {
-	arrayAudios[8]->playMemoryAudio(system);
+	arrayAudios[9]->playMemoryAudio(system);
 }
 
 void EfeitoSonoro::stopVickers()
