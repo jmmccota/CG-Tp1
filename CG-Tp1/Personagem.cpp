@@ -35,8 +35,3 @@ float Personagem::getX() {
 float Personagem::getY() {
 	return posY;
 }
-void Personagem::inverteY()
-{
-    for (int i = 0; i < poligonos.size(); i++)
-        poligonos[i].inverteY();
-}

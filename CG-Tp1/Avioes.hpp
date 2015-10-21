@@ -123,10 +123,12 @@ private:
 
     bool movCima = false, movBaixo = false, movEsq = false, movDir = false;
     int alvoX, alvoY;
+    GLfloat velX = 0, velY = 0;
 
     int estadoTiro;
     int contadorEst = -1;
     int tirosSegundo = 3;
+    int estrategia;
 
 public:
     Me262(GLfloat pX, GLfloat pY, float esc, Spitfire *a, Fase *f);

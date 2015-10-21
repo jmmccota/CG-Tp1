@@ -298,6 +298,11 @@ Me262::Me262(GLfloat pX, GLfloat pY, float esc, Spitfire *a, Fase *f)
     alvo = a;
     alvoX = alvo->getX();
     alvoY = alvo->getY();
+    int teta = atan((alvoY - posY) / (alvoX - posX));
+    if (alvoX < posX)
+        teta = teta + 3.14159;
+    velX = cos(teta) * velocidade;
+    velY = sin(teta) * velocidade;
 }
 Me262::~Me262()
 {
@@ -305,11 +310,47 @@ Me262::~Me262()
 
 void Me262::acao()
 {
+    posX += velX;
+    posY += velY;
 
+    if (!estadoTiro)
+        contadorEst = ++contadorEst % 10;
+    if (!contadorEst)
+        estrategia = rand() % 2;
+
+    atira(estrategia);
 }
 
 void Me262::atira(int tipo)
 {
+    //Solta bomba
+    if (tipo == 0)
+    {
+        estadoTiro = ++estadoTiro % (int)(1000 / (tirosSegundo * TEMPOQUADRO));
+        if (!estadoTiro)
+        {
+            EfeitoSonoro::getInstance().playBombDrop();
+            Bomba *b = new Bomba(posX, posY, 0.25
+                * escala);
+            if (inverteuY)
+                b->inverteY();
+            if (inverteuX)
+                b->inverteX();
+            if (girou)
+                b->gira();
+            fase->novoProjetilInimigo(b);
+        }
+    }
+    //Atira
+    else if (tipo == 1)
+    {
+        estadoTiro = ++estadoTiro % (int)(1000 / (tirosSegundo * TEMPOQUADRO));
+        if (!estadoTiro)
+        {
+            EfeitoSonoro::getInstance().playMg42Shot();
+            fase->novoProjetilInimigo(new TiroEspecialInimigo(posX, posY, alvo->getX(), alvo->getY(), 0.1 * escala, 30000 * escala));
+        }
+    }
 }
 
 int Me262::danoColisao()

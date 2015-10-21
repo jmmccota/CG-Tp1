@@ -104,7 +104,6 @@ void Fase::novoProjetilAmigo(Projetil *p)
 
 void Fase::reseta()
 {
-	
 	inimigosAtivos.clear();
 	projeteisInimigos.clear();
 	projeteisAmigos.clear();

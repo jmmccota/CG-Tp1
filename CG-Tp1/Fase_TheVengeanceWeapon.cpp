@@ -72,10 +72,12 @@ void Fase_TheVengeanceWeapon::desenhaBackground()
 
 void Fase_TheVengeanceWeapon::desenha()
 {
+
 	glClear(GL_COLOR_BUFFER_BIT);
 	glClearColor(0.1137, 0.8627, 0.8902, 1.0);
 	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
+    glLoadIdentity();
+    EfeitoVisual::getInstance().ortho2D();
     desenhaBackgroundAnterior();
 
     for (std::list<Projetil*>::iterator i = projeteisAmigos.begin(); i != projeteisAmigos.end(); ++i)
@@ -151,33 +153,33 @@ void Fase_TheVengeanceWeapon::atualiza(int value)
     //Inimigos normais
     if (value < 10000)
     {
-        if (value % 150 == 99)
+        if (value % 150 == 149)
         {
             Bf109 *aux = new Bf109(rand() % size.first, size.second, (float)100 / 10000, principal, this);
             aux->inverteY();
             inimigosAtivos.push_back(aux);
             EfeitoSonoro::getInstance().playBf109Motor();
         }
-        if (value % 400 == 99)
+        if (value % 400 == 399)
         {
             Me163 *aux2 = new Me163(rand() % size.first, size.second, (float)100 / 10000, principal, this);
             aux2->inverteY();
             inimigosAtivos.push_back(aux2);
             EfeitoSonoro::getInstance().playMe163Motor();
         }
-        if (value % 3000 == 9)
+        if (value % 3000 == 2999)
+        {
+            Bf109Amarelo *aux2 = new Bf109Amarelo(rand() % size.first, size.second, (float)100 / 10000, principal, this);
+            aux2->inverteY();
+            inimigosAtivos.push_back(aux2);
+        }
+        if (value % 2000 == 1999)
         {
             Bf109Verde *aux2 = new Bf109Verde(rand() % size.first, size.second, (float)100 / 10000, principal, this);
             aux2->inverteY();
             inimigosAtivos.push_back(aux2);
         }
-        if (value % 2000 == 9)
-        {
-            Bf109Verde *aux2 = new Bf109Verde(rand() % size.first, size.second, (float)100 / 10000, principal, this);
-            aux2->inverteY();
-            inimigosAtivos.push_back(aux2);
-        }
-        if (value % 3000 == 9)
+        if (value % 3000 == 2999)
         {
             Me262 *aux2 = new Me262(rand() % size.first, size.second, (float)100 / 10000, principal, this);
             aux2->inverteY();
@@ -187,24 +189,36 @@ void Fase_TheVengeanceWeapon::atualiza(int value)
     //Chefao
     else if (value == 10200)
     {
-        boss = new V2(size.first / 2, size.second + 299, (float) 900 / 10000, this);
+        boss = new V2(size.first / 2, size.second + 499, (float) 400 / 10000, this);
         inimigosAtivos.push_back(boss);
     }
     else
     {
         //Boss ativo
 
-        if (value % 100 == 99)
+        if (value % 300 == 299)
         {
-
+            Me262 *aux = new Me262(rand() % size.first, size.second, (float)100 / 10000, principal, this);
+            aux->inverteY();
+            inimigosAtivos.push_back(aux);
         }
-        if (value % 150 == 99)
+        if (value % 450 == 449)
         {
-
+            Me262 *aux = new Me262(size.first, rand() % size.second, (float)100 / 10000, principal, this);
+            aux->gira();
+            aux->inverteX();
+            inimigosAtivos.push_back(aux);
         }
-        if (value % 230 == 99)
+        if (value % 650 == 649)
         {
-
+            Me262 *aux = new Me262(0, rand() % size.second, (float)100 / 10000, principal, this);
+            aux->gira();
+            inimigosAtivos.push_back(aux);
+        }
+        if (value % 950 == 949)
+        {
+            Me262 *aux = new Me262(rand() % size.first, 0, (float)100 / 10000, principal, this);
+            inimigosAtivos.push_back(aux);
         }
     }
 
@@ -229,7 +243,7 @@ void Fase_TheVengeanceWeapon::atualiza(int value)
     for (std::list<Personagem*>::iterator i = inimigosAtivos.begin(); i != inimigosAtivos.end();)
     {
         (*i)->acao();
-        if ((*i)->getX() < -300 || (*i)->getX() > size.first + 300 || (*i)->getY() < -300 || (*i)->getY() > size.second + 300)
+        if ((*i)->getX() < -300 || (*i)->getX() > size.first + 300 || (*i)->getY() < -300 || (*i)->getY() > size.second + 500)
             i = inimigosAtivos.erase(i);
         else
             i++;
@@ -285,7 +299,7 @@ void Fase_TheVengeanceWeapon::atualiza(int value)
                 {
                     caixas.push_back(new Caixa((*j)->getX(), (*j)->getY(), 1));
                 }
-                else if (nome == "Bismarck")
+                else if (nome == "V2")
                 {
                     passouFase = true;
                 }
@@ -330,7 +344,7 @@ void Fase_TheVengeanceWeapon::atualiza(int value)
         if (EfeitoVisual::getInstance().colisao((*i), principal))
         {
             nome = (*i)->getNome();
-            if (nome == "Bismarck")
+            if (nome == "V2")
             {
                 i++;
                 continue;
@@ -346,7 +360,7 @@ void Fase_TheVengeanceWeapon::atualiza(int value)
             if (rand() % 20 == 0)
                 principal->powerUp = 1;
             Jogo::getInstance().score->incScoreValue((*i)->getScore());
-            if (nome == "bismarck")
+            if (nome == "V2")
             {
                 explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 5));
             }

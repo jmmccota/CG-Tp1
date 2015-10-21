@@ -154,7 +154,7 @@ void EfeitoSonoro::playMe163Motor()
 
 void EfeitoSonoro::playMe264Motor()
 {
-    //arrayAudios[9]->playMemoryAudio(system);
+    arrayAudios[9]->playMemoryAudio(system);
 }
 
 void EfeitoSonoro::playMe262Motor()
@@ -212,7 +212,10 @@ void EfeitoSonoro::stopMe163Motor()
 
 void EfeitoSonoro::stopV2Motor()
 {
-
+}
+void EfeitoSonoro::stopMe264Motor()
+{
+    arrayAudios[9]->stopAudio();
 }
 #pragma endregion
 
