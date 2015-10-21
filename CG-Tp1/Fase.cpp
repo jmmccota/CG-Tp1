@@ -53,7 +53,7 @@ void Fase::desenhaHUD() {
 	glEnd();
 
 	//Vidas
-	for (int i = 0; i < Jogo::getInstance().numeroVidas && i < 5; i++) {
+	for (int i = 0; i < Jogo::getInstance().numeroVidas; i++) {
 		Jogo::getInstance().vidas[i]->desenha();
 	}
 
@@ -69,7 +69,7 @@ void Fase::desenhaHUD() {
 			//EfeitoSonoro::getInstance().playGanhaVida();
 		}
 		Jogo::getInstance().setControlaScore();
-		//EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/ganhaVida.mp3");
+		/*EfeitoSonoro::getInstance().playStreamAudio("audio/sfx/ganhaVida.mp3");*/
 		//ADICIONAR SOM PARA MOSTRAR QUE GANHOU VIDA
 
 
