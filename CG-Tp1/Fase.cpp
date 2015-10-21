@@ -53,7 +53,7 @@ void Fase::desenhaHUD() {
 	glEnd();
 
 	//Vidas
-	for (int i = 0; i < Jogo::getInstance().numeroVidas; i++) {
+	for (int i = 0; i < Jogo::getInstance().numeroVidas&& i<5; i++) {
 		Jogo::getInstance().vidas[i]->desenha();
 	}
 
