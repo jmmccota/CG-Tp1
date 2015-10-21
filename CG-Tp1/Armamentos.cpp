@@ -64,6 +64,15 @@ Bomba::~Bomba()
 }
 
 
+void Bomba::acao()
+{
+    if (girou)
+        posX += (inverteuX ? -velocidade : velocidade);
+    else
+        posY += (inverteuY ? -velocidade : velocidade);
+}
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 TiroEspecialInimigo::TiroEspecialInimigo(GLfloat posX, GLfloat posY, GLfloat posXAlvo, GLfloat posYAlvo, float escala, float velocidade)

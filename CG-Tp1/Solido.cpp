@@ -72,4 +72,31 @@ void Solido::desenha()
 		poligonos[i].desenha(posX, posY);
 	}
 }
- 
+
+void Solido::inverteY()
+{
+    for (int i = 0; i < poligonos.size(); i++)
+        poligonos[i].inverteY();
+    inverteuY = !inverteuY;
+}
+
+void Solido::inverteX()
+{
+    for (int i = 0; i < poligonos.size(); i++)
+        poligonos[i].inverteX();
+    inverteuX = !inverteuX;
+}
+
+void Solido::gira()
+{
+    for (int i = 0; i < poligonos.size(); i++)
+        poligonos[i].gira();
+    int aux = tamY;
+    tamY = tamX;
+    tamX = aux;
+    girou = !girou;
+
+    bool aux2 = inverteuX;
+    inverteuX = inverteuY;
+    inverteuY = aux2;
+}

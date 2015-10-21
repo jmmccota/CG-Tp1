@@ -87,5 +87,20 @@ void Poligono::inverteY()
     for (int i = 0; i < pontosY.size(); i++)
         pontosY[i] = -pontosY[i];
 }
+void Poligono::inverteX()
+{
+    for (int i = 0; i < pontosX.size(); i++)
+        pontosX[i] = -pontosX[i];
+}
+void Poligono::gira()
+{
+    int aux;
+    for (int i = 0; i < pontosY.size(); i++)
+    {
+        aux = pontosY[i];
+        pontosY[i] = pontosX[i];
+        pontosX[i] = aux;
+    }
+}
 
  

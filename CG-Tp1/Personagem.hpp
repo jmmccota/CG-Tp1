@@ -52,10 +52,6 @@ class Personagem : public Solido
         //Retorna true caso o personagem tenha sido destruido
         bool destruido();
 
-        //Inverte os pontos Y do poligono
-        //    Usado para avioes vindo na direcao oposta
-        void inverteY();
-
 		//Retorna o dano ao outro aviao que colidiu com esse
 		virtual int danoColisao() = 0;
 

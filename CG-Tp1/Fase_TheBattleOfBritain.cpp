@@ -344,7 +344,7 @@ void Fase_TheBattleOfBritain::atualiza(int value)
 			if (rand() % 20 == 0)
 				principal->powerUp = 1;
 			Jogo::getInstance().score->incScoreValue((*i)->getScore());
-			if (nome == "bismarck")
+			if (nome == "Bismarck")
 			{
 				explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 10));
 				//EfeitoSonoro::getInstance().stopMe264Motor();

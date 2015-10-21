@@ -35,6 +35,8 @@ class Poligono
         //Inverte os pontos Y do poligono
         //    Usado para avioes vindo na direcao oposta
         void inverteY();
+        void inverteX();
+        void gira();
 
         //Rotaciona o poligono em teta graus
         void rotaciona(double teta);

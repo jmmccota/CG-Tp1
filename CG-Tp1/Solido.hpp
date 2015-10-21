@@ -39,6 +39,10 @@ class Solido
         //Escala do solido
         float escala;
 
+        bool inverteuY = false;
+        bool inverteuX = false;
+        bool girou = false;
+
 	public:
         Solido(GLfloat pX, GLfloat pY, GLfloat vel, float esc);
 
@@ -64,6 +68,9 @@ class Solido
 		GLfloat getTamX() { return tamX; }
 		GLfloat getTamY() { return tamY; }
 
+        void inverteY();
+        void inverteX();
+        void gira();
 };
 
 
