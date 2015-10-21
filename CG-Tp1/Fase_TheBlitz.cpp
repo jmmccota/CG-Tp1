@@ -423,7 +423,7 @@ void Fase_TheBlitz::atualiza(int value)
 			if (nome == "Me264")
 			{
 				explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 10));
-				//EfeitoSonoro::getInstance().stopMe264Motor();
+				EfeitoSonoro::getInstance().stopMe264Motor();
 			}
             else
 			    explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 2));
