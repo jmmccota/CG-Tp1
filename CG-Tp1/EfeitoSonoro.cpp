@@ -29,7 +29,7 @@ void EfeitoSonoro::createObjectSystem()
 		*/
 		FMOD::System_Create(&system);
 
-		system->init(50, FMOD_INIT_NORMAL, 0);
+		system->init(80, FMOD_INIT_NORMAL, 0);
 
 	}
 	catch (const std::exception&)
@@ -223,24 +223,9 @@ void EfeitoSonoro::stopV2Motor()
 #pragma endregion
 
 #pragma region "SFX Gerais"
-//void EfeitoSonoro::playVickersShot()
-//{
-//    arrayAudios[2]->playMemoryAudio(system);
-//}
-//
-//void EfeitoSonoro::playMg42Shot()
-//{
-//    arrayAudios[3]->playMemoryAudio(system);
-//}
-//
-//void EfeitoSonoro::playBombDrop()
-//{
-//    arrayAudios[4]->playMemoryAudio(system);
-//}
-
 void EfeitoSonoro::playExplosion()
 {
-	arrayAudios[5]->playMemoryAudio(system);
+	arrayAudios[5]->playMemoryAudio(system, true);
 }
 
 void EfeitoSonoro::playAirRaid()
