@@ -53,7 +53,6 @@ class Fase
 
 		//Limpa memoria alocada dinamicamente
 		virtual ~Fase() = 0;
-		bool bossOn = false;
 		//Inicializa o personagem principal e a fila de inimigos
 		virtual void definePersonagens() = 0;
 
