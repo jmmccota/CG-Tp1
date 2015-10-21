@@ -348,6 +348,7 @@ void Fase_TheBlitz::atualiza(int value)
 			if ((*j)->destruido())
 			{
 				explosoesAtivas.push_back(new Explosao((*j)->getX(), (*j)->getY(), 1));
+				EfeitoSonoro::getInstance().playExplosion();
 				Jogo::getInstance().score->incScoreValue((*j)->getScore());
 				j = inimigosAtivos.erase(j);
 				if (nome == "Bf109Verde") 
@@ -393,6 +394,7 @@ void Fase_TheBlitz::atualiza(int value)
 			principal->powerUp = 0;
 			Jogo::getInstance().numeroVidas--;
 			principal->morreu();
+			EfeitoSonoro::getInstance().playExplosion();
 		}
 	}
 
@@ -421,7 +423,7 @@ void Fase_TheBlitz::atualiza(int value)
 			if (nome == "Me264")
 			{
 				explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 10));
-				EfeitoSonoro::getInstance().stopMe264Motor();
+				//EfeitoSonoro::getInstance().stopMe264Motor();
 			}
             else
 			    explosoesAtivas.push_back(new Explosao(((*i)->getX() + principal->getX()) / 2, ((*i)->getY() + principal->getY()) / 2, 2));
@@ -440,6 +442,7 @@ void Fase_TheBlitz::atualiza(int value)
 			principal->powerUp = 0;
 			Jogo::getInstance().numeroVidas--;
 			principal->morreu();
+			EfeitoSonoro::getInstance().playExplosion();
 		}
 	}
 
