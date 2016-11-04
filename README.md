@@ -6,9 +6,11 @@ Agradecimento aos colaboradores, sem eles esse trabalho não seria magnífico co
 
 * [Daniel](https://github.com/daniel22390);
 
+* [Elias](https://github.com/EliasLuiz);
+
 * [Henrique](https://github.com/henriqfc);
 
-* [Elias](https://github.com/EliasLuiz).
+* [João](https://github.com/jmmccota).
 
 ***
 
