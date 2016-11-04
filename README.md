@@ -1,4 +1,18 @@
 # CG-Tp1
+
+Agradecimento aos colaboradores, sem eles esse trabalho não seria magnífico como foi:
+
+* [André](https://github.com/andrmalta);
+
+* [Daniel](https://github.com/daniel22390);
+
+* [Henrique](https://github.com/henriqfc);
+
+* [Elias](https://github.com/EliasLuiz).
+
+***
+
+
 	1 - é necessario cada um configurar o seu VS
 	-------------------------------------------
 	2 - O projeto de código-fonte deve ser multiplataforma. Assim, deve-se somente utilizar a linguagem C/C++ padr~ao ANSI/ISO juntamente com as funções da OpenGL e Glut. Uma dica é compilar e testar seu projeto no Windows e no Linux.
