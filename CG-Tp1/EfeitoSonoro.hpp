@@ -4,8 +4,12 @@
 class EfeitoSonoro;
 
 
+#ifdef _WIN32
 #include <fmod.hpp>
 #include <fmod_errors.h>
+#else
+#include "../fmod/inc/fmod_stub.hpp"
+#endif
 #include <iostream>
 #include <vector>
 #include "FMOD_Audio.hpp"
@@ -34,7 +38,7 @@ protected:
 	vector<FMOD_Audio *> arrayAudios;
 
 private:
-	//Verificação de erros
+	//Verificaï¿½ï¿½o de erros
 	void ERRCHECK(FMOD_RESULT result);
 
 public:

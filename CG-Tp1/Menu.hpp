@@ -5,7 +5,7 @@
 #include "Score.hpp"
 #include "EfeitoSonoro.hpp"
 #include "EfeitoVisual.hpp"
-#include <gl/glut.h>
+#include <GL/glut.h>
 #include <cstring>
 #include <string>
 #include <iostream>

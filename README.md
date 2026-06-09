@@ -14,3 +14,40 @@ Agradecimento aos colaboradores, sem eles esse trabalho não seria magnífico co
 
 ***
 
+## Build
+
+### Linux
+
+**Dependencies:**
+```bash
+sudo apt install build-essential freeglut3-dev libglu1-mesa-dev libgl1-mesa-dev
+```
+
+**Build + copy libs:**
+```bash
+./build.sh
+```
+
+Binary output: `CG-Tp1/CG-Tp1`
+
+---
+
+### Windows (MinGW)
+
+**Dependencies:** MinGW-w64 with `g++` in PATH.
+
+The bundled `freeglut/` and `fmod/` directories are already included in the repo.
+
+**Build + copy DLLs:**
+```bat
+build.bat
+```
+
+Binary output: `CG-Tp1\CG-Tp1.exe`
+
+---
+
+### Clean
+```bash
+make clean
+```

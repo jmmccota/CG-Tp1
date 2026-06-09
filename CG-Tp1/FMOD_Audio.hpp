@@ -1,6 +1,10 @@
 #pragma once
+#ifdef _WIN32
 #include <fmod.hpp>
 #include <fmod_errors.h>
+#else
+#include "../fmod/inc/fmod_stub.hpp"
+#endif
 #include <iostream>
 #include <vector>
 

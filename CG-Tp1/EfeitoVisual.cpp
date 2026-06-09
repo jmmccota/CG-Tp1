@@ -1,5 +1,6 @@
 #include "EfeitoVisual.hpp"
 #include <cmath>
+#include <cstring>
 #define FULLHD_ORTHO_X 1920
 #define FULLHD_ORTHO_Y 1080
 
@@ -35,7 +36,7 @@ bool EfeitoVisual::colisao(Solido *a, Solido *b)
 
 void EfeitoVisual::resize(GLsizei w, GLsizei h)
 {
-    // Especifica as dimensões da Viewport
+    // Especifica as dimensï¿½es da Viewport
     if (w * 9 / 16 < h)
         glViewport(0, 0, w, w * 9 / 16);
     else
@@ -62,9 +63,14 @@ pair<GLint, GLint> EfeitoVisual::sizeScreen()
 pair<double, double> EfeitoVisual::positionScreen(char * type)
 {
     pair<double, double> val;
-    if (type == "center") {
-        val.first = ((GetSystemMetrics(SM_CXSCREEN) - sizeScreen().first) / 2);
+    if (strcmp(type, "center") == 0) {
+#ifdef _WIN32
+        val.first  = ((GetSystemMetrics(SM_CXSCREEN) - sizeScreen().first)  / 2);
         val.second = ((GetSystemMetrics(SM_CYSCREEN) - sizeScreen().second) / 2);
+#else
+        val.first  = ((glutGet(GLUT_SCREEN_WIDTH)  - sizeScreen().first)  / 2);
+        val.second = ((glutGet(GLUT_SCREEN_HEIGHT) - sizeScreen().second) / 2);
+#endif
     }
     return val;
 }

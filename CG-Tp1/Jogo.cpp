@@ -12,12 +12,16 @@ Jogo::~Jogo()
 void Jogo::run()
 {
 	pair<int, int> sizeScreen = EfeitoVisual::getInstance().sizeScreen();
-	pair<int, int> posScrenn = EfeitoVisual::getInstance().positionScreen("center");
 	char *myargv[1];
 	int myargc = 1;
+#ifdef _WIN32
 	myargv[0] = _strdup("CG-Tp1");
+#else
+	myargv[0] = strdup("CG-Tp1");
+#endif
 
 	glutInit(&myargc, myargv);
+	pair<int, int> posScrenn = EfeitoVisual::getInstance().positionScreen("center");
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(sizeScreen.first, sizeScreen.second);
 	glutInitWindowPosition(posScrenn.first, posScrenn.second);

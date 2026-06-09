@@ -39,11 +39,11 @@ GLfloat translacaoTiro = 0.0f;
 // translacao tiro menu
 GLfloat translacaoTiro2 = 0.0f;
 // boolean para atirar do menu de opcoes
-boolean atirou = false;
+bool atirou = false;
 // boolean para bombardear do menu de opcoes
-boolean bombardeou = false;
+bool bombardeou = false;
 // boolean para atirar menu
-boolean atirou2 = false;
+bool atirou2 = false;
 float xFixo = 0;
 
 //Desenha uma Linha - Parametro: posição em relação ao eixo Y

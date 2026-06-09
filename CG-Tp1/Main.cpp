@@ -1,4 +1,4 @@
-#include <gl/glut.h>
+#include <GL/glut.h>
 #include "Jogo.hpp"
 
 int main(int argc, char **argv) {
@@ -13,7 +13,7 @@ int main(int argc, char **argv) {
 }
 //#include "Jogo.hpp"
 //#include "Avioes.hpp"
-//#include <gl/glut.h>
+//#include <GL/glut.h>
 //#include <math.h>
 //#include <iostream>
 //#include "Score.hpp"
